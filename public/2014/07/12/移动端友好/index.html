@@ -1,0 +1,162 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>关于生活，关于前端 › 移动端优化</title>
+  <meta name="author" content="Zhuxy">
+  
+  <meta name="description" content="移动端优化包括好多东西，我们大致可以朝三个方向努力：展现、内容和性能，以此来提高网站的用户体验。
+展现
+
+使网站在各种尺寸的屏幕下表现良好。
+
+现在用户可以使用各种设备（手机、平板、电子阅读器）访问你的网站。固定宽度、三列布局并带有复杂javascript动画和鼠标移动效果的网站，在小屏幕和低配置的设备上显示，显然不是很好。对网页瘦身、线性化网页布局才更加合理。这也就是为什么第一目标是更好的展现你的网页。
+内容
+
+使网站内容适应用户移动设备
+
+想一想如果你的用户使用手机访问你的站点，他们想干什么？一个很好的例子就是Alaska Air’s website。他们的网站在PC上专注于促使用户订飞机，而移动端，用户可能只想查看航班信息以及航班有没有延误，所以他们在这方面做了改进，满足了用户的需求。
+性能
+
+即使在低网速下，依旧要保持网站的流畅体验">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="移动端优化"/>
+  <meta property="og:site_name" content="关于生活，关于前端"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="关于生活，关于前端" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  
+</head>
+
+
+<body>
+  <header id="header"><div class="meta inner">
+  <h1><a href="/">关于生活，关于前端</a></h1>
+  <h2 id="header-h2"></h2>
+  <nav id="main-nav">
+    <ul>
+      
+      <li><a href="/">首页</a></li>
+      
+      <li><a href="/archives">文章归档</a></li>
+      
+      <li><a href="/about">关于</a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+</div>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  <div class="post-content">
+    <header>
+      
+  
+    <h1 class="title">移动端优化</h1>
+  
+
+      
+      <time datetime="2014-07-12T08:34:31.000Z">Jul 12 2014</time>
+      
+    </header>
+    <div class="entry">
+      
+        <p><img src="http://img1.picbed.org/uploads/2014/07/5366d0160924ab183425ee3937fae6cd7b890b88.jpg.png" alt="移动设备"></p>
+<p>移动端优化包括好多东西，我们大致可以朝三个方向努力：<strong>展现、内容和性能</strong>，以此来提高网站的用户体验。</p>
+<p><strong>展现</strong></p>
+<blockquote>
+<p>使网站在各种尺寸的屏幕下表现良好。</p>
+</blockquote>
+<p>现在用户可以使用各种设备（手机、平板、电子阅读器）访问你的网站。固定宽度、三列布局并带有复杂javascript动画和鼠标移动效果的网站，在小屏幕和低配置的设备上显示，显然不是很好。对网页瘦身、线性化网页布局才更加合理。这也就是为什么第一目标是更好的展现你的网页。</p>
+<p><strong>内容</strong></p>
+<blockquote>
+<p>使网站内容适应用户移动设备</p>
+</blockquote>
+<p>想一想如果你的用户使用手机访问你的站点，他们想干什么？一个很好的例子就是<a href="http://www.alaskaair.com/" target="_blank" rel="external">Alaska Air’s website</a>。他们的网站在PC上专注于促使用户订飞机，而移动端，用户可能只想查看航班信息以及航班有没有延误，所以他们在这方面做了改进，满足了用户的需求。</p>
+<p><strong>性能</strong></p>
+<blockquote>
+<p>即使在低网速下，依旧要保持网站的流畅体验</p>
+</blockquote>
+<a id="more"></a>
+
+<p>虽然这几年无线网络有了很大的提升，但是数据传输依旧是痛点。这就更应该实践<a href="http://developer.yahoo.com/performance/rules.html" target="_blank" rel="external">good performance practices</a>，只发送用户真正想要的内容。</p>
+<p><strong>定位你的受众</strong></p>
+<p>虽然这不是移动端友好定义的一部分，但是明确定位自己的用户，会使这些目标更加具体。例如：当确定要开发移动端站点时，绝对要定位兼容到什么浏览器以及什么设备。</p>
+<p>如果你的用户全是<a href="http://searchservervirtualization.techtarget.com/definition/early-adopter" target="_blank" rel="external">early-adopters</a>，你可以专注于平板和智能手机上的标准浏览器，另一方面，若你的用户使用一些低级的浏览器，你可以减少一些策略作为备选方案。</p>
+<p><strong>移动端开发的方法</strong></p>
+<p>下面一些方法通过不同的途径，实现了上面所设定的目标：</p>
+<ul>
+<li><p><a href="https://developer.mozilla.org/en/Web_development/Mobile/Separate_sites" target="_blank" rel="external">Separate sites</a></p>
+</li>
+<li><p><a href="https://developer.mozilla.org/en/Web_development/Mobile/Responsive_design" target="_blank" rel="external">Responsive design</a></p>
+</li>
+<li><p><a href="https://developer.mozilla.org/en/Web_development/Mobile/A_hybrid_approach" target="_blank" rel="external">A hybrid approach</a></p>
+</li>
+</ul>
+
+      
+    </div>
+    
+    <footer>
+      <div class="alignleft">
+      
+      
+      </div>
+      <div class="clearfix"></div>
+    </footer>
+    
+  </div>
+</article>
+
+
+<section id="comment">
+  
+            <!-- Duoshuo Comment BEGIN -->
+            <div class="ds-thread"></div>
+            <script type="text/javascript">
+                var duoshuoQuery = {short_name:"zhuxinyong"};
+                (function() {
+                    var ds = document.createElement('script');
+                    ds.type = 'text/javascript';ds.async = true;
+                    ds.src = 'http://static.duoshuo.com/embed.js';
+                    ds.charset = 'UTF-8';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+                })();
+            </script>
+            <!-- Duoshuo Comment END -->
+      
+  
+</section>
+
+</div></div>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer"><div class="inner"><div class="alignleft">
+  <p>
+  
+    &copy; 2014 Zhuxy
+  
+  </p>
+  <p>
+    Based on <a href="https://github.com/willerce/hexo-theme-noderce" >Noderce</a>
+  </p>
+
+</div>
+<div class="clearfix"></div></div></footer>
+  <script type="text/javascript">
+
+</script>
+
+</body>
+</html>

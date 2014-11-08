@@ -1,0 +1,1226 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>关于生活，关于前端 › Archives: 2014</title>
+  <meta name="author" content="Zhuxy">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="关于生活，关于前端"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="关于生活，关于前端" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  
+</head>
+
+
+<body>
+  <header id="header"><div class="meta inner">
+  <h1><a href="/">关于生活，关于前端</a></h1>
+  <h2 id="header-h2"></h2>
+  <nav id="main-nav">
+    <ul>
+      
+      <li><a href="/">首页</a></li>
+      
+      <li><a href="/archives">文章归档</a></li>
+      
+      <li><a href="/about">关于</a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+</div>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+<h2 class="archive-title">2014</h2>
+
+
+<article class="post">
+  <div class="post-content">
+    <header>
+      
+  
+    <h1 class="title"><a href="/2014/11/07/浏览器的工作原理：新式网络浏览器幕后揭秘/">浏览器的工作原理：新式网络浏览器幕后揭秘</a></h1>
+  
+
+      
+      <time datetime="2014-11-06T23:25:16.000Z">Nov 7 2014</time>
+      
+    </header>
+    <div class="entry">
+      
+        <p>转载：<a href="http://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/" target="_blank" rel="external">浏览器的工作原理：新式网络浏览器幕后揭秘</a></p>
+
+      
+    </div>
+    
+      
+    
+  </div>
+</article>
+
+
+
+
+<article class="post">
+  <div class="post-content">
+    <header>
+      
+  
+    <h1 class="title"><a href="/2014/11/03/使用Express4和Node搭建RESTful-API/">使用Express4和Node搭建RESTful API</a></h1>
+  
+
+      
+      <time datetime="2014-11-03T04:46:33.000Z">Nov 3 2014</time>
+      
+    </header>
+    <div class="entry">
+      
+        <p>几天前随着Express 4.0的发布，我们许多Node项目的路由需要跟着更改。伴随Express Router的变化，我们在设置应用路由时更加灵活。</p>
+<p>今天我们将使用Node,Express 4.0和它的路由来创建RESTful API，同时使用Mongoose与MongoDB交互。在Chrome中使用Postman来测试我们的API。</p>
+<p>接下来看看我们要创建的API以及它的用途。</p>
+<h3 id="我们的程序">我们的程序</h3>
+<p>我们将要创建的API:</p>
+<ul>
+<li>处理CRUD</li>
+<li>标准的URL(<code>http://example.com/api/bears</code>和<code>http://example.com/api/bears/:bear_id</code>)</li>
+<li>使用合适的HTTP来搭配RESTful(GET,POST,PUT和DELETE)</li>
+<li>返回JSON数据</li>
+<li>控制台打印出所有的请求</li>
+</ul>
+<p>这些都是严格遵循<a href="http://scotch.io/bar-talk/designing-a-restful-web-api" target="_blank" rel="external">RESTful APIS</a>的规范的，可以灵活的转变为任何你想创建的程序（用户，超级英雄，啤酒等）</p>
+<p>开始之前要确保你安装了Node环境然后我们才能开始！</p>
+<h3 id="启程">启程</h3>
+<p>我们先整理一下创建API所需要的文件，我们需要定义Node packages，使用Express搭建服务、路由和模型，最后，测试我们的API。</p>
+<p>下面是我们的目录结构，我们需要很多文件同时为了演示我们尽可能的精简。当真的要做一个产品或者一个大的应用时，你应该拥有一个更好的结构（比如剥离routes到一个单独的文件里）。</p>
+<pre><code>-<span class="ruby"> app/
+</span>    -<span class="ruby">---- models/
+</span>    -<span class="ruby">--------- bear.js     /<span class="regexp">/ our bear model
+</span></span>    -<span class="ruby"> node_modules/     <span class="regexp">//</span> created by npm. holds our dependencies/packages
+</span>    -<span class="ruby"> package.json         /<span class="regexp">/ define all our node app and dependencies
+</span></span>    -<span class="ruby"> server.js         /<span class="regexp">/ configure our application and create routes</span></span>
+</code></pre><h3 id="声明Node依赖包">声明Node依赖包</h3>
+<p>我们所有的Node项目都会在<code>package.json</code>里面定义依赖的包。先创建一个包含下面内容的文件：</p>
+<pre><code><span class="comment">// package.json</span>
+{
+    <span class="string">"name"</span>: <span class="string">"node-api"</span>,
+    <span class="string">"main"</span>: <span class="string">"server.js"</span>,
+    <span class="string">"dependencies"</span>: {
+        <span class="string">"express"</span>: <span class="string">"~4.0.0"</span>,
+        <span class="string">"mongoose"</span>: <span class="string">"~3.6.13"</span>,
+        <span class="string">"body-parser"</span>: <span class="string">"~1.0.1"</span>
+    }
+}
+</code></pre><p><strong>这些包的作用是啥？</strong> <code>express</code>是Node的Web框架，<code>mongoose</code>是和MongoDB数据库通信的对象关系映射，<code>body-parser</code>使我们能在HTTP请求中获得参数信息，方便我们做一些事情。</p>
+<h3 id="安装Node包">安装Node包</h3>
+<p>这或许是最简单的一步，在你的项目根目录打开终端输入：</p>
+<pre><code><span class="variable">$ </span>npm install
+</code></pre><p>npm会拉去所有的依赖包到<code>node_module</code>中。</p>
+<p><code>npm</code>是Node的包管理工具，现在我们有了所有依赖的包，可以开始创建API了。因为<code>server.js</code>是我们在package.json中声明的程序入口，所以我们找到<code>server.js</code>文件（没有的创建）来配置程序。</p>
+<h3 id="搭建我们的服务器">搭建我们的服务器</h3>
+<p>Node启动程序时会检查一些配置信息。</p>
+<p>我们会保持代码的简洁以及良好的注释，清晰的了解我们每一步完成了什么。</p>
+<pre><code><span class="comment">// server.js</span>
+
+<span class="comment">// BASE SETUP</span>
+<span class="comment">// =============================================================================</span>
+
+<span class="comment">// call the packages we need</span>
+<span class="keyword">var</span> express    = <span class="keyword">require</span>(<span class="string">'express'</span>);         <span class="comment">// call express</span>
+<span class="keyword">var</span> app        = express();                 <span class="comment">// define our app using express</span>
+<span class="keyword">var</span> bodyParser = <span class="keyword">require</span>(<span class="string">'body-parser'</span>);
+
+<span class="comment">// configure app to use bodyParser()</span>
+<span class="comment">// this will let us get the data from a POST</span>
+app.<span class="keyword">use</span>(bodyParser.urlencoded({ extended: <span class="keyword">true</span> }));
+app.<span class="keyword">use</span>(bodyParser.json());
+
+<span class="keyword">var</span> port = process.env.PORT || <span class="number">8080</span>;         <span class="comment">// set our port</span>
+
+<span class="comment">// ROUTES FOR OUR API</span>
+<span class="comment">// =============================================================================</span>
+<span class="keyword">var</span> router = express.Router();                 <span class="comment">// get an instance of the express Router</span>
+
+<span class="comment">// test route to make sure everything is working (accessed at GET http://localhost:8080/api)</span>
+router.get(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span><span class="params">(req, res)</span> </span>{
+    res.json({ message: <span class="string">'hooray! welcome to our api!'</span> });    
+});
+
+<span class="comment">// more routes for our API will happen here</span>
+
+<span class="comment">// REGISTER OUR ROUTES -------------------------------</span>
+<span class="comment">// all of our routes will be prefixed with /api</span>
+app.<span class="keyword">use</span>(<span class="string">'/api'</span>, router);
+
+<span class="comment">// START THE SERVER</span>
+<span class="comment">// =============================================================================</span>
+app.listen(port);
+console.log(<span class="string">'Magic happens on port '</span> + port);
+</code></pre><p>哇哦，我们做了许多事，但都很简单。接下来我们挨个看看：</p>
+<ul>
+<li><p><strong>基础设置</strong> 在我们的设置中包含使用express初始化应用，通过bodyParser来轻松获取请求头信息以及设置应用的端口。</p>
+</li>
+<li><p><strong>路由配置</strong> 我们使用Express的Router来定义应用的路由。</p>
+</li>
+<li><p><strong>启动服务</strong> 我们会在先前定义的端口启动应用，然后就可以运行和测试它。</p>
+</li>
+</ul>
+<h3 id="开启服务并测试">开启服务并测试</h3>
+<p>确保所有的工作已经就绪，接下来我们启动应用并在先前定义的路由上发一个请求确保能得到一个响应。</p>
+<p>使用下面的命令启动服务：</p>
+<pre><code><span class="variable">$ </span>node server.js
+</code></pre><p>你将会看到如下的界面：</p>
+<p><img src="http://img5.picbed.org/uploads/2014/11/node_api_start_server.png" alt="img"></p>
+<p>看到程序已经启动，接着来测试一下。</p>
+<h3 id="使用Postman测试我们的API">使用Postman测试我们的API</h3>
+<p>Postman会帮助我们测试API，它基本就是在我们填写的路径上发送HTTP请求。我们甚至可以传递参数和权限（在这个应用中我们暂且不需要）。</p>
+<p>打开Postman看看如何使用：</p>
+<p><img src="http://img4.tuchuang.org/uploads/2014/11/postman_rest_client_node_api.png" alt="img"></p>
+<p>你所需要做的就是：<strong>填写目的url，选择一个http方法最后发送请求</strong>，够简单吧？</p>
+<p>接下来就是期盼已久的时刻，在URL一栏中输入<strong><a href="http://localhost:8080/api" target="_blank" rel="external">http://localhost:8080/api</a></strong>，由于我们仅从服务器获得数据，所以我们选择<strong>GET</strong>方法，接着点击发送。</p>
+<p><img src="http://img3.tuchuang.org/uploads/2014/11/node_api_postman_test.png" alt="post man"></p>
+<p>不错，我们得到了预期的结果，现在我们可以为请求服务。接下来连上数据库方便我们执行CRUD操作。</p>
+<h3 id="数据库和Beaer模型">数据库和Beaer模型</h3>
+<p>我们会使这部分简短留有足够的时间在创建API路由上。我们所需要做的就是创建MongoDB数据库以及使程序和它相连。为了简化和数据库的操作我们同样需要mongoose模型。</p>
+<p><strong>创建数据库和链接</strong></p>
+<p>我们使用Modulus提供的数据库，你在上面可以创建自己的数据库以及可以在本地使用，或者使用Mongolab，所有你所需要的就是一个链接，就像下面那样就你的程序就可以连接。</p>
+<p>一旦创建好数据库以及有一个可以连接的地址，接着在<strong>server.js</strong>里面添加下面两行：</p>
+<pre><code>// server.js
+
+// BASE SETUP
+// =============================================================================
+
+<span class="keyword">...</span>
+
+var mongoose   = <span class="keyword">require</span>(<span class="string">'mongoose'</span>);
+mongoose.connect(<span class="string">'mongodb://node:node@novus.modulusmongo.net:27017/Iganiq8o'</span>); // connect to our database
+
+<span class="keyword">...</span>
+</code></pre><p>现在我们已经获取mongoose的包同时连上架设在远程Modulus的数据库。接下来就需要创建bears的模型。</p>
+<p><strong>Bear Moder app/models/bear.js</strong></p>
+<p>因为创建模型不是本教程的核心，所以我们只一个带有名字字段的模型。接下来创建并添加如下代码：</p>
+<pre><code><span class="comment">// app/models/bear.js</span>
+
+<span class="keyword">var</span> mongoose     = <span class="built_in">require</span>(<span class="string">'mongoose'</span>);
+<span class="keyword">var</span> Schema       = mongoose.Schema;
+
+<span class="keyword">var</span> BearSchema   = <span class="keyword">new</span> Schema({
+    name: <span class="built_in">String</span>
+});
+
+<span class="built_in">module</span>.exports = mongoose.model(<span class="string">'Bear'</span>, BearSchema);
+</code></pre><p>创建完上面的文件，接着就要在我们的server.js中引入：</p>
+<pre><code>// server.js
+
+// BASE SETUP
+// =============================================================================
+
+<span class="keyword">...</span>
+
+var Bear     = <span class="keyword">require</span>(<span class="string">'./app/models/bear'</span>);
+
+<span class="keyword">...</span>
+</code></pre><p>现在应用后端已经完成，接下来才是本文的重点，奔跑吧！兄弟！</p>
+<h3 id="Express路由模块和路由">Express路由模块和路由</h3>
+<p>我们将会使用Express Router实例来管理我们的路由，下面是我们将会用到的路由以及对应的HTTP方法。</p>
+<table>
+<thead>
+<tr>
+<th>Route</th>
+<th>HTTP Verb</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>/api/bears</td>
+<td>GET</td>
+<td>Get all the bears.</td>
+</tr>
+<tr>
+<td>/api/bears</td>
+<td>POST</td>
+<td>Create a bear.</td>
+</tr>
+<tr>
+<td>/api/bears/:bear_id</td>
+<td>GET</td>
+<td>Get a single bear.</td>
+</tr>
+<tr>
+<td>/api/bears/:bear_id</td>
+<td>PUT</td>
+<td>Update a bear with new info.</td>
+</tr>
+<tr>
+<td>/api/bears/:bear_id</td>
+<td>DELETE</td>
+<td>Delete a bear.</td>
+</tr>
+</tbody>
+</table>
+<p>这已经覆盖API所需的基本路由，同时也保持了我们的行为和HTPP方法同步的良好格式。</p>
+<h3 id="路由中间件">路由中间件</h3>
+<p>我们已经定义了第一个路由以及看到了它的作用。Express Router为我们在定义路由时提供很大的灵活性。</p>
+<p>我们希望在每次请求API时都可以得到反馈信息，我只需要在代码中添加<strong>console.log()</strong>。</p>
+<pre><code><span class="comment">// server.js</span>
+
+...
+
+<span class="comment">// ROUTES FOR OUR API</span>
+<span class="comment">// =============================================================================</span>
+<span class="keyword">var</span> router = express.Router();                 <span class="comment">// get an instance of the express Router</span>
+
+<span class="comment">// middleware to use for all requests</span>
+router.<span class="keyword">use</span>(<span class="function"><span class="keyword">function</span><span class="params">(req, res, next)</span> </span>{
+    <span class="comment">// do logging</span>
+    console.log(<span class="string">'Something is happening.'</span>);
+    next(); <span class="comment">// make sure we go to the next routes and don't stop here</span>
+});
+
+<span class="comment">// test route to make sure everything is working (accessed at GET http://localhost:8080/api)</span>
+router.<span class="keyword">get</span>(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span><span class="params">(req, res)</span> </span>{
+    res.json({ message: <span class="string">'hooray! welcome to our api!'</span> });    
+});
+
+<span class="comment">// more routes for our API will happen here</span>
+
+<span class="comment">// REGISTER OUR ROUTES -------------------------------</span>
+<span class="comment">// all of our routes will be prefixed with /api</span>
+app.<span class="keyword">use</span>(<span class="string">'/api'</span>, router);
+
+...
+</code></pre><p>为了达到那个目的我仅需要声明<strong>router.use(function())</strong>。我们定义路由的顺序很重要，因为程序会根据我们定义的顺序执行。</p>
+<p>我们返回的数据时JSON格式的，对于API来说这是标准的同样这也方便使用我们API的用户调用。</p>
+<p>我们同样需要添加<strong>next()</strong>标识程序需要继续执行下面的路由，这点很重要防止程序在此终止。</p>
+<p><strong>Middleware Uses</strong> 中间件的作用很强大，我们可以验证请求以此保证请求的安全性，同样可以在这里抛出异常。同时还可以做登陆分析，总之在这里可以很多事。</p>
+<p>疯狂吧！</p>
+<h3 id="测试我们的中间件">测试我们的中间件</h3>
+<p>现在使用Postman向我们的应用程序发送一个请求，在终端就会看到<strong>Something is happening</strong>。</p>
+<p>通过中间件，可以做一些了不起的事情，可以对用户进行权限管理。</p>
+<h3 id="创建基本路由">创建基本路由</h3>
+<p>我们首先需要<strong>获取</strong>和<strong>创建</strong>的接口，这两项都是通过<strong>/api/bears</strong>api完成的，我们要先创建一个实例以备后用。</p>
+<h3 id="创建一个熊_POST_/api/bears">创建一个熊 POST /api/bears</h3>
+<p>我们将会添加一个处理POST的路由接着使用Postman来测试。</p>
+<pre><code>// server.js
+
+<span class="keyword">...</span>
+
+// ROUTES FOR OUR API
+// =============================================================================
+
+<span class="keyword">...</span> // &lt;-- route middleware and first route are here
+
+// more routes <span class="keyword">for</span> our API will happen here
+
+// on routes that end <span class="keyword">in</span> /bears
+// ----------------------------------------------------
+router.route(<span class="string">'/bears'</span>)
+
+    // create a bear (accessed at POST http://localhost:<span class="number">8080</span>/api/bears)
+    .post(<span class="keyword">function</span>(req, res) {
+
+        var bear = new Bear();         // create a new instance of the Bear model
+        bear.name = req.body.name;  // set the bears name (comes from the request)
+
+        // save the bear and check <span class="keyword">for</span> errors
+        bear.save(<span class="keyword">function</span>(err) {
+            <span class="keyword">if</span> (err)
+                res.send(err);
+
+            res.json({ message: <span class="string">'Bear created!'</span> });
+        });
+
+    });
+
+// REGISTER OUR ROUTES -------------------------------
+// all of our routes will be prefixed with /api
+app.use(<span class="string">'/api'</span>, router);
+
+<span class="keyword">...</span>
+</code></pre><p>现在我们已经创建好POST路由，以后都会使用<strong>router.route</strong>来处理相同路由。可以处理所有以<strong>/bears</strong>结尾的请求。</p>
+<p>接下来用Postman看看创建的熊。</p>
+<p>注意我们以<strong>x-www-form-urlencoded</strong>的形式来发送<strong>name</strong>，这样就会以查询字符串的形式发送到Node服务器。</p>
+<p>我们得到创建成功后的信息，接着来处理获取熊的接口。</p>
+<h3 id="获取所有的熊">获取所有的熊</h3>
+<p>通过router.route(),我们可以把不同的路由连接在一起，这保证了代码的简洁。</p>
+<p>// server.js</p>
+<pre><code><span class="keyword">...</span>
+
+// ROUTES FOR OUR API
+// =============================================================================
+
+<span class="keyword">...</span> // &lt;-- route middleware and first route are here
+
+// more routes <span class="keyword">for</span> our API will happen here
+
+// on routes that end <span class="keyword">in</span> /bears
+// ----------------------------------------------------
+router.route(<span class="string">'/bears'</span>)
+
+    // create a bear (accessed at POST http://localhost:<span class="number">8080</span>/api/bears)
+    .post(<span class="keyword">function</span>(req, res) {
+
+        <span class="keyword">...</span>
+
+    })
+
+    // get all the bears (accessed at GET http://localhost:<span class="number">8080</span>/api/bears)
+    .get(<span class="keyword">function</span>(req, res) {
+        Bear.find(<span class="keyword">function</span>(err, bears) {
+            <span class="keyword">if</span> (err)
+                res.send(err);
+
+            res.json(bears);
+        });
+    });
+
+// REGISTER OUR ROUTES -------------------------------
+// all of our routes will be prefixed with /api
+app.use(<span class="string">'/api'</span>, router);
+
+<span class="keyword">...</span>
+</code></pre><p>一个简单的路由，仅仅向<strong><a href="http://localhost:8080/api/bears" target="_blank" rel="external">http://localhost:8080/api/bears</a></strong>发送了一个GET请求，我们就能得到以JSON格式数据。</p>
+<h3 id="为处理单个熊创建路由">为处理单个熊创建路由</h3>
+<p>我们以<strong>/bears</strong>结尾的路由来处理多个实例，现在来处理单个的实例，比如我们传递一个熊的ID时。</p>
+<p>通过以<strong>/bears/:bear_id</strong>结尾的路由来出来单个实例：</p>
+<p>＊ 获取一个实例<br>＊ 更新一个实例<br>＊ 删除一个实例</p>
+<p><strong>:bear_id</strong>可以从请求头中获取，这得益于<strong>body-parser</strong>。</p>
+<h3 id="获取一个实例">获取一个实例</h3>
+<p>我们将会添加一个路由去处理以<strong>:bear_id</strong>结尾的URL。</p>
+<pre><code>// server.js
+
+<span class="keyword">...</span>
+
+// ROUTES FOR OUR API
+// =============================================================================
+
+<span class="keyword">...</span>
+
+// on routes that end <span class="keyword">in</span> /bears
+// ----------------------------------------------------
+router.route(<span class="string">'/bears'</span>)
+    <span class="keyword">...</span>
+
+// on routes that end <span class="keyword">in</span> /bears/:bear_id
+// ----------------------------------------------------
+router.route(<span class="string">'/bears/:bear_id'</span>)
+
+    // get the bear with that id (accessed at GET http://localhost:<span class="number">8080</span>/api/bears/:bear_id)
+    .get(<span class="keyword">function</span>(req, res) {
+        Bear.findById(req.params.bear_id, <span class="keyword">function</span>(err, bear) {
+            <span class="keyword">if</span> (err)
+                res.send(err);
+            res.json(bear);
+        });
+    });
+
+// REGISTER OUR ROUTES -------------------------------
+// all of our routes will be prefixed with /api
+app.use(<span class="string">'/api'</span>, router);
+
+<span class="keyword">...</span>
+</code></pre><p>通过上面获取全部实例的数据，可以看到单个熊的ID，用这个ID可以在Postman中得到单个的实例。</p>
+<h3 id="更新实例">更新实例</h3>
+<p>用router.route()连接起类似的路由并添加<strong>.put()</strong>。</p>
+<pre><code>// server.js
+
+<span class="keyword">...</span>
+
+// on routes that end <span class="keyword">in</span> /bears
+// ----------------------------------------------------
+router.route(<span class="string">'/bears'</span>)
+    <span class="keyword">...</span>
+
+// on routes that end <span class="keyword">in</span> /bears/:bear_id
+// ----------------------------------------------------
+router.route(<span class="string">'/bears/:bear_id'</span>)
+
+    // get the bear with that id (accessed at GET http://localhost:<span class="number">8080</span>/api/bears/:bear_id)
+    .get(<span class="keyword">function</span>(req, res) {
+        <span class="keyword">...</span>
+    })
+
+    // update the bear with this id (accessed at PUT http://localhost:<span class="number">8080</span>/api/bears/:bear_id)
+    .put(<span class="keyword">function</span>(req, res) {
+
+        // use our bear model to find the bear we want
+        Bear.findById(req.params.bear_id, <span class="keyword">function</span>(err, bear) {
+
+            <span class="keyword">if</span> (err)
+                res.send(err);
+
+            bear.name = req.body.name;     // update the bears info
+
+            // save the bear
+            bear.save(<span class="keyword">function</span>(err) {
+                <span class="keyword">if</span> (err)
+                    res.send(err);
+
+                res.json({ message: <span class="string">'Bear updated!'</span> });
+            });
+
+        });
+    });
+
+// REGISTER OUR ROUTES -------------------------------
+// all of our routes will be prefixed with /api
+app.use(<span class="string">'/api'</span>, router);
+
+<span class="keyword">...</span>
+</code></pre><p>我们还是使用前面的ID获得实例，然后通过PUT方法，在参数里面修改然后保存。</p>
+<p>为了确定更改生效，我们需要再查一遍实例。</p>
+<h3 id="删除一个实例">删除一个实例</h3>
+<p>当需要删除一个实例时，仅仅需要向<strong>/api/bears/:bear_id</strong>发送DELETE请求。</p>
+<p>下面添加对应的代码：</p>
+<pre><code>// server.js
+
+<span class="keyword">...</span>
+
+// on routes that end <span class="keyword">in</span> /bears
+// ----------------------------------------------------
+router.route(<span class="string">'/bears'</span>)
+    <span class="keyword">...</span>
+
+// on routes that end <span class="keyword">in</span> /bears/:bear_id
+// ----------------------------------------------------
+router.route(<span class="string">'/bears/:bear_id'</span>)
+
+    // get the bear with that id (accessed at GET http://localhost:<span class="number">8080</span>/api/bears/:bear_id)
+    .get(<span class="keyword">function</span>(req, res) {
+        <span class="keyword">...</span>
+    })
+
+    // update the bear with this id (accessed at PUT http://localhost:<span class="number">8080</span>/api/bears/:bear_id)
+    .put(<span class="keyword">function</span>(req, res) {
+        <span class="keyword">...</span>
+    })
+
+    // delete the bear with this id (accessed at DELETE http://localhost:<span class="number">8080</span>/api/bears/:bear_id)
+    .delete(<span class="keyword">function</span>(req, res) {
+        Bear.remove({
+            _id: req.params.bear_id
+        }, <span class="keyword">function</span>(err, bear) {
+            <span class="keyword">if</span> (err)
+                res.send(err);
+
+            res.json({ message: <span class="string">'Successfully deleted'</span> });
+        });
+    });
+
+// REGISTER OUR ROUTES -------------------------------
+// all of our routes will be prefixed with /api
+app.use(<span class="string">'/api'</span>, router);
+
+<span class="keyword">...</span>
+</code></pre><p>使用一个存在的bear_id通过DELETE方法向我们的API发送请求，将会删除一个对应的实例。</p>
+<p>接着再去获得所有实例时，就会得到空值。</p>
+<h3 id="结论">结论</h3>
+<p>现在我们已有自己的API来处理CRUD，有一个好的基础才能创建一个更大和更健壮的程序。</p>
+<p>这只是一个简洁的使用Express4创建的Node API，其实还有好多需要做和可以做的。比如：添加权限控制，友好的错误提示等。</p>
+<p>如果有任何疑问，可以在下面留言。</p>
+
+      
+    </div>
+    
+      
+    
+  </div>
+</article>
+
+
+
+
+<article class="post">
+  <div class="post-content">
+    <header>
+      
+  
+    <h1 class="title"><a href="/2014/11/01/Express入门/">Express入门</a></h1>
+  
+
+      
+      <time datetime="2014-11-01T12:41:46.000Z">Nov 1 2014</time>
+      
+    </header>
+    <div class="entry">
+      
+        <p>此文为翻译，删改了一些东西。</p>
+<p>1.Express安装</p>
+<p>假设你对Node和npm已经有些熟悉，新建一个文件夹：node</p>
+<p>1.1第一种方法：</p>
+<p>首先在node文件夹里，我们新建<strong>package.json</strong>来配置Express应用的一些信息。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">{</div><div class="line">    "<span class="attribute">name</span>": <span class="value"><span class="string">"demo1"</span></span>,</div><div class="line">    "<span class="attribute">description</span>": <span class="value"><span class="string">"First Express app"</span></span>,</div><div class="line">    "<span class="attribute">version</span>": <span class="value"><span class="string">"0.0.1"</span></span>,</div><div class="line">    "<span class="attribute">dependencies</span>": <span class="value">{</span></div><div class="line">       "<span class="attribute">express</span>": <span class="value"><span class="string">"^4.10.1"</span></span>,</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>然后到终端里面输入：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm <span class="operator"><span class="keyword">install</span></span></div></pre></td></tr></table></figure>
+
+<p>然后程序就会自动安装Express。</p>
+<p>1.2第二种方法：</p>
+<p>在终端cd node然后输入：</p>
+<pre><code>npm <span class="keyword">init</span>
+</code></pre><p>然后一路回车，最后输入<strong>yes</strong>，会自动生成<strong>package.json</strong>文件。</p>
+<p>2.创建程序入口文件：app.js</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</div><div class="line"><span class="keyword">var</span> app = express();</div><div class="line">app.listen(<span class="number">3000</span>);</div></pre></td></tr></table></figure>
+
+<p>在我学习一个新框架时，总会把节奏放的很慢，以至于不把问题变得很复杂。</p>
+<p>3.定义程序的路由</p>
+<p>现在让我们来给程序定义一些路由，Express通过API方法可以相应许多HTTP请求，请看下面例子：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//Regular HTTP get</span></div><div class="line">app.<span class="keyword">get</span>(some url, <span class="keyword">do</span> something);</div><div class="line"> </div><div class="line"><span class="comment">//Some other page</span></div><div class="line">app.<span class="keyword">get</span>(some other url, <span class="keyword">do</span> something <span class="keyword">else</span>);</div><div class="line"> </div><div class="line"><span class="comment">//I can respond to a form post</span></div><div class="line">app.post(some url, <span class="keyword">do</span> more stuff);</div></pre></td></tr></table></figure>
+
+<p>接下来我们添加一个真正的首页路由：</p>
+<pre><code>app.<span class="keyword">get</span>(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span><span class="params">(request, response)</span> </span>{
+    response.send(<span class="string">"This would be some HTML"</span>);
+});    
+</code></pre><p>注意现在我们在response上添加来一个send方法。如果到现在没有任何异常，你可以在终端输入<strong>node app.js</strong>来启动程序，并访问<a href="http://127.0.0.1:3000/" target="_blank" rel="external">http://127.0.0.1:3000/</a></p>
+<p>此时在页面上你应该看到：</p>
+<pre><code>This would <span class="keyword">be</span> some HTML
+</code></pre><p>send方法可以处理不同数据类型的数据，假设你需要为你的站点添加JSON-based API，你可以简单的返回一个对象而不是字符串，Express可以自动把结果转换为JSON同时设置正确的相应头部：</p>
+<pre><code>app.<span class="keyword">get</span>(<span class="string">'/api'</span>, <span class="function"><span class="keyword">function</span><span class="params">(request, response)</span> </span>{
+    response.send({name:<span class="string">"Raymond"</span>,age:<span class="number">40</span>});
+});
+</code></pre><p>3.生成一个blog程序</p>
+<p>我们的第一个程序是一个blog，它看起来没有什么但是应该有的基本知识都包含了。package.json保持原样不做修改，修改app.js如下：</p>
+<pre><code><span class="keyword">var</span> express = require(<span class="string">'express'</span>);
+<span class="keyword">var</span> app = express();
+
+app.<span class="keyword">get</span>(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span><span class="params">(req, res)</span> </span>{
+    res.sendfile(<span class="string">'./views/index.html'</span>);
+});
+
+app.<span class="keyword">get</span>(<span class="string">'/about'</span>, <span class="function"><span class="keyword">function</span><span class="params">(req, res)</span> </span>{
+    res.sendfile(<span class="string">'./views/about.html'</span>);
+});
+
+app.<span class="keyword">get</span>(<span class="string">'/article'</span>, <span class="function"><span class="keyword">function</span><span class="params">(req, res)</span> </span>{
+    res.sendfile(<span class="string">'./views/article.html'</span>);
+});
+
+app.listen(<span class="number">3000</span>);
+</code></pre><p>此时我们把send方法改为sendfile，并且在app.js里面引入了html。同时添加了首页，关于和文章页面。</p>
+<p>接着我们在项目根目录添加views文件夹，并添加index.html,about.html和artical.html。index.html里面添加：</p>
+<pre><code><span class="tag">&lt;<span class="title">html</span>&gt;</span>
+<span class="tag">&lt;<span class="title">head</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">title</span>&gt;</span>Home Page<span class="tag">&lt;/<span class="title">title</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">head</span>&gt;</span>
+
+<span class="tag">&lt;<span class="title">body</span>&gt;</span>
+<span class="tag">&lt;<span class="title">h1</span>&gt;</span>Blog!<span class="tag">&lt;/<span class="title">h1</span>&gt;</span>
+
+<span class="tag">&lt;<span class="title">footer</span>&gt;</span>
+<span class="tag">&lt;<span class="title">p</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"/"</span>&gt;</span>Home<span class="tag">&lt;/<span class="title">a</span>&gt;</span> ~ <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"/about"</span>&gt;</span>About Me<span class="tag">&lt;/<span class="title">a</span>&gt;</span> ~ <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"/article"</span>&gt;</span>Some Article<span class="tag">&lt;/<span class="title">a</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">p</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">footer</span>&gt;</span>
+
+<span class="tag">&lt;/<span class="title">body</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">html</span>&gt;</span>
+</code></pre><p>到目前为止并没有什么特别的，就是一些静态文件。终端里面终止程序，然后再启动程序访问首页应该看到上面写的一些东西。</p>
+<p>4.改为动态应用</p>
+<p>Express支持很多模版引擎（Jade，EJS……），但是我很喜欢Hanlebars所以在接下来的程序中选择了它。在我们的package.json里面添加：</p>
+<pre><code>{
+    "<span class="attribute">name</span>": <span class="value"><span class="string">"blog2"</span></span>,
+    "<span class="attribute">description</span>": <span class="value"><span class="string">"Blog app"</span></span>,
+    "<span class="attribute">version</span>": <span class="value"><span class="string">"0.0.1"</span></span>,
+    "<span class="attribute">dependencies</span>": <span class="value">{
+        "<span class="attribute">express</span>": <span class="value"><span class="string">"3.x"</span></span>,
+        "<span class="attribute">hbs</span>":<span class="value"><span class="string">"*"</span>
+    </span>}
+</span>}
+</code></pre><p>接下来我们需要在app.js中使用它：</p>
+<pre><code><span class="keyword">var</span> express = require(<span class="string">'express'</span>);
+<span class="keyword">var</span> app = express();
+
+<span class="keyword">var</span> hbs = require(<span class="string">'hbs'</span>);
+
+app.<span class="keyword">set</span>(<span class="string">'view engine'</span>, <span class="string">'html'</span>);
+app.engine(<span class="string">'html'</span>, hbs.__express);
+
+app.<span class="keyword">get</span>(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span><span class="params">(req, res)</span> </span>{
+    res.render(<span class="string">'index'</span>);
+});
+
+app.<span class="keyword">get</span>(<span class="string">'/about'</span>, <span class="function"><span class="keyword">function</span><span class="params">(req, res)</span> </span>{
+    res.render(<span class="string">'about'</span>);
+});
+
+app.<span class="keyword">get</span>(<span class="string">'/article'</span>, <span class="function"><span class="keyword">function</span><span class="params">(req, res)</span> </span>{
+    res.render(<span class="string">'article'</span>);
+});
+
+app.listen(<span class="number">3000</span>);
+</code></pre><p>通过“view engine”告诉Express使用HTML作为动态文件，但这并不是必须的。“app.engine”才是指定何种引擎来渲染页面的。最后我们使用了render方法Express默认去views文件夹去加载页面文件，同时也会忽略文件后缀名，所以<strong>res.render(‘something’)</strong>等同于<strong>views/something.html</strong>，然后根据我们设置的模版引擎来渲染页面。</p>
+<p>4.首页展示文章</p>
+<p>为了保持教程简单这里并没有使用数据库，但是我们会模拟一些数据。在项目根目录创建：blog.js</p>
+<pre><code><span class="keyword">var</span> entries = [
+{<span class="string">"id"</span>:<span class="number">1</span>, <span class="string">"title"</span>:<span class="string">"Hello World!"</span>, <span class="string">"body"</span>:<span class="string">"This is the body of my blog entry. Sooo exciting."</span>, <span class="string">"published"</span>:<span class="string">"6/2/2013"</span>},
+{<span class="string">"id"</span>:<span class="number">2</span>, <span class="string">"title"</span>:<span class="string">"Eggs for Breakfast"</span>, <span class="string">"body"</span>:<span class="string">"Today I had eggs for breakfast. Sooo exciting."</span>, <span class="string">"published"</span>:<span class="string">"6/3/2013"</span>},
+{<span class="string">"id"</span>:<span class="number">3</span>, <span class="string">"title"</span>:<span class="string">"Beer is Good"</span>, <span class="string">"body"</span>:<span class="string">"News Flash! Beer is awesome!"</span>, <span class="string">"published"</span>:<span class="string">"6/4/2013"</span>},
+{<span class="string">"id"</span>:<span class="number">4</span>, <span class="string">"title"</span>:<span class="string">"Mean People Suck"</span>, <span class="string">"body"</span>:<span class="string">"People who are mean aren't nice or fun to hang around."</span>, <span class="string">"published"</span>:<span class="string">"6/5/2013"</span>},
+{<span class="string">"id"</span>:<span class="number">5</span>, <span class="string">"title"</span>:<span class="string">"I'm Leaving Technology X and You Care"</span>, <span class="string">"body"</span>:<span class="string">"Let me write some link bait about why I'm not using a particular technology anymore."</span>, <span class="string">"published"</span>:<span class="string">"6/10/2013"</span>},
+{<span class="string">"id"</span>:<span class="number">6</span>, <span class="string">"title"</span>:<span class="string">"Help My Kickstarter"</span>, <span class="string">"body"</span>:<span class="string">"I want a new XBox One. Please fund my Kickstarter."</span>, <span class="string">"published"</span>:<span class="string">"6/12/2013"</span>}];
+
+
+exports.getBlogEntries = <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
+    <span class="keyword">return</span> entries;
+}
+
+exports.getBlogEntry = <span class="function"><span class="keyword">function</span><span class="params">(id)</span> </span>{
+    <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>; i &lt; entries.length; i++) {
+        <span class="keyword">if</span>(entries[i].id == id) <span class="keyword">return</span> entries[i];
+    }
+}
+</code></pre><p>一贯的我们应该有一些：添加／编辑／删除的方法，但是到现在这两个方法足够了。更新app.js如下：</p>
+<pre><code><span class="keyword">var</span> express = require(<span class="string">'express'</span>);
+<span class="keyword">var</span> app = express();
+
+<span class="keyword">var</span> hbs = require(<span class="string">'hbs'</span>);
+
+<span class="keyword">var</span> blogEngine = require(<span class="string">'./blog'</span>);
+
+app.<span class="keyword">set</span>(<span class="string">'view engine'</span>, <span class="string">'html'</span>);
+app.engine(<span class="string">'html'</span>, hbs.__express);
+app.<span class="keyword">use</span>(express.bodyParser());
+
+app.<span class="keyword">get</span>(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span><span class="params">(req, res)</span> </span>{
+    res.render(<span class="string">'index'</span>,{title:<span class="string">"My Blog"</span>, entries:blogEngine.getBlogEntries()});
+});
+
+app.<span class="keyword">get</span>(<span class="string">'/about'</span>, <span class="function"><span class="keyword">function</span><span class="params">(req, res)</span> </span>{
+    res.render(<span class="string">'about'</span>, {title:<span class="string">"About Me"</span>});
+});
+
+app.<span class="keyword">get</span>(<span class="string">'/article/:id'</span>, <span class="function"><span class="keyword">function</span><span class="params">(req, res)</span> </span>{
+    <span class="keyword">var</span> entry = blogEngine.getBlogEntry(req.params.id);
+    res.render(<span class="string">'article'</span>,{title:entry.title, blog:entry});
+});
+
+app.listen(<span class="number">3000</span>);
+</code></pre><p>注意__以上方法使用于Express3.0，要是Express4.0则要把：</p>
+<pre><code>app.<span class="keyword">use</span>(express.bodyParser());
+</code></pre><p>换为：</p>
+<pre><code><span class="keyword">var</span> bodyParser = <span class="keyword">require</span>(<span class="string">'body-parser'</span>);
+app.<span class="keyword">use</span>(bodyParser.json());
+app.<span class="keyword">use</span>(bodyParser.urlencoded({
+  extended: <span class="keyword">true</span>
+}));
+</code></pre><p>接着我们要修改首页的代码，语法要根据你选择的模版引擎：(可能是hexo也编译大括号,所以我使用＋＋代替了大括号,大家如果复制代码记得改为大括号)</p>
+<pre><code>&lt;<span class="comment">h1</span>&gt;<span class="comment">Blog!</span>&lt;<span class="comment">/h1</span>&gt;
+<span class="literal">+</span><span class="literal">+</span><span class="comment">#each</span> <span class="comment">entries</span><span class="literal">+</span><span class="literal">+</span>
+    &lt;<span class="comment">p</span>&gt;
+        &lt;<span class="comment">a</span> <span class="comment">href="/article/</span><span class="literal">+</span><span class="literal">+</span><span class="comment">id</span><span class="literal">+</span><span class="literal">+</span><span class="comment">"</span>&gt;<span class="literal">+</span><span class="literal">+</span><span class="comment">title</span><span class="literal">+</span><span class="literal">+</span>&lt;<span class="comment">/a</span>&gt;&lt;<span class="comment">br/</span>&gt;
+        <span class="comment">Published:</span> <span class="literal">+</span><span class="literal">+</span><span class="comment">published</span><span class="literal">+</span><span class="literal">+</span>
+    &lt;<span class="comment">/p</span>&gt;
+<span class="literal">+</span><span class="literal">+</span><span class="comment">/each</span><span class="literal">+</span><span class="literal">+</span>
+</code></pre><p>即使你对Hanlebars不熟悉，也应该对上面的代码猜的差不多，就是循环文章列表。</p>
+<p>5.添加页面框架</p>
+<p>我敢说你现在应该疑惑其他页面结构去哪里了，当你在Express中使用模版引擎时会自动有框架支持。意味着我可以把我站点通用的东西整合到框架中同时Express会自动的在特定的地方输出我们的内容。在views里面创建layout.html:</p>
+<pre><code><span class="tag">&lt;<span class="title">html</span>&gt;</span>
+<span class="tag">&lt;<span class="title">head</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">title</span>&gt;</span>++title++<span class="tag">&lt;/<span class="title">title</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">head</span>&gt;</span>
+<span class="tag">&lt;<span class="title">body</span>&gt;</span>
+    +++body+++
+    <span class="tag">&lt;<span class="title">footer</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">p</span>&gt;</span>
+            <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"/"</span>&gt;</span>Home<span class="tag">&lt;/<span class="title">a</span>&gt;</span> ~ <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"/about"</span>&gt;</span>About Me<span class="tag">&lt;/<span class="title">a</span>&gt;</span>
+        <span class="tag">&lt;/<span class="title">p</span>&gt;</span>
+    <span class="tag">&lt;/<span class="title">footer</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">body</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">html</span>&gt;</span>
+</code></pre><p>6.显示文章内容</p>
+<p>更新artical.html:</p>
+<pre><code>&lt;<span class="comment">h1</span>&gt;<span class="literal">+</span><span class="literal">+</span><span class="comment">blog</span><span class="string">.</span><span class="comment">title</span><span class="literal">+</span><span class="literal">+</span>&lt;<span class="comment">/h1</span>&gt;
+&lt;<span class="comment">p</span>&gt;
+    <span class="comment">Published:</span> <span class="literal">+</span><span class="literal">+</span><span class="comment">blog</span><span class="string">.</span><span class="comment">published</span><span class="literal">+</span><span class="literal">+</span>
+&lt;<span class="comment">p/</span>&gt;
+<span class="literal">+</span><span class="literal">+</span><span class="comment">blog</span><span class="string">.</span><span class="comment">body</span><span class="literal">+</span><span class="literal">+</span>
+</code></pre><p>到此我们已经构建完成了我们的应用，重启应用：node app.js。</p>
+<p>如果看不到文章列表或者报错：</p>
+<pre><code><span class="keyword">module</span>.js:<span class="number">340</span>
+    <span class="keyword">throw</span> err;
+          ^
+<span class="keyword">Error</span>: Cannot find <span class="keyword">module</span> <span class="comment">'/Users/zhuxy/work/node/views/app.js'</span>
+    at <span class="keyword">Function</span>.<span class="keyword">Module</span>._resolveFilename (<span class="keyword">module</span>.js:<span class="number">338</span>:<span class="number">15</span>)
+    at <span class="keyword">Function</span>.<span class="keyword">Module</span>._load (<span class="keyword">module</span>.js:<span class="number">280</span>:<span class="number">25</span>)
+    at <span class="keyword">Function</span>.<span class="keyword">Module</span>.runMain (<span class="keyword">module</span>.js:<span class="number">497</span>:<span class="number">10</span>)
+    at startup (node.js:<span class="number">119</span>:<span class="number">16</span>)
+    at node.js:<span class="number">906</span>:<span class="number">3</span>
+</code></pre><p>问题时没有找到<strong>node_path</strong>路径，在终端输入：</p>
+<pre><code><span class="attribute">Linux(Mac)</span>: <span class="string">export NODE_PATH=../node_modules</span>
+<span class="attribute">Windows</span>: <span class="string">set NODE_PATH=.</span>
+</code></pre><p>我的是：</p>
+<pre><code>export <span class="constant">NODE_PATH</span>=<span class="regexp">/usr/local</span><span class="regexp">/lib/node</span>_modules
+</code></pre><p>到此我们的教程就完了！如有问题请回复 － －</p>
+<p>原文：<a href="http://code.tutsplus.com/tutorials/introduction-to-express--net-33367" target="_blank" rel="external">http://code.tutsplus.com/tutorials/introduction-to-express--net-33367</a></p>
+
+      
+    </div>
+    
+      
+    
+  </div>
+</article>
+
+
+
+
+<article class="post">
+  <div class="post-content">
+    <header>
+      
+  
+    <h1 class="title"><a href="/2014/10/19/Pub-Sub模式/">Pub/Sub模式</a></h1>
+  
+
+      
+      <time datetime="2014-10-19T01:31:53.000Z">Oct 19 2014</time>
+      
+    </header>
+    <div class="entry">
+      
+        <p>Javascript设计模式那本书也稀里糊涂的看了一遍，并没有在工作中很好的应用。这次公司的项目用到了Pub/Sub模式，最近就仔细看了一下。</p>
+<p>由于自己知识有限，为了严谨还是引用了维基百科的解释：</p>
+<blockquote>
+<p>發布/訂閱（Publish/subscribe 或pub/sub）是一種消息範式，消息的發送者（發布者）不是計劃發送其消息給特定的接收者（訂閱者）。而是發布的消息分為不同的類別，而不需要知道什麼樣的訂閱者訂閱。訂閱者對一個或多個類別表達興趣，於是只接收感興趣的消息，而不需要知道什麼樣的發布者發布的消息。這種發布者和訂閱者的解耦可以允許更好的可擴展性和更為動態的網路拓撲.</p>
+</blockquote>
+<p>发布者和订阅者中间的关系纽带是<strong>消息</strong>（又称主题topic），不需要直接关联。</p>
+<p>其实现实生活中有很多这样的例子：</p>
+<ul>
+<li>订阅彩信</li>
+<li>邮件订阅</li>
+</ul>
+<p>这就带来了其优点：</p>
+<p><strong>解藕</strong>：双方不需要知道对方的存在，由于<strong>主题</strong>是枢纽，双方的对程序／系统的修改都不会影响对方。</p>
+<p>同时由于其优点也带来了副作用：</p>
+<p><strong>死板的语义链接</strong>:发布者发出的数据格式必须和订阅者约定，这就造成修改时的成本。</p>
+<p>概念讲完了，现在看看如何实现：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line">var pubsub = {};</div><div class="line">(function(q){</div><div class="line">	//维护主题和订阅者的对象</div><div class="line">	var topics = {},</div><div class="line">		subUid = -1;</div><div class="line">	q.publish = function(topic,args){</div><div class="line">		//指定主题不存在则返回</div><div class="line">		if(!topics[topic]){</div><div class="line">			return false;</div><div class="line">		}</div><div class="line">		//取出指定主题下的订阅者和个数</div><div class="line">		var subscribers = topics[topic],</div><div class="line">			len = subscribers ? subscribers.length : 0;</div><div class="line">		//逐个执行该主题上订阅者的回调方法</div><div class="line">		while(len--){</div><div class="line">			subscribers[len].func(topic,args);</div><div class="line">		}</div><div class="line">		return this;</div><div class="line">	};</div><div class="line">	q.subscribe = function(topic,func){</div><div class="line">		//指定主题不存在则创建</div><div class="line">		if(!topics[topic]){</div><div class="line">			topics[topic] = [];</div><div class="line">		}</div><div class="line">		var token = (++subUid).toString();</div><div class="line">		//指定主题中添加订阅者</div><div class="line">		topics[topic].push({</div><div class="line">			token:token,</div><div class="line">			func:func</div><div class="line">		});</div><div class="line">		return token;</div><div class="line">	};</div><div class="line">	q.unsubscribe = function(token){</div><div class="line">		for(var m in topics){</div><div class="line">			if(topics[m]){</div><div class="line">				for(var i = 0, j = topics[m].length; i &lt; j; i++){</div><div class="line">					//根据token删除订阅者</div><div class="line">					if(topics[m][i].token === token){</div><div class="line">						topics[m].splice(i,1);</div><div class="line">						return token;</div><div class="line">					}</div><div class="line">				}</div><div class="line">			}</div><div class="line">		}</div><div class="line">		return this;</div><div class="line">	};</div><div class="line">}(pubsub));</div></pre></td></tr></table></figure>
+
+<p>订阅：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> messageLoger = <span class="function"><span class="keyword">function</span><span class="params">(topics,data)</span></span>{</div><div class="line">	<span class="built_in">console</span>.log(<span class="string">"Loggin:"</span> + topics + <span class="string">":"</span> + data);</div><div class="line">};</div><div class="line"></div><div class="line"><span class="keyword">var</span> subscription = pubsub.subscribe(<span class="string">'inbox/newMessage'</span>,messageLoger);</div><div class="line"></div><div class="line">pubsub.publish(<span class="string">'inbox/newMessage'</span>,<span class="string">'HelloWorld'</span>);</div></pre></td></tr></table></figure>
+
+<p>退订：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">pubsub.unsubscribe(subscription);</div><div class="line"></div><div class="line">pubsub.publish(<span class="string">'inbox/newMessage'</span>,<span class="string">'HelloWorld'</span>);</div></pre></td></tr></table></figure>
+
+<p><a class="jsbin-embed" href="http://jsbin.com/fidagu/1/embed" target="_blank" rel="external">JS Bin</a><script src="http://static.jsbin.com/js/embed.js"></script></p>
+<p> 参考：</p>
+<ol>
+<li><p><a href="http://msdn.microsoft.com/en-us/magazine/hh201955.aspx" target="_blank" rel="external">http://msdn.microsoft.com/en-us/magazine/hh201955.aspx</a></p>
+</li>
+<li><p><a href="http://addyosmani.com/resources/essentialjsdesignpatterns/book/#observerpatternjavascript" target="_blank" rel="external">http://addyosmani.com/resources/essentialjsdesignpatterns/book/#observerpatternjavascript</a></p>
+</li>
+<li><p><a href="http://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern" target="_blank" rel="external">http://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern</a></p>
+</li>
+</ol>
+
+      
+    </div>
+    
+      
+    
+  </div>
+</article>
+
+
+
+
+<article class="post">
+  <div class="post-content">
+    <header>
+      
+  
+    <h1 class="title"><a href="/2014/10/09/你不知道的“是非”/">你不知道的‘是非’</a></h1>
+  
+
+      
+      <time datetime="2014-10-09T14:09:06.000Z">Oct 9 2014</time>
+      
+    </header>
+    <div class="entry">
+      
+        <p>上一篇文章<a href="http://zhuxinyong.com/2014/09/27/JavaScript%E6%8A%80%E5%B7%A7%E6%8F%AD%E7%A7%98/" target="_blank" rel="external">JavaScript技巧揭秘</a>提到short-circuit evaluation。</p>
+<p>文章提到 || 为函数提供默认参数，此种方法应用很广泛。一直认为 <strong>&amp;&amp;</strong> 和 <strong>||</strong> 没有什么特别的也没有多加注意。最近看了一些关于她俩的文章和讨论发现很值得详细记录一下。</p>
+<p>以前认为 &amp;&amp; 和 || 返回的是Boolean值。</p>
+<p>例如：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(<span class="operator">a</span> && b){</div><div class="line"><span class="comment"> //do sth...</span></div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>此时你应该认为 <strong>a &amp;&amp; b</strong> 返回的是Boolean值。看个实例：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(<span class="literal">true</span> && <span class="string">'xx'</span>){</div><div class="line"> //<span class="keyword">do</span> sth...</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>上面的例子会执行if里面的do sth，但是 <strong>true &amp;&amp; ‘xx’</strong> 返回的是 ‘xx’,所以 &amp;&amp; 并不是简单的返回Boolean。同样 || 也不是简单的返回Boolean。</p>
+<p>为函数提供默认值我们经常会这样：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Fun</span><span class="params">(name)</span></span>{</div><div class="line">	<span class="keyword">var</span> name = name || <span class="string">'China'</span>;</div><div class="line">	<span class="built_in">console</span>.log(<span class="string">'Hello '</span> + name + <span class="string">'!'</span>);</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>当传入Fun里面的name的值能转化为false时，程序就提供一个默认值‘China’。那么在Js里什么值能转换为false：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="number">0</span>, <span class="string">''</span>, <span class="string">""</span>, <span class="literal">null</span> ,<span class="literal">undefined</span> ,<span class="literal">NaN</span></div></pre></td></tr></table></figure>
+
+<p>其余的值都可以转为true,包括<strong>-1,-2</strong>这些负数。</p>
+<p>那么现在来看几个例子（感觉比较有意思）：</p>
+<h4 id="&amp;&amp;运算：">&amp;&amp;运算：</h4>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="literal">true</span> && <span class="literal">false</span> <span class="regexp">//</span> <span class="keyword">return</span> <span class="literal">false</span></div><div class="line"><span class="literal">false</span> && <span class="literal">false</span> <span class="regexp">//</span><span class="keyword">return</span> <span class="literal">false</span></div><div class="line"><span class="string">""</span> && <span class="string">"one"</span> <span class="regexp">//</span><span class="keyword">return</span> <span class="string">""</span></div><div class="line"><span class="string">"one"</span> && <span class="string">""</span> <span class="regexp">//</span><span class="keyword">return</span> <span class="string">""</span></div><div class="line"><span class="string">"one"</span> && <span class="string">"two"</span> <span class="regexp">//</span><span class="keyword">return</span> <span class="string">"two"</span></div><div class="line"><span class="literal">null</span> && <span class="number">10</span> //<span class="keyword">return</span> <span class="literal">null</span></div><div class="line"><span class="number">10</span> && <span class="literal">null</span> <span class="regexp">//</span><span class="keyword">return</span> <span class="literal">null</span></div></pre></td></tr></table></figure>
+
+<h4 id="||_运算：">|| 运算：</h4>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="string">"one"</span> || <span class="string">"two"</span> <span class="comment">// "one"</span></div><div class="line"><span class="number">0</span> || <span class="string">"one"</span>     <span class="comment">// "one"</span></div><div class="line"><span class="string">""</span> || <span class="number">0</span>        <span class="comment">// 0</span></div><div class="line"><span class="literal">null</span> || <span class="number">10</span>     <span class="comment">// 10</span></div><div class="line"><span class="number">10</span> || <span class="literal">null</span>     <span class="comment">// 10</span></div></pre></td></tr></table></figure>
+
+<p>这里还有几个例子：</p>
+<p><a class="jsbin-embed" href="http://jsbin.com/quman/1/embed?js,console" target="_blank" rel="external">JS Bin</a><script src="http://static.jsbin.com/js/embed.js"></script></p>
+<p><a class="jsbin-embed" href="http://jsbin.com/pabem/1/embed?js,console" target="_blank" rel="external">JS Bin</a><script src="http://static.jsbin.com/js/embed.js"></script></p>
+<p>&amp;&amp; 和 || 其实返回的是表达式执行的结果,如上的say()和Fun()方法。</p>
+<p>说了这么多尝试总结一下：</p>
+<hr>
+<h4 id="&amp;&amp;：">&amp;&amp;：</h4>
+<ul>
+<li><p>当左右两边都为true时，结果为：true；</p>
+</li>
+<li><p>当左侧的表达式转为true时，结果为：右侧表达式执行的结果；</p>
+</li>
+<li><p>当左侧的表达式转为false时，结果为：左侧表达式执行的结果；</p>
+</li>
+</ul>
+<hr>
+<h4 id="||：">||：</h4>
+<ul>
+<li><p>当左右两边都为false时，结果为：false；</p>
+</li>
+<li><p>当左侧的表达式转为true时，结果为：左侧表达式执行的结果；</p>
+</li>
+<li><p>当左侧的表达式转为false时，结果为：右侧表达式执行的结果；</p>
+</li>
+</ul>
+<p>参考：</p>
+<ol>
+<li><p><a href="http://www.codecademy.com/forum_questions/502b728cdadc53000202b956" target="_blank" rel="external">http://www.codecademy.com/forum_questions/502b728cdadc53000202b956</a></p>
+</li>
+<li><p><a href="http://www.grauw.nl/blog/entry/510" target="_blank" rel="external">http://www.grauw.nl/blog/entry/510</a></p>
+</li>
+<li><p><a href="http://learn.jquery.com/javascript-101/operators/" target="_blank" rel="external">http://learn.jquery.com/javascript-101/operators/</a></p>
+</li>
+</ol>
+
+      
+    </div>
+    
+      
+    
+  </div>
+</article>
+
+
+
+
+<article class="post">
+  <div class="post-content">
+    <header>
+      
+  
+    <h1 class="title"><a href="/2014/09/27/JavaScript技巧揭秘/">JavaScript技巧揭秘</a></h1>
+  
+
+      
+      <time datetime="2014-09-27T08:41:07.000Z">Sep 27 2014</time>
+      
+    </header>
+    <div class="entry">
+      
+        <p>Javascript中有许多技巧被有经验的开发者广泛使用。它们并不显而易见，特别是对初级开发者。这些技巧利用了语言特点，从侧面实现了语言本身不能直接实现的目标。下面我对这些技巧做了一个解释说明的专辑。</p>
+<p>你应该知道其中多数技巧是hack,并不是用在日常的开发中的。这篇文章的目的是解释它们是如何工作的，并不赞同使用它们。</p>
+<p><strong>使用!!来进行Boolean值转换</strong></p>
+<p>JavaScript中的一切变量都可以转换为true或false，这意味着你如果把变量放到if表达式中，会根据转换结果自动选择执行真分支还是假分支。</p>
+<p>0，false，””，null，undefined，NaN可以转换为false，其他值会转换为真。有时你希望一个值转换为boolean值，你可以使用“||”。</p>
+<p>另一方面你可以使用if(x)来代替if(x == ‘test’)。当x是空值时，它会执行else分支。</p>
+<p><strong>字符串变为数字_</strong></p>
+<p>字符串变为数字最常用的方法当属parseInt(x,10)和parseFloat(),还有一种不常用的就是 “3” - 0。判断一个值是否为数字有个技巧：</p>
+<pre><code><span class="attribute">x ==</span>=<span class="string"> +x</span>
+</code></pre><p><strong>使用||提供默认值</strong></p>
+<p>在JavaScript中||时一个“<a href="http://en.wikipedia.org/wiki/Short-circuit_evaluation" target="_blank" rel="external">short-circuit evaluation</a>”，同样也广泛应用于其他语言当中。这个操作符首先会执行左侧表达式，当值为假时，执行右侧的表达式。考虑下面的一个例子：</p>
+<pre><code><span class="function"><span class="keyword">function</span> <span class="title">setAge</span><span class="params">(age)</span></span>{
+    <span class="keyword">this</span>.age = age || <span class="number">10</span>;
+}
+setAge()
+</code></pre><p>我们没有提供age参数，因此 age || 10 会返回 10，这是提供默认值的好方法，其实上面的例子等价于：</p>
+<pre><code><span class="keyword">var</span> age;
+
+<span class="keyword">if</span>(age){
+    <span class="keyword">this</span>.age = age;
+}<span class="keyword">else</span>{
+    <span class="keyword">this</span>.age = <span class="number">10</span>;
+}
+</code></pre><p>第一个例子很简明，以至于你会经常看到。</p>
+<p>我个人非常喜欢这个模式的简明，但是上面的例子有个问题：不能给年龄设置为0。改进方法：</p>
+<p>原作者的：</p>
+<pre><code><span class="keyword">this</span>.age = (<span class="keyword">typeof</span> age !== <span class="string">'undefined'</span>) ? age : <span class="number">10</span>;
+</code></pre><p>但是虽然上面的方法可以设置为0，但是此时依旧可以设置为null。所以下面是我的方法：</p>
+<pre><code>this.<span class="variable">age =</span> (<span class="variable">age =</span>== +age) ? age : <span class="number">10</span>;
+</code></pre><p><strong>使用void 0 来代替undefined</strong></p>
+<p>关键词void接受一个参数并且一直返回undefined，但为何不直接使用undefined呢？因为在一些浏览器中可以重写undefined，同样在一些框架中也可以看到。在<a href="http://stackoverflow.com/questions/8783510/javascript-how-dangerous-is-it-really-to-assume-undefined-is-not-overwritten" target="_blank" rel="external">EC5</a>中浏览器是不可以重写undefined的。</p>
+<p><strong>使用(function(){ })()实现封装模式</strong></p>
+<p>当你希望需要封装时，你可以将代码包裹在一个匿名函数并可以立即执行的函数里面。Javascript里面只有两种作用域：全局和函数作用域，看看<a href="http://ariya.ofilabs.com/2013/05/es6-and-block-scope.html" target="_blank" rel="external">ECMA6 block scopes</a>。你写在全局的变量，可以在任何地方使用；正常情况下你希望使用函数将多数代码封装同时对全局作用域只提供接口。所以这种模式会很好用，注意下面的例子：</p>
+<pre><code>(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
+  <span class="function"><span class="keyword">function</span> <span class="title">div</span><span class="params">(a, b)</span> </span>{
+    <span class="keyword">return</span> a / b;
+  }
+
+  <span class="function"><span class="keyword">function</span> <span class="title">divBy5</span><span class="params">(x)</span> </span>{
+    <span class="keyword">return</span> div(x, <span class="number">5</span>);
+  }
+
+  <span class="built_in">window</span>.divBy5 = divBy5;
+})()
+
+div <span class="comment">// =&gt; undefined</span>
+divBy5(<span class="number">10</span>); <span class="comment">// =&gt; 2</span>
+</code></pre><p>在以上提到的所有技巧里面，这是一个副作用最小的推荐使用，以此来减少内部逻辑代码暴露到全局作用域中。</p>
+<p>综诉：我想提醒的是你的代码对于其他开发者一定要简介明了。语言本身提供的结构一般优于人造的方法。</p>
+<p>上面提到的一些问题在即将到来的ES6中将得到解决。例如在将来你不需要使用复杂的<strong>age = age || 10</strong>模式，因为ES6允许使用更好的模式来提供默认值：</p>
+<pre><code><span class="keyword">function</span>(age = <span class="number">10</span>){
+    <span class="keyword">...</span>
+}
+</code></pre><p>另一个例子是，你将不再需要(function(){})()模式，当高级浏览器实现 <a href="http://eviltrout.com/2014/05/03/getting-started-with-es6.html" target="_blank" rel="external">EC6 modules</a></p>
+<p>原文：<a href="http://blog.mdnbar.com/javascript-common-tricks?utm_source=javascriptweekly&amp;utm_medium=email" target="_blank" rel="external">http://blog.mdnbar.com/javascript-common-tricks?utm_source=javascriptweekly&amp;utm_medium=email</a></p>
+<p>资源：</p>
+<p>如果你希望了解更多技巧，请看下面的链接：</p>
+<ol>
+<li><p><a href="https://github.com/jed/140bytes/wiki/Byte-saving-techniques" target="_blank" rel="external">Byte Saving Techniques</a></p>
+</li>
+<li><p><a href="https://github.com/miguelmota/javascript-idiosyncrasies" target="_blank" rel="external">JavaScript Idiosyncrasies (kinda)</a></p>
+</li>
+<li><p><a href="https://code.google.com/p/jslibs/wiki/JavascriptTips" target="_blank" rel="external">JavaScript language advanced Tips &amp; Tricks</a></p>
+</li>
+<li><p><a href="http://modernweb.com/2013/12/23/45-useful-javascript-tips-tricks-and-best-practices/" target="_blank" rel="external">45-useful-javascript-tips-tricks-and-best-practices</a></p>
+</li>
+</ol>
+
+      
+    </div>
+    
+      
+    
+  </div>
+</article>
+
+
+
+
+<article class="post">
+  <div class="post-content">
+    <header>
+      
+  
+    <h1 class="title"><a href="/2014/09/26/Hexo-升级报错/">Hexo 升级报错</a></h1>
+  
+
+      
+      <time datetime="2014-09-25T16:12:30.000Z">Sep 26 2014</time>
+      
+    </header>
+    <div class="entry">
+      
+        <p>在mac上好不容易装了node(这几天node一直没有安装成功，原来是安装包错误！！！)，等到安装hexo之后，运行：</p>
+<pre><code>hexo <span class="keyword">server</span>
+</code></pre><p>然后就报错：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="special">{</span> name: 'HexoError',</div><div class="line">  reason: 'incomplete explicit mapping pair; a key node is missed',</div><div class="line">  mark: </div><div class="line">   <span class="special">{</span> name: null,</div><div class="line">     buffer: 'categories: Kategorien<span class="command">\r</span><span class="command">\nsearch</span>: Suche<span class="command">\r</span><span class="command">\ntags</span>: Tags<span class="command">\r</span><span class="command">\ntagcloud</span>: Tag-Cloud<span class="command">\r</span><span class="command">\ntweets</span>: Tweets<span class="command">\r</span><span class="command">\nprev</span>: Vorherige Seite<span class="command">\r</span><span class="command">\nnext</span>: Nächste Seite<span class="command">\r</span><span class="command">\ncomment</span>: Kommentare<span class="command">\r</span><span class="command">\narchive</span>_a: Archiv<span class="command">\r</span><span class="command">\narchive</span>_b: Archiv: <span class="comment">%s\r\npage: Seite %d\r\nrecent_posts: Neueste Artikel\n\u0000',</span></div><div class="line">     position: 189,</div><div class="line">     line: 9,</div><div class="line">     column: 17 <span class="special">}</span>,</div><div class="line">  message: 'Process failed: languages/de.yml',</div><div class="line">  domain: </div><div class="line">   <span class="special">{</span> domain: null,</div><div class="line">     _events: <span class="special">{</span> error: <span class="special">[</span>Function<span class="special">]</span> <span class="special">}</span>,</div><div class="line">     _maxListeners: 10,</div><div class="line">     members: <span class="special">[</span> <span class="special">[</span>Object<span class="special">]</span> <span class="special">]</span> <span class="special">}</span>,</div><div class="line">  domainThrown: true,</div><div class="line">  stack: undefined <span class="special">}</span></div></pre></td></tr></table></figure>
+
+<p>看到第二句我就搜了一下，结果原因是hexo升级，<strong>Yaml Parser做出了一定的修改</strong>。</p>
+<p>解决办法：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="number">1</span>. 将主题<span class="keyword">language</span>下的有空格的项都需要加上双引号。<span class="keyword">tag</span> cloud --&gt; <span class="string">"tag cloud"</span></div><div class="line"></div><div class="line"><span class="number">2</span>. 如果用的默认主题light，可以直接拉取最新主题，覆盖<span class="keyword">language</span>文件夹即可。$ git clone http<span class="variable">s:</span>//github.<span class="keyword">com</span>/tommy351/hexo-theme-light themes/</div></pre></td></tr></table></figure>
+
+<p>参考：</p>
+<p><a href="https://github.com/wileam/code/blob/master/source/_posts/update-hexo.md" target="_blank" rel="external">https://github.com/wileam/code/blob/master/source/_posts/update-hexo.md</a></p>
+<p><a href="http://www.huangyunkun.com/2014/07/31/hexo-update-error-with-yaml-parser/" target="_blank" rel="external">http://www.huangyunkun.com/2014/07/31/hexo-update-error-with-yaml-parser/</a></p>
+
+      
+    </div>
+    
+      
+    
+  </div>
+</article>
+
+
+
+
+<article class="post">
+  <div class="post-content">
+    <header>
+      
+  
+    <h1 class="title"><a href="/2014/09/16/HTML历史管理-彩票生成器/">HTML历史管理-彩票生成器</a></h1>
+  
+
+      
+      <time datetime="2014-09-16T06:38:29.000Z">Sep 16 2014</time>
+      
+    </header>
+    <div class="entry">
+      
+        <p>一般的彩票网站都有<strong>机选</strong>（随机选择）功能：</p>
+<blockquote>
+<p><a href="http://caipiao.163.com/order/dlt/#from=syks" target="_blank" rel="external">网易彩票</a></p>
+<p><a href="http://caipiao.hao123.com/" target="_blank" rel="external">好123彩票</a></p>
+</blockquote>
+<p>下面就用javascript简单模拟一下</p>
+<h3 id="HTML">HTML</h3>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"caipiao"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">button</span> <span class="attribute">id</span>=<span class="value">"J_btn"</span>&gt;</span>彩票生成<span class="tag">&lt;/<span class="title">button</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<h3 id="Javascript">Javascript</h3>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> btn = document.getElementById(<span class="symbol">'J_bt</span>n'),</div><div class="line">    caipiao = document.getElementById(<span class="symbol">'J_caipia</span>o');</div><div class="line">btn.addEventListener(<span class="symbol">'clic</span>k',function(){</div><div class="line">    <span class="keyword">var</span> nums = randomNum(<span class="number">35</span>,<span class="number">7</span>);</div><div class="line">    caipiao.innerHTML = nums;</div><div class="line">});</div><div class="line"></div><div class="line"><span class="javadoc">/**</span></div><div class="line"> * 从指定数组中随机抽取指定个数的数字</div><div class="line"> * <span class="javadoctag">@param</span>  {[Number]} alls     [总个数]</div><div class="line"> * <span class="javadoctag">@param</span>  {[Number]} selected [要选择的个数]</div><div class="line"> * <span class="javadoctag">@return</span> {[Array]}          [返回的指定个数的数组]</div><div class="line"> */</div><div class="line">function randomNum(alls,selected){</div><div class="line">    <span class="keyword">var</span> numArr = [],</div><div class="line">        resultArr = [],</div><div class="line">        index;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">1</span>; i &lt;= alls; i++){</div><div class="line">        numArr.unshift(i);</div><div class="line">    }</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; selected; j++){</div><div class="line">        index = Math.floor( Math.random() * alls );</div><div class="line">        resultArr.push(numArr[index]);</div><div class="line">    }</div><div class="line">    <span class="keyword">return</span> resultArr;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p><a class="jsbin-embed" href="http://jsbin.com/binom/2/embed" target="_blank" rel="external">JS Bin</a><script src="http://static.jsbin.com/js/embed.js"></script></p>
+<p>但是有时候我感觉前一组数字会更好，想返回，可是上面的没有此功能。</p>
+<p>下面就来完成上面提到的需求：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> btn = <span class="built_in">document</span>.getElementById(<span class="string">'J_btn'</span>),</div><div class="line">    caipiao = <span class="built_in">document</span>.getElementById(<span class="string">'J_caipiao'</span>);</div><div class="line">    btn.addEventListener(<span class="string">'click'</span>,<span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">        <span class="keyword">var</span> numKey = <span class="built_in">Math</span>.random();</div><div class="line">        <span class="keyword">var</span> nums = randomNum(<span class="number">35</span>,<span class="number">7</span>);</div><div class="line">        caipiao.innerHTML = nums;</div><div class="line">        <span class="built_in">window</span>.location.hash = nums;</div><div class="line">    });</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 从指定数组中随机抽取指定个数的数字</div><div class="line">     * @param  {[Number]} alls     [总个数]</div><div class="line">     * @param  {[Number]} selected [要选择的个数]</div><div class="line">     * @return {[Array]}          [返回的指定个数的数组]</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">randomNum</span><span class="params">(alls,selected)</span></span>{</div><div class="line">        <span class="keyword">var</span> numArr = [],</div><div class="line">            resultArr = [],</div><div class="line">            index;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">1</span>; i &lt;= alls; i++){</div><div class="line">            numArr.unshift(i);</div><div class="line">        }</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; selected; j++){</div><div class="line">            index = <span class="built_in">Math</span>.floor( <span class="built_in">Math</span>.random() * alls );</div><div class="line">            resultArr.push(numArr[index]);</div><div class="line">        }</div><div class="line">        <span class="keyword">return</span> resultArr;</div><div class="line">    }</div><div class="line">    <span class="built_in">window</span>.onhashchange = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">        <span class="keyword">var</span> num = <span class="built_in">window</span>.location.hash.substr(<span class="number">1</span>) || <span class="string">''</span>;</div><div class="line">        caipiao.innerHTML = num;</div><div class="line">    };</div></pre></td></tr></table></figure>
+
+<p>预览地址：<a href="http://jsbin.com/batocu/1/" target="_blank" rel="external">demo1</a></p>
+<p>打开上面的连接，看地址栏的变化，会有一串数字。当生成几组之后，你可以通过浏览器的后退按钮选择前面生成的数。</p>
+<p><a class="jsbin-embed" href="http://jsbin.com/batocu/1/embed" target="_blank" rel="external">JS Bin</a><script src="http://static.jsbin.com/js/embed.js"></script></p>
+<p>进一步优化：</p>
+<p><strong>此时URL中的数字就是生成的数字，所以让人感觉不专业</strong>，所以我们做下处理</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> btn = <span class="built_in">document</span>.getElementById(<span class="string">'J_btn'</span>),</div><div class="line">    caipiao = <span class="built_in">document</span>.getElementById(<span class="string">'J_caipiao'</span>),</div><div class="line">    obj = {};</div><div class="line"></div><div class="line">btn.addEventListener(<span class="string">'click'</span>,<span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">    <span class="keyword">var</span> nums = randomNum(<span class="number">35</span>,<span class="number">7</span>);</div><div class="line">    caipiao.innerHTML = nums;</div><div class="line">    <span class="keyword">var</span> numKey = <span class="built_in">Math</span>.random();</div><div class="line">    obj[numKey] = nums;</div><div class="line">    <span class="built_in">window</span>.location.hash = numKey;</div><div class="line">});</div><div class="line"><span class="comment">/**</span></div><div class="line"> * 从指定数组中随机抽取指定个数的数字</div><div class="line"> * @param  {[Number]} alls     [总个数]</div><div class="line"> * @param  {[Number]} selected [要选择的个数]</div><div class="line"> * @return {[Array]}          [返回的指定个数的数组]</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">randomNum</span><span class="params">(alls,selected)</span></span>{</div><div class="line">    <span class="keyword">var</span> numArr = [],</div><div class="line">        resultArr = [],</div><div class="line">        index;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">1</span>; i &lt;= alls; i++){</div><div class="line">        numArr.unshift(i);</div><div class="line">    }</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; selected; j++){</div><div class="line">        index = <span class="built_in">Math</span>.floor( <span class="built_in">Math</span>.random() * alls );</div><div class="line">        resultArr.push(numArr[index]);</div><div class="line">    }</div><div class="line">    <span class="keyword">return</span> resultArr;</div><div class="line">}</div><div class="line"><span class="built_in">window</span>.onhashchange = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">    <span class="keyword">var</span> num = obj[<span class="built_in">window</span>.location.hash.substr(<span class="number">1</span>)] || <span class="string">''</span>;</div><div class="line">    caipiao.innerHTML = num;</div><div class="line">};</div></pre></td></tr></table></figure>
+
+<p>解析：</p>
+<p><strong>新增了一个对象 obj，存储生成的数字，关键字是 随机生成的数字numKey，从hash取的时候也是根据numKey。</strong></p>
+<p>预览：<a href="http://jsbin.com/bakep/1/#0.8101516056340188" target="_blank" rel="external">demo2</a></p>
+<p>此时你会看到浏览器后面有一串小数，貌似很专业。</p>
+
+      
+    </div>
+    
+      
+    
+  </div>
+</article>
+
+
+
+
+<article class="post">
+  <div class="post-content">
+    <header>
+      
+  
+    <h1 class="title"><a href="/2014/09/09/Javascript算法-排序/">Javascript算法-排序</a></h1>
+  
+
+      
+      <time datetime="2014-09-09T05:54:45.000Z">Sep 9 2014</time>
+      
+    </header>
+    <div class="entry">
+      
+        <p>笔试会遇到一些算法问题，为了不被虐，也是为了增加知识，开始一个系列的算法学习。</p>
+<p><strong>交换排序的基本思想是：两两比较待排序记录的关键字，发现两个记录的次序相反时即进行交换，直到没有反序的记录为止。</strong></p>
+<h2 id="冒泡排序">冒泡排序</h2>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">sort</span><span class="params">(array)</span></span>{</div><div class="line"></div><div class="line">    <span class="comment">// 是否为数组</span></div><div class="line">    <span class="keyword">var</span> isArray = Object.prototype.toString.call(<span class="keyword">array</span>).slice(<span class="number">8</span>,-<span class="number">1</span>).toLowerCase() === <span class="string">'array'</span>;</div><div class="line"></div><div class="line">    <span class="keyword">if</span>(!isArray){</div><div class="line">        <span class="keyword">return</span> <span class="keyword">array</span> + <span class="string">' is not an Array!'</span>;</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="keyword">var</span> n = <span class="keyword">array</span>.length,</div><div class="line">        tmp;</div><div class="line"></div><div class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; n; i++){</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">var</span> j = i + <span class="number">1</span>; j &lt; n - i; j++){</div><div class="line">            <span class="keyword">if</span>(<span class="keyword">array</span>[j - <span class="number">1</span>] &gt; <span class="keyword">array</span>[j]){</div><div class="line">                tmp = <span class="keyword">array</span>[j - <span class="number">1</span>];</div><div class="line">                <span class="keyword">array</span>[j - <span class="number">1</span>] = <span class="keyword">array</span>[j];</div><div class="line">                <span class="keyword">array</span>[j] = tmp;</div><div class="line">            }</div><div class="line">        }</div><div class="line">    }</div><div class="line">    <span class="keyword">return</span> <span class="keyword">array</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>调用：</p>
+<pre><code><span class="function">sort</span>(<span class="attr_selector">[119,20,10,3]</span>) <span class="comment">//[3,10,20,119]</span>
+
+<span class="function">sort</span>(123) <span class="comment">//123 is not an Array.</span>
+</code></pre>
+      
+    </div>
+    
+      
+    
+  </div>
+</article>
+
+
+
+
+<article class="post">
+  <div class="post-content">
+    <header>
+      
+  
+    <h1 class="title"><a href="/2014/08/22/window-查看端口占用/">window 查看端口占用</a></h1>
+  
+
+      
+      <time datetime="2014-08-22T08:38:26.000Z">Aug 22 2014</time>
+      
+    </header>
+    <div class="entry">
+      
+        <p>查看端口命令：</p>
+<pre><code><span class="keyword">C</span>:\netstat -aon|findstr <span class="number">8080</span>
+</code></pre><p>结果：</p>
+<pre><code><span class="title">TCP</span>  <span class="number">127.0.0.1:80</span>   <span class="number">0.0.0.0:0</span>     LISTENING  <span class="number">2448</span>
+</code></pre><p>端口被进程号为2448的进程占用，继续执行下面命令：</p>
+<pre><code><span class="keyword">C</span>:\tasklist|findstr <span class="number">2448</span>
+</code></pre><p>结果：</p>
+<pre><code>thread.<span class="keyword">exe</span>       <span class="number">2016</span> Console      <span class="number">0</span>  <span class="number">16</span>,<span class="number">064</span> K
+</code></pre><p>很清楚，thread占用了你的端口,Kill it</p>
+<p>命令：</p>
+<pre><code><span class="title">taskkill</span> -F -PID <span class="number">2448</span>
+</code></pre>
+      
+    </div>
+    
+      
+    
+  </div>
+</article>
+
+
+
+
+<div class="pagination">
+  <table width='100%'>
+    <tbody>
+    <tr>
+      <td width='120' align='left'>
+        
+      </td>
+      <td width='auto' align='center'>
+          <a href="/archives/">文章归档</a>
+      </td>
+      <td width='120' align='right'>
+        
+        <div class="alignright">
+          <a href="/archives/2014/page/2/" class="alignright next">Next ›</a>
+        </div>
+        
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+
+
+
+</div></div>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer"><div class="inner"><div class="alignleft">
+  <p>
+  
+    &copy; 2014 Zhuxy
+  
+  </p>
+  <p>
+    Based on <a href="https://github.com/willerce/hexo-theme-noderce" >Noderce</a>
+  </p>
+
+</div>
+<div class="clearfix"></div></div></footer>
+  <script type="text/javascript">
+
+</script>
+
+</body>
+</html>

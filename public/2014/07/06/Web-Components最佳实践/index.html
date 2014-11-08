@@ -1,0 +1,193 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>关于生活，关于前端 › Web Components最佳实践</title>
+  <meta name="author" content="Zhuxy">
+  
+  <meta name="description" content="Web Components是一组新的web平台功能，可以使开发者通过声明式、组合式的途径来构建应用。下面是一些给开发者的一些最佳实践建议:
+
+命名空间：自定义元素应该用破折号隔开（例如：&amp;lt;x-tabs&amp;gt;,&amp;lt;my-tabs&amp;gt;)，破折号前面的字符才是有效的命名空间。你应该使其简短、唯一，尽可能不要覆盖其他人的前缀。如果你的组件已经有许多开发感兴趣，应该使组件的前缀小于三个字符。
+
+尽可能模仿内建元素：你的组件对其他开发者来说就应该像内嵌组件一样。如果以后正式公开组件的API时,若组件的API感觉很另类，你是否会感觉到尴尬？
+
+静默处理：组件应该想本地DOM元素，所以应该避免在普通元素交互时，出现js 错误，例如：你可以在ul中嵌套div,但它并不会按照你的想法渲染，可是它并不会抛出错误。
+
+属性定义数据输入：使用属性来传递配置信息，用boolean属性来表示boolean值，例如：&amp;lt;my-element selected&amp;gt;来代替&amp;lt;my-element seleted=&amp;quot;true&amp;quot;&amp;gt;.
+
+事件定义数据输出：除了传输的数据信息巨大或者改变极其频繁之外，我们应该使用事件来传递组件里的信息。
+
+引入依赖的文件：引入你组件的所依赖，不要担心冗余，只要设置合理的缓存头，它们只会在首次会被加载，使用http2.0可以减少多文件的消耗，或者在你发布app时，还可以合并和压缩它们到一个文件里面。
+
+为组件写文档：方便其他人使用你的组件，组件有许多方法可作为它们的API,下面列出了一些容易忽略的地方：
+
+
+通过实例标记可以简明的描述属性。
+若一个组件是设计嵌套在另一个中的，需要表明在其中如何使用。
+列出js方法和属性
+列出包含的事件
+当使用shadow dom，元素和select属性允许你把节点放到正确的地方，若其中有任何特殊元素，必须指明。
+若你的组件和微数据有关，需要写出微数据如何应用到你的组件上。">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Web Components最佳实践"/>
+  <meta property="og:site_name" content="关于生活，关于前端"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="关于生活，关于前端" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  
+</head>
+
+
+<body>
+  <header id="header"><div class="meta inner">
+  <h1><a href="/">关于生活，关于前端</a></h1>
+  <h2 id="header-h2"></h2>
+  <nav id="main-nav">
+    <ul>
+      
+      <li><a href="/">首页</a></li>
+      
+      <li><a href="/archives">文章归档</a></li>
+      
+      <li><a href="/about">关于</a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+</div>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  <div class="post-content">
+    <header>
+      
+  
+    <h1 class="title">Web Components最佳实践</h1>
+  
+
+      
+      <time datetime="2014-07-05T23:39:29.000Z">Jul 6 2014</time>
+      
+    </header>
+    <div class="entry">
+      
+        <p><img src="http://img2.picbed.org/uploads/2014/07/web_components_best_practices.jpg" alt="best practices"></p>
+<p>Web Components是一组新的web平台功能，可以使开发者通过声明式、组合式的途径来构建应用。下面是一些给开发者的一些最佳实践建议:</p>
+<ul>
+<li><p>命名空间：自定义元素应该用破折号隔开（例如：<code>&lt;x-tabs&gt;,&lt;my-tabs&gt;</code>)，破折号前面的字符才是有效的命名空间。你应该使其简短、唯一，尽可能不要覆盖其他人的前缀。如果你的组件已经有许多开发感兴趣，应该使组件的前缀小于三个字符。</p>
+</li>
+<li><p>尽可能模仿内建元素：你的组件对其他开发者来说就应该像内嵌组件一样。如果以后正式公开组件的API时,若组件的API感觉很另类，你是否会感觉到尴尬？</p>
+</li>
+<li><p>静默处理：组件应该想本地DOM元素，所以应该避免在普通元素交互时，出现js 错误，例如：你可以在ul中嵌套div,但它并不会按照你的想法渲染，可是它并不会抛出错误。</p>
+</li>
+<li><p>属性定义数据输入：使用属性来传递配置信息，用boolean属性来表示boolean值，例如：<code>&lt;my-element selected&gt;来代替&lt;my-element seleted=&quot;true&quot;&gt;</code>.</p>
+</li>
+<li><p>事件定义数据输出：除了传输的数据信息巨大或者改变极其频繁之外，我们应该使用事件来传递组件里的信息。</p>
+</li>
+<li><p>引入依赖的文件：引入你组件的所依赖，不要担心<link rel="import" ...="">冗余，只要设置合理的缓存头，它们只会在首次会被加载，使用http2.0可以减少多文件的消耗，或者在你发布app时，还可以合并和压缩它们到一个文件里面。</p>
+</li>
+<li><p>为组件写文档：方便其他人使用你的组件，组件有许多方法可作为它们的API,下面列出了一些容易忽略的地方：</p>
+<blockquote>
+<ol>
+<li>通过实例标记可以简明的描述属性。</li>
+<li>若一个组件是设计嵌套在另一个中的，需要表明在其中如何使用。</li>
+<li>列出js方法和属性</li>
+<li>列出包含的事件</li>
+<li>当使用shadow dom，<content>元素和select属性允许你把节点放到正确的地方，若其中有任何特殊元素，必须指明。</content></li>
+<li>若你的组件和微数据有关，需要写出微数据如何应用到你的组件上。</li>
+</ol>
+</blockquote>
+</li>
+</ul>
+<p><a id="more"></a></p>
+<ul>
+<li><p>在shadow dom中不要包含太多的东西：虽然允许你在其中添加一些视觉外的很多标签，可是这并不是你想添加多少，就添加多少的理由。因为过多的元素会导致性能问题，另外，尽可能的在DOM中保持语义化。</p>
+</li>
+<li><p>不要创建过多的自定义组件：如果你有两个仅仅是表现形式不同的组件，这是你就应该考虑合二为一，或者自定义元素可以扩展，而不要重复创建相似功能的组件。</p>
+</li>
+<li><p>统一声明方式和重要的API:尽可能保持相似功能的紧密性，方便使用者改变其中任何一个地方都可以达到效果。</p>
+</li>
+<li><p>永远不要假设你运行的环境：如果你的组件很受欢迎，它将会运行在任何你想不到的环境，或者和你没有听过的组件混合使用，力争组件的独立性和灵活性：不要依赖外部的框架、结构。</p>
+</li>
+</ul>
+<h3 id="不要忘记">不要忘记</h3>
+<p>一个成功的组件会被许多人应用在许多不同的环境中，这意味着遵循web的最佳实践开发变得更重要。</p>
+<ul>
+<li><p>可访问性：确保你的组件可通过ARIA 访问，特别是我们在创建新类型元素的时候这显得更重要。确保添加上 role=””属性。</p>
+</li>
+<li><p>性能：若你用一个回调来等待处理长时间的操作，记住不要过渡阻止主线程资源。误操作和逻辑性的循环会影响渲染性能，此时使用requestAnimationFrame来管理动画队列。应该清除像动画这种被暂停后占用的资源并且直到你把组件添加到DOM中才开启对应的操作。</p>
+</li>
+<li><p>脚本不是万能的：许多结构和样式需要js的支持，但是现在纯css就可以实现对应的效果。</p>
+</li>
+<li><p>响应式：把组件做成响应式的，因为你的用户会在你想不到的环境下使用组件。</p>
+</li>
+<li><p>测试：自定义标签，理想情况下需要单元测试来检测你的API.</p>
+</li>
+</ul>
+<p>原文：<a href="http://webcomponents.org/articles/web-components-best-practices/" target="_blank" rel="external">Web Components Best Practices</a></p>
+
+      
+    </div>
+    
+    <footer>
+      <div class="alignleft">
+      
+      
+      </div>
+      <div class="clearfix"></div>
+    </footer>
+    
+  </div>
+</article>
+
+
+<section id="comment">
+  
+            <!-- Duoshuo Comment BEGIN -->
+            <div class="ds-thread"></div>
+            <script type="text/javascript">
+                var duoshuoQuery = {short_name:"zhuxinyong"};
+                (function() {
+                    var ds = document.createElement('script');
+                    ds.type = 'text/javascript';ds.async = true;
+                    ds.src = 'http://static.duoshuo.com/embed.js';
+                    ds.charset = 'UTF-8';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+                })();
+            </script>
+            <!-- Duoshuo Comment END -->
+      
+  
+</section>
+
+</div></div>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer"><div class="inner"><div class="alignleft">
+  <p>
+  
+    &copy; 2014 Zhuxy
+  
+  </p>
+  <p>
+    Based on <a href="https://github.com/willerce/hexo-theme-noderce" >Noderce</a>
+  </p>
+
+</div>
+<div class="clearfix"></div></div></footer>
+  <script type="text/javascript">
+
+</script>
+
+</body>
+</html>

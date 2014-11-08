@@ -1,0 +1,283 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>关于生活，关于前端 › Archives: 2014/6</title>
+  <meta name="author" content="Zhuxy">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="关于生活，关于前端"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="关于生活，关于前端" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  
+</head>
+
+
+<body>
+  <header id="header"><div class="meta inner">
+  <h1><a href="/">关于生活，关于前端</a></h1>
+  <h2 id="header-h2"></h2>
+  <nav id="main-nav">
+    <ul>
+      
+      <li><a href="/">首页</a></li>
+      
+      <li><a href="/archives">文章归档</a></li>
+      
+      <li><a href="/about">关于</a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+</div>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+<h2 class="archive-title">2014/6</h2>
+
+
+<article class="post">
+  <div class="post-content">
+    <header>
+      
+  
+    <h1 class="title"><a href="/2014/06/30/客户端字体问题/">Git windows 客户端字体问题</a></h1>
+  
+
+      
+      <time datetime="2014-06-30T14:32:55.000Z">Jun 30 2014</time>
+      
+    </header>
+    <div class="entry">
+      
+        <p>Git客户端一直报如下警告：</p>
+<blockquote>
+<p>Warning: Your console font probably doesn’t support Unicode. If you experience strange characters in the output, consider switching to a TrueType font such as Lucida Console! </p>
+</blockquote>
+<p>查了一下原因是控制台字体问题：改为<strong>宋体</strong>就好了。</p>
+
+      
+    </div>
+    
+      
+    
+  </div>
+</article>
+
+
+
+
+<article class="post">
+  <div class="post-content">
+    <header>
+      
+  
+    <h1 class="title"><a href="/2014/06/29/WebComponents/">Web Components (一)</a></h1>
+  
+
+      
+      <time datetime="2014-06-29T15:26:16.000Z">Jun 29 2014</time>
+      
+    </header>
+    <div class="entry">
+      
+        <p>谷歌的I/O大会讲了Web Components的一些内容，然后自己就看了一些想文章。</p>
+<p>大致了解其中的一些内容，Web Components不是一个概念，而是五个概念的集合：</p>
+<ol>
+<li>Templates 定义一些惰性的代码块，但是使用的时候可激活。</li>
+<li>Decorators 增强或修改存在元素的表现。</li>
+<li>Custom Elements 允许开发者通过新的标签和新的脚本接口，来定义自己的元素。</li>
+<li>Shadow DOM 一个封装过的Dom,里面包含一些子节点（不可见）。</li>
+<li>Imports 定义上述元素如何被打包和加载的。</li>
+</ol>
+<p>每一个元素都是非常有用的，若把他们联合起来使用，可以使web开发者创造出代码复用性、可维护性更强的组件。</p>
+
+      
+    </div>
+    
+      
+    
+  </div>
+</article>
+
+
+
+
+<article class="post">
+  <div class="post-content">
+    <header>
+      
+  
+    <h1 class="title"><a href="/2014/06/27/占位符/">占位符</a></h1>
+  
+
+      
+      <time datetime="2014-06-27T08:13:28.000Z">Jun 27 2014</time>
+      
+    </header>
+    <div class="entry">
+      
+        <p>前端做静态页面的时候，经常会遇到图片占位的问题。若要遇到各种尺寸的图片，还要去切各种尺寸，十足很疼！所以下面给大家分享几个工作中用的图片占位：</p>
+<ul>
+<li><a href="http://lorempixel.com/" target="_blank" rel="external">lorempixum</a></li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">http:</span>/<span class="regexp">/lorempixum.com/</span><span class="number">400</span>/<span class="number">200</span>，<span class="number">400</span>x20<span class="number">0</span>的随机图片</div><div class="line"><span class="symbol">http:</span>/<span class="regexp">/lorempixum.com/g</span><span class="regexp">/400/</span><span class="number">200</span>，<span class="number">400</span>x20<span class="number">0</span>的随机灰度图片</div><div class="line"><span class="symbol">http:</span>/<span class="regexp">/lorempixum.com/</span><span class="number">400</span>/<span class="number">200</span>/sports，<span class="number">400</span>x20<span class="number">0</span>的随机体育类图片</div></pre></td></tr></table></figure>
+
+<ul>
+<li><a href="http://dummyimage.com/" target="_blank" rel="external">Dynamic Dummy Image Generator</a></li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">http:</span>/<span class="regexp">/dummyimage.com/qvga</span></div><div class="line"><span class="symbol">http:</span>/<span class="regexp">/dummyimage.com/skyscraper</span><span class="regexp">/f0f/f</span></div></pre></td></tr></table></figure>
+
+<ul>
+<li><a href="http://placebox.es/" target="_blank" rel="external">placebox</a></li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http:<span class="comment">//placebox.es/150/150/d97f19/f1f1f1/</span></div></pre></td></tr></table></figure>
+
+<ul>
+<li><a href="http://placehold.it/" target="_blank" rel="external">placehold</a></li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">http</span>://placehold.<span class="keyword">it</span>/<span class="number">350</span>x150</div><div class="line"><span class="keyword">http</span>://placehold.<span class="keyword">it</span>/<span class="number">350</span>x150/ff0</div></pre></td></tr></table></figure>
+
+<ul>
+<li><a href="http://fakeimg.pl/" target="_blank" rel="external">fakeimg</a></li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">http</span>://fakeimg.pl/<span class="number">300</span></div><div class="line"><span class="keyword">http</span>://fakeimg.pl/<span class="number">250</span>x100</div><div class="line"><span class="keyword">http</span>://fakeimg.pl/<span class="number">250</span>x100/ff0000</div><div class="line"><span class="keyword">http</span>://fakeimg.pl/<span class="number">350</span>x200/ff0000/<span class="number">00</span></div><div class="line"><span class="keyword">http</span>://fakeimg.pl/<span class="number">350</span>x200/ff0000,<span class="number">128</span>/<span class="number">000</span>,<span class="number">25</span></div><div class="line"><span class="keyword">http</span>://fakeimg.pl/<span class="number">350</span>x200/?<span class="keyword">text</span>=Hell</div><div class="line"><span class="keyword">http</span>://fakeimg.pl/<span class="number">350</span>x200/?<span class="keyword">text</span>=World&font=lobste</div></pre></td></tr></table></figure>
+
+<p>That’s all!</p>
+
+      
+    </div>
+    
+      
+    
+  </div>
+</article>
+
+
+
+
+<article class="post">
+  <div class="post-content">
+    <header>
+      
+  
+    <h1 class="title"><a href="/2014/06/26/Fis-快速入门/">Fis 快速入门</a></h1>
+  
+
+      
+      <time datetime="2014-06-26T14:48:48.000Z">Jun 26 2014</time>
+      
+    </header>
+    <div class="entry">
+      
+        <p>最近一直在学习百度的<a href="http:http://fis.baidu.com" target="_blank" rel="external">Fis</a>。</p>
+<h3 id="何为Fis?">何为Fis?</h3>
+<blockquote>
+<p>FIS是专为解决前端开发中自动化工具、性能优化、模块化框架、开发规范、代码部署、开发流程等问题的工具框架。</p>
+</blockquote>
+<p>现在公司的前端项目主要用到合并、压缩、合并图片（css sprite）、解决缓存问题。</p>
+<h3 id="如何使用Fis?">如何使用Fis?</h3>
+<p>1.安装 Fis</p>
+<p>Fis是基于NodeJs的，所以开始前请自行安装Node。</p>
+<p>安装Fis的命令为：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm <span class="operator"><span class="keyword">install</span> -g fis</span></div></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+      
+      <footer>
+        <div class="alignleft">
+          <a href="/2014/06/26/Fis-快速入门/#more" class="more-link">阅读全文 &gt;</a>
+        </div>
+        <div class="clearfix"></div>
+      </footer>
+      
+    
+  </div>
+</article>
+
+
+
+
+<article class="post">
+  <div class="post-content">
+    <header>
+      
+  
+    <h1 class="title"><a href="/2014/06/22/为什么要写博客？/">为什么要学习？</a></h1>
+  
+
+      
+      <time datetime="2014-06-21T17:17:52.000Z">Jun 22 2014</time>
+      
+    </header>
+    <div class="entry">
+      
+        <p>当你的才华撑不起你的野心时，就应该静下心来学习。</p>
+
+      
+    </div>
+    
+      
+    
+  </div>
+</article>
+
+
+
+
+<div class="pagination">
+  <table width='100%'>
+    <tbody>
+    <tr>
+      <td width='120' align='left'>
+        
+      </td>
+      <td width='auto' align='center'>
+          <a href="/archives/">文章归档</a>
+      </td>
+      <td width='120' align='right'>
+        
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+
+
+
+</div></div>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer"><div class="inner"><div class="alignleft">
+  <p>
+  
+    &copy; 2014 Zhuxy
+  
+  </p>
+  <p>
+    Based on <a href="https://github.com/willerce/hexo-theme-noderce" >Noderce</a>
+  </p>
+
+</div>
+<div class="clearfix"></div></div></footer>
+  <script type="text/javascript">
+
+</script>
+
+</body>
+</html>

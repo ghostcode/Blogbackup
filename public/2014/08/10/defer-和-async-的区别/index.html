@@ -1,0 +1,161 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>关于生活，关于前端 › defer 和 async 的区别</title>
+  <meta name="author" content="Zhuxy">
+  
+  <meta name="description" content="加载javascript一直是页面优化的重头戏，defer和async又可以帮助一些：
+async:
+
+Set this Boolean attribute to indicate that the browser should, if possible, execute the script as">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="defer 和 async 的区别"/>
+  <meta property="og:site_name" content="关于生活，关于前端"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="关于生活，关于前端" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  
+</head>
+
+
+<body>
+  <header id="header"><div class="meta inner">
+  <h1><a href="/">关于生活，关于前端</a></h1>
+  <h2 id="header-h2"></h2>
+  <nav id="main-nav">
+    <ul>
+      
+      <li><a href="/">首页</a></li>
+      
+      <li><a href="/archives">文章归档</a></li>
+      
+      <li><a href="/about">关于</a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+</div>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  <div class="post-content">
+    <header>
+      
+  
+    <h1 class="title">defer 和 async 的区别</h1>
+  
+
+      
+      <time datetime="2014-08-10T06:59:26.000Z">Aug 10 2014</time>
+      
+    </header>
+    <div class="entry">
+      
+        <p>加载javascript一直是页面优化的重头戏，defer和async又可以帮助一些：</p>
+<h3 id="async:">async:</h3>
+<blockquote>
+<p>Set this Boolean attribute to indicate that the browser should, if possible, execute the script asynchronously. It has no effect on inline scripts (i.e., scripts that don’t have the src attribute).</p>
+</blockquote>
+<p>大意：</p>
+<blockquote>
+<p>设置此Boolean属性就是让浏览器异步的执行此脚本，它对内敛脚本无效（就是没有src属性的脚本）</p>
+</blockquote>
+<h3 id="defer:">defer:</h3>
+<blockquote>
+<p>This Boolean attribute is set to indicate to a browser that the script is meant to be executed after the document has been parsed. </p>
+</blockquote>
+<p>大意：</p>
+<blockquote>
+<p>设置此Boolean属性就是告诉浏览器在DOM节点解析完毕之前执行。</p>
+</blockquote>
+<p>文档说的很少，其实还有好多东西，这里直接记录其异同：</p>
+<p><strong>同：</strong></p>
+<ul>
+<li>不阻塞页面的渲染</li>
+<li>只能应用在通过src属性连接的javascript</li>
+<li>此脚本内部不能有document.write</li>
+<li>加载完成后可以触发onload事件</li>
+</ul>
+<p><strong>异：</strong></p>
+<ul>
+<li>出现的版本不同defer属于HTML4,async属于HTML5</li>
+<li>各浏览器支持程度不同（IE4开始支持defer）</li>
+<li>执行时机不同（defer在页面渲染完成之后执行，async在加载完成之后就执行）</li>
+<li>执行的顺序不同（defer会严格按照页面出现的顺序执行，async在能执行的时候就会执行，有可能会顺序颠倒）</li>
+</ul>
+<p>参考图：</p>
+<p><img src="http://img2.picbed.org/uploads/2014/08/execution2.jpg" alt="加载于执行"></p>
+<p>注：</p>
+<p><strong>正是由于async的执行顺序不可控，在具有依赖的脚本加载时不可以使用。对于没有依赖的代码可以使用比如统计代码、或者一个页面的单一脚本等</strong></p>
+<p>参考：</p>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/script" target="_blank" rel="external">https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/script</a></p>
+<p><a href="http://stackoverflow.com/questions/10808109/script-tag-async-defer" target="_blank" rel="external">http://stackoverflow.com/questions/10808109/script-tag-async-defer</a></p>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Mozilla_event_reference/DOMContentLoaded_(event" target="_blank" rel="external">https://developer.mozilla.org/zh-CN/docs/Mozilla_event_reference/DOMContentLoaded_(event</a>)</p>
+<p><a href="http://ued.ctrip.com/blog/?p=3121" target="_blank" rel="external">http://ued.ctrip.com/blog/?p=3121</a></p>
+
+      
+    </div>
+    
+    <footer>
+      <div class="alignleft">
+      
+      
+      </div>
+      <div class="clearfix"></div>
+    </footer>
+    
+  </div>
+</article>
+
+
+<section id="comment">
+  
+            <!-- Duoshuo Comment BEGIN -->
+            <div class="ds-thread"></div>
+            <script type="text/javascript">
+                var duoshuoQuery = {short_name:"zhuxinyong"};
+                (function() {
+                    var ds = document.createElement('script');
+                    ds.type = 'text/javascript';ds.async = true;
+                    ds.src = 'http://static.duoshuo.com/embed.js';
+                    ds.charset = 'UTF-8';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+                })();
+            </script>
+            <!-- Duoshuo Comment END -->
+      
+  
+</section>
+
+</div></div>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer"><div class="inner"><div class="alignleft">
+  <p>
+  
+    &copy; 2014 Zhuxy
+  
+  </p>
+  <p>
+    Based on <a href="https://github.com/willerce/hexo-theme-noderce" >Noderce</a>
+  </p>
+
+</div>
+<div class="clearfix"></div></div></footer>
+  <script type="text/javascript">
+
+</script>
+
+</body>
+</html>

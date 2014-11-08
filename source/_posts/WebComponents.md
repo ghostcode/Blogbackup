@@ -1,0 +1,16 @@
+title: Web Components (一)
+date: 2014-06-29 23:26:16
+tags: webcomponents
+---
+
+谷歌的I/O大会讲了Web Components的一些内容，然后自己就看了一些想文章。
+
+大致了解其中的一些内容，Web Components不是一个概念，而是五个概念的集合：
+
+1. Templates 定义一些惰性的代码块，但是使用的时候可激活。
+2. Decorators 增强或修改存在元素的表现。
+3. Custom Elements 允许开发者通过新的标签和新的脚本接口，来定义自己的元素。
+4. Shadow DOM 一个封装过的Dom,里面包含一些子节点（不可见）。
+5. Imports 定义上述元素如何被打包和加载的。
+
+每一个元素都是非常有用的，若把他们联合起来使用，可以使web开发者创造出代码复用性、可维护性更强的组件。

@@ -1,0 +1,201 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>关于生活，关于前端 › Sublime Text2 个人常用插件</title>
+  <meta name="author" content="Zhuxy">
+  
+  <meta name="description" content="这是个人常用Sublime Text 2的一些常用插件，会陆续更新，这并不是什么必备插件。
+Sublime Text 2的插件安装方法：
+1. 按Ctrl+`调出console
+
+2. 粘贴以下代码到底部命令行并回车：
+
+import urllib2,os;pf=’Package Control.s">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Sublime Text2 个人常用插件"/>
+  <meta property="og:site_name" content="关于生活，关于前端"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="关于生活，关于前端" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  
+</head>
+
+
+<body>
+  <header id="header"><div class="meta inner">
+  <h1><a href="/">关于生活，关于前端</a></h1>
+  <h2 id="header-h2"></h2>
+  <nav id="main-nav">
+    <ul>
+      
+      <li><a href="/">首页</a></li>
+      
+      <li><a href="/archives">文章归档</a></li>
+      
+      <li><a href="/about">关于</a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+</div>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  <div class="post-content">
+    <header>
+      
+  
+    <h1 class="title">Sublime Text2 个人常用插件</h1>
+  
+
+      
+      <time datetime="2014-08-05T01:23:46.000Z">Aug 5 2014</time>
+      
+    </header>
+    <div class="entry">
+      
+        <p>这是个人常用Sublime Text 2的一些常用插件，会陆续更新，这并不是什么必备插件。</p>
+<p>Sublime Text 2的插件安装方法：</p>
+<pre><code><span class="bullet">1. </span>按Ctrl+`调出console
+
+<span class="bullet">2. </span>粘贴以下代码到底部命令行并回车：
+</code></pre><blockquote>
+<p>import urllib2,os;pf=’Package Control.sublime-package’;ipp=sublime.installed_packages_path();os.makedirs(ipp) if not os.path.exists(ipp) else None;open(os.path.join(ipp,pf),’wb’).write(urllib2.urlopen(‘<a href="http://sublime.wbond.net/&#39;+pf.replace(" target="_blank" rel="external">http://sublime.wbond.net/&#39;+pf.replace(</a>‘ ‘,’%20’)).read())</p>
+</blockquote>
+<ul>
+<li>Emmet (前端的最爱)</li>
+<li>HTML/CSS/JS Pretty (代码美化)</li>
+<li>DocBlockr (注释)</li>
+<li>AngularJS</li>
+<li>SublimeCodeIntel (代码自动提示Javascript、python)</li>
+<li>ternjs (支持Vim,Emacs等javascript提示)</li>
+<li>ConvertToUTF8 (乱码解决)</li>
+<li>Ctage</li>
+<li>FakeImg.pl(图片占位)</li>
+<li>Placeholders</li>
+<li>Code​Formatter</li>
+<li>SublimeCodeIntel</li>
+</ul>
+<p>技巧：(默认是在Preference-&gt; Settings-User 添加)</p>
+<ul>
+<li>vim 编辑模式</li>
+</ul>
+<blockquote>
+<p><strong>“ignored_packages”: []</strong>,ESC进入 VIM模式。</p>
+</blockquote>
+<ul>
+<li>双击带中划线的代码选中</li>
+</ul>
+<blockquote>
+<p>Preference-&gt; Settings-Default 找到 <strong>“word_separators”</strong>,删除里面的‘-’。</p>
+</blockquote>
+<ul>
+<li>高亮当前行</li>
+</ul>
+<blockquote>
+<p>“highlight_line”: true</p>
+</blockquote>
+<ul>
+<li>设置tab的空格数（我这里设置的是四个）</li>
+</ul>
+<pre><code><span class="string">"tab_size"</span>: <span class="number">2</span>,
+
+<span class="string">"translate_tabs_to_spaces"</span>: <span class="literal">true</span>
+</code></pre><ul>
+<li>去除行末尾的多余空格</li>
+</ul>
+<pre><code><span class="string">"trim_trailing_white_space_on_save"</span>: <span class="literal">true</span>
+</code></pre><p>主题：</p>
+<pre><code>{
+    "<span class="attribute">theme</span>": <span class="value"><span class="string">"Soda Light.sublime-theme"</span></span>,
+    "<span class="attribute">soda_folder_icons</span>": <span class="value"><span class="literal">true</span>
+</span>}
+</code></pre><p>现在我的设置：</p>
+<pre><code>{
+    "<span class="attribute">color_scheme</span>": <span class="value"><span class="string">"Packages/Color Scheme - Default/Monokai.tmTheme"</span></span>,
+    "<span class="attribute">font_size</span>": <span class="value"><span class="number">13.0</span></span>,
+    "<span class="attribute">highlight_line</span>": <span class="value"><span class="literal">true</span></span>,
+    "<span class="attribute">ignored_packages</span>":
+    <span class="value">[
+    ]</span>,
+    "<span class="attribute">soda_folder_icons</span>": <span class="value"><span class="literal">true</span></span>,
+    "<span class="attribute">theme</span>": <span class="value"><span class="string">"Soda Light.sublime-theme"</span></span>,
+    "<span class="attribute">tab_size</span>":<span class="value"><span class="number">4</span></span>,
+    "<span class="attribute">translate_tabs_to_spaces</span>": <span class="value"><span class="literal">true</span></span>,
+    "<span class="attribute">trim_trailing_white_space_on_save</span>": <span class="value"><span class="literal">true</span>
+</span>}
+</code></pre><p>参考：<a href="http://buymeasoda.github.io/soda-theme/" target="_blank" rel="external">http://buymeasoda.github.io/soda-theme/</a></p>
+<p>更多插件：</p>
+<p><a href="https://sublime.wbond.net/" target="_blank" rel="external">https://sublime.wbond.net/</a></p>
+
+      
+    </div>
+    
+    <footer>
+      <div class="alignleft">
+      
+      
+  
+  <div class="tags">
+    <a href="/tags/工具/">工具</a>
+  </div>
+
+      </div>
+      <div class="clearfix"></div>
+    </footer>
+    
+  </div>
+</article>
+
+
+<section id="comment">
+  
+            <!-- Duoshuo Comment BEGIN -->
+            <div class="ds-thread"></div>
+            <script type="text/javascript">
+                var duoshuoQuery = {short_name:"zhuxinyong"};
+                (function() {
+                    var ds = document.createElement('script');
+                    ds.type = 'text/javascript';ds.async = true;
+                    ds.src = 'http://static.duoshuo.com/embed.js';
+                    ds.charset = 'UTF-8';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+                })();
+            </script>
+            <!-- Duoshuo Comment END -->
+      
+  
+</section>
+
+</div></div>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer"><div class="inner"><div class="alignleft">
+  <p>
+  
+    &copy; 2014 Zhuxy
+  
+  </p>
+  <p>
+    Based on <a href="https://github.com/willerce/hexo-theme-noderce" >Noderce</a>
+  </p>
+
+</div>
+<div class="clearfix"></div></div></footer>
+  <script type="text/javascript">
+
+</script>
+
+</body>
+</html>
