@@ -81,8 +81,8 @@ disqus_shortname:
 # Extensions
 ## Plugins: https://github.com/tommy351/hexo/wiki/Plugins
 ## Themes: https://github.com/tommy351/hexo/wiki/Themes
-theme: hexo-theme-daisy
-# theme: simple
+# theme: hexo-theme-daisy
+theme: simple
 exclude_generator:
 
 # Deployment

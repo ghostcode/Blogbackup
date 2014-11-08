@@ -1,7 +1,7 @@
 title: Mac终端变主题
 date: 2014-11-08 20:20:54
 categories:
-tags:
+tags: Mac
 ---
 最近看终端眼睛有点累，想改变一下主题。
 
