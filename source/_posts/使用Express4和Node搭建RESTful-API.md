@@ -23,6 +23,8 @@ tags: Node Express
 
 开始之前要确保你安装了Node环境然后我们才能开始！
 
+<!-- more -->
+
 ###启程###
 
 我们先整理一下创建API所需要的文件，我们需要定义Node packages，使用Express搭建服务、路由和模型，最后，测试我们的API。
