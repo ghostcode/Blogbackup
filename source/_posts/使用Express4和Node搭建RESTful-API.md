@@ -124,7 +124,7 @@ Node启动程序时会检查一些配置信息。
 
 你将会看到如下的界面：
 
-![img](http://img5.picbed.org/uploads/2014/11/node_api_start_server.png)
+![img](/assets/images/node-api-start-server.png)
 
 看到程序已经启动，接着来测试一下。
 
