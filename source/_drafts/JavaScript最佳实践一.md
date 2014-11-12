@@ -5,11 +5,11 @@ tags: JavaScript
 
 选择易理解和简短的名字作为变量和方法。
 
-__不好的名字__
+__不好的命名__
 
 	x1 fe2 xbqne
 
-__同样糟糕的名字__
+__同样糟糕的命名__
 
 	incrementerForMainLoopWhichSpansFromTenToTwenty
 	}
@@ -117,8 +117,40 @@ __对象字面量__：其中的任何东西都需要通过对象的名字获得�
 	}();
 	module.init();
 
+###使用严格模式###
 
+浏览器的JavaScript解析引擎有很强大的容错能力，当你需要移植代码或者交接代码给同事时，松散的代码就会给你带来麻烦。所以代码检查才能保证代码的安全。
 
+检查你的代码：[http://www.jslint.com/](http://www.jslint.com/)
+
+###代码注释适中为好###
+
+>好的代码不需解释
+
+这是一个夸张的迷信。
+
+注释那些你认为需要解释的地方，但是记住不要讲解你的人生故事（不要太长）。
+
+避免使用单行注释__//__，使用__/* */__更安全，当换行时不会产生错误。
+
+如果你使用注释来调试代码，这是一个很好的技巧：
+
+	module = function(){
+	   var current = null;
+	/*
+	   var init = function(){
+	   };
+	   var show = function(){
+	      current = 1;
+	   };
+	   var hide = function(){
+	      show();
+	   }
+	// */
+	   return{init:init, show:show, current:current}
+	}();
+
+注释不能出现在用户面前。__开发代码不是活的代码__
 
 
 
