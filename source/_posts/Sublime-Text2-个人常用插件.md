@@ -1,6 +1,6 @@
 title: 'Sublime Text2 个人常用插件'
 date: 2014-08-05 09:23:46
-tags: 工具
+tags: Sublime
 ---
 这是个人常用Sublime Text 2的一些常用插件，会陆续更新，这并不是什么必备插件。
 
@@ -24,7 +24,7 @@ Sublime Text 2的插件安装方法：
 * FakeImg.pl(图片占位)
 * Placeholders
 * Code​Formatter
-* SublimeCodeIntel
+* FileHeader(添加文件头部)
 
 技巧：(默认是在Preference-> Settings-User 添加)
 
