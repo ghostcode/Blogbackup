@@ -15,6 +15,8 @@ tags: Sublime
 
 ###为已经存在的文件添加头部###
 
+<!-- more -->
+
 * 侧栏菜单
 
 ![new file](../assets/images/addheadernewfile.gif)
