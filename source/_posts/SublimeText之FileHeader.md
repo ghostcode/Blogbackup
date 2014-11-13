@@ -7,7 +7,7 @@ tags: Sublime
 
 * 侧栏菜单
 
-![new file](../assets/images/newfile.gif)
+![new file](http://zhuxinyong.com/assets/images/newfile.gif)
 
 * 快捷键
 
@@ -19,7 +19,7 @@ tags: Sublime
 
 * 侧栏菜单
 
-![new file](../assets/images/addheadernewfile.gif)
+![new file](http://zhuxinyong.com/assets/images/addheadernewfile.gif)
 
 * 快捷键
 
@@ -27,10 +27,10 @@ tags: Sublime
 
 ###为指定目录下面的文件添加头部###
 
-![new file](../assets/images/addheaderspecifiled.gif)
+![new file](http://zhuxinyong.com/assets/images/addheaderspecifiled.gif)
 
 FileHeader最重要的功能是可以自动更新文件最后更改时间以及更改者，看下面的图片留意__@Last modified time:__保存前后的区别。
 
-![new file](../assets/images/addxx.gif)
+![new file](http://zhuxinyong.com/assets/images/addxx.gif)
 
 具体参考：[FileHeader](https://github.com/shiyanhui/FileHeader)
