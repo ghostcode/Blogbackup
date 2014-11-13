@@ -22,6 +22,8 @@ __字符串变为数字___
 
 __使用||提供默认值__
 
+<!-- more -->
+
 在JavaScript中||时一个“[short-circuit evaluation](http://en.wikipedia.org/wiki/Short-circuit_evaluation)”，同样也广泛应用于其他语言当中。这个操作符首先会执行左侧表达式，当值为假时，执行右侧的表达式。考虑下面的一个例子：
 
 	function setAge(age){

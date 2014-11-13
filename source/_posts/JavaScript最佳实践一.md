@@ -1,6 +1,9 @@
 title: JavaScript最佳实践一
 tags: JavaScript
+date: 2014-11-13 09:37:38
+categories:
 ---
+
 ###变量和函数名有意义###
 
 选择易理解和简短的名字作为变量和方法。
