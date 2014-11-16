@@ -20,6 +20,8 @@ Meta标签是用来存储一些页面信息，目的是使浏览器和搜索引�
 	<meta http-equiv="Cache-Control" content="no-cache" />  
 	<meta http-equiv="Pragma" content="no-cache" />  
 
+<!-- more -->
+
 你依旧可以设置过期时间，当过期时就从服务器获取新数据：
 
 	<meta http-equiv="expires" content="Fri, 18 Jul 2014 1:00:00 GMT" />  
