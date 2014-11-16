@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Parallax</title>
+    <style>
+        body{
+            margin:0;
+            padding: 0;
+        }
+        .paralax{
+            background-position: 50% 0;
+            background-attachment: fixed;
+            background-repeat: repeat;
+            height: 1000px; 
+            margin: 0 auto; 
+            width: 100%; 
+            max-width: 1920px; 
+            position: relative; 
+        }
+        article{
+            height: 458px; 
+            position: absolute; 
+            text-align: center; 
+            top: 150px; 
+            width: 100%; 
+        }
+        #home{
+            background-image: url(../images/iOS7_01.jpg);
+        }
+        #about{
+            -webkit-box-shadow: 0 0 50px rgba(0,0,0,0.8);
+              box-shadow: 0 0 50px rgba(0,0,0,0.8);
+            background-image: url(../images/iOS7_05.jpg);
+        }
+        #end{
+            -webkit-box-shadow: 0 0 50px rgba(0,0,0,0.8);
+              box-shadow: 0 0 50px rgba(0,0,0,0.8);
+            background-image: url(../images/iOS7_08.jpg)
+        }
+    </style>
+</head>
+<body>
+    <section id="home" class="paralax" data-type="background" data-speed="2">
+        <article>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque nulla cum natus maxime! Vero deserunt adipisci odit deleniti magni iusto incidunt placeat. Atque, tempore, totam. Alias obcaecati eveniet nulla qui.
+        </article>
+    </section>
+    <section id="about" class="paralax" data-type="background" data-speed="2">
+        <article>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque nulla cum natus maxime! Vero deserunt adipisci odit deleniti magni iusto incidunt placeat. Atque, tempore, totam. Alias obcaecati eveniet nulla qui.
+        </article>
+    </section>
+    <section id="end" class="paralax" data-type="background" data-speed="2">
+        <article>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque nulla cum natus maxime! Vero deserunt adipisci odit deleniti magni iusto incidunt placeat. Atque, tempore, totam. Alias obcaecati eveniet nulla qui.
+        </article>
+    </section>
+    <script src="../common/jquery-2.1.1.min.js"></script>
+    <script>
+        $(function(){
+            $('section[data-type="background"]').each(function(){
+                var $bgobj = $(this),
+                    $window = $(window),
+                    coords;
+
+                $window.scroll(function(){
+                    var yPos = -($window.scrollTop() / $bgobj.data('speed'));
+
+                    coords = '50% ' + yPos + 'px';
+                    $bgobj.css({backgroundPosition:coords})
+
+                })
+            })
+        })
+    </script>
+</body>
+</html>
