@@ -20,6 +20,8 @@ __同样糟糕的命名__
 
 尽量避免使用变量和方法的名字去解释值。
 
+<!-- more -->
+
 __或许在其他一些国家是没有意义__
 
 	isOverEighteen()
@@ -153,12 +155,137 @@ __对象字面量__：其中的任何东西都需要通过对象的名字获得�
 	   return{init:init, show:show, current:current}
 	}();
 
-注释不能出现在用户面前。__开发代码不是活的代码__
+注释不能出现在用户面前。__开发代码不是活的代码(开发代码不是面向用户的代码)__
 
+###避免技术混用###
 
+JavaScript很擅长计算，获取外部数据（Ajax）以及根据事件做出相应的回应。
 
+例如：
 
+在类名为mandatory且其值为空时在外围加上红色边框。
 
+	var f = document.getElementById('mainform');
+	var inputs = f.getElementsByTagName('input');
+	for(var i=0,j=inputs.length;i<j;i++){
+	   if(inputs[i].className === 'mandatory' && inputs.value === ''){
+	      inputs[i].style.borderColor = '#f00';
+	      inputs[i].style.borderStyle = 'solid';
+	      inputs[i].style.borderWidth = '1px';
+	   }
+	}
+
+两个月后，产品改版不要加红色边框，要在在字段后面增加一个提示图标。
+
+其他开发会改变你的JavaScript代码为如下：
+
+	var f = document.getElementById('mainform');
+	var inputs = f.getElementsByTagName('input');
+	for(var i=0,j=inputs.length;i<j;i++){
+	   if(inputs[i].className === 'mandatory' && inputs.value === ''){
+	      inputs[i].className+=' error';
+	   }
+	}
+
+###使用短路符号###
+
+你一旦习惯使用短路符号，就会发现你的代码简洁并且容易阅读。
+
+原代码：
+
+	var lunch = new Array();
+	lunch[0]='Dosa';
+	lunch[1]='Roti';
+	lunch[2]='Rice';
+	lunch[3]='what the heck is this?';
+
+改后代码：
+
+	var lunch = [
+	   'Dosa',
+	   'Roti',
+	   'Rice',
+	   'what the heck is this?'
+	];
+
+原代码：
+
+	if(v){
+	   var x = v;
+	} else {
+	   var x =10;
+	}
+
+改后代码：
+
+	var x = v || 10;
+
+###模块化###
+
+保持代码模块化和职责单一性。
+
+很容易写出一个方法来处理好多事情，可是当你要扩展功能时，你应该拆分多个方法去实现此功能。
+
+为了防止出现类似的情况，你应该保证代码的简单和通用去完成功能，而不是大而全的方法去实现。
+
+在另一个功能时，你可以使用揭示模式暴露方法以此来扩展方法。
+
+好的代码应该容易扩展而不需要重写核心代码。
+
+###渐进增强###
+
+避免JavaScript代码的高度耦合。
+
+DOM的生成耗费时间并且代价昂贵。
+
+有些元素的生成依赖JavaScript，但当JavaScript代码被禁用时，用户看到的页面就不会那么友好。
+
+###允许配置和转移###
+
+你的代码会随时被改变。
+
+包括标签，类名和IDs以及外观。
+
+把这些放到可配置项中，使你的代码易维护并可定制。
+
+例如：
+
+	carousel = function(){
+	   var config = {
+	      CSS:{
+	         classes:{
+	            current:'current',
+	            scrollContainer:'scroll'
+	         },
+	         IDs:{
+	            maincontainer:'carousel'
+	         }
+	      },
+	      labels:{
+	         previous:'back',
+	         next:'next',
+	         auto:'play'
+	      },
+	      settings:{
+	         amount:5,
+	         skin:'blue',
+	         autoplay:false
+	      },
+	   };
+	   function init(){
+	   };
+	   function scroll(){
+	   };
+	   function highlight(){
+	   };
+	   return {config:config,init:init}
+	}();
+
+###总结###
+
+在这一节，我们讲到来命名规范，注释以及一些代码组织的建议。
+
+原文：[javascript-best-practices-1](http://www.thinkful.com/learn/javascript-best-practices-1/Modularize)
 
 
 
