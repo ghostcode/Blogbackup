@@ -25,6 +25,8 @@ Sublime Text 2的插件安装方法：
 * Placeholders
 * Code​Formatter
 * FileHeader(添加文件头部)
+* [Java​Script Patterns](https://sublime.wbond.net/packages/JavaScript%20Patterns) (妈妈再也不担心我没有办法装逼了)
+* [Java​Script & Node​JS Snippets](https://sublime.wbond.net/packages/JavaScript%20%26%20NodeJS%20Snippets) (提高效率)
 
 技巧：(默认是在Preference-> Settings-User 添加)
 

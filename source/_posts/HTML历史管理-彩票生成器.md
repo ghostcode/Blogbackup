@@ -17,6 +17,8 @@ tags:
 <button id="J_btn">彩票生成</button>
 ```
 
+<!-- more -->
+
 ###Javascript###
 
 
