@@ -35,6 +35,8 @@ __keyframes就是对应上面animation-name的__
 	  }
 	}
 
+详情：[keyframes](http://www.smashingmagazine.com/2011/05/17/an-introduction-to-css3-keyframe-animations/)
+
 >box-shadow
 
 语法：
