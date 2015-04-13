@@ -20,11 +20,3 @@ vs:
 * reload()会重新发送当前页面的POST数据，href 不会。
 * 当前URl即使有hash值也会刷新，href不会。
 * reload()有个可选参数 reload(true) 表示跳过缓存直接请求服务器数据，reload(false)相反。
-
-
-http://stackoverflow.com/questions/2405117/difference-between-window-location-href-window-location-href-and-window-location
-
-
-http://jsperf.com/location-href-vs-location-reload
-
-https://developer.mozilla.org/en-US/docs/Web/API/Window/location
