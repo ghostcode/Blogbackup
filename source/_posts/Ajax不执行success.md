@@ -23,3 +23,10 @@ tags: Ajax
 ```
 
 打印出error信息
+
+返回数据格式问题：
+http://stackoverflow.com/questions/16570686/ajax-fails-but-status-code-is-still-200-ok
+
+跨域问题：
+
+1. http://stackoverflow.com/questions/4840825/ajax-with-jquery-200-ok-but-not-success
