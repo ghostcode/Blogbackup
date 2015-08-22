@@ -13,41 +13,35 @@ tags:
 
 ###如何使用？###
 
-*	获取Weinre
+* 获取Weinre
 
 在任何支持Node.js环境的系统下，通过包管理器（NPM）即可安装Weinre
 ```
  npm install -g weinre
 ```
 
-*	开启Weinre调试
+* 开启Weinre调试
 
 ```
 weinre --boundHost -all-
 ```
 <!--more-->
-*	通过PC浏览器（webkit）打开调试页面
+* 通过PC浏览器（webkit）打开调试页面
 
 	http://localhost:8080
 
-![debug](http://img1.tuchuang.org/uploads/2014/07/20131121114239.png)
+![img](/assets/images/weinre-demo.jpg)
 
-
-*	在调试页面添加脚本
+* 在调试页面添加脚本
 
 	<script src="http://localhost[Your IP]:8080/target/target-script-min.js#anonymous"></script>
 
 __注意：这里的localhost要改为自己本机的ip地址__
 
 
-*	手机访问你要调试的页面，在debug页面（上图页面的第一个连接）看是否通信成功
+* 手机访问你要调试的页面，看是否通信成功。看targets下面有连接基本就对了。
 
-![debug](http://img4.picbed.org/uploads/2014/07/20131121115208.png)
-
-看targets下面有连接基本就对了。
-
-
-*	最后这就像chrome的debug一样了
+* 最后这就像chrome的debug一样了
 
 [weinre](http://people.apache.org/~pmuellr/weinre-docs/latest/Home.html)
 
