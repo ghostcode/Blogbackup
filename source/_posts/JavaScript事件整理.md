@@ -175,7 +175,7 @@ element.onclick = function(e){
    throw "Error"  // 此处JS抛出一个错误，同样会忽略后面的代码，但是已经调用过peventDefault方法，浏览器不会执行默认行为
 });
 ```
-对于addEventListener添加的事件，return false是无效的：
+对于addEventListener添加的事件，return false是无法阻止默认事件的：
 ```
 element.addEventListener('click',function(e){
     alert(123)
