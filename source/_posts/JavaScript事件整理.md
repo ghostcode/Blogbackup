@@ -222,3 +222,4 @@ function doSomething(e)
 1. http://www.quirksmode.org/js/events_order.html
 2. http://stackoverflow.com/questions/4924036/return-false-on-addeventlistener-submit-still-submits-the-form
 3. http://www.w3school.com.cn/js/js_errors.asp
+4. http://www.cnblogs.com/sugar-tomato/p/4514576.html
