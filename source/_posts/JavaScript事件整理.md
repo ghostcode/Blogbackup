@@ -22,9 +22,9 @@ tags: javascript
 
 而W3C组织做了一个明智的决定：__w3c的事件模型开始于事件捕获然后到达目标元素之后开始事件冒泡，并且给了开发者选择何时处理事件。__
 <!-- more -->
+
 ```
     element1.addEventListener('click',doSomething2,true)
-
     element2.addEventListener('click',doSomething,false)
 ```
 
