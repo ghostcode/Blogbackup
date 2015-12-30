@@ -3,3 +3,5 @@ date: 2015-12-30 22:22:04
 categories:
 tags:
 ---
+
+padding:Percentages refer to the width of the containing block
