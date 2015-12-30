@@ -19,7 +19,6 @@ tags: Ajax
 	.error(error){
 		console.log(error)
 	}
-}
 ```
 
 打印出error信息

@@ -38,6 +38,7 @@ post_asset_folder: false
 relative_link: false
 highlight:
   enable: true
+  auto_detect: true
   line_number: true
   tab_replace:
 
@@ -88,5 +89,5 @@ exclude_generator:
 # Deployment
 ## Docs: http://hexo.io/docs/deployment.html
 deploy:
-  type: github
+  type: git
   repo: git@github.com:ghostcode/blog.git
