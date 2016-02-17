@@ -33,3 +33,4 @@ share: true
 duoshuo: zhuxinyong
 #是否开启云标签
 tagcloud: true
+baidu_tongji: true

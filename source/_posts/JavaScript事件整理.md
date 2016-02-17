@@ -182,7 +182,7 @@ element.addEventListener('click',function(e){
     return false
 },false)
 ```
-只能使用addEventListener，这或许就是peventDefault灵活的地方,但是如果你对return false一见钟情、不离不弃，还是想用它，如之奈何？提供一个方法：
+只能使用peventDefault，这或许就是peventDefault灵活的地方,但是如果你对return false一见钟情、不离不弃，还是想用它，如之奈何？提供一个方法：
 ```
 element.onclick = function(e){
     try{

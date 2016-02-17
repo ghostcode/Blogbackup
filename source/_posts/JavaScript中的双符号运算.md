@@ -31,6 +31,9 @@ Returns the smallest integer greater than or equal to a number.
 >Math.floor(x)
 Returns the largest integer less than or equal to a number.
 
+>~~
+是向0计算，取值向0靠拢
+
 
 __双感叹号__
 
