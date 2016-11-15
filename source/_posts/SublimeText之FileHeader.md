@@ -3,7 +3,7 @@ date: 2014-11-13 14:11:39
 categories:
 tags: Sublime
 ---
-###创建一个新文件###
+__创建一个新文件__
 
 * 侧栏菜单
 
@@ -13,7 +13,7 @@ tags: Sublime
 
 >OSX默认__super+alt+n__，Windows和Linux默认__ctrl+alt+n__
 
-###为已经存在的文件添加头部###
+__为已经存在的文件添加头部__
 
 <!-- more -->
 
@@ -25,7 +25,7 @@ tags: Sublime
 
 >OSX默认__super+alt+a__，Window和Linux默认__ctrl+alt+a__
 
-###为指定目录下面的文件添加头部###
+__为指定目录下面的文件添加头部__
 
 ![new file](http://zhuxinyong.com/assets/images/addheaderspecifiled.gif)
 

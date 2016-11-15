@@ -4,7 +4,7 @@ tags:
 ---
 加载javascript一直是页面优化的重头戏，defer和async又可以帮助一些：
 
-###async:###
+__async:__
 
 >Set this Boolean attribute to indicate that the browser should, if possible, execute the script asynchronously. It has no effect on inline scripts (i.e., scripts that don't have the src attribute).
 
@@ -12,7 +12,7 @@ tags:
 
 >设置此Boolean属性就是让浏览器异步的执行此脚本，它对内敛脚本无效（就是没有src属性的脚本）
 
-###defer:###
+__defer:__
 
 >This Boolean attribute is set to indicate to a browser that the script is meant to be executed after the document has been parsed. 
 
@@ -35,10 +35,6 @@ __异：__
 * 各浏览器支持程度不同（IE4开始支持defer）
 * 执行时机不同（defer在页面渲染完成之后执行，async在加载完成之后就执行）
 * 执行的顺序不同（defer会严格按照页面出现的顺序执行，async在能执行的时候就会执行，有可能会顺序颠倒）
-
-参考图：
-
-![加载于执行](http://img2.picbed.org/uploads/2014/08/execution2.jpg)
 
 注：
 

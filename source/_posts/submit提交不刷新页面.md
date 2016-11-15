@@ -4,7 +4,7 @@ categories:
 tags:
 ---
 
-###form中点击submit不刷新页面，纯html。###
+__form中点击submit不刷新页面，纯html。__
 
 ```
 	<iframe style="display: none;" src="" name="target_submit"></iframe>
@@ -16,7 +16,7 @@ tags:
 
 技巧：提交表单，目标刷新页是iframe。
 
-###阻止默认的submit，使用JavaScript提交。###
+__阻止默认的submit，使用JavaScript提交。__
 
 ```
 	$('#formId').submit(function () {

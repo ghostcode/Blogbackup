@@ -10,13 +10,13 @@ tags:
 * 通过[gulp/config](https://github.com/greypants/gulp-starter/blob/master/gulp/config.js)配置任务
 * 用BrowserSync替换LiveReload
 
-###开始###
+__开始__
 
 周末，我决定使自己沉浸于Grunt和RequireJs中，   接着到周一时，看到一篇 [and just like that Grunt and RequireJS are out, it’s all about Gulp and Browserify now.](http://www.100percentjs.com/just-like-grunt-gulp-browserify-now/)整个人都不好了！
 
 为了让你避免googling，文档中遨游以及我碰到的问题，我搜集了一些认为对你开始有用的资源和信息
 
-###Gulp + Browserify starter repo###
+__Gulp + Browserify starter repo__
 
 我已经创建了[Gulp + Browserify starter repo](https://github.com/greypants/gulp-starter)并配有如何完成一些常规任务和工作流的例子。
 
@@ -33,7 +33,7 @@ tags:
 * [Report Errors through Notification Center](https://github.com/greypants/gulp-starter/blob/master/gulp/util/handleErrors.js)
 * [Image processing](https://github.com/greypants/gulp-starter/blob/master/gulp/tasks/images.js#L11)
 
-###[常见问题集合](https://github.com/greypants/gulp-starter/wiki)###
+__[常见问题集合](https://github.com/greypants/gulp-starter/wiki)__
 
 [Node](http://nodejs.org/),[npm](https://www.npmjs.org/),[CommonJS](http://wiki.commonjs.org/wiki/Modules/1.1),[package.json](https://www.npmjs.org/doc/json.html)...是什么？当我一头扎进这些内容时，多数文档不够详尽，都假设用户对其有些了解的情况下编写的文档。我已经将一些背景知识融入到Wiki中，以此消除我上面提到的Repo的知识隔阂。
 
@@ -44,7 +44,7 @@ tags:
 * [What is Browserify?](https://github.com/greypants/gulp-starter/wiki/What-is-Browserify%3F)
 * [What is Gulp?](https://github.com/greypants/gulp-starter/wiki/What-is-Gulp%3F)
 
-###为何Gulp很好？###
+__为何Gulp很好？__
 
 __它是有意义的。__
 
@@ -65,13 +65,13 @@ __它是有意义的。__
 
 首先，`gulp.src`定位到资源文件用于接下来的各种任务。在这个例子中，我使文件经过`gulp-imagemin`，然后通过`gulp.dest()`输出到我的`build`目录。若想添加额外的操作（重命名，改变尺寸，自动加载等），只需要在任务流中加载更多的管道。
 
-###速度###
+__速度__
 
 Gulp是相当的快，我刚刚完成了一个相当复杂的app，它编译Sass，SourceMap的CoffeeScript，Handlebars的模板以及自动加载。这些看起来貌似都不是问题。
 
 >By harnessing the power of node's streams you get fast builds that don't write intermediary files to disk. - gulpjs.com
 
-###打散任务配置文件###
+__打散任务配置文件__
 
 gulpfile就是在使用gulp时的任务配置，如果你使用过grunt，它就像gruntfile。在经历一些实验，收到一些提交建议和学习Node/CommonJS多棒之后，我拆分了所有的任务到单个文件中，然后通过gulpfile.js组合起来。
 
@@ -105,13 +105,13 @@ gulpfile就是在使用gulp时的任务配置，如果你使用过grunt，它就
 
 这样就可以重用而且在新项目中很容易建立，阅读[gulp doc](https://github.com/gulpjs/gulp/blob/master/docs/README.md)获得更多知识。
 
-###为何Browserify很好？###
+__为何Browserify很好？__
 
 >“Browserify lets you require('modules') in the browser by bundling up all of your dependencies.” - Browserify.org
 
 Browserify就像一个单独的文件，遵守require依赖原理同时把他们合并为一个新文件，你可以在命令行里使用或者通过Node中的API在gulp中调用。
 
-####基础的API例子####
+__基础的API例子__
 
 __app.js__
 

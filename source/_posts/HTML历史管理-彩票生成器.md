@@ -10,7 +10,7 @@ tags:
 
 下面就用javascript简单模拟一下
 
-###HTML###
+__HTML__
 
 ```
 <div id="caipiao"></div>
@@ -19,7 +19,7 @@ tags:
 
 <!-- more -->
 
-###Javascript###
+__Javascript__
 
 
 ```

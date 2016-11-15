@@ -3,7 +3,7 @@ date: 2014-07-20 16:34:07
 tags:
 ---
 <!-- ![weinre](http://img1.tuchuang.org/uploads/2014/07/weinre_demo.jpg) -->
-###什么是weinre?###
+__什么是weinre?__
 
 >weinre is a debugger for web pages, like FireBug (for FireFox) and Web Inspector (for WebKit-based browsers), except it's designed to work remotely, and in particular, to allow you debug web pages on a mobile device such as a phone.
 
@@ -11,7 +11,7 @@ tags:
 
 >weinre是网页的调试工具，就像FireFox里面的firebug和webkit内核的开发者工具，唯一的区别它是为远程调试设计的，特点是它可以调试手机上的网页。
 
-###如何使用？###
+__如何使用？__
 
 * 获取Weinre
 

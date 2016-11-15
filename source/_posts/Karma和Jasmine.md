@@ -2,7 +2,7 @@ title: Karma和Jasmine
 date: 2014-08-20 10:28:44
 tags:
 ---
-###什么是Karma?###
+__什么是Karma?__
 
 Karma是Google出品，前身叫“Testacular”，主要目的：
 
@@ -19,7 +19,7 @@ Karma是Google出品，前身叫“Testacular”，主要目的：
 	为了满足我们（google）自己的测试运行器，满足快速开发和持续集成的需求。
 
 
-###什么是Jasmine?###
+__什么是Jasmine?__
 
 	Jasmine is a behavior-driven development framework for testing JavaScript code.
 	It does not depend on any other JavaScript frameworks. It does not require a DOM. 

@@ -5,7 +5,7 @@ tags: JavaScript
 ---
 上周我看到一篇 [20行代码实现模板引擎](http://krasimirtsonev.com/blog/article/Javascript-template-engine-in-just-20-line)，这是受[John Resig's post on the same topic](http://ejohn.org/blog/javascript-micro-templating/)启发的。我发现他们是如此简单，有趣同时也激发我产生一个__20行代码实现客户端Router__的想法。
 
-###开始创建一个router###
+__开始创建一个router__
 
 首先我们需要一个html模板：
 
@@ -41,15 +41,15 @@ tags: JavaScript
 
 就像我们看的一样，它们是如此的基础，那是因为我们这篇文章专注于路由部门。
 
-###Hash URL's###
+__Hash URL's__
 
 为了实现路由我将使用URL's，就是在__#__后面的一串东西，例如：`http://example.com/#/our/url/here`，我可以通过使用__HTML5 History AP__来实现，但是我会在下次来使用它。
 
-###处理route变化###
+__处理route变化__
 
 页面加载完之后通过__onhashchange__事件来处理路由变化同时使用__onload__事件来处理页面加载之后对应的处理。
 
-###路由注册方法###
+__路由注册方法__
 
 我们开始构建路由注册方法：
 
@@ -60,7 +60,7 @@ tags: JavaScript
 	  routes[path] = {templateId: templateId, controller: controller};
 	}
 
-###注册路由###
+__注册路由__
 
 现在我们可以创建新的路由，注意我模仿了AngularJs的控制器定义方式：
 
@@ -75,7 +75,7 @@ tags: JavaScript
 
 但是依旧什么也没发生，因为我们还没有处理路由的方法......
 
-###真是的路由处理方法###
+__真是的路由处理方法__
 
 我们创建了路由处理方法，但是我们依旧不知道在哪里渲染我们的内容，现在我设置了一个id为__view__的元素来容纳我们的内容：
 
@@ -100,7 +100,7 @@ tags: JavaScript
 
 万事俱备，我们来测试一下！
 
-###测试第一版本###
+__测试第一版本__
 
 首先我们在页面添加一些可以导航的链接，来触发我们不同的路由：
 

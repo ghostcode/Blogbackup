@@ -2,7 +2,7 @@ title: 'Flex box 应对复杂布局'
 date: 2014-07-20 22:32:32
 tags:
 ---
-###什么是Flex box?###
+__什么是Flex box?__
 
 >The CSS3 Flexible Box, or flexbox, is a layout mode providing for the arrangement of elements on a page such that the elements behave predictably when the page layout must accommodate different screen sizes and different display devices. 
 
@@ -12,7 +12,7 @@ tags:
 
 通俗点说：flexbox布局模式可以调整子元素的宽、高，使元素最大限度的使用屏幕大小。一个伸缩容器，会扩展子元素来适应屏幕或者收缩子元素防止溢出。
 
-###如何定义Flex box?###
+__如何定义Flex box?__
 
 ```
 display:flex
