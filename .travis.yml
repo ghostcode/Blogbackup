@@ -24,7 +24,7 @@ after_script:
 
 branches:
   only:
-    - master
+    - gh-pages
 env:
  global:
    - GH_REF: git@github.com:ghostcode/blog.git
