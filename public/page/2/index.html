@@ -135,6 +135,104 @@ var _hmt = _hmt || [];
 </nav>
       
   
+    <article id="post-DOM小结" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/03/20/DOM小结/" class="article-date">
+  	<time datetime="2016-03-20T01:55:13.000Z" itemprop="datePublished">Mar 20 2016</time>
+</a>
+      
+      
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/20/DOM小结/">DOM小结</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>DOM是针对HTML和XML文档的一个API（应用程序编程入口）。DOM描绘了一个层次化的节点树，允许开发人员添加／移除和修改页面某一部分。</p>
+</blockquote>
+<p>注：从上面的引述中可以得知，DOM不仅存在于HTML中，DOM也不是JS的一部分。DOM只是提供了一些规范，具体JS就是根据这些规范去实现它提出的一些接口 。</p>
+<p>这里有个问题， <strong>IE中所有的DOM对象都是以COM对象实现的，所以DOM对象和JS原生对象行为或活动特点不一致。</strong>这也导致JS对象引用IE DOM对象会内存泄漏。</p>
+<p>JS中实现了一个Node类型，所有节点都集成它，所以会共享相同的属性和方法。</p>
+<p>下面就用个思维导图总结下：</p>
+<p><img src="/assets/images/dom.png" alt="img"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
+    <article id="post-module-exports和exports的区别" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/03/16/module-exports和exports的区别/" class="article-date">
+  	<time datetime="2016-03-16T09:58:59.000Z" itemprop="datePublished">Mar 16 2016</time>
+</a>
+      
+      
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/16/module-exports和exports的区别/">module.exports和exports的区别</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在前端现在盛行</p>
+<p><a href="https://cnodejs.org/topic/5231a630101e574521e45ef8" target="_blank" rel="external">https://cnodejs.org/topic/5231a630101e574521e45ef8</a><br><a href="https://github.com/chemdemo/chemdemo.github.io/issues/2" target="_blank" rel="external">https://github.com/chemdemo/chemdemo.github.io/issues/2</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
     <article id="post-ionic起步" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -699,108 +797,6 @@ var _hmt = _hmt || [];
         
           <p class="article-more-link">
             <a href="/2015/12/29/MySQL基础操作/#more">more >></a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-    <article id="post-前端初学者问题" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/12/22/前端初学者问题/" class="article-date">
-  	<time datetime="2015-12-22T08:58:10.000Z" itemprop="datePublished">Dec 22 2015</time>
-</a>
-      
-      
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/22/前端初学者问题/">前端初学者问题</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a href="http://www.jb51.net/web/79245.html" target="_blank" rel="external">http://www.jb51.net/web/79245.html</a></p>
-<p><a href="https://zh.wikipedia.org/wiki/XHTML" target="_blank" rel="external">https://zh.wikipedia.org/wiki/XHTML</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-    <article id="post-低版本Webkit的popstate事件问题" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/12/22/低版本Webkit的popstate事件问题/" class="article-date">
-  	<time datetime="2015-12-22T07:43:14.000Z" itemprop="datePublished">Dec 22 2015</time>
-</a>
-      
-      
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/22/低版本Webkit的popstate事件问题/">低版本Webkit的popstate事件问题</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>对于popstate事件大家应该有个印象：活动历史项改变时触发。</p>
-<p>以下几种情况会触发：</p>
-<ul>
-<li>点击浏览器的前进，后退按钮</li>
-<li>Javascript代码中调用history.back(),forward(),go()</li>
-</ul>
-<p>来个简单的例子：</p>
-<figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">window</span>.onpopstate = <span class="keyword">function</span>(event) &#123;</span><br><span class="line">  alert(<span class="string">"location: "</span> + document.location + <span class="string">", state: "</span> + JSON.stringify(event.state));</span><br><span class="line">&#125;;</span><br><span class="line">history.pushState(&#123;page: <span class="number">1</span>&#125;, <span class="string">"title 1"</span>, <span class="string">"?page=1"</span>);</span><br><span class="line">history.pushState(&#123;page: <span class="number">2</span>&#125;, <span class="string">"title 2"</span>, <span class="string">"?page=2"</span>);</span><br><span class="line">history.replaceState(&#123;page: <span class="number">3</span>&#125;, <span class="string">"title 3"</span>, <span class="string">"?page=3"</span>);</span><br><span class="line">history.back(); // alerts <span class="string">"location: http://example.com/example.html?page=1, state: &#123;"</span>page<span class="string">":1&#125;"</span></span><br><span class="line">history.back(); // alerts <span class="string">"location: http://example.com/example.html, state: null</span><br><span class="line">history.go(2);  // alerts "</span>location: http://example.com/example.html?page=<span class="number">3</span>, state: &#123;<span class="string">"page"</span>:<span class="number">3</span>&#125;</span><br></pre></td></tr></table></figure>
-        
-          <p class="article-more-link">
-            <a href="/2015/12/22/低版本Webkit的popstate事件问题/#more">more >></a>
           </p>
         
       

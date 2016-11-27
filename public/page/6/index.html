@@ -135,6 +135,127 @@ var _hmt = _hmt || [];
 </nav>
       
   
+    <article id="post-SublimeText之FileHeader" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2014/11/13/SublimeText之FileHeader/" class="article-date">
+  	<time datetime="2014-11-13T06:11:39.000Z" itemprop="datePublished">Nov 13 2014</time>
+</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sublime/">Sublime</a></li></ul>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/11/13/SublimeText之FileHeader/">SublimeText之FileHeader</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>创建一个新文件</strong></p>
+<ul>
+<li>侧栏菜单</li>
+</ul>
+<p><img src="http://zhuxinyong.com/assets/images/newfile.gif" alt="new file"></p>
+<ul>
+<li>快捷键</li>
+</ul>
+<blockquote>
+<p>OSX默认<strong>super+alt+n</strong>，Windows和Linux默认<strong>ctrl+alt+n</strong></p>
+</blockquote>
+<p><strong>为已经存在的文件添加头部</strong></p>
+        
+          <p class="article-more-link">
+            <a href="/2014/11/13/SublimeText之FileHeader/#more">more >></a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
+    <article id="post-JavaScript最佳实践一" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2014/11/13/JavaScript最佳实践一/" class="article-date">
+  	<time datetime="2014-11-13T01:37:38.000Z" itemprop="datePublished">Nov 13 2014</time>
+</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/11/13/JavaScript最佳实践一/">JavaScript最佳实践一</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>变量和函数名有意义</strong></p>
+<p>选择易理解和简短的名字作为变量和方法。</p>
+<p><strong>糟糕的命名</strong></p>
+<pre><code><span class="title">x1</span> fe2 xbqne
+</code></pre><p><strong>同样糟糕的命名</strong></p>
+<pre><code><span class="title">incrementerForMainLoopWhichSpansFromTenToTwenty</span>
+}
+createNewMemberIfAgeOverTwentyOneAndMoonIsFull
+</code></pre><p>尽量避免使用变量和方法的名字去解释值。</p>
+        
+          <p class="article-more-link">
+            <a href="/2014/11/13/JavaScript最佳实践一/#more">more >></a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
     <article id="post-Git-flow备忘清单" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -564,132 +685,6 @@ var _hmt = _hmt || [];
             <a href="/2014/10/09/你不知道的“是非”/#more">more >></a>
           </p>
         
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-    <article id="post-JavaScript技巧揭秘" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2014/09/27/JavaScript技巧揭秘/" class="article-date">
-  	<time datetime="2014-09-27T08:41:07.000Z" itemprop="datePublished">Sep 27 2014</time>
-</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/09/27/JavaScript技巧揭秘/">JavaScript技巧揭秘</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Javascript中有许多技巧被有经验的开发者广泛使用。它们并不显而易见，特别是对初级开发者。这些技巧利用了语言特点，从侧面实现了语言本身不能直接实现的目标。下面我对这些技巧做了一个解释说明的专辑。</p>
-<p>你应该知道其中多数技巧是hack,并不是用在日常的开发中的。这篇文章的目的是解释它们是如何工作的，并不赞同使用它们。</p>
-<p><strong>使用!!来进行Boolean值转换</strong></p>
-<p>JavaScript中的一切变量都可以转换为true或false，这意味着你如果把变量放到if表达式中，会根据转换结果自动选择执行真分支还是假分支。</p>
-<p>0，false，””，null，undefined，NaN可以转换为false，其他值会转换为真。有时你希望一个值转换为boolean值，你可以使用“||”。</p>
-<p>另一方面你可以使用if(x)来代替if(x == ‘test’)。当x是空值时，它会执行else分支。</p>
-<p><strong>字符串变为数字_</strong></p>
-<p>字符串变为数字最常用的方法当属parseInt(x,10)和parseFloat(),还有一种不常用的就是 “3” - 0。判断一个值是否为数字有个技巧：</p>
-<pre><code><span class="attribute">x ==</span>=<span class="string"> +x</span>
-</code></pre><p><strong>使用||提供默认值</strong></p>
-        
-          <p class="article-more-link">
-            <a href="/2014/09/27/JavaScript技巧揭秘/#more">more >></a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-    <article id="post-Hexo问题" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2014/09/26/Hexo问题/" class="article-date">
-  	<time datetime="2014-09-25T16:12:30.000Z" itemprop="datePublished">Sep 26 2014</time>
-</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/09/26/Hexo问题/">Hexo问题</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在mac上好不容易装了node(这几天node一直没有安装成功，原来是安装包错误！！！)，等到安装hexo之后，运行：</p>
-<pre><code>hexo <span class="keyword">server</span>
-</code></pre><p>然后就报错：</p>
-<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="special">&#123;</span> name: 'HexoError',</span><br><span class="line">  reason: 'incomplete explicit mapping pair; a key node is missed',</span><br><span class="line">  mark: </span><br><span class="line">   <span class="special">&#123;</span> name: null,</span><br><span class="line">     buffer: 'categories: Kategorien<span class="command">\r</span><span class="command">\nsearch</span>: Suche<span class="command">\r</span><span class="command">\ntags</span>: Tags<span class="command">\r</span><span class="command">\ntagcloud</span>: Tag-Cloud<span class="command">\r</span><span class="command">\ntweets</span>: Tweets<span class="command">\r</span><span class="command">\nprev</span>: Vorherige Seite<span class="command">\r</span><span class="command">\nnext</span>: Nächste Seite<span class="command">\r</span><span class="command">\ncomment</span>: Kommentare<span class="command">\r</span><span class="command">\narchive</span>_a: Archiv<span class="command">\r</span><span class="command">\narchive</span>_b: Archiv: <span class="comment">%s\r\npage: Seite %d\r\nrecent_posts: Neueste Artikel\n\u0000',</span></span><br><span class="line">     position: 189,</span><br><span class="line">     line: 9,</span><br><span class="line">     column: 17 <span class="special">&#125;</span>,</span><br><span class="line">  message: 'Process failed: languages/de.yml',</span><br><span class="line">  domain: </span><br><span class="line">   <span class="special">&#123;</span> domain: null,</span><br><span class="line">     _events: <span class="special">&#123;</span> error: <span class="special">[</span>Function<span class="special">]</span> <span class="special">&#125;</span>,</span><br><span class="line">     _maxListeners: 10,</span><br><span class="line">     members: <span class="special">[</span> <span class="special">[</span>Object<span class="special">]</span> <span class="special">]</span> <span class="special">&#125;</span>,</span><br><span class="line">  domainThrown: true,</span><br><span class="line">  stack: undefined <span class="special">&#125;</span></span><br></pre></td></tr></table></figure>
-<p>看到第二句我就搜了一下，结果原因是hexo升级，<strong>Yaml Parser做出了一定的修改</strong>。</p>
-<p>解决办法：</p>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>. 将主题<span class="keyword">language</span>下的有空格的项都需要加上双引号。<span class="keyword">tag</span> cloud --&gt; <span class="string">"tag cloud"</span></span><br><span class="line"><span class="number">2</span>. 如果用的默认主题light，可以直接拉取最新主题，覆盖<span class="keyword">language</span>文件夹即可。$ git clone http<span class="variable">s:</span>//github.<span class="keyword">com</span>/tommy351/hexo-theme-light themes/</span><br></pre></td></tr></table></figure>
-<p>参考：</p>
-<p><a href="https://github.com/wileam/code/blob/master/source/_posts/update-hexo.md" target="_blank" rel="external">https://github.com/wileam/code/blob/master/source/_posts/update-hexo.md</a></p>
-<p><a href="http://www.huangyunkun.com/2014/07/31/hexo-update-error-with-yaml-parser/" target="_blank" rel="external">http://www.huangyunkun.com/2014/07/31/hexo-update-error-with-yaml-parser/</a></p>
-<p><strong>hexo 3.1.1更新后代码高亮失效</strong></p>
-<p>原因：</p>
-<blockquote>
-<p>Add option to disable highlight auto-detect</p>
-</blockquote>
-<p>解决方法：</p>
-<p>增加 auto_detect: true 到站点 _config.yml 的 hilight 部分，否则默认自动检测语言高亮是关闭的</p>
-<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">highlight</span>: <span class="string"></span></span><br><span class="line"><span class="attribute">enable</span>: <span class="string">true</span></span><br><span class="line"><span class="attribute">auto_detect</span>: <span class="string">true</span></span><br><span class="line"><span class="attribute">line_number</span>: <span class="string">true</span></span><br><span class="line"><span class="attribute">tab_replace</span>: <span class="string">''</span></span><br></pre></td></tr></table></figure>
-<p>参考：<br><a href="https://github.com/hexojs/hexo/releases/tag/3.1.1" target="_blank" rel="external">https://github.com/hexojs/hexo/releases/tag/3.1.1</a></p>
-<p><a href="https://github.com/iissnan/hexo-theme-next/issues/186" target="_blank" rel="external">https://github.com/iissnan/hexo-theme-next/issues/186</a></p>
-
       
     </div>
     <footer class="article-footer">

@@ -135,6 +135,108 @@ var _hmt = _hmt || [];
 </nav>
       
   
+    <article id="post-前端初学者问题" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/12/22/前端初学者问题/" class="article-date">
+  	<time datetime="2015-12-22T08:58:10.000Z" itemprop="datePublished">Dec 22 2015</time>
+</a>
+      
+      
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/22/前端初学者问题/">前端初学者问题</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="http://www.jb51.net/web/79245.html" target="_blank" rel="external">http://www.jb51.net/web/79245.html</a></p>
+<p><a href="https://zh.wikipedia.org/wiki/XHTML" target="_blank" rel="external">https://zh.wikipedia.org/wiki/XHTML</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
+    <article id="post-低版本Webkit的popstate事件问题" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/12/22/低版本Webkit的popstate事件问题/" class="article-date">
+  	<time datetime="2015-12-22T07:43:14.000Z" itemprop="datePublished">Dec 22 2015</time>
+</a>
+      
+      
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/22/低版本Webkit的popstate事件问题/">低版本Webkit的popstate事件问题</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>对于popstate事件大家应该有个印象：活动历史项改变时触发。</p>
+<p>以下几种情况会触发：</p>
+<ul>
+<li>点击浏览器的前进，后退按钮</li>
+<li>Javascript代码中调用history.back(),forward(),go()</li>
+</ul>
+<p>来个简单的例子：</p>
+<figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">window</span>.onpopstate = <span class="keyword">function</span>(event) &#123;</span><br><span class="line">  alert(<span class="string">"location: "</span> + document.location + <span class="string">", state: "</span> + JSON.stringify(event.state));</span><br><span class="line">&#125;;</span><br><span class="line">history.pushState(&#123;page: <span class="number">1</span>&#125;, <span class="string">"title 1"</span>, <span class="string">"?page=1"</span>);</span><br><span class="line">history.pushState(&#123;page: <span class="number">2</span>&#125;, <span class="string">"title 2"</span>, <span class="string">"?page=2"</span>);</span><br><span class="line">history.replaceState(&#123;page: <span class="number">3</span>&#125;, <span class="string">"title 3"</span>, <span class="string">"?page=3"</span>);</span><br><span class="line">history.back(); // alerts <span class="string">"location: http://example.com/example.html?page=1, state: &#123;"</span>page<span class="string">":1&#125;"</span></span><br><span class="line">history.back(); // alerts <span class="string">"location: http://example.com/example.html, state: null</span><br><span class="line">history.go(2);  // alerts "</span>location: http://example.com/example.html?page=<span class="number">3</span>, state: &#123;<span class="string">"page"</span>:<span class="number">3</span>&#125;</span><br></pre></td></tr></table></figure>
+        
+          <p class="article-more-link">
+            <a href="/2015/12/22/低版本Webkit的popstate事件问题/#more">more >></a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
     <article id="post-IE11无法打开网页" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -550,122 +652,6 @@ var _hmt = _hmt || [];
 <p>跨域问题：</p>
 <ol>
 <li><a href="http://stackoverflow.com/questions/4840825/ajax-with-jquery-200-ok-but-not-success" target="_blank" rel="external">http://stackoverflow.com/questions/4840825/ajax-with-jquery-200-ok-but-not-success</a></li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-    <article id="post-Android环境配置" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/05/09/Android环境配置/" class="article-date">
-  	<time datetime="2015-05-09T01:19:11.000Z" itemprop="datePublished">May 9 2015</time>
-</a>
-      
-      
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/05/09/Android环境配置/">Android环境配置</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a href="http://developer.android.com/sdk/installing/installing-adt.html" target="_blank" rel="external">http://developer.android.com/sdk/installing/installing-adt.html</a></p>
-<p><a href="http://stackoverflow.com/questions/9259370/eclipse-with-android-plugin-blocked-at-calculating-requirements-and-dependenc" target="_blank" rel="external">http://stackoverflow.com/questions/9259370/eclipse-with-android-plugin-blocked-at-calculating-requirements-and-dependenc</a></p>
-<p><a href="http://my.oschina.net/joanfen/blog/145723" target="_blank" rel="external">http://my.oschina.net/joanfen/blog/145723</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-    <article id="post-AMD-CMD和ES-Harmony等" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/05/03/AMD-CMD和ES-Harmony等/" class="article-date">
-  	<time datetime="2015-05-03T04:36:17.000Z" itemprop="datePublished">May 3 2015</time>
-</a>
-      
-      
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/05/03/AMD-CMD和ES-Harmony等/">AMD CMD和ES Harmony等</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>收集模块相关文章：</p>
-<p>为何需要模块？</p>
-<blockquote>
-<p>天生(ES6之前)缺陷，需要后天弥补</p>
-</blockquote>
-<ol>
-<li><a href="http://cyj.me/why-seajs/zh/#async" target="_blank" rel="external">SeaJS 所为何</a></li>
-<li><a href="RequireJS">http://cyj.me/why-seajs/requirejs/</a></li>
-</ol>
-<p>模块的概念：</p>
-<ol>
-<li><a href="http://www.ruanyifeng.com/blog/2012/10/javascript_module.html" target="_blank" rel="external">Javascript模块化编程（一）：模块的写法</a></li>
-<li><a href="http://www.ruanyifeng.com/blog/2012/10/asynchronous_module_definition.html" target="_blank" rel="external">Javascript模块化编程（二）：AMD规范</a></li>
-<li><a href="http://www.ruanyifeng.com/blog/2012/11/require_js.html" target="_blank" rel="external">Javascript模块化编程（三）：require.js的用法</a></li>
-</ol>
-<p>AMD与CMD异同？</p>
-<ol>
-<li><a href="http://www.zhihu.com/question/20351507" target="_blank" rel="external">AMD 和 CMD 的区别有哪些？</a></li>
-<li><a href="http://justineo.github.io/singles/writing-modular-js/" target="_blank" rel="external">使用 AMD、CommonJS 及 ES Harmony 编写模块化的 JavaScript</a></li>
-</ol>
-<p>如何支持AMD和CMD？</p>
-<ol>
-<li><a href="http://my.oschina.net/felumanman/blog/263330" target="_blank" rel="external">支持模块</a></li>
-<li><a href="http://ifandelse.com/its-not-hard-making-your-library-support-amd-and-commonjs/" target="_blank" rel="external">It’s Not Hard: Making Your Library Support AMD and CommonJS</a></li>
 </ol>
 
       

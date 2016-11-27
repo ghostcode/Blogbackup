@@ -135,6 +135,128 @@ var _hmt = _hmt || [];
 </nav>
       
   
+    <article id="post-WebComponents" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2014/06/29/WebComponents/" class="article-date">
+  	<time datetime="2014-06-29T15:26:16.000Z" itemprop="datePublished">Jun 29 2014</time>
+</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webcomponents/">webcomponents</a></li></ul>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/06/29/WebComponents/">Web Components (一)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>谷歌的I/O大会讲了Web Components的一些内容，然后自己就看了一些想文章。</p>
+<p>大致了解其中的一些内容，Web Components不是一个概念，而是五个概念的集合：</p>
+<ol>
+<li>Templates 定义一些惰性的代码块，但是使用的时候可激活。</li>
+<li>Decorators 增强或修改存在元素的表现。</li>
+<li>Custom Elements 允许开发者通过新的标签和新的脚本接口，来定义自己的元素。</li>
+<li>Shadow DOM 一个封装过的Dom,里面包含一些子节点（不可见）。</li>
+<li>Imports 定义上述元素如何被打包和加载的。</li>
+</ol>
+<p>每一个元素都是非常有用的，若把他们联合起来使用，可以使web开发者创造出代码复用性、可维护性更强的组件。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
+    <article id="post-占位符" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2014/06/27/占位符/" class="article-date">
+  	<time datetime="2014-06-27T08:13:28.000Z" itemprop="datePublished">Jun 27 2014</time>
+</a>
+      
+      
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/06/27/占位符/">占位符</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>前端做静态页面的时候，经常会遇到图片占位的问题。若要遇到各种尺寸的图片，还要去切各种尺寸，十足很疼！所以下面给大家分享几个工作中用的图片占位：</p>
+<ul>
+<li><a href="http://lorempixel.com/" target="_blank" rel="external">lorempixum</a></li>
+</ul>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">http:</span><span class="comment">//lorempixum.com/400/200，400x200的随机图片</span></span><br><span class="line"><span class="string">http:</span><span class="comment">//lorempixum.com/g/400/200，400x200的随机灰度图片</span></span><br><span class="line"><span class="string">http:</span><span class="comment">//lorempixum.com/400/200/sports，400x200的随机体育类图片</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><a href="http://dummyimage.com/" target="_blank" rel="external">Dynamic Dummy Image Generator</a></li>
+</ul>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">http:</span><span class="comment">//dummyimage.com/qvga</span></span><br><span class="line"><span class="string">http:</span><span class="comment">//dummyimage.com/skyscraper/f0f/f</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><a href="http://placebox.es/" target="_blank" rel="external">placebox</a></li>
+</ul>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">http:</span><span class="comment">//placebox.es/150/150/d97f19/f1f1f1/</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><a href="http://placehold.it/" target="_blank" rel="external">placehold</a></li>
+</ul>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">http:</span><span class="comment">//placehold.it/350x150</span></span><br><span class="line"><span class="string">http:</span><span class="comment">//placehold.it/350x150/ff0</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><a href="http://fakeimg.pl/" target="_blank" rel="external">fakeimg</a></li>
+</ul>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">http:</span><span class="comment">//fakeimg.pl/300</span></span><br><span class="line"><span class="string">http:</span><span class="comment">//fakeimg.pl/250x100</span></span><br><span class="line"><span class="string">http:</span><span class="comment">//fakeimg.pl/250x100/ff0000</span></span><br><span class="line"><span class="string">http:</span><span class="comment">//fakeimg.pl/350x200/ff0000/00</span></span><br><span class="line"><span class="string">http:</span><span class="comment">//fakeimg.pl/350x200/ff0000,128/000,25</span></span><br><span class="line"><span class="string">http:</span><span class="comment">//fakeimg.pl/350x200/?text=Hell</span></span><br><span class="line"><span class="string">http:</span><span class="comment">//fakeimg.pl/350x200/?text=World&amp;font=lobste</span></span><br></pre></td></tr></table></figure>
+<p>That’s all!</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
     <article id="post-Fis-快速入门" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">

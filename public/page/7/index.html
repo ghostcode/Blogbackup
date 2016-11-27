@@ -135,6 +135,132 @@ var _hmt = _hmt || [];
 </nav>
       
   
+    <article id="post-JavaScript技巧揭秘" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2014/09/27/JavaScript技巧揭秘/" class="article-date">
+  	<time datetime="2014-09-27T08:41:07.000Z" itemprop="datePublished">Sep 27 2014</time>
+</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/09/27/JavaScript技巧揭秘/">JavaScript技巧揭秘</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Javascript中有许多技巧被有经验的开发者广泛使用。它们并不显而易见，特别是对初级开发者。这些技巧利用了语言特点，从侧面实现了语言本身不能直接实现的目标。下面我对这些技巧做了一个解释说明的专辑。</p>
+<p>你应该知道其中多数技巧是hack,并不是用在日常的开发中的。这篇文章的目的是解释它们是如何工作的，并不赞同使用它们。</p>
+<p><strong>使用!!来进行Boolean值转换</strong></p>
+<p>JavaScript中的一切变量都可以转换为true或false，这意味着你如果把变量放到if表达式中，会根据转换结果自动选择执行真分支还是假分支。</p>
+<p>0，false，””，null，undefined，NaN可以转换为false，其他值会转换为真。有时你希望一个值转换为boolean值，你可以使用“||”。</p>
+<p>另一方面你可以使用if(x)来代替if(x == ‘test’)。当x是空值时，它会执行else分支。</p>
+<p><strong>字符串变为数字_</strong></p>
+<p>字符串变为数字最常用的方法当属parseInt(x,10)和parseFloat(),还有一种不常用的就是 “3” - 0。判断一个值是否为数字有个技巧：</p>
+<pre><code><span class="attribute">x ==</span>=<span class="string"> +x</span>
+</code></pre><p><strong>使用||提供默认值</strong></p>
+        
+          <p class="article-more-link">
+            <a href="/2014/09/27/JavaScript技巧揭秘/#more">more >></a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
+    <article id="post-Hexo问题" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2014/09/26/Hexo问题/" class="article-date">
+  	<time datetime="2014-09-25T16:12:30.000Z" itemprop="datePublished">Sep 26 2014</time>
+</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/09/26/Hexo问题/">Hexo问题</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在mac上好不容易装了node(这几天node一直没有安装成功，原来是安装包错误！！！)，等到安装hexo之后，运行：</p>
+<pre><code>hexo <span class="keyword">server</span>
+</code></pre><p>然后就报错：</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="special">&#123;</span> name: 'HexoError',</span><br><span class="line">  reason: 'incomplete explicit mapping pair; a key node is missed',</span><br><span class="line">  mark: </span><br><span class="line">   <span class="special">&#123;</span> name: null,</span><br><span class="line">     buffer: 'categories: Kategorien<span class="command">\r</span><span class="command">\nsearch</span>: Suche<span class="command">\r</span><span class="command">\ntags</span>: Tags<span class="command">\r</span><span class="command">\ntagcloud</span>: Tag-Cloud<span class="command">\r</span><span class="command">\ntweets</span>: Tweets<span class="command">\r</span><span class="command">\nprev</span>: Vorherige Seite<span class="command">\r</span><span class="command">\nnext</span>: Nächste Seite<span class="command">\r</span><span class="command">\ncomment</span>: Kommentare<span class="command">\r</span><span class="command">\narchive</span>_a: Archiv<span class="command">\r</span><span class="command">\narchive</span>_b: Archiv: <span class="comment">%s\r\npage: Seite %d\r\nrecent_posts: Neueste Artikel\n\u0000',</span></span><br><span class="line">     position: 189,</span><br><span class="line">     line: 9,</span><br><span class="line">     column: 17 <span class="special">&#125;</span>,</span><br><span class="line">  message: 'Process failed: languages/de.yml',</span><br><span class="line">  domain: </span><br><span class="line">   <span class="special">&#123;</span> domain: null,</span><br><span class="line">     _events: <span class="special">&#123;</span> error: <span class="special">[</span>Function<span class="special">]</span> <span class="special">&#125;</span>,</span><br><span class="line">     _maxListeners: 10,</span><br><span class="line">     members: <span class="special">[</span> <span class="special">[</span>Object<span class="special">]</span> <span class="special">]</span> <span class="special">&#125;</span>,</span><br><span class="line">  domainThrown: true,</span><br><span class="line">  stack: undefined <span class="special">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>看到第二句我就搜了一下，结果原因是hexo升级，<strong>Yaml Parser做出了一定的修改</strong>。</p>
+<p>解决办法：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>. 将主题<span class="keyword">language</span>下的有空格的项都需要加上双引号。<span class="keyword">tag</span> cloud --&gt; <span class="string">"tag cloud"</span></span><br><span class="line"><span class="number">2</span>. 如果用的默认主题light，可以直接拉取最新主题，覆盖<span class="keyword">language</span>文件夹即可。$ git clone http<span class="variable">s:</span>//github.<span class="keyword">com</span>/tommy351/hexo-theme-light themes/</span><br></pre></td></tr></table></figure>
+<p>参考：</p>
+<p><a href="https://github.com/wileam/code/blob/master/source/_posts/update-hexo.md" target="_blank" rel="external">https://github.com/wileam/code/blob/master/source/_posts/update-hexo.md</a></p>
+<p><a href="http://www.huangyunkun.com/2014/07/31/hexo-update-error-with-yaml-parser/" target="_blank" rel="external">http://www.huangyunkun.com/2014/07/31/hexo-update-error-with-yaml-parser/</a></p>
+<p><strong>hexo 3.1.1更新后代码高亮失效</strong></p>
+<p>原因：</p>
+<blockquote>
+<p>Add option to disable highlight auto-detect</p>
+</blockquote>
+<p>解决方法：</p>
+<p>增加 auto_detect: true 到站点 _config.yml 的 hilight 部分，否则默认自动检测语言高亮是关闭的</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">highlight</span>: <span class="string"></span></span><br><span class="line"><span class="attribute">enable</span>: <span class="string">true</span></span><br><span class="line"><span class="attribute">auto_detect</span>: <span class="string">true</span></span><br><span class="line"><span class="attribute">line_number</span>: <span class="string">true</span></span><br><span class="line"><span class="attribute">tab_replace</span>: <span class="string">''</span></span><br></pre></td></tr></table></figure>
+<p>参考：<br><a href="https://github.com/hexojs/hexo/releases/tag/3.1.1" target="_blank" rel="external">https://github.com/hexojs/hexo/releases/tag/3.1.1</a></p>
+<p><a href="https://github.com/iissnan/hexo-theme-next/issues/186" target="_blank" rel="external">https://github.com/iissnan/hexo-theme-next/issues/186</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
     <article id="post-HTML历史管理-彩票生成器" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -589,196 +715,6 @@ And <span class="keyword">it</span> has a clean, obvious syntax so <span class="
 </blockquote>
 <p>解决方法：</p>
 <p>找到index.lock 删除即可</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-    <article id="post-Grunt遇到的问题" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2014/08/05/Grunt遇到的问题/" class="article-date">
-  	<time datetime="2014-08-05T08:51:03.000Z" itemprop="datePublished">Aug 5 2014</time>
-</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Grunt/">Grunt</a></li></ul>
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/08/05/Grunt遇到的问题/">Grunt遇到的问题</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在用YEOMAN构建应用时，遇到一个问题：</p>
-<blockquote>
-<p>D:\nodeJS\node_modules\grunt-html&gt;grunt<br>    grunt-cli: The grunt command line interface. (v0.1.6)<br>    Fatal error: Unable to find local grunt.<br>    If you’re seeing this message, either a Gruntfile wasn’t found or grunt<br>    hasn’t been installed locally to your project. For more information about<br>    installing and configuring grunt, please see the Getting Started guide:<br>    <a href="http://gruntjs.com/getting-started" target="_blank" rel="external">http://gruntjs.com/getting-started</a></p>
-</blockquote>
-<p>一般我们使用Grunt之前安装：</p>
-<pre><code>npm <span class="operator"><span class="keyword">install</span> -<span class="keyword">g</span> grunt-cli</span>
-</code></pre><p>然后在项目中使用：</p>
-<pre><code><span class="title">grunt</span> serve
-</code></pre><p>这时就会报错。</p>
-<p>经过查资料，看文档，找到解决方法。</p>
-<p>官网资料：</p>
-<blockquote>
-<p>Note that installing grunt-cli does not install the Grunt task runner! The job of the Grunt CLI is simple: run the version of Grunt which has been installed next to a Gruntfile. This allows multiple versions of Grunt to be installed on the same machine simultaneously.</p>
-</blockquote>
-<p>翻译：</p>
-<blockquote>
-<p>注意，安装grunt-cli并不等于安装了grunt任务运行器！Grunt CLI的工作很简单：在Gruntfile所在目录调用运行已经安装好的相应版本的Grunt。这就意味着可以在同一台机器上同时安装多个版本的Grunt。</p>
-</blockquote>
-<p>在项目根目录运行：</p>
-<pre><code>npm install grunt --<span class="built_in">save</span>-<span class="built_in">dev</span>
-</code></pre><p><strong>save-dev</strong>会自动将<strong>grunt</strong>添加到<strong>package.json</strong>的<strong>dev-dependency</strong>中，不需要手动添加。</p>
-<p>参考：</p>
-<p><a href="http://stackoverflow.com/questions/15483735/fatal-error-unable-to-find-local-grunt-when-running-grunt-command" target="_blank" rel="external">http://stackoverflow.com/questions/15483735/fatal-error-unable-to-find-local-grunt-when-running-grunt-command</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-    <article id="post-Sublime-Text2-个人常用插件" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2014/08/05/Sublime-Text2-个人常用插件/" class="article-date">
-  	<time datetime="2014-08-05T01:23:46.000Z" itemprop="datePublished">Aug 5 2014</time>
-</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sublime/">Sublime</a></li></ul>
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/08/05/Sublime-Text2-个人常用插件/">Sublime Text2 个人常用插件</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>这是个人常用Sublime Text 2的一些常用插件，会陆续更新，这并不是什么必备插件。</p>
-<p>Sublime Text 2的插件安装方法：</p>
-<pre><code><span class="number">1.</span> 按Ctrl+`调出console
-
-<span class="number">2.</span> 粘贴以下代码到底部命令行并回车：
-</code></pre><blockquote>
-<p>import urllib2,os;pf=’Package Control.sublime-package’;ipp=sublime.installed_packages_path();os.makedirs(ipp) if not os.path.exists(ipp) else None;open(os.path.join(ipp,pf),’wb’).write(urllib2.urlopen(‘<a href="http://sublime.wbond.net/&#39;+pf.replace(" target="_blank" rel="external">http://sublime.wbond.net/&#39;+pf.replace(</a>‘ ‘,’%20’)).read())</p>
-</blockquote>
-<ul>
-<li>Emmet (前端的最爱)</li>
-<li>HTML/CSS/JS Pretty (代码美化)</li>
-<li>DocBlockr (注释)</li>
-<li>AngularJS</li>
-<li>SublimeCodeIntel (代码自动提示Javascript、python)</li>
-<li>ternjs (支持Vim,Emacs等javascript提示)</li>
-<li>ConvertToUTF8 (乱码解决)</li>
-<li>Ctage</li>
-<li>FakeImg.pl(图片占位)</li>
-<li>Placeholders</li>
-<li>Code​Formatter</li>
-<li>FileHeader(添加文件头部)</li>
-<li><a href="https://sublime.wbond.net/packages/JavaScript%20Patterns" target="_blank" rel="external">Java​Script Patterns</a> (妈妈再也不担心我没有办法装逼了)</li>
-<li><a href="https://sublime.wbond.net/packages/JavaScript%20%26%20NodeJS%20Snippets" target="_blank" rel="external">Java​Script &amp; Node​JS Snippets</a> (提高效率)</li>
-</ul>
-<p>技巧：(默认是在Preference-&gt; Settings-User 添加)</p>
-<ul>
-<li>vim 编辑模式</li>
-</ul>
-<blockquote>
-<p><strong>“ignored_packages”: []</strong>,ESC进入 VIM模式。</p>
-</blockquote>
-<ul>
-<li>双击带中划线的代码选中</li>
-</ul>
-<blockquote>
-<p>Preference-&gt; Settings-Default 找到 <strong>“word_separators”</strong>,删除里面的‘-’。</p>
-</blockquote>
-<ul>
-<li>高亮当前行</li>
-</ul>
-<blockquote>
-<p>“highlight_line”: true</p>
-</blockquote>
-<ul>
-<li>设置tab的空格数（我这里设置的是四个）</li>
-</ul>
-<pre><code><span class="string">"tab_size"</span>: <span class="number">2</span>,
-
-<span class="string">"translate_tabs_to_spaces"</span>: <span class="literal">true</span>
-</code></pre><ul>
-<li>去除行末尾的多余空格</li>
-</ul>
-<pre><code><span class="string">"trim_trailing_white_space_on_save"</span>: <span class="literal">true</span>
-</code></pre><p>主题：</p>
-<pre><code>{
-    "<span class="attribute">theme</span>": <span class="value"><span class="string">"Soda Light.sublime-theme"</span></span>,
-    "<span class="attribute">soda_folder_icons</span>": <span class="value"><span class="literal">true</span>
-</span>}
-</code></pre><p>现在我的设置：</p>
-<pre><code>{
-    "<span class="attribute">color_scheme</span>": <span class="value"><span class="string">"Packages/Color Scheme - Default/Monokai.tmTheme"</span></span>,
-    "<span class="attribute">font_size</span>": <span class="value"><span class="number">13.0</span></span>,
-    "<span class="attribute">highlight_line</span>": <span class="value"><span class="literal">true</span></span>,
-    "<span class="attribute">ignored_packages</span>":
-    <span class="value">[
-    ]</span>,
-    "<span class="attribute">soda_folder_icons</span>": <span class="value"><span class="literal">true</span></span>,
-    "<span class="attribute">theme</span>": <span class="value"><span class="string">"Soda Light.sublime-theme"</span></span>,
-    "<span class="attribute">tab_size</span>":<span class="value"><span class="number">4</span></span>,
-    "<span class="attribute">translate_tabs_to_spaces</span>": <span class="value"><span class="literal">true</span></span>,
-    "<span class="attribute">trim_trailing_white_space_on_save</span>": <span class="value"><span class="literal">true</span>
-</span>}
-</code></pre><p>参考：<a href="http://buymeasoda.github.io/soda-theme/" target="_blank" rel="external">http://buymeasoda.github.io/soda-theme/</a></p>
-<p>更多插件：</p>
-<p><a href="https://sublime.wbond.net/" target="_blank" rel="external">https://sublime.wbond.net/</a></p>
 
       
     </div>

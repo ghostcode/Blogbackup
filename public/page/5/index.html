@@ -135,6 +135,140 @@ var _hmt = _hmt || [];
 </nav>
       
   
+    <article id="post-永恒的水平垂直居中" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/03/02/永恒的水平垂直居中/" class="article-date">
+  	<time datetime="2015-03-02T07:19:48.000Z" itemprop="datePublished">Mar 2 2015</time>
+</a>
+      
+      
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/03/02/永恒的水平垂直居中/">永恒的水平垂直居中</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>css中居中问题是永远的话题特别是<strong>垂直居中</strong>，各路高手使出各种“奇异淫”的方法。前段时间一直搞JS，好久没有弄css了这次公司做了电商。遇到商品的图片需要处理，所以得总结一下，不能每次写都去查资料。</p>
+<p>代码结构：</p>
+<pre><code>&lt;div class=<span class="string">"box"</span>&gt;
+    &lt;img src=<span class="string">"#"</span> alt=<span class="string">""</span> <span class="variable">width</span>=<span class="string">"100"</span> <span class="variable">height</span>=<span class="string">"100"</span>&gt;
+&lt;/div&gt;
+
+.<span class="built_in">box</span>{
+    <span class="variable">width</span>: <span class="number">400</span>px;
+    <span class="variable">height</span>: <span class="number">400</span>px;
+    <span class="built_in">background</span>-<span class="built_in">color</span>:#<span class="number">999</span>;
+    <span class="built_in">text</span>-align: center;
+}
+
+.<span class="built_in">box</span> img{
+
+}
+</code></pre>
+        
+          <p class="article-more-link">
+            <a href="/2015/03/02/永恒的水平垂直居中/#more">more >></a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
+    <article id="post-忘却jQuery与原生JavaScript重归于好" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/02/08/忘却jQuery与原生JavaScript重归于好/" class="article-date">
+  	<time datetime="2015-02-08T06:58:42.000Z" itemprop="datePublished">Feb 8 2015</time>
+</a>
+      
+      
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/02/08/忘却jQuery与原生JavaScript重归于好/">忘却jQuery与“原配”JavaScript重归于好</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>JavaScript就在那里不离不弃，你却对她视而不见。为何不用jQuery？因为它太慢而且在确认你站点不需要而外的负担时。</p>
+<p>我无意与在框架和原生代码之前争辩，有时抛弃使用那些神奇的东西很难。但是在这我想说的是仅仅为了一个字符选择器而加载一大坨代码，例如<strong>$</strong>或者其他类似的。</p>
+<p>假定简写并不是它的唯一特点，每个使用框架的人是因为支持IE，动画处理和单一的选择器功能。</p>
+<p><strong>原生等价</strong></p>
+<p>选择元素</p>
+<pre><code><span class="comment">// jQuery</span>
+<span class="keyword">var</span> els = $(<span class="string">'.el'</span>);
+
+<span class="comment">// Native</span>
+<span class="keyword">var</span> els = <span class="built_in">document</span>.querySelectorAll(<span class="string">'.el'</span>);
+
+<span class="comment">// Shorthand</span>
+<span class="keyword">var</span> $ = <span class="function"><span class="keyword">function</span> (<span class="params">el</span>) </span>{
+  <span class="keyword">return</span> <span class="built_in">document</span>.querySelectorAll(el);
+}
+
+<span class="keyword">var</span> els = $(<span class="string">'.el'</span>);
+
+<span class="comment">// Or use regex-based micro-selector lib</span>
+<span class="comment">// http://jsperf.com/micro-selector-libraries</span>
+</code></pre>
+        
+          <p class="article-more-link">
+            <a href="/2015/02/08/忘却jQuery与原生JavaScript重归于好/#more">more >></a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
     <article id="post-python中urllib和urllib2的区别联系" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -589,127 +723,6 @@ var _hmt = _hmt || [];
         
           <p class="article-more-link">
             <a href="/2014/11/16/简单实现视差滚动/#more">more >></a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-    <article id="post-SublimeText之FileHeader" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2014/11/13/SublimeText之FileHeader/" class="article-date">
-  	<time datetime="2014-11-13T06:11:39.000Z" itemprop="datePublished">Nov 13 2014</time>
-</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sublime/">Sublime</a></li></ul>
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/11/13/SublimeText之FileHeader/">SublimeText之FileHeader</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>创建一个新文件</strong></p>
-<ul>
-<li>侧栏菜单</li>
-</ul>
-<p><img src="http://zhuxinyong.com/assets/images/newfile.gif" alt="new file"></p>
-<ul>
-<li>快捷键</li>
-</ul>
-<blockquote>
-<p>OSX默认<strong>super+alt+n</strong>，Windows和Linux默认<strong>ctrl+alt+n</strong></p>
-</blockquote>
-<p><strong>为已经存在的文件添加头部</strong></p>
-        
-          <p class="article-more-link">
-            <a href="/2014/11/13/SublimeText之FileHeader/#more">more >></a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-    <article id="post-JavaScript最佳实践一" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2014/11/13/JavaScript最佳实践一/" class="article-date">
-  	<time datetime="2014-11-13T01:37:38.000Z" itemprop="datePublished">Nov 13 2014</time>
-</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/11/13/JavaScript最佳实践一/">JavaScript最佳实践一</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>变量和函数名有意义</strong></p>
-<p>选择易理解和简短的名字作为变量和方法。</p>
-<p><strong>糟糕的命名</strong></p>
-<pre><code><span class="title">x1</span> fe2 xbqne
-</code></pre><p><strong>同样糟糕的命名</strong></p>
-<pre><code><span class="title">incrementerForMainLoopWhichSpansFromTenToTwenty</span>
-}
-createNewMemberIfAgeOverTwentyOneAndMoonIsFull
-</code></pre><p>尽量避免使用变量和方法的名字去解释值。</p>
-        
-          <p class="article-more-link">
-            <a href="/2014/11/13/JavaScript最佳实践一/#more">more >></a>
           </p>
         
       
