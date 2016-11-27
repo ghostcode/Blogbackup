@@ -27,4 +27,4 @@ branches:
     - master
 env:
  global:
-   - GH_REF: git@github.com:ghostcode/blog.git
+   - GH_REF: github.com/ghostcode/blog.git
