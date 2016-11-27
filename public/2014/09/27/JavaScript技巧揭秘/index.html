@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>JavaScript技巧揭秘 | 关于生活，关于前端</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="wumiiVerification" content="e6510660-240e-4909-8068-663f55fc7795" />
+  <meta name="description" content="Javascript中有许多技巧被有经验的开发者广泛使用。它们并不显而易见，特别是对初级开发者。这些技巧利用了语言特点，从侧面实现了语言本身不能直接实现的目标。下面我对这些技巧做了一个解释说明的专辑。
+你应该知道其中多数技巧是hack,并不是用在日常的开发中的。这篇文章的目的是解释它们是如何工作的，并不赞同使用它们。
+使用!!来进行Boolean值转换
+JavaScript中的一切变量都可以转换为">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript技巧揭秘">
+<meta property="og:url" content="http://zhuxinyong.com/2014/09/27/JavaScript技巧揭秘/index.html">
+<meta property="og:site_name" content="关于生活，关于前端">
+<meta property="og:description" content="Javascript中有许多技巧被有经验的开发者广泛使用。它们并不显而易见，特别是对初级开发者。这些技巧利用了语言特点，从侧面实现了语言本身不能直接实现的目标。下面我对这些技巧做了一个解释说明的专辑。
+你应该知道其中多数技巧是hack,并不是用在日常的开发中的。这篇文章的目的是解释它们是如何工作的，并不赞同使用它们。
+使用!!来进行Boolean值转换
+JavaScript中的一切变量都可以转换为">
+<meta property="og:updated_time" content="2015-09-22T05:29:43.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript技巧揭秘">
+<meta name="twitter:description" content="Javascript中有许多技巧被有经验的开发者广泛使用。它们并不显而易见，特别是对初级开发者。这些技巧利用了语言特点，从侧面实现了语言本身不能直接实现的目标。下面我对这些技巧做了一个解释说明的专辑。
+你应该知道其中多数技巧是hack,并不是用在日常的开发中的。这篇文章的目的是解释它们是如何工作的，并不赞同使用它们。
+使用!!来进行Boolean值转换
+JavaScript中的一切变量都可以转换为">
+  
+    <link rel="alternative" href="/atom.xml" title="关于生活，关于前端" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+<script type="text/javascript">
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?8c6506f2771c14e5184e4b40cb38aac2";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+  <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<div class="profilepic">
+			<img src="https://avatars0.githubusercontent.com/u/745181?v=2&amp;s=460">
+		</div>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Zhuxy</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="onoffswitch">
+			    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
+			    <label class="onoffswitch-label" for="myonoffswitch">
+			        <span class="onoffswitch-inner"></span>
+			        <span class="onoffswitch-switch"></span>
+			    </label>
+			</div>
+		
+
+		<div class="switch-area">
+			<section class="first-part">
+				<nav class="header-menu">
+					<ul>
+					
+						<li><a href="/">主页</a></li>
+			        
+						<li><a href="/archives">所有文章</a></li>
+			        
+						<li><a href="/about">关于</a></li>
+			        
+					</ul>
+				</nav>
+				<nav class="header-nav">
+					<div class="social">
+						
+							<a class="github" target="_blank" href="https://github.com/ghostcode" title="github">github</a>
+				        
+							<a class="weibo" target="_blank" href="http://weibo.com/ghostcode" title="weibo">weibo</a>
+				        
+					</div>
+				</nav>
+			</section>
+			
+			
+			<section class="second-part">
+				<div class="widget tagcloud">
+					<a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/ES6/" style="font-size: 10px;">ES6</a> <a href="/tags/Express/" style="font-size: 10px;">Express</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Grunt/" style="font-size: 10px;">Grunt</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/Javascript/" style="font-size: 20px;">Javascript</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/Node/" style="font-size: 10px;">Node</a> <a href="/tags/Node-Express/" style="font-size: 10px;">Node Express</a> <a href="/tags/Sublime/" style="font-size: 20px;">Sublime</a> <a href="/tags/chrome/" style="font-size: 10px;">chrome</a> <a href="/tags/css3/" style="font-size: 10px;">css3</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/promise/" style="font-size: 10px;">promise</a> <a href="/tags/regexp/" style="font-size: 10px;">regexp</a> <a href="/tags/webcomponents/" style="font-size: 10px;">webcomponents</a> <a href="/tags/架构/" style="font-size: 10px;">架构</a> <a href="/tags/浏览器/" style="font-size: 10px;">浏览器</a> <a href="/tags/特效/" style="font-size: 10px;">特效</a>
+				</div>
+			</section>
+			
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay"></div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img src="https://avatars0.githubusercontent.com/u/745181?v=2&amp;s=460">
+			</div>
+
+			<hgroup>
+			  <h1 class="header-author"><a href="/">Zhuxy</a></h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/about">关于</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/ghostcode" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/ghostcode" title="weibo">weibo</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <article id="post-JavaScript技巧揭秘" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2014/09/27/JavaScript技巧揭秘/" class="article-date">
+  	<time datetime="2014-09-27T08:41:07.000Z" itemprop="datePublished">Sep 27 2014</time>
+</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JavaScript技巧揭秘
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Javascript中有许多技巧被有经验的开发者广泛使用。它们并不显而易见，特别是对初级开发者。这些技巧利用了语言特点，从侧面实现了语言本身不能直接实现的目标。下面我对这些技巧做了一个解释说明的专辑。</p>
+<p>你应该知道其中多数技巧是hack,并不是用在日常的开发中的。这篇文章的目的是解释它们是如何工作的，并不赞同使用它们。</p>
+<p><strong>使用!!来进行Boolean值转换</strong></p>
+<p>JavaScript中的一切变量都可以转换为true或false，这意味着你如果把变量放到if表达式中，会根据转换结果自动选择执行真分支还是假分支。</p>
+<p>0，false，””，null，undefined，NaN可以转换为false，其他值会转换为真。有时你希望一个值转换为boolean值，你可以使用“||”。</p>
+<p>另一方面你可以使用if(x)来代替if(x == ‘test’)。当x是空值时，它会执行else分支。</p>
+<p><strong>字符串变为数字_</strong></p>
+<p>字符串变为数字最常用的方法当属parseInt(x,10)和parseFloat(),还有一种不常用的就是 “3” - 0。判断一个值是否为数字有个技巧：</p>
+<pre><code><span class="attribute">x ==</span>=<span class="string"> +x</span>
+</code></pre><p><strong>使用||提供默认值</strong></p>
+<a id="more"></a>
+<p>在JavaScript中||时一个“<a href="http://en.wikipedia.org/wiki/Short-circuit_evaluation" target="_blank" rel="external">short-circuit evaluation</a>”，同样也广泛应用于其他语言当中。这个操作符首先会执行左侧表达式，当值为假时，执行右侧的表达式。考虑下面的一个例子：</p>
+<pre><code><span class="function"><span class="keyword">function</span> <span class="title">setAge</span><span class="params">(age)</span></span>{
+    <span class="keyword">this</span>.age = age || <span class="number">10</span>;
+}
+setAge()
+</code></pre><p>我们没有提供age参数，因此 age || 10 会返回 10，这是提供默认值的好方法，其实上面的例子等价于：</p>
+<pre><code><span class="keyword">var</span> age;
+
+<span class="keyword">if</span>(age){
+    <span class="keyword">this</span>.age = age;
+}<span class="keyword">else</span>{
+    <span class="keyword">this</span>.age = <span class="number">10</span>;
+}
+</code></pre><p>第一个例子很简明，以至于你会经常看到。</p>
+<p>我个人非常喜欢这个模式的简明，但是上面的例子有个问题：不能给年龄设置为0。改进方法：</p>
+<p>原作者的：</p>
+<pre><code><span class="keyword">this</span>.age = (<span class="keyword">typeof</span> age !== <span class="string">'undefined'</span>) ? age : <span class="number">10</span>;
+</code></pre><p>但是虽然上面的方法可以设置为0，但是此时依旧可以设置为null。所以下面是我的方法：</p>
+<pre><code><span class="keyword">this</span>.age = (age === +age) ? age : <span class="number">10</span>;
+</code></pre><p><strong>使用void 0 来代替undefined</strong></p>
+<p>关键词void接受一个参数并且一直返回undefined，但为何不直接使用undefined呢？因为在一些浏览器中可以重写undefined，同样在一些框架中也可以看到。在<a href="http://stackoverflow.com/questions/8783510/javascript-how-dangerous-is-it-really-to-assume-undefined-is-not-overwritten" target="_blank" rel="external">EC5</a>中浏览器是不可以重写undefined的。</p>
+<p><strong>使用(function(){ })()实现封装模式</strong></p>
+<p>当你希望需要封装时，你可以将代码包裹在一个匿名函数并可以立即执行的函数里面。Javascript里面只有两种作用域：全局和函数作用域，看看<a href="http://ariya.ofilabs.com/2013/05/es6-and-block-scope.html" target="_blank" rel="external">ECMA6 block scopes</a>。你写在全局的变量，可以在任何地方使用；正常情况下你希望使用函数将多数代码封装同时对全局作用域只提供接口。所以这种模式会很好用，注意下面的例子：</p>
+<pre><code>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>{
+  <span class="function"><span class="keyword">function</span> <span class="title">div</span>(<span class="params">a, b</span>) </span>{
+    <span class="keyword">return</span> a / b;
+  }
+
+  <span class="function"><span class="keyword">function</span> <span class="title">divBy5</span>(<span class="params">x</span>) </span>{
+    <span class="keyword">return</span> div(x, <span class="number">5</span>);
+  }
+
+  <span class="built_in">window</span>.divBy5 = divBy5;
+})()
+
+div <span class="comment">// =&gt; undefined</span>
+divBy5(<span class="number">10</span>); <span class="comment">// =&gt; 2</span>
+</code></pre><p>在以上提到的所有技巧里面，这是一个副作用最小的推荐使用，以此来减少内部逻辑代码暴露到全局作用域中。</p>
+<p>综诉：我想提醒的是你的代码对于其他开发者一定要简介明了。语言本身提供的结构一般优于人造的方法。</p>
+<p>上面提到的一些问题在即将到来的ES6中将得到解决。例如在将来你不需要使用复杂的<strong>age = age || 10</strong>模式，因为ES6允许使用更好的模式来提供默认值：</p>
+<pre><code><span class="function"><span class="keyword">function</span><span class="params">(age = 10)</span></span>{
+    ...
+}
+</code></pre><p>另一个例子是，你将不再需要(function(){})()模式，当高级浏览器实现 <a href="http://eviltrout.com/2014/05/03/getting-started-with-es6.html" target="_blank" rel="external">EC6 modules</a></p>
+<p>原文：<a href="http://blog.mdnbar.com/javascript-common-tricks?utm_source=javascriptweekly&amp;utm_medium=email" target="_blank" rel="external">http://blog.mdnbar.com/javascript-common-tricks?utm_source=javascriptweekly&amp;utm_medium=email</a></p>
+<p>资源：</p>
+<p>如果你希望了解更多技巧，请看下面的链接：</p>
+<ol>
+<li><p><a href="https://github.com/jed/140bytes/wiki/Byte-saving-techniques" target="_blank" rel="external">Byte Saving Techniques</a></p>
+</li>
+<li><p><a href="https://github.com/miguelmota/javascript-idiosyncrasies" target="_blank" rel="external">JavaScript Idiosyncrasies (kinda)</a></p>
+</li>
+<li><p><a href="https://code.google.com/p/jslibs/wiki/JavascriptTips" target="_blank" rel="external">JavaScript language advanced Tips &amp; Tricks</a></p>
+</li>
+<li><p><a href="http://modernweb.com/2013/12/23/45-useful-javascript-tips-tricks-and-best-practices/" target="_blank" rel="external">45-useful-javascript-tips-tricks-and-best-practices</a></p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2014/10/09/你不知道的“是非”/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          你不知道的‘是非’
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2014/09/26/Hexo问题/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Hexo问题</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="JavaScript技巧揭秘" data-title="JavaScript技巧揭秘" data-url="http://zhuxinyong.com/2014/09/27/JavaScript技巧揭秘/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"zhuxinyong"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Zhuxy
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+  <script src="/js/main.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

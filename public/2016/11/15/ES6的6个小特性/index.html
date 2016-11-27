@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>ES6的6个小特性 | 关于生活，关于前端</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="wumiiVerification" content="e6510660-240e-4909-8068-663f55fc7795" />
+  <meta name="description" content="JS社区的每个人都喜欢新的API、语法以及一些简单、明了更高效的完成重要任务的新特性。过去一年ES6带来了十足的进步，下面是6个我最喜欢的JS新增特性。
+1.Object[key]
+有时候不能在对象变量声明时设置所有的key/value，所以得再声明之后添加key/value。
+let myKey = &apos;key3&apos;;
+let obj = {
+    key1: &apos;One&apos;,
+    key2: &apos;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES6的6个小特性">
+<meta property="og:url" content="http://zhuxinyong.com/2016/11/15/ES6的6个小特性/index.html">
+<meta property="og:site_name" content="关于生活，关于前端">
+<meta property="og:description" content="JS社区的每个人都喜欢新的API、语法以及一些简单、明了更高效的完成重要任务的新特性。过去一年ES6带来了十足的进步，下面是6个我最喜欢的JS新增特性。
+1.Object[key]
+有时候不能在对象变量声明时设置所有的key/value，所以得再声明之后添加key/value。
+let myKey = &apos;key3&apos;;
+let obj = {
+    key1: &apos;One&apos;,
+    key2: &apos;">
+<meta property="og:updated_time" content="2016-11-16T06:31:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ES6的6个小特性">
+<meta name="twitter:description" content="JS社区的每个人都喜欢新的API、语法以及一些简单、明了更高效的完成重要任务的新特性。过去一年ES6带来了十足的进步，下面是6个我最喜欢的JS新增特性。
+1.Object[key]
+有时候不能在对象变量声明时设置所有的key/value，所以得再声明之后添加key/value。
+let myKey = &apos;key3&apos;;
+let obj = {
+    key1: &apos;One&apos;,
+    key2: &apos;">
+  
+    <link rel="alternative" href="/atom.xml" title="关于生活，关于前端" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+<script type="text/javascript">
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?8c6506f2771c14e5184e4b40cb38aac2";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+  <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<div class="profilepic">
+			<img src="https://avatars0.githubusercontent.com/u/745181?v=2&amp;s=460">
+		</div>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Zhuxy</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="onoffswitch">
+			    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
+			    <label class="onoffswitch-label" for="myonoffswitch">
+			        <span class="onoffswitch-inner"></span>
+			        <span class="onoffswitch-switch"></span>
+			    </label>
+			</div>
+		
+
+		<div class="switch-area">
+			<section class="first-part">
+				<nav class="header-menu">
+					<ul>
+					
+						<li><a href="/">主页</a></li>
+			        
+						<li><a href="/archives">所有文章</a></li>
+			        
+						<li><a href="/about">关于</a></li>
+			        
+					</ul>
+				</nav>
+				<nav class="header-nav">
+					<div class="social">
+						
+							<a class="github" target="_blank" href="https://github.com/ghostcode" title="github">github</a>
+				        
+							<a class="weibo" target="_blank" href="http://weibo.com/ghostcode" title="weibo">weibo</a>
+				        
+					</div>
+				</nav>
+			</section>
+			
+			
+			<section class="second-part">
+				<div class="widget tagcloud">
+					<a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/ES6/" style="font-size: 10px;">ES6</a> <a href="/tags/Express/" style="font-size: 10px;">Express</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Grunt/" style="font-size: 10px;">Grunt</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/Javascript/" style="font-size: 20px;">Javascript</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/Node/" style="font-size: 10px;">Node</a> <a href="/tags/Node-Express/" style="font-size: 10px;">Node Express</a> <a href="/tags/Sublime/" style="font-size: 20px;">Sublime</a> <a href="/tags/chrome/" style="font-size: 10px;">chrome</a> <a href="/tags/css3/" style="font-size: 10px;">css3</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/promise/" style="font-size: 10px;">promise</a> <a href="/tags/regexp/" style="font-size: 10px;">regexp</a> <a href="/tags/webcomponents/" style="font-size: 10px;">webcomponents</a> <a href="/tags/架构/" style="font-size: 10px;">架构</a> <a href="/tags/浏览器/" style="font-size: 10px;">浏览器</a> <a href="/tags/特效/" style="font-size: 10px;">特效</a>
+				</div>
+			</section>
+			
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay"></div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img src="https://avatars0.githubusercontent.com/u/745181?v=2&amp;s=460">
+			</div>
+
+			<hgroup>
+			  <h1 class="header-author"><a href="/">Zhuxy</a></h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/about">关于</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/ghostcode" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/ghostcode" title="weibo">weibo</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <article id="post-ES6的6个小特性" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/11/15/ES6的6个小特性/" class="article-date">
+  	<time datetime="2016-11-15T13:07:46.000Z" itemprop="datePublished">Nov 15 2016</time>
+</a>
+      
+      
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ES6的6个小特性
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>JS社区的每个人都喜欢新的API、语法以及一些简单、明了更高效的完成重要任务的新特性。过去一年ES6带来了十足的进步，下面是6个我最喜欢的JS新增特性。</p>
+<p><strong>1.Object[key]</strong></p>
+<p>有时候不能在对象变量声明时设置所有的key/value，所以得再声明之后添加key/value。</p>
+<pre><code><span class="keyword">let</span> myKey = <span class="string">'key3'</span>;
+<span class="keyword">let</span> obj = {
+    key1: <span class="string">'One'</span>,
+    key2: <span class="string">'Two'</span>
+};
+obj[myKey] = <span class="string">'Three'</span>;
+</code></pre><p>往好的说这有点不方便，往坏的说这种方式令人疑惑而且有点丑陋。ES6提供给开发者一种更优雅的方式：</p>
+<pre><code><span class="keyword">let</span> myKey = <span class="string">'variableKey'</span>;
+<span class="keyword">let</span> obj = {
+    key<span class="number">1</span>: <span class="string">'One'</span>,
+    key<span class="number">2</span>: <span class="string">'Two'</span>,
+    [myKey]: <span class="string">'Three'</span> <span class="comment">/* yay! */</span>
+};
+</code></pre><p>开发者可以使用<code>[]</code>包裹变量从而使用一条语句完成所有的功能。</p>
+<p><strong>2.Arrow Functions</strong></p>
+<p>你不需要跟上ES6的所有改变，箭头函数已经是许多讨论的话题并且也给JS开发者带来了一些困惑。即使我可以写很多博文来说箭头函数的特点，但是我想指出箭头函数是如何提供一个为简单函数压缩代码的方法。</p>
+<pre><code><span class="comment">// Adds a 10% tax to total</span>
+let calculateTotal = total =&gt; total * <span class="number">1.1</span>;
+calculateTotal(<span class="number">10</span>) <span class="comment">// 11</span>
+
+<span class="comment">// Cancel an event -- another tiny task</span>
+let brickEvent = e =&gt; e.preventDefault();
+<span class="built_in">document</span>.<span class="built_in">querySelector</span>(<span class="string">'div'</span>).addEventListener(<span class="string">'click'</span>, brickEvent);
+</code></pre><p>无<code>functions</code>和<code>return</code>关键词，有时甚至不需要添加<code>()</code>，箭头函数为写函数提供了一种简短的代码书写方式。</p>
+<p><strong>find/findIndex</strong></p>
+<p>JS为开发者提供了<code>Array.prototype.indexOf</code>方法来获取数组中的指定元素下标，但是<code>indexOf</code>并没有提供一个根据判断条件来获取指定元素的方法，<code>find</code>和<code>findIndex</code>两个方法提供了取出第一个满足计算条件的元素和下标。</p>
+<pre><code>let age = [<span class="number">12</span>,<span class="number">19</span>,<span class="number">6</span>,<span class="number">4</span>];
+
+let firstAdult = ages.find(age =&gt; age &gt;= <span class="number">18</span>); <span class="comment">// 19</span>
+let firstAdultIndex = ages.findIndex(age =&gt; age &gt;= <span class="number">19</span>); <span class="comment">// 1</span>
+</code></pre><p><strong>…扩展修饰符</strong></p>
+<p>扩展修饰符表示数组和可迭代对象在调用的时候应该拆分成单个参数：</p>
+<pre><code><span class="comment">// Pass to function that expects separate multiple arguments</span>
+<span class="comment">// Much like Function.prototype.apply() does</span>
+<span class="keyword">let</span> numbers = [<span class="number">9</span>, <span class="number">4</span>, <span class="number">7</span>, <span class="number">1</span>];
+<span class="built_in">Math</span>.min(...numbers); <span class="comment">// 1</span>
+
+<span class="comment">// Convert NodeList to Array</span>
+<span class="keyword">let</span> divsArray = [...document.querySelectorAll(<span class="string">'div'</span>)];
+
+<span class="comment">// Convert Arguments to Array</span>
+<span class="keyword">let</span> argsArray = [...arguments];
+</code></pre><p>这个特定的另一个红利可以把可迭代对象（<code>NodeList</code>、<code>arguments</code>）变成真的数组，以前我们经常使用<code>Array.from</code>或其他方法实现的。</p>
+<p><strong>Template Literals</strong></p>
+<p>JS里多行字符起初通过<code>+</code>和<code>\</code>来完成的，但是都很难维护。许多开发者甚至一些框架使用<code>&lt;script&gt;</code>标签来容纳模板，然后使用DOM方法的<code>outerHTML</code>来获取HTML字符。</p>
+<p>ES6提供了<code>Template Literals</code>使用反引号来容易的创建多行字符串：</p>
+<pre><code><span class="comment">// Multiline String</span>
+<span class="keyword">let</span> myString = <span class="string">`Hello
+
+I'm a new line`</span>;
+
+<span class="comment">//Basic interpolations</span>
+<span class="keyword">let</span> obj = {x:<span class="number">1</span>,y:<span class="number">2</span>};
+
+<span class="built_in">console</span>.log(<span class="string">`Your total is: <span class="subst">${obj.x + obj.y}</span>`</span>); <span class="comment">// Your total is 3</span>
+</code></pre><p><strong>Default Argument Values</strong></p>
+<p>为函数参数提供默认值在服务端语言已经提供（python、php），现在JS也有此能力：</p>
+<pre><code>//Basic usage
+
+<span class="function"><span class="keyword">function</span></span> great( <span class="keyword">name</span> = <span class="string">'Anon'</span> ){
+    console.<span class="built_in">log</span>(`Hello ${<span class="keyword">name</span>}`);
+}
+
+great(); // Hello Anon<span class="comment">!</span>
+
+//You can have a <span class="function"><span class="keyword">function</span></span> too<span class="comment">!</span>
+
+<span class="function"><span class="keyword">function</span></span> greet( <span class="keyword">name</span> = <span class="string">'Anon'</span>,callback = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{} ){
+    console.<span class="built_in">log</span>(`Hello ${<span class="keyword">name</span>}<span class="comment">!`);</span>
+    // No more <span class="string">"callback &amp;&amp; callback()"</span> (no conditional)
+    callback();
+}
+
+// <span class="keyword">Only</span> set a <span class="keyword">default</span> for one <span class="type">parameter</span>
+<span class="function"><span class="keyword">function</span></span> greet(<span class="keyword">name</span>, callback = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{}) {}
+</code></pre><p>以上列出的6个特性就是ES6提供给开发者，当然还有许多特性。</p>
+<p>评论里提供的：</p>
+<p>1 . </p>
+<pre><code>const isRequired = <span class="function"><span class="params">()</span> =&gt;</span> {<span class="keyword">throw</span> <span class="keyword">new</span> Error(<span class="string">'param is required'</span>);};
+
+const hello = <span class="function"><span class="params">(name = isRequired())</span> =&gt;</span> { <span class="built_in">console</span>.log(`<span class="javascript">hello ${name}</span>`) };
+</code></pre><p>2 . </p>
+<pre><code><span class="keyword">const</span> <span class="keyword">is</span> = {
+    <span class="function"><span class="keyword">get</span> <span class="title">required</span>(<span class="params"></span>)</span>{
+        <span class="keyword">throw</span> <span class="keyword">new</span> Error(<span class="string">'Required argument'</span>)
+    }
+}
+
+import {<span class="keyword">is</span>} <span class="keyword">from</span> <span class="string">'utils'</span>
+
+<span class="function"><span class="keyword">const</span> <span class="title">foo</span>(<span class="params">name = <span class="keyword">is</span>.required</span>) </span>=&gt; Array.<span class="keyword">from</span>(name)
+</code></pre><p>原文：<a href="https://davidwalsh.name/es6-features" target="_blank" rel="external">https://davidwalsh.name/es6-features</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/11/26/ES6的6个小特性（二）/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          ES6的6个小特性（二）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/08/07/枚举对象属性几种方法/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">枚举对象属性几种方法</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="ES6的6个小特性" data-title="ES6的6个小特性" data-url="http://zhuxinyong.com/2016/11/15/ES6的6个小特性/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"zhuxinyong"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Zhuxy
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+  <script src="/js/main.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

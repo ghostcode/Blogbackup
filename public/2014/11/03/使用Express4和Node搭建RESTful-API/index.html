@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>使用Express4和Node搭建RESTful API | 关于生活，关于前端</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="wumiiVerification" content="e6510660-240e-4909-8068-663f55fc7795" />
+  <meta name="description" content="几天前随着Express 4.0的发布，我们许多Node项目的路由需要跟着更改。伴随Express Router的变化，我们在设置应用路由时更加灵活。
+今天我们将使用Node,Express 4.0和它的路由来创建RESTful API，同时使用Mongoose与MongoDB交互。在Chrome中使用Postman来测试我们的API。
+接下来看看我们要创建的API以及它的用途。
+我们的程序
+我们">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用Express4和Node搭建RESTful API">
+<meta property="og:url" content="http://zhuxinyong.com/2014/11/03/使用Express4和Node搭建RESTful-API/index.html">
+<meta property="og:site_name" content="关于生活，关于前端">
+<meta property="og:description" content="几天前随着Express 4.0的发布，我们许多Node项目的路由需要跟着更改。伴随Express Router的变化，我们在设置应用路由时更加灵活。
+今天我们将使用Node,Express 4.0和它的路由来创建RESTful API，同时使用Mongoose与MongoDB交互。在Chrome中使用Postman来测试我们的API。
+接下来看看我们要创建的API以及它的用途。
+我们的程序
+我们">
+<meta property="og:image" content="http://zhuxinyong.com/assets/images/node-api-start-server.png">
+<meta property="og:image" content="http://zhuxinyong.com/assets/images/postman-rest-client-node-api.png">
+<meta property="og:image" content="http://zhuxinyong.com/assets/images/node-api-postman-test.png">
+<meta property="og:image" content="http://zhuxinyong.com/assets/images/node-api-route-middleware-express.png">
+<meta property="og:image" content="http://zhuxinyong.com/assets/images/node-api-postman-post-create-bear.png">
+<meta property="og:image" content="http://zhuxinyong.com/assets/images/node-api-postman-get-all.png">
+<meta property="og:image" content="http://zhuxinyong.com/assets/images/node-api-postman-get-single.png">
+<meta property="og:image" content="http://zhuxinyong.com/assets/images/node-api-post-man-update-record.png">
+<meta property="og:image" content="http://zhuxinyong.com/assets/images/node-api-postman-all-updated.png">
+<meta property="og:image" content="http://zhuxinyong.com/assets/images/node-api-postman-delete.png">
+<meta property="og:updated_time" content="2016-11-15T13:31:45.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用Express4和Node搭建RESTful API">
+<meta name="twitter:description" content="几天前随着Express 4.0的发布，我们许多Node项目的路由需要跟着更改。伴随Express Router的变化，我们在设置应用路由时更加灵活。
+今天我们将使用Node,Express 4.0和它的路由来创建RESTful API，同时使用Mongoose与MongoDB交互。在Chrome中使用Postman来测试我们的API。
+接下来看看我们要创建的API以及它的用途。
+我们的程序
+我们">
+  
+    <link rel="alternative" href="/atom.xml" title="关于生活，关于前端" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+<script type="text/javascript">
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?8c6506f2771c14e5184e4b40cb38aac2";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+  <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<div class="profilepic">
+			<img src="https://avatars0.githubusercontent.com/u/745181?v=2&amp;s=460">
+		</div>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Zhuxy</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="onoffswitch">
+			    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
+			    <label class="onoffswitch-label" for="myonoffswitch">
+			        <span class="onoffswitch-inner"></span>
+			        <span class="onoffswitch-switch"></span>
+			    </label>
+			</div>
+		
+
+		<div class="switch-area">
+			<section class="first-part">
+				<nav class="header-menu">
+					<ul>
+					
+						<li><a href="/">主页</a></li>
+			        
+						<li><a href="/archives">所有文章</a></li>
+			        
+						<li><a href="/about">关于</a></li>
+			        
+					</ul>
+				</nav>
+				<nav class="header-nav">
+					<div class="social">
+						
+							<a class="github" target="_blank" href="https://github.com/ghostcode" title="github">github</a>
+				        
+							<a class="weibo" target="_blank" href="http://weibo.com/ghostcode" title="weibo">weibo</a>
+				        
+					</div>
+				</nav>
+			</section>
+			
+			
+			<section class="second-part">
+				<div class="widget tagcloud">
+					<a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/ES6/" style="font-size: 10px;">ES6</a> <a href="/tags/Express/" style="font-size: 10px;">Express</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Grunt/" style="font-size: 10px;">Grunt</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/Javascript/" style="font-size: 20px;">Javascript</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/Node/" style="font-size: 10px;">Node</a> <a href="/tags/Node-Express/" style="font-size: 10px;">Node Express</a> <a href="/tags/Sublime/" style="font-size: 20px;">Sublime</a> <a href="/tags/chrome/" style="font-size: 10px;">chrome</a> <a href="/tags/css3/" style="font-size: 10px;">css3</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/promise/" style="font-size: 10px;">promise</a> <a href="/tags/regexp/" style="font-size: 10px;">regexp</a> <a href="/tags/webcomponents/" style="font-size: 10px;">webcomponents</a> <a href="/tags/架构/" style="font-size: 10px;">架构</a> <a href="/tags/浏览器/" style="font-size: 10px;">浏览器</a> <a href="/tags/特效/" style="font-size: 10px;">特效</a>
+				</div>
+			</section>
+			
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay"></div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img src="https://avatars0.githubusercontent.com/u/745181?v=2&amp;s=460">
+			</div>
+
+			<hgroup>
+			  <h1 class="header-author"><a href="/">Zhuxy</a></h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/about">关于</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/ghostcode" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/ghostcode" title="weibo">weibo</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <article id="post-使用Express4和Node搭建RESTful-API" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2014/11/03/使用Express4和Node搭建RESTful-API/" class="article-date">
+  	<time datetime="2014-11-03T04:46:33.000Z" itemprop="datePublished">Nov 3 2014</time>
+</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Node-Express/">Node Express</a></li></ul>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      使用Express4和Node搭建RESTful API
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>几天前随着Express 4.0的发布，我们许多Node项目的路由需要跟着更改。伴随Express Router的变化，我们在设置应用路由时更加灵活。</p>
+<p>今天我们将使用Node,Express 4.0和它的路由来创建RESTful API，同时使用Mongoose与MongoDB交互。在Chrome中使用Postman来测试我们的API。</p>
+<p>接下来看看我们要创建的API以及它的用途。</p>
+<p><strong>我们的程序</strong></p>
+<p>我们将要创建的API:</p>
+<ul>
+<li>处理CRUD</li>
+<li>标准的URL(<code>http://example.com/api/bears</code>和<code>http://example.com/api/bears/:bear_id</code>)</li>
+<li>使用合适的HTTP来搭配RESTful(GET,POST,PUT和DELETE)</li>
+<li>返回JSON数据</li>
+<li>控制台打印出所有的请求</li>
+</ul>
+<p>这些都是严格遵循<a href="http://scotch.io/bar-talk/designing-a-restful-web-api" target="_blank" rel="external">RESTful APIS</a>的规范的，可以灵活的转变为任何你想创建的程序（用户，超级英雄，啤酒等）</p>
+<p>开始之前要确保你安装了Node环境然后我们才能开始！</p>
+<a id="more"></a>
+<p><strong>启程</strong></p>
+<p>我们先整理一下创建API所需要的文件，我们需要定义Node packages，使用Express搭建服务、路由和模型，最后，测试我们的API。</p>
+<p>下面是我们的目录结构，我们需要很多文件同时为了演示我们尽可能的精简。当真的要做一个产品或者一个大的应用时，你应该拥有一个更好的结构（比如剥离routes到一个单独的文件里）。</p>
+<pre><code>-<span class="ruby"> app/
+</span>    -<span class="ruby">---- models/
+</span>    -<span class="ruby">--------- bear.js     /<span class="regexp">/ our bear model
+</span></span>    -<span class="ruby"><span class="regexp"> node_modules/</span>     /<span class="regexp">/ created by npm. holds our dependencies/packages</span>
+</span>    -<span class="ruby"> package.json         /<span class="regexp">/ define all our node app and dependencies
+</span></span>    -<span class="ruby"><span class="regexp"> server.js         /</span><span class="regexp">/ configure our application and create routes</span></span>
+</code></pre><p><strong>声明Node依赖包</strong></p>
+<p>我们所有的Node项目都会在<code>package.json</code>里面定义依赖的包。先创建一个包含下面内容的文件：</p>
+<pre><code>// package.json
+{
+    <span class="string">"name"</span>: <span class="string">"node-api"</span>,
+    <span class="string">"main"</span>: <span class="string">"server.js"</span>,
+    <span class="string">"dependencies"</span>: {
+        <span class="string">"express"</span>: <span class="string">"~4.0.0"</span>,
+        <span class="string">"mongoose"</span>: <span class="string">"~3.6.13"</span>,
+        <span class="string">"body-parser"</span>: <span class="string">"~1.0.1"</span>
+    }
+}
+</code></pre><p><strong>这些包的作用是啥？</strong> <code>express</code>是Node的Web框架，<code>mongoose</code>是和MongoDB数据库通信的对象关系映射，<code>body-parser</code>使我们能在HTTP请求中获得参数信息，方便我们做一些事情。</p>
+<p><strong>安装Node包</strong></p>
+<p>这或许是最简单的一步，在你的项目根目录打开终端输入：</p>
+<pre><code>$ npm <span class="keyword">install</span>
+</code></pre><p>npm会拉去所有的依赖包到<code>node_module</code>中。</p>
+<p><code>npm</code>是Node的包管理工具，现在我们有了所有依赖的包，可以开始创建API了。因为<code>server.js</code>是我们在package.json中声明的程序入口，所以我们找到<code>server.js</code>文件（没有的创建）来配置程序。</p>
+<p><strong>搭建我们的服务器</strong></p>
+<p>Node启动程序时会检查一些配置信息。</p>
+<p>我们会保持代码的简洁以及良好的注释，清晰的了解我们每一步完成了什么。</p>
+<pre><code><span class="comment">// server.js</span>
+
+<span class="comment">// BASE SETUP</span>
+<span class="comment">// =============================================================================</span>
+
+<span class="comment">// call the packages we need</span>
+<span class="keyword">var</span> express    = <span class="keyword">require</span>(<span class="string">'express'</span>);         <span class="comment">// call express</span>
+<span class="keyword">var</span> app        = express();                 <span class="comment">// define our app using express</span>
+<span class="keyword">var</span> bodyParser = <span class="keyword">require</span>(<span class="string">'body-parser'</span>);
+
+<span class="comment">// configure app to use bodyParser()</span>
+<span class="comment">// this will let us get the data from a POST</span>
+app.<span class="keyword">use</span>(bodyParser.urlencoded({ extended: <span class="keyword">true</span> }));
+app.<span class="keyword">use</span>(bodyParser.json());
+
+<span class="keyword">var</span> port = process.env.PORT || <span class="number">8080</span>;         <span class="comment">// set our port</span>
+
+<span class="comment">// ROUTES FOR OUR API</span>
+<span class="comment">// =============================================================================</span>
+<span class="keyword">var</span> router = express.Router();                 <span class="comment">// get an instance of the express Router</span>
+
+<span class="comment">// test route to make sure everything is working (accessed at GET http://localhost:8080/api)</span>
+router.get(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span><span class="params">(req, res)</span> </span>{
+    res.json({ message: <span class="string">'hooray! welcome to our api!'</span> });    
+});
+
+<span class="comment">// more routes for our API will happen here</span>
+
+<span class="comment">// REGISTER OUR ROUTES -------------------------------</span>
+<span class="comment">// all of our routes will be prefixed with /api</span>
+app.<span class="keyword">use</span>(<span class="string">'/api'</span>, router);
+
+<span class="comment">// START THE SERVER</span>
+<span class="comment">// =============================================================================</span>
+app.listen(port);
+console.log(<span class="string">'Magic happens on port '</span> + port);
+</code></pre><p>哇哦，我们做了许多事，但都很简单。接下来我们挨个看看：</p>
+<ul>
+<li><p><strong>基础设置</strong> 在我们的设置中包含使用express初始化应用，通过bodyParser来轻松获取请求头信息以及设置应用的端口。</p>
+</li>
+<li><p><strong>路由配置</strong> 我们使用Express的Router来定义应用的路由。</p>
+</li>
+<li><p><strong>启动服务</strong> 我们会在先前定义的端口启动应用，然后就可以运行和测试它。</p>
+</li>
+</ul>
+<p><strong>开启服务并测试</strong></p>
+<p>确保所有的工作已经就绪，接下来我们启动应用并在先前定义的路由上发一个请求确保能得到一个响应。</p>
+<p>使用下面的命令启动服务：</p>
+<pre><code>$ node <span class="keyword">server</span>.js
+</code></pre><p>你将会看到如下的界面：</p>
+<p><img src="/assets/images/node-api-start-server.png" alt="img"></p>
+<p>看到程序已经启动，接着来测试一下。</p>
+<p><strong>使用Postman测试我们的API</strong></p>
+<p>Postman会帮助我们测试API，它基本就是在我们填写的路径上发送HTTP请求。我们甚至可以传递参数和权限（在这个应用中我们暂且不需要）。</p>
+<p>打开Postman看看如何使用：</p>
+<p><img src="/assets/images/postman-rest-client-node-api.png" alt="img"></p>
+<p>你所需要做的就是：<strong>填写目的url，选择一个http方法最后发送请求</strong>，够简单吧？</p>
+<p>接下来就是期盼已久的时刻，在URL一栏中输入<strong><a href="http://localhost:8080/api" target="_blank" rel="external">http://localhost:8080/api</a></strong>，由于我们仅从服务器获得数据，所以我们选择<strong>GET</strong>方法，接着点击发送。</p>
+<p><img src="/assets/images/node-api-postman-test.png" alt="post man"></p>
+<p>不错，我们得到了预期的结果，现在我们可以为请求服务。接下来连上数据库方便我们执行CRUD操作。</p>
+<p><strong>数据库和Beaer模型</strong></p>
+<p>我们会使这部分简短留有足够的时间在创建API路由上。我们所需要做的就是创建MongoDB数据库以及使程序和它相连。为了简化和数据库的操作我们同样需要mongoose模型。</p>
+<p><strong>创建数据库和链接</strong></p>
+<p>我们使用Modulus提供的数据库，你在上面可以创建自己的数据库以及可以在本地使用，或者使用Mongolab，所有你所需要的就是一个链接，就像下面那样就你的程序就可以连接。</p>
+<p>一旦创建好数据库以及有一个可以连接的地址，接着在<strong>server.js</strong>里面添加下面两行：</p>
+<pre><code><span class="comment">// server.js</span>
+
+<span class="comment">// BASE SETUP</span>
+<span class="comment">// =============================================================================</span>
+
+<span class="attribute">...</span>
+
+<span class="built_in">var</span> mongoose   = <span class="keyword">require</span>(<span class="string">'mongoose'</span>);
+mongoose<span class="built_in">.</span>connect(<span class="string">'mongodb://node:node@novus.modulusmongo.net:27017/Iganiq8o'</span>); <span class="comment">// connect to our database</span>
+
+<span class="attribute">...</span>
+</code></pre><p>现在我们已经获取mongoose的包同时连上架设在远程Modulus的数据库。接下来就需要创建bears的模型。</p>
+<p><strong>Bear Moder app/models/bear.js</strong></p>
+<p>因为创建模型不是本教程的核心，所以我们只一个带有名字字段的模型。接下来创建并添加如下代码：</p>
+<pre><code><span class="comment">// app/models/bear.js</span>
+
+<span class="keyword">var</span> mongoose     = <span class="built_in">require</span>(<span class="string">'mongoose'</span>);
+<span class="keyword">var</span> Schema       = mongoose.Schema;
+
+<span class="keyword">var</span> BearSchema   = <span class="keyword">new</span> Schema({
+    name: <span class="built_in">String</span>
+});
+
+<span class="built_in">module</span>.exports = mongoose.model(<span class="string">'Bear'</span>, BearSchema);
+</code></pre><p>创建完上面的文件，接着就要在我们的server.js中引入：</p>
+<pre><code><span class="comment">// server.js</span>
+
+<span class="comment">// BASE SETUP</span>
+<span class="comment">// =============================================================================</span>
+
+<span class="attribute">...</span>
+
+<span class="built_in">var</span> Bear     = <span class="keyword">require</span>(<span class="string">'./app/models/bear'</span>);
+
+<span class="attribute">...</span>
+</code></pre><p>现在应用后端已经完成，接下来才是本文的重点，奔跑吧！兄弟！</p>
+<p><strong>Express路由模块和路由</strong></p>
+<p>我们将会使用Express Router实例来管理我们的路由，下面是我们将会用到的路由以及对应的HTTP方法。</p>
+<table>
+<thead>
+<tr>
+<th>Route</th>
+<th>HTTP Verb</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>/api/bears</td>
+<td>GET</td>
+<td>Get all the bears.</td>
+</tr>
+<tr>
+<td>/api/bears</td>
+<td>POST</td>
+<td>Create a bear.</td>
+</tr>
+<tr>
+<td>/api/bears/:bear_id</td>
+<td>GET</td>
+<td>Get a single bear.</td>
+</tr>
+<tr>
+<td>/api/bears/:bear_id</td>
+<td>PUT</td>
+<td>Update a bear with new info.</td>
+</tr>
+<tr>
+<td>/api/bears/:bear_id</td>
+<td>DELETE</td>
+<td>Delete a bear.</td>
+</tr>
+</tbody>
+</table>
+<p>这已经覆盖API所需的基本路由，同时也保持了我们的行为和HTPP方法同步的良好格式。</p>
+<p><strong>路由中间件</strong></p>
+<p>我们已经定义了第一个路由以及看到了它的作用。Express Router为我们在定义路由时提供很大的灵活性。</p>
+<p>我们希望在每次请求API时都可以得到反馈信息，我只需要在代码中添加<strong>console.log()</strong>。</p>
+<pre><code><span class="comment">// server.js</span>
+
+...
+
+<span class="comment">// ROUTES FOR OUR API</span>
+<span class="comment">// =============================================================================</span>
+<span class="keyword">var</span> router = express.Router();                 <span class="comment">// get an instance of the express Router</span>
+
+<span class="comment">// middleware to use for all requests</span>
+router.<span class="keyword">use</span>(<span class="function"><span class="keyword">function</span><span class="params">(req, res, next)</span> </span>{
+    <span class="comment">// do logging</span>
+    console.log(<span class="string">'Something is happening.'</span>);
+    next(); <span class="comment">// make sure we go to the next routes and don't stop here</span>
+});
+
+<span class="comment">// test route to make sure everything is working (accessed at GET http://localhost:8080/api)</span>
+router.<span class="keyword">get</span>(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span><span class="params">(req, res)</span> </span>{
+    res.json({ message: <span class="string">'hooray! welcome to our api!'</span> });    
+});
+
+<span class="comment">// more routes for our API will happen here</span>
+
+<span class="comment">// REGISTER OUR ROUTES -------------------------------</span>
+<span class="comment">// all of our routes will be prefixed with /api</span>
+app.<span class="keyword">use</span>(<span class="string">'/api'</span>, router);
+
+...
+</code></pre><p>为了达到那个目的我仅需要声明<strong>router.use(function())</strong>。我们定义路由的顺序很重要，因为程序会根据我们定义的顺序执行。</p>
+<p>我们返回的数据时JSON格式的，对于API来说这是标准的同样这也方便使用我们API的用户调用。</p>
+<p>我们同样需要添加<strong>next()</strong>标识程序需要继续执行下面的路由，这点很重要防止程序在此终止。</p>
+<p><strong>Middleware Uses</strong> 中间件的作用很强大，我们可以验证请求以此保证请求的安全性，同样可以在这里抛出异常。同时还可以做登陆分析，总之在这里可以很多事。</p>
+<p>疯狂吧！</p>
+<p><strong>测试我们的中间件</strong></p>
+<p>现在使用Postman向我们的应用程序发送一个请求，在终端就会看到<strong>Something is happening</strong>。</p>
+<p><img src="/assets/images/node-api-route-middleware-express.png" alt="middle"></p>
+<p>通过中间件，可以做一些了不起的事情，可以对用户进行权限管理。</p>
+<p><strong>创建基本路由</strong></p>
+<p>我们首先需要<strong>获取</strong>和<strong>创建</strong>的接口，这两项都是通过<strong>/api/bears</strong>api完成的，我们要先创建一个实例以备后用。</p>
+<p><strong>创建一个熊 POST /api/bears</strong></p>
+<p>我们将会添加一个处理POST的路由接着使用Postman来测试。</p>
+<pre><code><span class="comment">// server.js</span>
+
+...
+
+<span class="comment">// ROUTES FOR OUR API</span>
+<span class="comment">// =============================================================================</span>
+
+... <span class="comment">// &lt;-- route middleware and first route are here</span>
+
+<span class="comment">// more routes for our API will happen here</span>
+
+<span class="comment">// on routes that end in /bears</span>
+<span class="comment">// ----------------------------------------------------</span>
+router.route(<span class="string">'/bears'</span>)
+
+    <span class="comment">// create a bear (accessed at POST http://localhost:8080/api/bears)</span>
+    .post(<span class="function"><span class="keyword">function</span><span class="params">(req, res)</span> </span>{
+
+        <span class="keyword">var</span> bear = <span class="keyword">new</span> Bear();         <span class="comment">// create a new instance of the Bear model</span>
+        bear.name = req.body.name;  <span class="comment">// set the bears name (comes from the request)</span>
+
+        <span class="comment">// save the bear and check for errors</span>
+        bear.save(<span class="function"><span class="keyword">function</span><span class="params">(err)</span> </span>{
+            <span class="keyword">if</span> (err)
+                res.send(err);
+
+            res.json({ message: <span class="string">'Bear created!'</span> });
+        });
+
+    });
+
+<span class="comment">// REGISTER OUR ROUTES -------------------------------</span>
+<span class="comment">// all of our routes will be prefixed with /api</span>
+app.<span class="keyword">use</span>(<span class="string">'/api'</span>, router);
+
+...
+</code></pre><p>现在我们已经创建好POST路由，以后都会使用<strong>router.route</strong>来处理相同路由。可以处理所有以<strong>/bears</strong>结尾的请求。</p>
+<p>接下来用Postman看看创建的熊。</p>
+<p><img src="/assets/images/node-api-postman-post-create-bear.png" alt="middle"></p>
+<p>注意我们以<strong>x-www-form-urlencoded</strong>的形式来发送<strong>name</strong>，这样就会以查询字符串的形式发送到Node服务器。</p>
+<p>我们得到创建成功后的信息，接着来处理获取熊的接口。</p>
+<p><strong>获取所有的熊</strong></p>
+<p>通过router.route(),我们可以把不同的路由连接在一起，这保证了代码的简洁。</p>
+<p>// server.js</p>
+<pre><code>...
+
+<span class="comment">// ROUTES FOR OUR API</span>
+<span class="comment">// =============================================================================</span>
+
+... <span class="comment">// &lt;-- route middleware and first route are here</span>
+
+<span class="comment">// more routes for our API will happen here</span>
+
+<span class="comment">// on routes that end in /bears</span>
+<span class="comment">// ----------------------------------------------------</span>
+router.route(<span class="string">'/bears'</span>)
+
+    <span class="comment">// create a bear (accessed at POST http://localhost:8080/api/bears)</span>
+    .post(<span class="function"><span class="keyword">function</span><span class="params">(req, res)</span> </span>{
+
+        ...
+
+    })
+
+    <span class="comment">// get all the bears (accessed at GET http://localhost:8080/api/bears)</span>
+    .<span class="keyword">get</span>(<span class="function"><span class="keyword">function</span><span class="params">(req, res)</span> </span>{
+        Bear.find(<span class="function"><span class="keyword">function</span><span class="params">(err, bears)</span> </span>{
+            <span class="keyword">if</span> (err)
+                res.send(err);
+
+            res.json(bears);
+        });
+    });
+
+<span class="comment">// REGISTER OUR ROUTES -------------------------------</span>
+<span class="comment">// all of our routes will be prefixed with /api</span>
+app.<span class="keyword">use</span>(<span class="string">'/api'</span>, router);
+
+...
+</code></pre><p>一个简单的路由，仅仅向<strong><a href="http://localhost:8080/api/bears" target="_blank" rel="external">http://localhost:8080/api/bears</a></strong>发送了一个GET请求，我们就能得到以JSON格式数据。</p>
+<p><img src="/assets/images/node-api-postman-get-all.png" alt="json data"></p>
+<p><strong>为处理单个熊创建路由</strong></p>
+<p>我们以<strong>/bears</strong>结尾的路由来处理多个实例，现在来处理单个的实例，比如我们传递一个熊的ID时。</p>
+<p>通过以<strong>/bears/:bear_id</strong>结尾的路由来出来单个实例：</p>
+<p>＊ 获取一个实例<br>＊ 更新一个实例<br>＊ 删除一个实例</p>
+<p><strong>:bear_id</strong>可以从请求头中获取，这得益于<strong>body-parser</strong>。</p>
+<p><strong>获取一个实例</strong></p>
+<p>我们将会添加一个路由去处理以<strong>:bear_id</strong>结尾的URL。</p>
+<pre><code><span class="comment">// server.js</span>
+
+...
+
+<span class="comment">// ROUTES FOR OUR API</span>
+<span class="comment">// =============================================================================</span>
+
+...
+
+<span class="comment">// on routes that end in /bears</span>
+<span class="comment">// ----------------------------------------------------</span>
+router.route(<span class="string">'/bears'</span>)
+    ...
+
+<span class="comment">// on routes that end in /bears/:bear_id</span>
+<span class="comment">// ----------------------------------------------------</span>
+router.route(<span class="string">'/bears/:bear_id'</span>)
+
+    <span class="comment">// get the bear with that id (accessed at GET http://localhost:8080/api/bears/:bear_id)</span>
+    .<span class="keyword">get</span>(<span class="function"><span class="keyword">function</span><span class="params">(req, res)</span> </span>{
+        Bear.findById(req.params.bear_id, <span class="function"><span class="keyword">function</span><span class="params">(err, bear)</span> </span>{
+            <span class="keyword">if</span> (err)
+                res.send(err);
+            res.json(bear);
+        });
+    });
+
+<span class="comment">// REGISTER OUR ROUTES -------------------------------</span>
+<span class="comment">// all of our routes will be prefixed with /api</span>
+app.<span class="keyword">use</span>(<span class="string">'/api'</span>, router);
+
+...
+</code></pre><p>通过上面获取全部实例的数据，可以看到单个熊的ID，用这个ID可以在Postman中得到单个的实例。</p>
+<p><img src="/assets/images/node-api-postman-get-single.png" alt="all data"></p>
+<p><strong>更新实例</strong></p>
+<p>用router.route()连接起类似的路由并添加<strong>.put()</strong>。</p>
+<pre><code><span class="comment">// server.js</span>
+
+...
+
+<span class="comment">// on routes that end in /bears</span>
+<span class="comment">// ----------------------------------------------------</span>
+router.route(<span class="string">'/bears'</span>)
+    ...
+
+<span class="comment">// on routes that end in /bears/:bear_id</span>
+<span class="comment">// ----------------------------------------------------</span>
+router.route(<span class="string">'/bears/:bear_id'</span>)
+
+    <span class="comment">// get the bear with that id (accessed at GET http://localhost:8080/api/bears/:bear_id)</span>
+    .<span class="keyword">get</span>(<span class="function"><span class="keyword">function</span><span class="params">(req, res)</span> </span>{
+        ...
+    })
+
+    <span class="comment">// update the bear with this id (accessed at PUT http://localhost:8080/api/bears/:bear_id)</span>
+    .put(<span class="function"><span class="keyword">function</span><span class="params">(req, res)</span> </span>{
+
+        <span class="comment">// use our bear model to find the bear we want</span>
+        Bear.findById(req.params.bear_id, <span class="function"><span class="keyword">function</span><span class="params">(err, bear)</span> </span>{
+
+            <span class="keyword">if</span> (err)
+                res.send(err);
+
+            bear.name = req.body.name;     <span class="comment">// update the bears info</span>
+
+            <span class="comment">// save the bear</span>
+            bear.save(<span class="function"><span class="keyword">function</span><span class="params">(err)</span> </span>{
+                <span class="keyword">if</span> (err)
+                    res.send(err);
+
+                res.json({ message: <span class="string">'Bear updated!'</span> });
+            });
+
+        });
+    });
+
+<span class="comment">// REGISTER OUR ROUTES -------------------------------</span>
+<span class="comment">// all of our routes will be prefixed with /api</span>
+app.<span class="keyword">use</span>(<span class="string">'/api'</span>, router);
+
+...
+</code></pre><p>我们还是使用前面的ID获得实例，然后通过PUT方法，在参数里面修改然后保存。</p>
+<p><img src="/assets/images/node-api-post-man-update-record.png" alt="save data"></p>
+<p>为了确定更改生效，我们需要再查一遍实例。</p>
+<p><img src="/assets/images/node-api-postman-all-updated.png" alt="get data"></p>
+<p><strong>删除一个实例</strong></p>
+<p>当需要删除一个实例时，仅仅需要向<strong>/api/bears/:bear_id</strong>发送DELETE请求。</p>
+<p>下面添加对应的代码：</p>
+<pre><code><span class="comment">// server.js</span>
+
+...
+
+<span class="comment">// on routes that end in /bears</span>
+<span class="comment">// ----------------------------------------------------</span>
+router.route(<span class="string">'/bears'</span>)
+    ...
+
+<span class="comment">// on routes that end in /bears/:bear_id</span>
+<span class="comment">// ----------------------------------------------------</span>
+router.route(<span class="string">'/bears/:bear_id'</span>)
+
+    <span class="comment">// get the bear with that id (accessed at GET http://localhost:8080/api/bears/:bear_id)</span>
+    .<span class="keyword">get</span>(<span class="function"><span class="keyword">function</span><span class="params">(req, res)</span> </span>{
+        ...
+    })
+
+    <span class="comment">// update the bear with this id (accessed at PUT http://localhost:8080/api/bears/:bear_id)</span>
+    .put(<span class="function"><span class="keyword">function</span><span class="params">(req, res)</span> </span>{
+        ...
+    })
+
+    <span class="comment">// delete the bear with this id (accessed at DELETE http://localhost:8080/api/bears/:bear_id)</span>
+    .<span class="keyword">delete</span>(<span class="function"><span class="keyword">function</span><span class="params">(req, res)</span> </span>{
+        Bear.remove({
+            _id: req.params.bear_id
+        }, <span class="function"><span class="keyword">function</span><span class="params">(err, bear)</span> </span>{
+            <span class="keyword">if</span> (err)
+                res.send(err);
+
+            res.json({ message: <span class="string">'Successfully deleted'</span> });
+        });
+    });
+
+<span class="comment">// REGISTER OUR ROUTES -------------------------------</span>
+<span class="comment">// all of our routes will be prefixed with /api</span>
+app.<span class="keyword">use</span>(<span class="string">'/api'</span>, router);
+
+...
+</code></pre><p>使用一个存在的bear_id通过DELETE方法向我们的API发送请求，将会删除一个对应的实例。</p>
+<p><img src="/assets/images/node-api-postman-delete.png" alt="delete data"></p>
+<p>接着再去获得所有实例时，就会得到空值。</p>
+<p><strong>结论</strong></p>
+<p>现在我们已有自己的API来处理CRUD，有一个好的基础才能创建一个更大和更健壮的程序。</p>
+<p>这只是一个简洁的使用Express4创建的Node API，其实还有好多需要做和可以做的。比如：添加权限控制，友好的错误提示等。</p>
+<p>如果有任何疑问，可以在下面留言。</p>
+<p>原文：<a href="http://scotch.io/tutorials/javascript/build-a-restful-api-using-node-and-express-4" target="_blank" rel="external">http://scotch.io/tutorials/javascript/build-a-restful-api-using-node-and-express-4</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2014/11/07/浏览器的工作原理：新式网络浏览器幕后揭秘/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          浏览器的工作原理：新式网络浏览器幕后揭秘
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2014/11/01/Express入门/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Express入门</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="使用Express4和Node搭建RESTful-API" data-title="使用Express4和Node搭建RESTful API" data-url="http://zhuxinyong.com/2014/11/03/使用Express4和Node搭建RESTful-API/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"zhuxinyong"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Zhuxy
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+  <script src="/js/main.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

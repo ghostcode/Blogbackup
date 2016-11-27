@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Pub/Sub模式 | 关于生活，关于前端</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="wumiiVerification" content="e6510660-240e-4909-8068-663f55fc7795" />
+  <meta name="description" content="Javascript设计模式那本书也稀里糊涂的看了一遍，并没有在工作中很好的应用。这次公司的项目用到了Pub/Sub模式，最近就仔细看了一下。
+由于自己知识有限，为了严谨还是引用了维基百科的解释：
+
+發布/訂閱（Publish/subscribe 或pub/sub）是一種消息範式，消息的發送者（發布者）不是計劃發送其消息給特定的接收者（訂閱者）。而是發布的消息分為不同的類別，而不需要知道什麼樣的訂">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Pub/Sub模式">
+<meta property="og:url" content="http://zhuxinyong.com/2014/10/19/Pub-Sub模式/index.html">
+<meta property="og:site_name" content="关于生活，关于前端">
+<meta property="og:description" content="Javascript设计模式那本书也稀里糊涂的看了一遍，并没有在工作中很好的应用。这次公司的项目用到了Pub/Sub模式，最近就仔细看了一下。
+由于自己知识有限，为了严谨还是引用了维基百科的解释：
+
+發布/訂閱（Publish/subscribe 或pub/sub）是一種消息範式，消息的發送者（發布者）不是計劃發送其消息給特定的接收者（訂閱者）。而是發布的消息分為不同的類別，而不需要知道什麼樣的訂">
+<meta property="og:updated_time" content="2015-09-22T05:29:43.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Pub/Sub模式">
+<meta name="twitter:description" content="Javascript设计模式那本书也稀里糊涂的看了一遍，并没有在工作中很好的应用。这次公司的项目用到了Pub/Sub模式，最近就仔细看了一下。
+由于自己知识有限，为了严谨还是引用了维基百科的解释：
+
+發布/訂閱（Publish/subscribe 或pub/sub）是一種消息範式，消息的發送者（發布者）不是計劃發送其消息給特定的接收者（訂閱者）。而是發布的消息分為不同的類別，而不需要知道什麼樣的訂">
+  
+    <link rel="alternative" href="/atom.xml" title="关于生活，关于前端" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+<script type="text/javascript">
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?8c6506f2771c14e5184e4b40cb38aac2";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+  <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<div class="profilepic">
+			<img src="https://avatars0.githubusercontent.com/u/745181?v=2&amp;s=460">
+		</div>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Zhuxy</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="onoffswitch">
+			    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
+			    <label class="onoffswitch-label" for="myonoffswitch">
+			        <span class="onoffswitch-inner"></span>
+			        <span class="onoffswitch-switch"></span>
+			    </label>
+			</div>
+		
+
+		<div class="switch-area">
+			<section class="first-part">
+				<nav class="header-menu">
+					<ul>
+					
+						<li><a href="/">主页</a></li>
+			        
+						<li><a href="/archives">所有文章</a></li>
+			        
+						<li><a href="/about">关于</a></li>
+			        
+					</ul>
+				</nav>
+				<nav class="header-nav">
+					<div class="social">
+						
+							<a class="github" target="_blank" href="https://github.com/ghostcode" title="github">github</a>
+				        
+							<a class="weibo" target="_blank" href="http://weibo.com/ghostcode" title="weibo">weibo</a>
+				        
+					</div>
+				</nav>
+			</section>
+			
+			
+			<section class="second-part">
+				<div class="widget tagcloud">
+					<a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/ES6/" style="font-size: 10px;">ES6</a> <a href="/tags/Express/" style="font-size: 10px;">Express</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Grunt/" style="font-size: 10px;">Grunt</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/Javascript/" style="font-size: 20px;">Javascript</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/Node/" style="font-size: 10px;">Node</a> <a href="/tags/Node-Express/" style="font-size: 10px;">Node Express</a> <a href="/tags/Sublime/" style="font-size: 20px;">Sublime</a> <a href="/tags/chrome/" style="font-size: 10px;">chrome</a> <a href="/tags/css3/" style="font-size: 10px;">css3</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/promise/" style="font-size: 10px;">promise</a> <a href="/tags/regexp/" style="font-size: 10px;">regexp</a> <a href="/tags/webcomponents/" style="font-size: 10px;">webcomponents</a> <a href="/tags/架构/" style="font-size: 10px;">架构</a> <a href="/tags/浏览器/" style="font-size: 10px;">浏览器</a> <a href="/tags/特效/" style="font-size: 10px;">特效</a>
+				</div>
+			</section>
+			
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay"></div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img src="https://avatars0.githubusercontent.com/u/745181?v=2&amp;s=460">
+			</div>
+
+			<hgroup>
+			  <h1 class="header-author"><a href="/">Zhuxy</a></h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/about">关于</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/ghostcode" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/ghostcode" title="weibo">weibo</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <article id="post-Pub-Sub模式" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2014/10/19/Pub-Sub模式/" class="article-date">
+  	<time datetime="2014-10-19T01:31:53.000Z" itemprop="datePublished">Oct 19 2014</time>
+</a>
+      
+      
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Pub/Sub模式
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Javascript设计模式那本书也稀里糊涂的看了一遍，并没有在工作中很好的应用。这次公司的项目用到了Pub/Sub模式，最近就仔细看了一下。</p>
+<p>由于自己知识有限，为了严谨还是引用了维基百科的解释：</p>
+<blockquote>
+<p>發布/訂閱（Publish/subscribe 或pub/sub）是一種消息範式，消息的發送者（發布者）不是計劃發送其消息給特定的接收者（訂閱者）。而是發布的消息分為不同的類別，而不需要知道什麼樣的訂閱者訂閱。訂閱者對一個或多個類別表達興趣，於是只接收感興趣的消息，而不需要知道什麼樣的發布者發布的消息。這種發布者和訂閱者的解耦可以允許更好的可擴展性和更為動態的網路拓撲.</p>
+</blockquote>
+<p>发布者和订阅者中间的关系纽带是<strong>消息</strong>（又称主题topic），不需要直接关联。</p>
+<p>其实现实生活中有很多这样的例子：</p>
+<ul>
+<li>订阅彩信</li>
+<li>邮件订阅</li>
+</ul>
+<p>这就带来了其优点：</p>
+<p><strong>解藕</strong>：双方不需要知道对方的存在，由于<strong>主题</strong>是枢纽，双方的对程序／系统的修改都不会影响对方。</p>
+<p>同时由于其优点也带来了副作用：</p>
+<p><strong>死板的语义链接</strong>:发布者发出的数据格式必须和订阅者约定，这就造成修改时的成本。</p>
+<a id="more"></a>
+<p>概念讲完了，现在看看如何实现：</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> pubsub = &#123;&#125;;</span><br><span class="line">(function(q)&#123;</span><br><span class="line">	<span class="comment">//维护主题和订阅者的对象</span></span><br><span class="line">	<span class="keyword">var</span> topics = &#123;&#125;,</span><br><span class="line">		subUid = -1;</span><br><span class="line">	q.publish = function(topic,<span class="keyword">args</span>)&#123;</span><br><span class="line">		<span class="comment">//指定主题不存在则返回</span></span><br><span class="line">		<span class="keyword">if</span>(!topics[topic])&#123;</span><br><span class="line">			<span class="keyword">return</span> false;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//取出指定主题下的订阅者和个数</span></span><br><span class="line">		<span class="keyword">var</span> subscribers = topics[topic],</span><br><span class="line">			len = subscribers ? subscribers.length : 0;</span><br><span class="line">		<span class="comment">//逐个执行该主题上订阅者的回调方法</span></span><br><span class="line">		<span class="keyword">while</span>(len--)&#123;</span><br><span class="line">			subscribers[len].func(topic,<span class="keyword">args</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> this;</span><br><span class="line">	&#125;;</span><br><span class="line">	q.subscribe = function(topic,func)&#123;</span><br><span class="line">		<span class="comment">//指定主题不存在则创建</span></span><br><span class="line">		<span class="keyword">if</span>(!topics[topic])&#123;</span><br><span class="line">			topics[topic] = [];</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">var</span> <span class="keyword">token</span> = (++subUid).<span class="keyword">toString</span>();</span><br><span class="line">		<span class="comment">//指定主题中添加订阅者</span></span><br><span class="line">		topics[topic].push(&#123;</span><br><span class="line">			<span class="keyword">token</span>:<span class="keyword">token</span>,</span><br><span class="line">			func:func</span><br><span class="line">		&#125;);</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">token</span>;</span><br><span class="line">	&#125;;</span><br><span class="line">	q.unsubscribe = function(<span class="keyword">token</span>)&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">var</span> <span class="keyword">m</span> <span class="keyword">in</span> topics)&#123;</span><br><span class="line">			<span class="keyword">if</span>(topics[<span class="keyword">m</span>])&#123;</span><br><span class="line">				<span class="keyword">for</span>(<span class="keyword">var</span> i = 0, j = topics[<span class="keyword">m</span>].length; i &lt; j; i++)&#123;</span><br><span class="line">					<span class="comment">//根据token删除订阅者</span></span><br><span class="line">					<span class="keyword">if</span>(topics[<span class="keyword">m</span>][i].<span class="keyword">token</span> === <span class="keyword">token</span>)&#123;</span><br><span class="line">						topics[<span class="keyword">m</span>].splice(i,1);</span><br><span class="line">						<span class="keyword">return</span> <span class="keyword">token</span>;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> this;</span><br><span class="line">	&#125;;</span><br><span class="line">&#125;(pubsub));</span><br></pre></td></tr></table></figure>
+<p>订阅：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> messageLoger = <span class="function"><span class="keyword">function</span>(<span class="params">topics,data</span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">"Loggin:"</span> + topics + <span class="string">":"</span> + data);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> subscription = pubsub.subscribe(<span class="string">'inbox/newMessage'</span>,messageLoger);</span><br><span class="line"></span><br><span class="line">pubsub.publish(<span class="string">'inbox/newMessage'</span>,<span class="string">'HelloWorld'</span>);</span><br></pre></td></tr></table></figure>
+<p>退订：</p>
+<figure class="highlight ocaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pubsub.unsubscribe(subscription);</span><br><span class="line"></span><br><span class="line">pubsub.publish(<span class="symbol">'inbox</span>/newMessage',<span class="symbol">'HelloWorld'</span>);</span><br></pre></td></tr></table></figure>
+<p><a class="jsbin-embed" href="http://jsbin.com/fidagu/1/embed" target="_blank" rel="external">JS Bin</a><script src="http://static.jsbin.com/js/embed.js"></script></p>
+<p> 参考：</p>
+<ol>
+<li><p><a href="http://msdn.microsoft.com/en-us/magazine/hh201955.aspx" target="_blank" rel="external">http://msdn.microsoft.com/en-us/magazine/hh201955.aspx</a></p>
+</li>
+<li><p><a href="http://addyosmani.com/resources/essentialjsdesignpatterns/book/#observerpatternjavascript" target="_blank" rel="external">http://addyosmani.com/resources/essentialjsdesignpatterns/book/#observerpatternjavascript</a></p>
+</li>
+<li><p><a href="http://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern" target="_blank" rel="external">http://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern</a></p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2014/11/01/Express入门/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          Express入门
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2014/10/09/你不知道的“是非”/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">你不知道的‘是非’</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Pub-Sub模式" data-title="Pub/Sub模式" data-url="http://zhuxinyong.com/2014/10/19/Pub-Sub模式/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"zhuxinyong"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Zhuxy
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+  <script src="/js/main.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>
