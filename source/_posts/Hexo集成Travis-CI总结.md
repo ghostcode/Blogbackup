@@ -4,6 +4,4 @@ categories:
 tags:
 ---
 
-Hexo
-
 http://www.jianshu.com/p/e22c13d85659

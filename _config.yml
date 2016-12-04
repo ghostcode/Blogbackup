@@ -3,8 +3,8 @@
 ## Source: https://github.com/tommy351/hexo/
 
 # Site
-title: 关于生活，关于前端
-subtitle: 
+title: 生活&前端
+subtitle:
 description:
 author: Zhuxy
 email: aotuwangren@163.com
@@ -23,6 +23,7 @@ code_dir: downloads/code
 # Directory
 source_dir: source
 public_dir: public
+skip_render: demo/**
 
 # Writing
 new_post_name: :title.md # File name of new posts
