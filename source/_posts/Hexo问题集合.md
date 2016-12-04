@@ -89,6 +89,19 @@ https://github.com/iissnan/hexo-theme-next/issues/186
 
 	skip_render: Paths not to be rendered. You can use glob expressions for path matching
 
-大体意思就是 hexo 在生成博客时，就是忽略此目录（博客的配置文件_config.yml里的 source_dir 下的指定目录）
+大体意思就是 hexo 在生成博客时，就是忽略此目录（博客的配置文件_config.yml里的 source_dir 下的指定目录）不编译：
+
+	skip_render: demo/*.html //忽略 source/demo/下的 html 文件
+	skip_render: demo/** // 忽略source/demo/ 下文件以及子目录下的文件
+
+若有多个目录需要忽略：
+
+	skip_render: [demo/**,sideproject/**]
+
+或
+
+	skip_render:
+		- demo/**
+		- sideproject/**
 
 参考：https://hexo.io/docs/configuration.html

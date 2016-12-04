@@ -23,7 +23,7 @@ code_dir: downloads/code
 # Directory
 source_dir: source
 public_dir: public
-skip_render: demo/**
+skip_render: 'demo/**'
 
 # Writing
 new_post_name: :title.md # File name of new posts
