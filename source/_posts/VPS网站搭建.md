@@ -69,6 +69,9 @@ tags:
 
 然后就可以访问了！
 
+还有一点如何让NodeJS程序一直跑着？就是我退出终端或程序异常中断等，这里我选择了:PM2，其实还有好多选择 nodemon 、forever 等没有做过对比，有时间在看看区别。
+
+    pm2 start app.js
 
 参考资料：
 
@@ -81,3 +84,5 @@ https://segmentfault.com/q/1010000004112942
 http://httpd.apache.org/docs/current/vhosts/examples.html
 
 https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-centos-6-with-yum
+
+https://www.npmjs.com/package/pm2
