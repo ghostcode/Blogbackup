@@ -1,0 +1,27 @@
+<div class="main-index">
+    <ul class="post-list">
+        <% site.posts.sort('date', 'desc').limit(12).each(function(post){ %>
+            <li>
+                <a class="post-img" href=""><img/></a>
+                <div class="content">
+                    <div class="post-info">
+                        <a class="avatar" target="_blank" href="/about"><%- config.author %></a>
+                        <span class="time"><%- moment(post.date).format("YYYY年MM月DD日") %></span>
+                    </div>
+                    <a class="title" href="<%- url_for(post.path) %>"><%- post.title %></a>
+                    <div class="abstract">
+                        <%- post.excerpt.replace(/img/g,'') %>
+                    </div>
+                    <div class="meta">
+                        <a class="category" href="/">JS</a>
+                    </div>
+                </div>
+            </li>
+        <%})%>
+
+        <% if(site.posts.length > 125) {%>
+            <li><a href="<%- url_for("/blog/archives/") %>">更多文章...</a></li>
+        <% } %>
+
+    </ul>
+</div>

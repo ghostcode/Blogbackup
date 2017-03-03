@@ -6,11 +6,16 @@ tags:
 
 最近在捣鼓一个chrome插件，包括两个功能：1.倒计时，2.日历。
 
+
 大致是下面这个样子：
+
 
 ![倒计时模式](/assets/images/countdown.png)
 
 ![日历模式](/assets/images/calendar.png)
+
+<!--more-->
+
 
 倒计时模式倒还简单，日历刚开始以为困难点，仔细分析后也还挺顺利。
 
