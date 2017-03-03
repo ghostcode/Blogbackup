@@ -20,6 +20,10 @@ archive_dir: archives
 category_dir: categories
 code_dir: downloads/code
 
+social:
+  github: "https://github.com/ghostcode"
+  weibo: "http://weibo.com/ghostcode"
+
 # Directory
 source_dir: source
 public_dir: public
