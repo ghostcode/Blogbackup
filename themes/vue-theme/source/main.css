@@ -2,7 +2,7 @@
 * @Author: zhuxy
 * @Date:   2017-03-03 10:13:04
 * @Last Modified by:   zhuxy
-* @Last Modified time: 2017-03-04 22:58:10
+* @Last Modified time: 2017-03-04 23:01:03
 */
 
 ul {
@@ -113,6 +113,7 @@ body {
 }
 
 .post-list {
+    margin-top: 20px;
     width: 730px;
 }
 

@@ -1,15 +1,13 @@
-<div class="main">
-    <ul class="post-list">
-        <% site.posts.sort('date', 'desc').each(function(post){ %>
-            <li>
-                <a class="post-img" href=""><img/></a>
-                <div class="content">
-                    <div class="post-info">
-                        <span class="time"><%- moment(post.date).format("YYYY年MM月DD日") %></span>
-                    </div>
-                    <a class="title" href="<%- url_for(post.path) %>"><%- post.title %></a>
+<ul class="post-list">
+    <% site.posts.sort('date', 'desc').each(function(post){ %>
+        <li>
+            <a class="post-img" href=""><img/></a>
+            <div class="content">
+                <div class="post-info">
+                    <span class="time"><%- moment(post.date).format("YYYY年MM月DD日") %></span>
                 </div>
-            </li>
-        <%})%>
-    </ul>
-</div>
+                <a class="title" href="<%- url_for(post.path) %>"><%- post.title %></a>
+            </div>
+        </li>
+    <%})%>
+</ul>
