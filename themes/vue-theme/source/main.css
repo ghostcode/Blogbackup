@@ -2,7 +2,7 @@
 * @Author: zhuxy
 * @Date:   2017-03-03 10:13:04
 * @Last Modified by:   zhuxy
-* @Last Modified time: 2017-03-03 23:42:55
+* @Last Modified time: 2017-03-04 22:58:10
 */
 
 ul {
@@ -84,14 +84,32 @@ body {
     height: 100%;
 }
 
-.main-index {
-    width: 480px;
+.home{
+    padding-top: 0;
+}
+.home .main{
+    width: 100%;
+    margin: 0;
+}
+.home .main-index{
+    display: flex;
+    justify-content:center;
+    align-items:center;
+}
+.home .nav-list li a{
+    height:35px;
+    line-height: 35px;
+    font-size:30px;
+    color:#000;
+}
+.home .nav-list li a:hover{
+    color:#42b983;
 }
 
 .main-bg {
     // background:url(./img/mac.jpg) no-repeat scroll center 0 transparent;
-    // background-size: cover;
-    // height:100%;
+    background-size: cover;
+    height:90%;
 }
 
 .post-list {
