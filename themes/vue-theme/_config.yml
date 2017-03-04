@@ -13,7 +13,10 @@ rss: /atom.xml
 
 avatar: "https://avatars0.githubusercontent.com/u/745181?v=2&s=460"
 
+# 是否打开左下角分享
 share: true
+# 是否打开百度统计
+baidu_tongji: true
 
 comment_provider: duoshuo
 # Duoshuo comment
@@ -23,3 +26,6 @@ duoshuo:
 auto_excerpt:
   enable: true
   length: 150
+
+
+separator: ' '

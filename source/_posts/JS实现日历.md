@@ -1,6 +1,11 @@
 title: JS实现日历
 date: 2017-02-19 18:35:25
 categories:
+  - JavaScript
+  - JavaScript
+  - JavaScript
+  - JavaScript
+  - JavaScript
 tags:
 ---
 
