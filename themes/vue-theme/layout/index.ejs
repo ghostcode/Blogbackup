@@ -2,7 +2,9 @@
     <ul class="nav-list clearfix">
         <% for (var i in theme.menu){ %>
             <li>
-                <a class="blog-nav-item" href="<%- url_for(theme.menu[i]) %>"><%= i %></a>
+                <% if( !is_current('index', true) ){%>
+                    <a class="blog-nav-item" href="<%- url_for(theme.menu[i]) %>"><%= i %></a>
+                <%}%>
             </li>
         <% } %>
     </ul>

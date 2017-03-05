@@ -1,6 +1,6 @@
 title: JavaScript最佳实践一
-tags: JavaScript
 date: 2014-11-13 09:37:38
+tags: JavaScript
 categories:
 ---
 
