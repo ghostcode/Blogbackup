@@ -2,7 +2,7 @@
 * @Author: zhuxy
 * @Date:   2017-03-03 10:13:04
 * @Last Modified by:   zhuxy
-* @Last Modified time: 2017-03-04 23:01:03
+* @Last Modified time: 2017-03-06 10:08:11
 */
 
 ul {
@@ -97,8 +97,6 @@ body {
     align-items:center;
 }
 .home .nav-list li a{
-    height:35px;
-    line-height: 35px;
     font-size:30px;
     color:#000;
 }
