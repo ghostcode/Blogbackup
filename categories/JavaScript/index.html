@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8">
   
-  <title>分类: javascript | 生活😁技术</title>
+  <title>分类: JavaScript | 生活😁技术</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
 <meta property="og:title" content="生活😁技术">
-<meta property="og:url" content="http://zhuxinyong.com/categories/javascript/index.html">
+<meta property="og:url" content="http://zhuxinyong.com/categories/JavaScript/index.html">
 <meta property="og:site_name" content="生活😁技术">
 <meta property="og:locale" content="Chinese">
 <meta name="twitter:card" content="summary">
@@ -66,14 +66,14 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-一个数字截取引发的精度问题（三）" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Canvas-入门" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017-03-17-一个数字截取引发的精度问题（三）.html" class="article-date">
-  <time datetime="2017-03-17T05:24:21.000Z" itemprop="datePublished">Mar 17 2017</time>
+    <a href="/2017-03-29-Canvas-入门.html" class="article-date">
+  <time datetime="2017-03-29T05:14:21.000Z" itemprop="datePublished">Mar 29 2017</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/javascript/">javascript</a>
+    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
   </div>
 
   </div>
@@ -84,7 +84,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017-03-17-一个数字截取引发的精度问题（三）.html">一个数字截取引发的精度问题（三）</a>
+      <a class="article-title" href="/2017-03-29-Canvas-入门.html">Canvas-入门</a>
     </h1>
   
 
@@ -94,44 +94,50 @@
       
         <!-- Table of Contents -->
         
-        <p>上次总结的第四条： <strong>当传入的参数小于数字的整数位时，返回指数形式表示的字符串。</strong></p>
-<pre><code>let numObj = 12345.6
-numObj.toPrecision(2) // &apos;1.2e+4&apos;
-</code></pre><p>在JavaScript中有一个专门返回数字的指数形式的方法：<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toExponential" target="_blank" rel="noopener">toExponential()</a></p>
+        <h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>canvas是HTML5新增的一个重要元素，先看下它的定义：</p>
 <blockquote>
-<p>numObj.toExponential([fractionDigits])</p>
-</blockquote>
-<p>解释：</p>
-<blockquote>
-<p>A string representing the given Number object in exponential notation with one digit before the decimal point, rounded to fractionDigits digits after the decimal point.</p>
+<p><code>&lt;canvas&gt;</code> is an HTML element which can be used to draw graphics using scripting (usually JavaScript).<br>This can, for instance, be used to draw graphs, make photo composition or simple (and not so simple) animations. </p>
 </blockquote>
 <p>大意：</p>
 <blockquote>
-<p>返回一个小数点前有一位数字且已按照小数点后指定的位数（fractionDigits）四舍五入后的指数形式的字符串。</p>
+<p>使用JS脚本可以绘制图形、简单的动画</p>
 </blockquote>
-<pre><code>let numObj = 77.1234;
-
-console.log(numObj.toExponential());  // logs 7.71234e+1
-console.log(numObj.toExponential(4)); // logs 7.7123e+1
-console.log(numObj.toExponential(2)); // logs 7.71e+1
-console.log(77.1234.toExponential()); // logs 7.71234e+1
-console.log(77 .toExponential());     // logs 7.7e+1
-</code></pre><p>注意：</p>
+<p>注：<strong>canvas只是一个普通无色透明区域可理解为画布，同时绘制图形不是用鼠标，而是用JS脚本。</strong></p>
+<p>因为是新增元素，兼容性方面如下：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/76372-334f2782f9726cd0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h2 id="页面添加canvas"><a href="#页面添加canvas" class="headerlink" title="页面添加canvas"></a>页面添加canvas</h2><pre><code>&lt;canvas id=&quot;j-canvas&quot; width=&quot;400&quot; height=&quot;300&quot;&gt;
+    不支持canvas
+&lt;/canvas&gt;
+</code></pre><p>注：</p>
 <ol>
-<li>fractionDigits 取 0~20之间，其实就是小数点后有几个数字。 </li>
-<li>若numObj是一个没有小数点或者非指数形式的数字字面量，在调用时需要加一个空格，以防止解释器将”点”解释为小数点。</li>
-<li>此方法也会进行四舍五入，作为金额计算时，要多加注意。</li>
+<li>对不支持的浏览器显示，”不支持canvas”文案</li>
+<li>canvas不像img标签，canvas需要结束标签 &lt; /canvas&gt;</li>
+<li>canvas可以应用border、background-color、margin等属性</li>
+<li>canvas在没有指定宽高时，默认300 * 150</li>
 </ol>
-<p>下篇将探究一下，经典问题：0.1 + 0.2 != 0.3。</p>
+<h2 id="操作canvas"><a href="#操作canvas" class="headerlink" title="操作canvas"></a>操作canvas</h2><pre><code>// 获得canvas
+var canvas = document.getElementById(&apos;j-canvas&apos;);
+// 获得画布
+var ctx = canvas.getContext(&apos;2d&apos;);
+</code></pre><h2 id="检测支持性"><a href="#检测支持性" class="headerlink" title="检测支持性"></a>检测支持性</h2><pre><code>var canvas = document.getElementById(&apos;j-canvas&apos;);
+
+if (canvas.getContext) {
+  var ctx = canvas.getContext(&apos;2d&apos;);
+  // 支持处理
+} else {
+    // 不支持处理
+}
+</code></pre><h2 id="坐标系"><a href="#坐标系" class="headerlink" title="坐标系"></a>坐标系</h2><p>既然我们要在canvas上画东西，肯定要知道画的位置，所以就牵扯到坐标系的东西。<br>在canvas中坐标系分2D、3D坐标系统，除了默认的还有 <strong>坐标系转换</strong>。我们这次只探讨2D默认坐标系：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/76372-298c7c45d58848f1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zhuxinyong.com/2017-03-17-一个数字截取引发的精度问题（三）.html" data-id="cjhpoekqz0045lcg9zvatmvc6" class="article-share-link">分享</a>
+      <a data-url="http://zhuxinyong.com/2017-03-29-Canvas-入门.html" data-id="cjhpoj7md00594sg9m051biud" class="article-share-link">分享</a>
       
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/float-double-精度/">float double 精度</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li></ul>
 
     </footer>
   </div>
@@ -141,14 +147,14 @@ console.log(77 .toExponential());     // logs 7.7e+1
 
 
   
-    <article id="post-一个数字截取引发的精度问题（二）" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-JS实现日历" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017-03-12-一个数字截取引发的精度问题（二）.html" class="article-date">
-  <time datetime="2017-03-12T03:35:46.000Z" itemprop="datePublished">Mar 12 2017</time>
+    <a href="/2017-02-19-JS实现日历.html" class="article-date">
+  <time datetime="2017-02-19T10:35:25.000Z" itemprop="datePublished">Feb 19 2017</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/javascript/">javascript</a>
+    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>►<a class="article-category-link" href="/categories/JavaScript/JavaScript/">JavaScript</a>►<a class="article-category-link" href="/categories/JavaScript/JavaScript/JavaScript/">JavaScript</a>►<a class="article-category-link" href="/categories/JavaScript/JavaScript/JavaScript/JavaScript/">JavaScript</a>►<a class="article-category-link" href="/categories/JavaScript/JavaScript/JavaScript/JavaScript/JavaScript/">JavaScript</a>
   </div>
 
   </div>
@@ -159,7 +165,7 @@ console.log(77 .toExponential());     // logs 7.7e+1
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017-03-12-一个数字截取引发的精度问题（二）.html">一个数字截取引发的精度问题（二）</a>
+      <a class="article-title" href="/2017-02-19-JS实现日历.html">JS实现日历</a>
     </h1>
   
 
@@ -167,51 +173,22 @@ console.log(77 .toExponential());     // logs 7.7e+1
     
     <div class="article-entry" itemprop="articleBody">
       
-        <!-- Table of Contents -->
+        <p>最近在捣鼓一个chrome插件，包括两个功能：1.倒计时，2.日历。</p>
+<p>大致是下面这个样子：</p>
+<p><img src="/assets/images/countdown.png" alt="倒计时模式"></p>
+<p><img src="/assets/images/calendar.png" alt="日历模式"></p>
         
-        <p>上篇文章只是简单介绍了 toFixed 方法，抽时间把 Number 里的一些方法又看了一下，其中有个方法引起我的注意： </p>
-<pre><code>Number.prototype.toPrecision()
-</code></pre><p>precision 为”精度”的意思，貌似这个方法更符合上<a href="http://zhuxinyong.com/2017-03-12-%E4%B8%80%E4%B8%AA%E6%95%B0%E5%AD%97%E6%88%AA%E5%8F%96%E5%BC%95%E5%8F%91%E7%9A%84%E7%B2%BE%E5%BA%A6%E9%97%AE%E9%A2%98%EF%BC%88%E4%B8%80%EF%BC%89.html">一篇</a>文章所说的功能。可是事情并没有像我想象的一样，先看官方定义：</p>
-<blockquote>
-<p>A string representing a Number object in fixed-point or exponential notation rounded to precision significant digits</p>
-</blockquote>
-<p>大意：</p>
-<blockquote>
-<p>返回一个定点和指数表示的同时四舍五入到指定位数的字符串。</p>
-</blockquote>
-<p>再看一下使用方法，同时会总结出一些要点：</p>
-<pre><code>let PI = 3.1415926
-console.log(PI.toPrecision(6)) // 3.14159
-console.log(PI.toPrecision(4)) // 3.142
-console.log(PI.toPrecision(2)) // 3.1
-</code></pre><blockquote>
-<p>1.按指定的数字截取数字位数，同时四舍五入。</p>
-</blockquote>
-<pre><code>let numObj = 0.000123
-
-console.log(numObj.toPrecision());    // &apos;0.000123&apos;
-console.log(numObj.toPrecision(5));   // &apos;0.00012300&apos;
-console.log(numObj.toPrecision(2));   // &apos;0.00012&apos;
-console.log(numObj.toPrecision(1));   // &apos;0.0001&apos; 
-</code></pre><blockquote>
-<p>2.没有传入参数时，返回数字的字符串形式，3.截取的位置从左边第一个非0的数字开始算起，不足补0。</p>
-</blockquote>
-<pre><code>let numObj = 12345.6
-numObj.toPrecision(2) // &apos;1.2e+4&apos;
-</code></pre><blockquote>
-<p>4.当传入的参数小于数字的整数位时，返回指数形式标识的字符串。</p>
-</blockquote>
-<p>此方法用下来并没有达到我直觉认为的那样，这在一些金钱格式化上还不是很好用。</p>
-
+          <p class="article-more-link">
+            <a href="/2017-02-19-JS实现日历.html#more">继续阅读全文 »</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zhuxinyong.com/2017-03-12-一个数字截取引发的精度问题（二）.html" data-id="cjhpoekr00046lcg99sm2vl6q" class="article-share-link">分享</a>
+      <a data-url="http://zhuxinyong.com/2017-02-19-JS实现日历.html" data-id="cjhpoj7la003v4sg9zu3j3jed" class="article-share-link">分享</a>
       
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/float-double-精度/">float double 精度</a></li></ul>
-
     </footer>
   </div>
   
@@ -220,14 +197,14 @@ numObj.toPrecision(2) // &apos;1.2e+4&apos;
 
 
   
-    <article id="post-一个数字截取引发的精度问题（一）" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-“节流函数”提高性能" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017-03-12-一个数字截取引发的精度问题（一）.html" class="article-date">
-  <time datetime="2017-03-12T01:34:40.000Z" itemprop="datePublished">Mar 12 2017</time>
+    <a href="/2016-01-03-“节流函数”提高性能.html" class="article-date">
+  <time datetime="2016-01-03T04:39:00.000Z" itemprop="datePublished">Jan 3 2016</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/javascript/">javascript</a>
+    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
   </div>
 
   </div>
@@ -238,7 +215,7 @@ numObj.toPrecision(2) // &apos;1.2e+4&apos;
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017-03-12-一个数字截取引发的精度问题（一）.html">一个数字截取引发的精度问题（一）</a>
+      <a class="article-title" href="/2016-01-03-“节流函数”提高性能.html">“节流函数”提高性能</a>
     </h1>
   
 
@@ -248,60 +225,26 @@ numObj.toPrecision(2) // &apos;1.2e+4&apos;
       
         <!-- Table of Contents -->
         
-        <p>上周有一个“收银台”的业务需要重构，其中有一个需求：</p>
-<blockquote>
-<p>收益计算的结果，取小数点后两位但不进行四舍五入，若不足则补0。</p>
-</blockquote>
-<p>看到这个需求你应该会第一个想到：</p>
-<pre><code>numberObj.toFixed([digits])
-</code></pre><p>因为这个方法基本可以满足这个需求。但是当看到以前同事的方法时，感觉这个方法并不能完全满足：</p>
-<pre><code>/**
-* 截断小数点后几位
-* @val 数值
-* @pos 小数点后截断的位置
-*/
-cutOffDecimal(val, pos) {
-    // 把数字转换成字符串
-    val = val.toString()
-    let len = val.length
-    let index = val.indexOf(&apos;.&apos;)
-    let subVal = val; // 这是什么鬼？
-    if (index != -1) {
-      subVal = val.substring(0, index + pos +  1)
-    }
-    // 利用 toFixed 防止小数位达不到其位数要求
-    return Number(subVal).toFixed(pos)
-}
-</code></pre><p>代码意思很明显，检测是否含有小数点，若有则用小数点的位置 + 精确的小数位置 + 1，因为substring最后一个位置不包括在内所以加1，<br>最后用toFixed补全。</p>
-<p>他没有直接用toFixed，说明此方法不能直接满足。我查了一下<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed" target="_blank" rel="noopener">API</a>说明果然有猫腻：</p>
-<blockquote>
-<p>The number is rounded if necessary</p>
-</blockquote>
-<p>意思是此方法在必要时进行四舍五入，一看这个肯定不能直接满足此需求，我感觉上面代码写的也有点啰嗦，改写如下：</p>
-<pre><code>export function NumberPrecision(number,prec = 0){
-
-    if(typeof number != &apos;number&apos; || Number.isNaN(number)){
-        console.error(&apos;Must be a number but not a NaN&apos;);
-        return;
-    }
-
-    return number.toFixed(prec + 1).slice(0,-1);
-}
-</code></pre><blockquote>
-<p>1.类型判断，非数字以及NaN的则报错；</p>
-</blockquote>
-<blockquote>
-<p>2.toFixed我没有直接取到目标位置，而是取到目标位置的下一个位置，这样就避免了该方法的四舍五入对结果造成的影响，然后再用slice截取字符串。</p>
-</blockquote>
+        <p>浏览器中DOM操作比起非DOM交互需要更多的内存和CUP时间，连续的DOM操作有可能会导致浏览器挂起，甚至崩溃。尤其IE中的onresize事件。<br>高频率的更改会让浏览器崩溃。为了绕开这个问题，需要使用定时器对此类处理函数进行<strong>节流</strong>。</p>
+<p>函数节流背后的基本思想：<strong>某些代码不可以在没有间隔的情况下连续重复执行</strong>。</p>
+<p>节流函数实现一般实现：1，定时器控制开关，2.定时清除定时器。</p>
+<p>1.</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> throttle = &#123;</span><br><span class="line">    <span class="keyword">switch</span>:<span class="keyword">false</span>,</span><br><span class="line">    timer:<span class="number">100</span>,</span><br><span class="line">    process:<span class="function"><span class="keyword">function</span><span class="params">(method,context)</span></span>&#123;</span><br><span class="line">        <span class="keyword">var</span> <span class="keyword">self</span> = this;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">self</span>.<span class="keyword">switch</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">self</span>.<span class="keyword">switch</span> = <span class="keyword">true</span>;</span><br><span class="line">        setTimeout(<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span><br><span class="line">            <span class="keyword">self</span>.<span class="keyword">switch</span> = <span class="keyword">false</span>;</span><br><span class="line">            method.call(context);</span><br><span class="line">        &#125;,<span class="keyword">self</span>.timer);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2.</p>
+<figure class="highlight monkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">throttle</span>(</span><span class="function"><span class="keyword">method</span>,<span class="title">context</span>)&#123;</span></span><br><span class="line">    clearTimeout(<span class="function"><span class="keyword">method</span>.<span class="title">flag</span>);</span></span><br><span class="line">    <span class="function"><span class="keyword">method</span>.<span class="title">flag</span> =</span> setTimeout(<span class="function"><span class="keyword">function</span>(</span>)&#123;</span><br><span class="line">        <span class="function"><span class="keyword">method</span>.<span class="title">call</span>(</span>context);</span><br><span class="line">    &#125;,<span class="number">100</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>适用场景：scroll,resize事件还有输入联想词等高频事件。</p>
+<p>参考：</p>
+<p><a href="https://www.nczonline.net/blog/2007/11/30/the-throttle-function/" target="_blank" rel="noopener">https://www.nczonline.net/blog/2007/11/30/the-throttle-function/</a></p>
+<p><a href="https://gist.github.com/derek-watson/3349917" target="_blank" rel="noopener">https://gist.github.com/derek-watson/3349917</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zhuxinyong.com/2017-03-12-一个数字截取引发的精度问题（一）.html" data-id="cjhpoekqx003zlcg9n5ia3i00" class="article-share-link">分享</a>
+      <a data-url="http://zhuxinyong.com/2016-01-03-“节流函数”提高性能.html" data-id="cjhpoj7kk00334sg93lhqvuq3" class="article-share-link">分享</a>
       
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/float-double-精度/">float double 精度</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/throttle/">throttle</a></li></ul>
 
     </footer>
   </div>
@@ -436,45 +379,6 @@ window.onload = function() {
 <!-- author:forvoid begin -->
 
 <!-- author:forvoid end -->
-
-<!-- author:forvoid end -->
-
-
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      })
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      })
-    </script>
-    <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-  
-
-
- <script src="/js/is.js"></script>
-
-
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
-
-
-<script src="/js/script.js"></script>
-<script src="/js/elevator.js"></script>
-  </div>
-</body>
-</html>:forvoid end -->
 
 <!-- author:forvoid end -->
 
