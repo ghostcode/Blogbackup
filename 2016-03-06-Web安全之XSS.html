@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Web安全之XSS | 生活😁技术</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="安全方面在写代码的时候从来没有考虑过，自从参加了公司的一次安全分享的会议，就多少在写代码的时候多加注意。理解了“一起用户的输入都是不安全”的含义，这次先总结一下安全里面的XSS的内容。 名词解释  跨站脚本攻击（Cross Site Script）,通常指黑客通过“HTML注入”篡改网页，插入恶意脚本，从而在用户浏览网页时，控制用户浏览器的一种攻击。  攻击方式：  反射型XSS   诱导用户点击">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web安全之XSS">
+<meta property="og:url" content="http://zhuxinyong.com/2016-03-06-Web安全之XSS.html">
+<meta property="og:site_name" content="生活😁技术">
+<meta property="og:description" content="安全方面在写代码的时候从来没有考虑过，自从参加了公司的一次安全分享的会议，就多少在写代码的时候多加注意。理解了“一起用户的输入都是不安全”的含义，这次先总结一下安全里面的XSS的内容。 名词解释  跨站脚本攻击（Cross Site Script）,通常指黑客通过“HTML注入”篡改网页，插入恶意脚本，从而在用户浏览网页时，控制用户浏览器的一种攻击。  攻击方式：  反射型XSS   诱导用户点击">
+<meta property="og:locale" content="Chinese">
+<meta property="og:updated_time" content="2018-05-28T02:47:23.887Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Web安全之XSS">
+<meta name="twitter:description" content="安全方面在写代码的时候从来没有考虑过，自从参加了公司的一次安全分享的会议，就多少在写代码的时候多加注意。理解了“一起用户的输入都是不安全”的含义，这次先总结一下安全里面的XSS的内容。 名词解释  跨站脚本攻击（Cross Site Script）,通常指黑客通过“HTML注入”篡改网页，插入恶意脚本，从而在用户浏览网页时，控制用户浏览器的一种攻击。  攻击方式：  反射型XSS   诱导用户点击">
+  
+    <link rel="alternate" href="/atom.xml" title="生活😁技术" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://zhuxinyong.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">生活😁技术</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Web安全之XSS" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016-03-06-Web安全之XSS.html" class="article-date">
+  <time datetime="2016-03-06T04:12:02.000Z" itemprop="datePublished">Mar 6 2016</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Web安全之XSS
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>安全方面在写代码的时候从来没有考虑过，自从参加了公司的一次安全分享的会议，就多少在写代码的时候多加注意。理解了“一起用户的输入都是不安全”的含义，这次先总结一下安全里面的XSS的内容。</p>
+<p><strong>名词解释</strong></p>
+<blockquote>
+<p>跨站脚本攻击（Cross Site Script）,通常指黑客通过“HTML注入”篡改网页，插入恶意脚本，从而在用户浏览网页时，控制用户浏览器的一种攻击。</p>
+</blockquote>
+<p><strong>攻击方式：</strong></p>
+<ul>
+<li>反射型XSS</li>
+</ul>
+<blockquote>
+<p>诱导用户点击恶意链接，反射型XSS又称“非持久型XSS”（Non-persistent XSS）</p>
+</blockquote>
+<ul>
+<li>存储型XSS</li>
+</ul>
+<blockquote>
+<p>恶意代码存储在服务器端，浏览带有恶意代码的页面就会受到攻击，又称“持久型XSS”（Persistent XSS）</p>
+</blockquote>
+<p><strong>危害</strong></p>
+<ul>
+<li>破坏页面显示</li>
+<li>窃取Cookie</li>
+<li>session劫持</li>
+<li>重定向网址</li>
+<li>非法转账</li>
+</ul>
+<p><strong>攻击</strong></p>
+<ol>
+<li>反射型</li>
+</ol>
+<p>页面有个输入框是根据URL的查询字符串显示的（最常见的是搜索）：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">http://xxx.<span class="keyword">com</span>?<span class="built_in">search</span>=searchkey</span><br><span class="line"></span><br><span class="line">&lt;<span class="built_in">input</span> <span class="built_in">type</span>=<span class="string">"text"</span> value=<span class="string">"searchkey"</span> /&gt;</span><br></pre></td></tr></table></figure>
+<p>根据用户输入，则显示相应的关键词，如果“用户”不输入正常的字符，若输入：<br><code>&quot;/&gt;&lt;script&gt;alert(document.cookie)&lt;/script&gt;&lt;!-</code></p>
+<p>然后把构造好的连接发给用户，诱导其点击：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://xxx.com?search="/&gt;<span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript">alert(<span class="built_in">document</span>.cookie)</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span><span class="tag">&lt;<span class="name">!-</span></span></span><br></pre></td></tr></table></figure>
+<p>渲染的结果可能为：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">value</span>=<span class="string">" "</span>/&gt;</span><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript">alert(<span class="built_in">document</span>.cookie)</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span><span class="tag">&lt;<span class="name">!-"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<p>此时页面将弹出用户的cookie信息，这只是简单的模拟，只要存在XSS。脚本则可以发挥很大的破坏性。</p>
+<p>防御：</p>
+<blockquote>
+<p>将重要的cookie标记为http only,这样的话js中的document.cookie语句就不能获取到cookie了. </p>
+</blockquote>
+<ol start="2">
+<li>存储型XSS</li>
+</ol>
+<p>常见于留言板，评论等</p>
+<p>存储类型的比反射型多了一个步骤，就是要把恶意代码提交到服务器，然后用户访问相应的页面（服务器返回带有恶意代码的页面）。</p>
+<p>比如一篇文章中含有<code>&lt;script&gt;alert(document.cookie)&lt;/script&gt;</code>，如果服务器没有做相应的处理，原样输出。当用户访问该文章时，则会弹出cookie信息。</p>
+<p>防御:</p>
+<blockquote>
+<p>做特殊字符过滤，转码</p>
+</blockquote>
+<script src="https://gist.github.com/ghostcode/cdaa7ae95965ab0b6b2f.js"></script>
+
+<p>不要相信或假设用户的输入。</p>
+<ol>
+<li><a href="http://www.cnblogs.com/index-html/p/xss_long_live.html" target="_blank" rel="noopener">http://www.cnblogs.com/index-html/p/xss_long_live.html</a></li>
+<li><a href="http://www.cnblogs.com/hustskyking/p/xss-snippets.html" target="_blank" rel="noopener">http://www.cnblogs.com/hustskyking/p/xss-snippets.html</a></li>
+<li><a href="http://www.cnblogs.com/TankXiao/archive/2012/03/21/2337194.html" target="_blank" rel="noopener">http://www.cnblogs.com/TankXiao/archive/2012/03/21/2337194.html</a></li>
+<li><a href="http://blog.csdn.net/ghsau/article/details/17027893" target="_blank" rel="noopener">http://blog.csdn.net/ghsau/article/details/17027893</a></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhuxinyong.com/2016-03-06-Web安全之XSS.html" data-id="cjhpnuxaf0035pog9880e9nlu" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2016-03-08-touch事件小结.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          touch事件小结
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016-01-16-JavaScript中的双符号运算.html" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">JavaScript中的双符号运算</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+       
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title recent-posts">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018-05-28-一个数字截取引发的精度问题（四）.html">一个数字截取引发的精度问题（四）</a>
+          </li>
+        
+          <li>
+            <a href="/2017-07-08-sass-vs-less.html">sass vs less</a>
+          </li>
+        
+          <li>
+            <a href="/2017-06-11-全栈工程师指南.html">全栈工程师指南</a>
+          </li>
+        
+          <li>
+            <a href="/2017-06-03-使同事羡慕不已的8个npm命令.html">使同事羡慕不已的8个npm命令</a>
+          </li>
+        
+          <li>
+            <a href="/2017-05-18-微信更新了这些内容，你还不知道？.html">微信更新了这些内容，你还不知道？</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+
+  
+    
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2018 Zhuxy&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;aotuwangren@163.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+  
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "e2fb4051c49842688ce669e634bc983f",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+    
+
+  
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

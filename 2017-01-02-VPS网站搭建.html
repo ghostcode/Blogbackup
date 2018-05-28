@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>VPS网站搭建 | 生活😁技术</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="在搬瓦工买了一个VPS只装了一个Shadowsocks用来翻墙，实在是浪费。凑巧我有几个域名，就把搭建网站的简单过程走一遍，学习一下服务端的知识。 刚开始的疑问： 1.一个VPS(单IP)如何部署多个应用程序（不同的端口，且非80端口）？ 2.二级域名如何配置？ 需要的东西： 一个空间和多个域名 我首先在空间上跑了一个简单的NodeJS程序，端口3000，然后直接用IP + port 可以访问，然">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VPS网站搭建">
+<meta property="og:url" content="http://zhuxinyong.com/2017-01-02-VPS网站搭建.html">
+<meta property="og:site_name" content="生活😁技术">
+<meta property="og:description" content="在搬瓦工买了一个VPS只装了一个Shadowsocks用来翻墙，实在是浪费。凑巧我有几个域名，就把搭建网站的简单过程走一遍，学习一下服务端的知识。 刚开始的疑问： 1.一个VPS(单IP)如何部署多个应用程序（不同的端口，且非80端口）？ 2.二级域名如何配置？ 需要的东西： 一个空间和多个域名 我首先在空间上跑了一个简单的NodeJS程序，端口3000，然后直接用IP + port 可以访问，然">
+<meta property="og:locale" content="Chinese">
+<meta property="og:updated_time" content="2018-05-28T02:47:23.894Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="VPS网站搭建">
+<meta name="twitter:description" content="在搬瓦工买了一个VPS只装了一个Shadowsocks用来翻墙，实在是浪费。凑巧我有几个域名，就把搭建网站的简单过程走一遍，学习一下服务端的知识。 刚开始的疑问： 1.一个VPS(单IP)如何部署多个应用程序（不同的端口，且非80端口）？ 2.二级域名如何配置？ 需要的东西： 一个空间和多个域名 我首先在空间上跑了一个简单的NodeJS程序，端口3000，然后直接用IP + port 可以访问，然">
+  
+    <link rel="alternate" href="/atom.xml" title="生活😁技术" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://zhuxinyong.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">生活😁技术</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-VPS网站搭建" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017-01-02-VPS网站搭建.html" class="article-date">
+  <time datetime="2017-01-02T13:16:46.000Z" itemprop="datePublished">Jan 2 2017</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      VPS网站搭建
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>在搬瓦工买了一个VPS只装了一个Shadowsocks用来翻墙，实在是浪费。凑巧我有几个域名，就把搭建网站的简单过程走一遍，学习一下服务端的知识。</p>
+<p>刚开始的疑问：</p>
+<pre><code>1.一个VPS(单IP)如何部署多个应用程序（不同的端口，且非80端口）？
+2.二级域名如何配置？
+</code></pre><p>需要的东西：</p>
+<pre><code>一个空间和多个域名
+</code></pre><p>我首先在空间上跑了一个简单的NodeJS程序，端口3000，然后直接用IP + port 可以访问，然后我就到域名服务商的域名管理那里添加域名解析，将域名解析到对应的IP，然后成功访问。刚开始我以为可以直接在那里添加端口，然后映射到不同程序呢。然后搜了一些资料貌似不是这样的，基本是用Nginx、Apache做转发。<br>这就基本解决了第一个问题：一个VPS(单IP)如何部署多个应用程序（不同的端口，且非80端口）？</p>
+<p>具体如何做呢？(centos)</p>
+<p>   1.首先安装Nginx</p>
+<pre><code>sudo yum install epel-release
+sudo yum install nginx
+</code></pre><p>   2.启动Nginx:</p>
+<pre><code>sudo /etc/init.d/nginx start
+</code></pre><p>   3.配置Nginx:</p>
+<pre><code>http{
+    server {
+        listen 80;
+        server_name a.com;
+        location / {
+            proxy_pass http://localhost:8080;
+        }
+    }
+    server {
+        listen 80;
+        server_name b.com;
+        location / {
+            proxy_pass http://localhost:8081;
+        }
+    }
+}
+</code></pre><p>当请求过来的时候Nginx首先拿到请求，然后根据域名分发到不同的应用服务器（不同端口）</p>
+<p>   4.重新加载配置</p>
+<pre><code>nginx -s reload
+</code></pre><p>二级域名如何玩呢？</p>
+<p>本来以为会很难，其实也很简单。类似上面解析域名的操作，添加一个A记录，然后主机名填你想填的比如：blog、mail、bbs等，然后到Nginx配置一下server_name:</p>
+<pre><code>server {
+    listen 80;
+    server_name blog.b.com;
+    location / {
+        proxy_pass http://localhost:8081;
+    }
+}
+</code></pre><p>然后就可以访问了！</p>
+<p>还有一点如何让NodeJS程序一直跑着？就是我退出终端或程序异常中断等，这里我选择了:PM2，其实还有好多选择 nodemon 、forever 等没有做过对比，有时间在看看区别。</p>
+<pre><code>pm2 start app.js
+</code></pre><p>参考资料：</p>
+<p><a href="http://www.west.cn/cms/news/domain/2014-10-22/1404.html" target="_blank" rel="noopener">http://www.west.cn/cms/news/domain/2014-10-22/1404.html</a></p>
+<p><a href="https://segmentfault.com/q/1010000003756513" target="_blank" rel="noopener">https://segmentfault.com/q/1010000003756513</a></p>
+<p><a href="https://segmentfault.com/q/1010000004112942" target="_blank" rel="noopener">https://segmentfault.com/q/1010000004112942</a></p>
+<p><a href="http://httpd.apache.org/docs/current/vhosts/examples.html" target="_blank" rel="noopener">http://httpd.apache.org/docs/current/vhosts/examples.html</a></p>
+<p><a href="https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-centos-6-with-yum" target="_blank" rel="noopener">https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-centos-6-with-yum</a></p>
+<p><a href="https://www.npmjs.com/package/pm2" target="_blank" rel="noopener">https://www.npmjs.com/package/pm2</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhuxinyong.com/2017-01-02-VPS网站搭建.html" data-id="cjhpnuxas003rpog9lwdgzy3m" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2017-01-22-Vue组件通信.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          Vue组件通信
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016-12-23-JavaScript.html" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">JavaScript Template实现</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+       
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title recent-posts">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018-05-28-一个数字截取引发的精度问题（四）.html">一个数字截取引发的精度问题（四）</a>
+          </li>
+        
+          <li>
+            <a href="/2017-07-08-sass-vs-less.html">sass vs less</a>
+          </li>
+        
+          <li>
+            <a href="/2017-06-11-全栈工程师指南.html">全栈工程师指南</a>
+          </li>
+        
+          <li>
+            <a href="/2017-06-03-使同事羡慕不已的8个npm命令.html">使同事羡慕不已的8个npm命令</a>
+          </li>
+        
+          <li>
+            <a href="/2017-05-18-微信更新了这些内容，你还不知道？.html">微信更新了这些内容，你还不知道？</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+
+  
+    
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2018 Zhuxy&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;aotuwangren@163.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+  
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "e2fb4051c49842688ce669e634bc983f",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+    
+
+  
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

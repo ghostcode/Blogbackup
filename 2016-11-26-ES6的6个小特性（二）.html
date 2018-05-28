@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>ES6的6个小特性（二） | 生活😁技术</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="继上一篇的 《Six Tiny But Awesome ES6 Features》，这次我再分享6个可以减少代码和最大化效率的方法。  1.Object Shorthand  新的对象声明方法允许我们可以不声明对象的 key : var x = 12; var y = yes; var z = {one:&amp;apos;1&amp;apos;,two:&amp;apos;2&amp;apos;};  // The old w">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES6的6个小特性（二）">
+<meta property="og:url" content="http://zhuxinyong.com/2016-11-26-ES6的6个小特性（二）.html">
+<meta property="og:site_name" content="生活😁技术">
+<meta property="og:description" content="继上一篇的 《Six Tiny But Awesome ES6 Features》，这次我再分享6个可以减少代码和最大化效率的方法。  1.Object Shorthand  新的对象声明方法允许我们可以不声明对象的 key : var x = 12; var y = yes; var z = {one:&amp;apos;1&amp;apos;,two:&amp;apos;2&amp;apos;};  // The old w">
+<meta property="og:locale" content="Chinese">
+<meta property="og:updated_time" content="2018-05-28T02:47:23.892Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ES6的6个小特性（二）">
+<meta name="twitter:description" content="继上一篇的 《Six Tiny But Awesome ES6 Features》，这次我再分享6个可以减少代码和最大化效率的方法。  1.Object Shorthand  新的对象声明方法允许我们可以不声明对象的 key : var x = 12; var y = yes; var z = {one:&amp;apos;1&amp;apos;,two:&amp;apos;2&amp;apos;};  // The old w">
+  
+    <link rel="alternate" href="/atom.xml" title="生活😁技术" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://zhuxinyong.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">生活😁技术</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-ES6的6个小特性（二）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016-11-26-ES6的6个小特性（二）.html" class="article-date">
+  <time datetime="2016-11-26T14:50:31.000Z" itemprop="datePublished">Nov 26 2016</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ES6的6个小特性（二）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>继上一篇的 <a href="http://zhuxinyong.com/2016/11/15/ES6%E7%9A%846%E4%B8%AA%E5%B0%8F%E7%89%B9%E6%80%A7/">《Six Tiny But Awesome ES6 Features》</a>，这次我再分享6个可以减少代码和最大化效率的方法。</p>
+<p><strong> 1.Object Shorthand </strong></p>
+<p>新的对象声明方法允许我们可以不声明对象的 key :</p>
+<pre><code>var x = 12;
+var y = yes;
+var z = {one:&apos;1&apos;,two:&apos;2&apos;};
+
+// The old way
+var obj = {
+    x:x,
+    y:y,
+    z:z
+}
+// The new way
+var obj = {x,y,z};
+</code></pre><p><strong> 2.Method Properties </strong></p>
+<p>避免 function 关键字声明函数：</p>
+<pre><code>var davidwalsh = {
+    makeItHappen(param){
+        // do stuff
+    }
+}
+</code></pre><p>必须承认去除掉 function 关键字确实使代码简洁、更好维护。</p>
+<p><strong> 3.Blocks vs Immediately Executed Functions </strong></p>
+<p>下面创建立即执行方法的模式有点难看：</p>
+<pre><code>(function(){
+    // do stuff
+})();
+</code></pre><p>通过ES6我们可以通过 {} 和 let 来创建块级作用于，完成立即执行函数的作用：</p>
+<pre><code>{
+    let j = 12;
+    let divs = document.querySelectorAll(&apos;div&apos;);
+
+    // do stuff
+}
+
+j; // ReferenceError: j is not defined...
+</code></pre><p> 如果在 Block 内部声明函数，它将会被外部访问到。但你如果使用 let 关键字声明函数自变量，将不使用括号的情况下实现 IEF 的功能。</p>
+<p><strong> 4. for loops and let </strong></p>
+<p> 因为在JS里面会存在变量提升，我们经常会在作用域前面声明一些”无用”的迭代变量，例如（for var x = …）。ES6 使用 let 解决了此恼人的问题：</p>
+<pre><code>for(let x = 0; x &lt; len; i++){
+    //do stuff
+}
+
+x; // ReferenceError: x is not defined
+</code></pre><p> 不久以后 let 会被应用的更多。</p>
+<p><strong> 5.get and set for Classes </strong></p>
+<pre><code>class Cart{
+    constructor(total){
+        this._total = total;
+    }
+    get total(){return this._total;}
+    set total(v){this._total = Number(v);}
+}
+
+var cart = new Cart(100);
+
+cart.total // 100
+</code></pre><p> 能为属性设置 get、set 是这部分最棒的。不需要使用函数来进行特殊的设定–当执行 obj.prop = {value} 时，一切都会自动执行。</p>
+<p><strong> 6.startsWith,endsWith and includes </strong></p>
+<pre><code>&quot;MooTools&quot;.startsWith(&quot;Moo&quot;); // true;
+&quot;MooTools&quot;.startsWith(&quot;moo&quot;); // false;
+
+&quot;MooTools&quot;.endsWith(&quot;Tools&quot;); // true;
+
+&quot;MooTools&quot;.includes(&quot;oo&quot;); // true;
+</code></pre><p> 注：includes 方法兼容性还是很多，曾有一个线上bug，就是因为不支持此方法导致的。</p>
+<p> 原文：<a href="https://davidwalsh.name/es6-features-ii/amp" target="_blank" rel="noopener">https://davidwalsh.name/es6-features-ii/amp</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhuxinyong.com/2016-11-26-ES6的6个小特性（二）.html" data-id="cjhpnuxaq003npog90ms0jkoj" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2016-12-01-Hybrid文章集合.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          Hybrid文章集合
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016-11-15-ES6的6个小特性.html" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">ES6的6个小特性</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+       
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title recent-posts">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018-05-28-一个数字截取引发的精度问题（四）.html">一个数字截取引发的精度问题（四）</a>
+          </li>
+        
+          <li>
+            <a href="/2017-07-08-sass-vs-less.html">sass vs less</a>
+          </li>
+        
+          <li>
+            <a href="/2017-06-11-全栈工程师指南.html">全栈工程师指南</a>
+          </li>
+        
+          <li>
+            <a href="/2017-06-03-使同事羡慕不已的8个npm命令.html">使同事羡慕不已的8个npm命令</a>
+          </li>
+        
+          <li>
+            <a href="/2017-05-18-微信更新了这些内容，你还不知道？.html">微信更新了这些内容，你还不知道？</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+
+  
+    
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2018 Zhuxy&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;aotuwangren@163.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+  
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "e2fb4051c49842688ce669e634bc983f",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+    
+
+  
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

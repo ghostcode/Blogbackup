@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>sass vs less | 生活😁技术</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="sass2007年发布，最早的一款CSS预处理器，带来了变量、常量、嵌套、混入、函数、循环等功能，解决了CSS不可编程的短板。由于浏览器不能直接识别Sass，所以需要预先编译。 Sass有两套语法规则：  缩进式  body     color: red     header         background: red  大括号  body{     color: red     header">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sass vs less">
+<meta property="og:url" content="http://zhuxinyong.com/2017-07-08-sass-vs-less.html">
+<meta property="og:site_name" content="生活😁技术">
+<meta property="og:description" content="sass2007年发布，最早的一款CSS预处理器，带来了变量、常量、嵌套、混入、函数、循环等功能，解决了CSS不可编程的短板。由于浏览器不能直接识别Sass，所以需要预先编译。 Sass有两套语法规则：  缩进式  body     color: red     header         background: red  大括号  body{     color: red     header">
+<meta property="og:locale" content="Chinese">
+<meta property="og:updated_time" content="2018-05-28T02:47:23.901Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="sass vs less">
+<meta name="twitter:description" content="sass2007年发布，最早的一款CSS预处理器，带来了变量、常量、嵌套、混入、函数、循环等功能，解决了CSS不可编程的短板。由于浏览器不能直接识别Sass，所以需要预先编译。 Sass有两套语法规则：  缩进式  body     color: red     header         background: red  大括号  body{     color: red     header">
+  
+    <link rel="alternate" href="/atom.xml" title="生活😁技术" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://zhuxinyong.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">生活😁技术</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-sass-vs-less" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017-07-08-sass-vs-less.html" class="article-date">
+  <time datetime="2017-07-07T23:42:06.000Z" itemprop="datePublished">Jul 8 2017</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      sass vs less
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <h2 id="sass"><a href="#sass" class="headerlink" title="sass"></a>sass</h2><p>2007年发布，最早的一款CSS预处理器，带来了变量、常量、嵌套、混入、函数、循环等功能，<br>解决了CSS不可编程的短板。由于浏览器不能直接识别Sass，所以需要预先编译。</p>
+<p>Sass有两套语法规则：</p>
+<ol>
+<li>缩进式</li>
+</ol>
+<pre><code>body
+    color: red
+    header
+        background: red
+</code></pre><ol start="2">
+<li>大括号</li>
+</ol>
+<pre><code>body{
+    color: red
+    header{
+        background: red
+    }
+}
+</code></pre><h2 id="less"><a href="#less" class="headerlink" title="less"></a>less</h2><p>2009年，受Sass影响，但使用的CSS语法，可以快速上手。它也有上面说的一些功能。</p>
+<p>下面对比一些常用功能：</p>
+<h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><p>变量是代码最小的复用单元，可以减少硬编码。</p>
+<p>sass</p>
+<pre><code>$color: blue;
+
+body{
+    $color: black;
+    color: $color;
+}
+</code></pre><p>less </p>
+<pre><code>@color: blue;
+
+body{
+    @color: black;
+    color: @color;
+}
+</code></pre><p>提到变量，就不得不提作用域。</p>
+<pre><code>$color: black;
+.scoped {
+    $bg: blue;
+    $color: white;
+    color: $color;
+    background-color:$bg;
+}
+.unscoped {
+    color:$color;
+}
+</code></pre><p>sass在这里还是有点小问题的:</p>
+<p>3.4.0之前：</p>
+<pre><code>.unscoped{
+    color: white
+}
+</code></pre><p>之后：</p>
+<pre><code>.unscoped{
+    color: black;
+}
+</code></pre><p>后声明的变量总是会覆盖之前声明的变量，不管之前变量在何处声明。也就是变量都是全局的，谁在后面谁是老大。</p>
+<p>3.4.0（包括）之后，修正了这个问题：</p>
+<blockquote>
+<p>All variable assignments not at the top level of the document are now local by default. If there’s a global variable with the same name, it won’t be overwritten unless the !global flag is used. For example, $var: value !global will assign to $var globally. This behavior can be detected using feature-exists(global-variable-shadowing).</p>
+</blockquote>
+<p>大概：变量不再是全局，而默认是局部，除非给变量声明时，加上 !global。</p>
+<p>less就没有这个问题，作用域很其像他编程语言。</p>
+<h2 id="嵌套"><a href="#嵌套" class="headerlink" title="嵌套"></a>嵌套</h2><p>sass/less 官都提到了写出的样式和 HMTL 的结构更加相像，层级很明了。</p>
+<p>html</p>
+<pre><code>&lt;nav&gt;
+    &lt;ul&gt;
+        &lt;li&gt;
+            &lt;a&gt;&lt;/a&gt;
+        &lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/nav&gt;
+</code></pre><p>sass / less</p>
+<pre><code>nav{
+    ul{
+        li{
+           a{
+
+           } 
+        }
+    }
+}
+</code></pre><p>其实这样嵌套深了也不一样好，毕竟最后也会转换为CSS，会导致选择器很长，从性能、代码体积上都会有损失。个人认为 3 到 4 层嵌套<br>就可以了，或者上面的也可以写成：</p>
+<pre><code>nav{
+    ul{
+
+    }
+
+    li{
+
+    }
+
+    a{
+
+    }
+}
+</code></pre><h2 id="混入"><a href="#混入" class="headerlink" title="混入"></a>混入</h2><p>一个规则集合可以导入到另一个规则集合，或者可以说大块的代码复用。适用场景：我们在写 CSS3 时，要加很多前缀（当然现在有好多工具可以自动添加）。</p>
+<p>sass</p>
+<pre><code>@mixin border-radius($radius:10px) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+.box { 
+    @include border-radius(10px); 
+}
+</code></pre><p>less</p>
+<pre><code>.border-radius(@radius:10px){
+  -webkit-border-radius: @radius;
+     -moz-border-radius: @radius;
+      -ms-border-radius: @radius;
+          border-radius: @radius;
+}
+
+.box{
+    .border-radius(5px);
+}
+</code></pre><p>sass 有严格的声明和引用语法：@mixin，@include，而less 就松散很多，同时less还有个问题：</p>
+<pre><code>.mixin{
+    color:red;
+}
+
+.other-mixin(){
+    background:blue;
+}
+
+.class{
+    .mixin;
+    .other-mixin;
+}
+</code></pre><p>output</p>
+<pre><code>.mixin{
+    color:red;
+}
+
+.class{
+    color:red;
+    background:blue;
+}
+</code></pre><p>就是你在使用 mixin 时，不加小括号会把 mixin 也输出。因为 less 的编译器不知道你是在声明<br>mixin 还是在声明普通的选择器。</p>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><p>sass/less 都各自内置了一些函数：Color、String、List、Math、Type等</p>
+<p>sass/less</p>
+<pre><code>@base: #f04615;
+@width: 0.5;
+
+.class {
+   width: percentage(@width); // returns `50%`
+   color: saturate(@base, 5%);
+}
+</code></pre><p>output</p>
+<pre><code>.class {
+   width: 50%;
+   color: #f6430f;
+}
+</code></pre><p>最好的例子应该是 REM 布局中的 px2rem 函数了：</p>
+<pre><code>$baseFontSize:100px !default;
+
+@function px2rem( $px , $base-font-size: $baseFontSize ){
+    @if (unitless($px)) {
+        @return px2rem($px + 0px);
+
+    } @else if (unit($px) == rem) {
+        @return $px;
+    }
+
+    @return $px/($base-font-size) * 1rem;
+}
+
+
+.body{
+    font-size:px2rem(100)
+}
+</code></pre><h2 id="导入"><a href="#导入" class="headerlink" title="导入"></a>导入</h2><p>sass/less</p>
+<pre><code>@import &quot;reset.css&quot;
+
+@import &quot;reset&quot; // reset.less / reset.scss
+</code></pre><h2 id="运算"><a href="#运算" class="headerlink" title="运算"></a>运算</h2><p>四则运算</p>
+<pre><code>+ - * /
+</code></pre><p>sass</p>
+<pre><code>$conversion-1: 5cm + 10mm; // result is 6cm
+$conversion-2: 2 - 3cm - 5mm; // result is -1.5cm
+</code></pre><p>less</p>
+<pre><code>@conversion-1: 5cm + 10mm; // result is 6cm
+@conversion-2: 2 - 3cm - 5mm; // result is -1.5cm
+</code></pre><p>单位也是参与计算的</p>
+<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><p>sass</p>
+<pre><code>.message{
+    border:1px solid #ccc;
+}
+
+.success{
+    @extend .message;
+    border-color:green;
+}
+
+.error{
+    @extend .message;
+    border-color:red;
+}
+</code></pre><p>output</p>
+<pre><code>.message, .success, .error {
+    border: 1px solid #ccc;
+}
+
+.success {
+    border-color: green;
+}
+
+.error {
+    border-color: red;
+}
+</code></pre><p>less （1.4.0加入）</p>
+<pre><code>.message{
+    border:1px solid #ccc;
+}
+
+.success{
+    &amp;:extend(.message);
+    border-color:green;
+}
+
+.error{
+    &amp;:extend(.message);
+    border-color:red;
+}
+</code></pre><p>output</p>
+<pre><code>.message, .success, .error {
+    border: 1px solid #ccc;
+}
+
+.success {
+    border-color: green;
+}
+
+.error {
+    border-color: red;
+}
+</code></pre><p>注：extend 和 mixin 有时可以达到同样的功能，但是从语法和输出后的代码上还是有些区别的。</p>
+<p>extend生成的代码更紧凑、更符合预期。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhuxinyong.com/2017-07-08-sass-vs-less.html" data-id="cjhpnuxbi0056pog914479nsl" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2018-05-28-一个数字截取引发的精度问题（四）.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          一个数字截取引发的精度问题（四）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017-06-11-全栈工程师指南.html" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">全栈工程师指南</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+       
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+    <div class="widget-wrap">
+    
+      <div class="widget" id="toc-widget-fixed">
+      
+        <strong class="toc-title">文章目录</strong>
+        <div class="toc-widget-list">
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#sass"><span class="toc-number">1.</span> <span class="toc-text">sass</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#less"><span class="toc-number">2.</span> <span class="toc-text">less</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#变量"><span class="toc-number">3.</span> <span class="toc-text">变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#嵌套"><span class="toc-number">4.</span> <span class="toc-text">嵌套</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#混入"><span class="toc-number">5.</span> <span class="toc-text">混入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数"><span class="toc-number">6.</span> <span class="toc-text">函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#导入"><span class="toc-number">7.</span> <span class="toc-text">导入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#运算"><span class="toc-number">8.</span> <span class="toc-text">运算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#继承"><span class="toc-number">9.</span> <span class="toc-text">继承</span></a></li></ol>
+          </div>
+      </div>
+    </div>
+
+  
+    
+
+  
+    
+  
+    
+  
+    
+
+  
+    
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2018 Zhuxy&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;aotuwangren@163.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+  
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "e2fb4051c49842688ce669e634bc983f",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+    
+
+  
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

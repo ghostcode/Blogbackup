@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>一个数据埋点的问题 | 生活😁技术</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="背景： 上周负责收集收据的同事说前端埋点数据格式有问题，可是发送数据这块没有改动。怎么会出错？ 发送数据代码： let data = {         act_k:&amp;apos;123&amp;apos;,         act_v:&amp;apos;456&amp;apos;     }  $.ajax({     url:&amp;apos;http://xxx.com&amp;apos;,     type:&amp;apos;get">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一个数据埋点的问题">
+<meta property="og:url" content="http://zhuxinyong.com/2017-03-21-一个数据埋点的问题.html">
+<meta property="og:site_name" content="生活😁技术">
+<meta property="og:description" content="背景： 上周负责收集收据的同事说前端埋点数据格式有问题，可是发送数据这块没有改动。怎么会出错？ 发送数据代码： let data = {         act_k:&amp;apos;123&amp;apos;,         act_v:&amp;apos;456&amp;apos;     }  $.ajax({     url:&amp;apos;http://xxx.com&amp;apos;,     type:&amp;apos;get">
+<meta property="og:locale" content="Chinese">
+<meta property="og:updated_time" content="2018-05-28T02:47:23.897Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一个数据埋点的问题">
+<meta name="twitter:description" content="背景： 上周负责收集收据的同事说前端埋点数据格式有问题，可是发送数据这块没有改动。怎么会出错？ 发送数据代码： let data = {         act_k:&amp;apos;123&amp;apos;,         act_v:&amp;apos;456&amp;apos;     }  $.ajax({     url:&amp;apos;http://xxx.com&amp;apos;,     type:&amp;apos;get">
+  
+    <link rel="alternate" href="/atom.xml" title="生活😁技术" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://zhuxinyong.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">生活😁技术</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-一个数据埋点的问题" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017-03-21-一个数据埋点的问题.html" class="article-date">
+  <time datetime="2017-03-21T07:07:33.000Z" itemprop="datePublished">Mar 21 2017</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      一个数据埋点的问题
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>背景：</p>
+<p>上周负责收集收据的同事说前端埋点数据格式有问题，可是发送数据这块没有改动。怎么会出错？</p>
+<p>发送数据代码：</p>
+<pre><code>let data = {
+        act_k:&apos;123&apos;,
+        act_v:&apos;456&apos;
+    }
+
+$.ajax({
+    url:&apos;http://xxx.com&apos;,
+    type:&apos;get&apos;,
+    data:data
+})
+</code></pre><p>需要传递给后端的格式如下：</p>
+<pre><code>http://xxx.com/?act_k=123&amp;act_v=456
+</code></pre><p>这次发送的数据格式：</p>
+<pre><code>let data = {
+        act_k:&apos;123123&apos;,
+        act_v:{
+            name:&apos;name&apos;,
+            age:20
+        }
+    }
+</code></pre><p>发送如下：</p>
+<pre><code>http://xxx.com/?act_k=123123&amp;act_v[name]=name&amp;act_v[age]=20
+</code></pre><p>看着数据是发送过去了，可是不符合后端接收要求：</p>
+<pre><code>http://xxx.com/?{&quot;act_k&quot;:&quot;123123&quot;,&quot;act_v&quot;:{&quot;name&quot;:&quot;name&quot;,&quot;age&quot;:20}}
+</code></pre><p>对比两次发送的数据，看到act_k的值类型不同，第一个为字符串，第二个为对象。是不是这里的问题呢？可是前端业务代码都一样，所以只能会是 jQuery 的 ajax 方法在处理不同 data 时逻辑不同。</p>
+<p>于是写了一个demo页面做测试，一步步跟踪发现如下代码：</p>
+<pre><code>// Convert data if not already a string
+if ( s.data &amp;&amp; s.processData &amp;&amp; typeof s.data !== &quot;string&quot; ) {
+    s.data = jQuery.param( s.data, s.traditional );
+}
+</code></pre><p>意思是若 data 是一个非字符串，则进行 <a href="http://api.jquery.com/jQuery.param/" target="_blank" rel="noopener">jQuery.param</a> 处理。</p>
+<pre><code>// &lt;=1.3.2:
+$.param({ a: [ 2, 3, 4 ] }); // &quot;a=2&amp;a=3&amp;a=4&quot;
+// &gt;=1.4:
+$.param({ a: [ 2, 3, 4 ] }); // &quot;a[]=2&amp;a[]=3&amp;a[]=4&quot;
+
+// &lt;=1.3.2:
+$.param({ a: { b: 1, c: 2 }, d: [ 3, 4, { e: 5 } ] });
+// &quot;a=[object+Object]&amp;d=3&amp;d=4&amp;d=[object+Object]&quot;
+
+// &gt;=1.4:
+$.param({ a: { b: 1, c: 2 }, d: [ 3, 4, { e: 5 } ] });
+// &quot;a[b]=1&amp;a[c]=2&amp;d[]=3&amp;d[]=4&amp;d[2][e]=5&quot;
+</code></pre><p>传入我的数据：</p>
+<pre><code>act_k=123123&amp;act_v[name]=name&amp;act_v[age]=20
+</code></pre><p>看来就是它了，jQuery.param 把我的数据给序列化了。如果不熟悉此方法，<a href="http://api.jquery.com/serialize/" target="_blank" rel="noopener">.serialize()</a> 肯定在模拟表单提交时使用过。</p>
+<pre><code>jQuery.fn.extend( {
+    serialize: function() {
+        return jQuery.param( this.serializeArray() );
+    },
+    serializeArray: function() {
+        return this.map( function() {
+
+            // Can add propHook for &quot;elements&quot; to filter or add form elements
+            var elements = jQuery.prop( this, &quot;elements&quot; );
+            return elements ? jQuery.makeArray( elements ) : this;
+        } )
+        .filter( function() {
+            var type = this.type;
+
+            // Use .is( &quot;:disabled&quot; ) so that fieldset[disabled] works
+            return this.name &amp;&amp; !jQuery( this ).is( &quot;:disabled&quot; ) &amp;&amp;
+                rsubmittable.test( this.nodeName ) &amp;&amp; !rsubmitterTypes.test( type ) &amp;&amp;
+                ( this.checked || !rcheckableType.test( type ) );
+        } )
+        .map( function( i, elem ) {
+            var val = jQuery( this ).val();
+
+            if ( val == null ) {
+                return null;
+            }
+
+            if ( jQuery.isArray( val ) ) {
+                return jQuery.map( val, function( val ) {
+                    return { name: elem.name, value: val.replace( rCRLF, &quot;\r\n&quot; ) };
+                } );
+            }
+
+            return { name: elem.name, value: val.replace( rCRLF, &quot;\r\n&quot; ) };
+        } ).get();
+    }
+} );
+</code></pre><p>serialize 也是调用了 jQuery.param，如何解决此问题？</p>
+<p>看逻辑判断：</p>
+<pre><code>if ( s.data &amp;&amp; s.processData &amp;&amp; typeof s.data !== &quot;string&quot; ) {
+    s.data = jQuery.param( s.data, s.traditional );
+}
+</code></pre><p>processData 为 false,或者 data 为字符串就行。</p>
+<p>方法一：</p>
+<pre><code>$.ajax({
+    url:&apos;http://xxx.com&apos;,
+    type:&apos;get&apos;,
+    data:data,
+    processData:false // 新增
+})
+</code></pre><p>发送数据：</p>
+<pre><code>http://xxx.com/?[object Object]
+</code></pre><p>真够彻底，一点也不处理。</p>
+<p>方法二：</p>
+<pre><code>let data = {
+        act_k:&apos;123123&apos;,
+        act_v:{
+            name:&apos;name&apos;,
+            age:20
+        }
+    }
+
+data = JSON.stringify(data);
+</code></pre><p>发送数据：</p>
+<pre><code>http://xxx.com/?{&quot;act_k&quot;:&quot;123123&quot;,&quot;act_v&quot;:{&quot;name&quot;:&quot;name&quot;,&quot;age&quot;:20}}
+</code></pre><p>ok，符合要求。</p>
+<p>总结：</p>
+<pre><code>在业务代码一直没有改动的情况下，多数是因为输入参数变动，导致框架代码逻辑分之变动。
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhuxinyong.com/2017-03-21-一个数据埋点的问题.html" data-id="cjhpnuxb20049pog9lzmatpwb" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2017-03-22-React之JSX.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          React之JSX
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017-03-17-一个数字截取引发的精度问题（三）.html" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">一个数字截取引发的精度问题（三）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+       
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title recent-posts">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018-05-28-一个数字截取引发的精度问题（四）.html">一个数字截取引发的精度问题（四）</a>
+          </li>
+        
+          <li>
+            <a href="/2017-07-08-sass-vs-less.html">sass vs less</a>
+          </li>
+        
+          <li>
+            <a href="/2017-06-11-全栈工程师指南.html">全栈工程师指南</a>
+          </li>
+        
+          <li>
+            <a href="/2017-06-03-使同事羡慕不已的8个npm命令.html">使同事羡慕不已的8个npm命令</a>
+          </li>
+        
+          <li>
+            <a href="/2017-05-18-微信更新了这些内容，你还不知道？.html">微信更新了这些内容，你还不知道？</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+
+  
+    
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2018 Zhuxy&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;aotuwangren@163.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+  
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "e2fb4051c49842688ce669e634bc983f",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+    
+
+  
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>weinre远程调试web mobile | 生活😁技术</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="什么是weinre?  weinre is a debugger for web pages, like FireBug (for FireFox) and Web Inspector (for WebKit-based browsers), except it’s designed to work remotely, and in particular, to allow you debug">
+<meta property="og:type" content="article">
+<meta property="og:title" content="weinre远程调试web mobile">
+<meta property="og:url" content="http://zhuxinyong.com/2014-07-20-weinre远程调试web.html">
+<meta property="og:site_name" content="生活😁技术">
+<meta property="og:description" content="什么是weinre?  weinre is a debugger for web pages, like FireBug (for FireFox) and Web Inspector (for WebKit-based browsers), except it’s designed to work remotely, and in particular, to allow you debug">
+<meta property="og:locale" content="Chinese">
+<meta property="og:image" content="http://zhuxinyong.com/assets/images/weinre-demo.jpg">
+<meta property="og:updated_time" content="2018-05-28T02:47:23.866Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="weinre远程调试web mobile">
+<meta name="twitter:description" content="什么是weinre?  weinre is a debugger for web pages, like FireBug (for FireFox) and Web Inspector (for WebKit-based browsers), except it’s designed to work remotely, and in particular, to allow you debug">
+<meta name="twitter:image" content="http://zhuxinyong.com/assets/images/weinre-demo.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="生活😁技术" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://zhuxinyong.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">生活😁技术</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-weinre远程调试web" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014-07-20-weinre远程调试web.html" class="article-date">
+  <time datetime="2014-07-20T08:34:07.000Z" itemprop="datePublished">Jul 20 2014</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      weinre远程调试web mobile
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <!-- ![weinre](http://img1.tuchuang.org/uploads/2014/07/weinre_demo.jpg) -->
+<p><strong>什么是weinre?</strong></p>
+<blockquote>
+<p>weinre is a debugger for web pages, like FireBug (for FireFox) and Web Inspector (for WebKit-based browsers), except it’s designed to work remotely, and in particular, to allow you debug web pages on a mobile device such as a phone.</p>
+</blockquote>
+<p>大体意思：</p>
+<blockquote>
+<p>weinre是网页的调试工具，就像FireFox里面的firebug和webkit内核的开发者工具，唯一的区别它是为远程调试设计的，特点是它可以调试手机上的网页。</p>
+</blockquote>
+<p><strong>如何使用？</strong></p>
+<ul>
+<li>获取Weinre</li>
+</ul>
+<p>在任何支持Node.js环境的系统下，通过包管理器（NPM）即可安装Weinre<br><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="keyword">install</span> -g weinre</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>开启Weinre调试</li>
+</ul>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">weinre <span class="comment">--boundHost -all-</span></span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<ul>
+<li><p>通过PC浏览器（webkit）打开调试页面</p>
+<p>  <a href="http://localhost:8080" target="_blank" rel="noopener">http://localhost:8080</a></p>
+</li>
+</ul>
+<p><img src="/assets/images/weinre-demo.jpg" alt="img"></p>
+<ul>
+<li><p>在调试页面添加脚本</p>
+  <script src="http://localhost[Your IP]:8080/target/target-script-min.js#anonymous"></script>
+
+</li>
+</ul>
+<p><strong>注意：这里的localhost要改为自己本机的ip地址</strong></p>
+<ul>
+<li><p>手机访问你要调试的页面，看是否通信成功。看targets下面有连接基本就对了。</p>
+</li>
+<li><p>最后这就像chrome的debug一样了</p>
+</li>
+</ul>
+<p><a href="http://people.apache.org/~pmuellr/weinre-docs/latest/Home.html" target="_blank" rel="noopener">weinre</a></p>
+<p><a href="http://dearb.me/archive/2013-11-21/web-inspector-remote-debugger-weinre/" target="_blank" rel="noopener">参考</a></p>
+<p><a href="https://www.youtube.com/results?search_query=weinre" target="_blank" rel="noopener">youtube</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhuxinyong.com/2014-07-20-weinre远程调试web.html" data-id="cjhpnux8x000dpog975a5czcw" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2014-07-20-Flex.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          Flex box 应对复杂布局
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2014-07-13-WebMobile图标定义属性.html" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">WebMobile图标定义属性</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+       
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title recent-posts">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018-05-28-一个数字截取引发的精度问题（四）.html">一个数字截取引发的精度问题（四）</a>
+          </li>
+        
+          <li>
+            <a href="/2017-07-08-sass-vs-less.html">sass vs less</a>
+          </li>
+        
+          <li>
+            <a href="/2017-06-11-全栈工程师指南.html">全栈工程师指南</a>
+          </li>
+        
+          <li>
+            <a href="/2017-06-03-使同事羡慕不已的8个npm命令.html">使同事羡慕不已的8个npm命令</a>
+          </li>
+        
+          <li>
+            <a href="/2017-05-18-微信更新了这些内容，你还不知道？.html">微信更新了这些内容，你还不知道？</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+
+  
+    
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2018 Zhuxy&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;aotuwangren@163.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+  
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "e2fb4051c49842688ce669e634bc983f",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+    
+
+  
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

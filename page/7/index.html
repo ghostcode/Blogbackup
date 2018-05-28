@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>生活😁技术</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="生活😁技术">
+<meta property="og:url" content="http://zhuxinyong.com/page/7/index.html">
+<meta property="og:site_name" content="生活😁技术">
+<meta property="og:locale" content="Chinese">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="生活😁技术">
+  
+    <link rel="alternate" href="/atom.xml" title="生活😁技术" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://zhuxinyong.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">生活😁技术</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-reload" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015-04-08-reload.html" class="article-date">
+  <time datetime="2015-04-08T11:07:23.000Z" itemprop="datePublished">Apr 8 2015</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015-04-08-reload.html">reload vs href</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>有时候会遇到一些需求，操作完某些任务后刷新页面。</p>
+<p>一般你会怎么做？</p>
+<p>是不是这样:</p>
+<pre><code>window.location.href = window.location.href
+</code></pre><p>vs:</p>
+<pre><code>window.location.reload()
+</code></pre><p>那你知道这两种有和区别吗？如果看官知道，请绕道，若不是很清楚请随我一起一探究竟。</p>
+<ul>
+<li>reload()会重新发送当前页面的POST数据，href 不会。</li>
+<li>当前URl即使有hash值也会刷新，href不会。</li>
+<li>reload()有个可选参数 reload(true) 表示跳过缓存直接请求服务器数据，reload(false)相反。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhuxinyong.com/2015-04-08-reload.html" data-id="cjhpnux9u0022pog97zkqkmkz" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-Gulp+Browserify" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015-03-17-Gulp+Browserify.html" class="article-date">
+  <time datetime="2015-03-17T15:18:33.000Z" itemprop="datePublished">Mar 17 2015</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015-03-17-Gulp+Browserify.html">Gulp+Browserify</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>更新<br>2014年，9月8日<br><a href="https://github.com/greypants/gulp-starter" target="_blank" rel="noopener">Gulp start</a>在这篇文章写之后经过了很大的发展。可下面的内容依旧是连贯的，只有少数部分在第一次写过之后进行了更改。比如：</p>
+<ul>
+<li><a href="https://github.com/greypants/gulp-starter/blob/master/gulpfile.js#L17" target="_blank" rel="noopener">自动加载task</a></li>
+<li>通过<a href="https://github.com/greypants/gulp-starter/blob/master/gulp/config.js" target="_blank" rel="noopener">gulp/config</a>配置任务</li>
+<li>用BrowserSync替换LiveReload</li>
+</ul>
+</blockquote>
+<p><strong>开始</strong></p>
+<p>周末，我决定使自己沉浸于Grunt和RequireJs中，   接着到周一时，看到一篇 <a href="http://www.100percentjs.com/just-like-grunt-gulp-browserify-now/" target="_blank" rel="noopener">and just like that Grunt and RequireJS are out, it’s all about Gulp and Browserify now.</a>整个人都不好了！</p>
+<p>为了让你避免googling，文档中遨游以及我碰到的问题，我搜集了一些认为对你开始有用的资源和信息</p>
+<p><strong>Gulp + Browserify starter repo</strong></p>
+<p>我已经创建了<a href="https://github.com/greypants/gulp-starter" target="_blank" rel="noopener">Gulp + Browserify starter repo</a>并配有如何完成一些常规任务和工作流的例子。</p>
+        
+          <p class="article-more-link">
+            <a href="/2015-03-17-Gulp+Browserify.html#more">继续阅读全文 »</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhuxinyong.com/2015-03-17-Gulp+Browserify.html" data-id="cjhpnux9s001wpog9pkrmvrzn" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-更好的事件处理" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015-03-12-更好的事件处理.html" class="article-date">
+  <time datetime="2015-03-12T14:06:50.000Z" itemprop="datePublished">Mar 12 2015</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015-03-12-更好的事件处理.html">更好的事件处理</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在Js应用中事件的处理很重要，写出漂亮的事件处理方法显得更重要。</p>
+<p>需求背景：</p>
+<p>产品经理说：在鼠标点击这个按钮时，根据鼠标位置显示一个弹窗。</p>
+<p>巴拉巴拉写完了：</p>
+<pre><code>function handleClick(event) {
+    var popup = document.getElementById(&quot;popup&quot;);
+    popup.style.left = event.clientX + &quot;px&quot;;
+    popup.style.top = event.clientY + &quot;px&quot;;
+    popup.className = &quot;reveal&quot;;
+}
+
+addListener(element, &quot;click&quot;, handleClick);
+</code></pre><p>思路：<strong>获取点击时鼠标位置，然后给弹窗定位最后展示</strong>。</p>
+<p>上面的代码看上去很好，满足需求。</p>
+        
+          <p class="article-more-link">
+            <a href="/2015-03-12-更好的事件处理.html#more">继续阅读全文 »</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhuxinyong.com/2015-03-12-更好的事件处理.html" data-id="cjhpnux9t001zpog9ditvw9qw" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-背景图片位置“解密”" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015-03-11-背景图片位置“解密”.html" class="article-date">
+  <time datetime="2015-03-11T06:28:48.000Z" itemprop="datePublished">Mar 11 2015</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015-03-11-背景图片位置“解密”.html">背景图片位置“解密”</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>背景图片很好设置，背景位置也很好定位。一般是相对于左上角来定位：</p>
+<pre><code>background-position:10px 10px;
+</code></pre><p>上面的意思就是：<strong>背景图片的左上角显示在背景区域的10x10处</strong>。这是我们经常用到的写法。</p>
+<p>最近在做图片水平垂直居中的时候，就想到用背景图片来做：</p>
+<pre><code>background-position:50%;
+</code></pre><p>或者：</p>
+<pre><code>background-position:center;
+</code></pre><p>在用百分比的时候发现了一个问题，或者说自己以前没有注意到的地方：<strong>百分比不是按照背景图片的左上角来定位到背景区域的</strong>。如果百分比是按照以前认为的,当50%的时候，图片就不应该显示在居中位置，应该是：</p>
+<p><img src="/assets/images/bgp.png" alt="img"></p>
+<p>带着疑问查阅了一下文档，果然里面有一套计算公式。</p>
+        
+          <p class="article-more-link">
+            <a href="/2015-03-11-背景图片位置“解密”.html#more">继续阅读全文 »</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhuxinyong.com/2015-03-11-背景图片位置“解密”.html" data-id="cjhpnux9r001upog9wm98t31n" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-永恒的水平垂直居中" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015-03-02-永恒的水平垂直居中.html" class="article-date">
+  <time datetime="2015-03-02T07:19:48.000Z" itemprop="datePublished">Mar 2 2015</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015-03-02-永恒的水平垂直居中.html">永恒的水平垂直居中</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>css中居中问题是永远的话题特别是<strong>垂直居中</strong>，各路高手使出各种“奇异淫”的方法。前段时间一直搞JS，好久没有弄css了这次公司做了电商。遇到商品的图片需要处理，所以得总结一下，不能每次写都去查资料。</p>
+<p>代码结构：</p>
+<pre><code>&lt;div class=&quot;box&quot;&gt;
+    &lt;img src=&quot;#&quot; alt=&quot;&quot; width=&quot;100&quot; height=&quot;100&quot;&gt;
+&lt;/div&gt;
+
+.box{
+    width: 400px;
+    height: 400px;
+    background-color:#999;
+    text-align: center;
+}
+
+.box img{
+
+}
+</code></pre>
+        
+          <p class="article-more-link">
+            <a href="/2015-03-02-永恒的水平垂直居中.html#more">继续阅读全文 »</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhuxinyong.com/2015-03-02-永恒的水平垂直居中.html" data-id="cjhpnux9w0025pog9if36f52b" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-忘却jQuery与“原配”JavaScript重归于好" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015-02-08-忘却jQuery与“原配”JavaScript重归于好.html" class="article-date">
+  <time datetime="2015-02-08T06:58:42.000Z" itemprop="datePublished">Feb 8 2015</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015-02-08-忘却jQuery与“原配”JavaScript重归于好.html">忘却jQuery与“原配”JavaScript重归于好</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>JavaScript就在那里不离不弃，你却对她视而不见。为何不用jQuery？因为它太慢而且在确认你站点不需要而外的负担时。</p>
+<p>我无意与在框架和原生代码之前争辩，有时抛弃使用那些神奇的东西很难。但是在这我想说的是仅仅为了一个字符选择器而加载一大坨代码，例如<strong>$</strong>或者其他类似的。</p>
+<p>假定简写并不是它的唯一特点，每个使用框架的人是因为支持IE，动画处理和单一的选择器功能。</p>
+<p><strong>原生等价</strong></p>
+<p>选择元素</p>
+<pre><code>// jQuery
+var els = $(&apos;.el&apos;);
+
+// Native
+var els = document.querySelectorAll(&apos;.el&apos;);
+
+// Shorthand
+var $ = function (el) {
+  return document.querySelectorAll(el);
+}
+
+var els = $(&apos;.el&apos;);
+
+// Or use regex-based micro-selector lib
+// http://jsperf.com/micro-selector-libraries
+</code></pre>
+        
+          <p class="article-more-link">
+            <a href="/2015-02-08-忘却jQuery与“原配”JavaScript重归于好.html#more">继续阅读全文 »</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhuxinyong.com/2015-02-08-忘却jQuery与“原配”JavaScript重归于好.html" data-id="cjhpnux9p001spog995meysw9" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-python中urllib和urllib2的区别联系" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015-01-27-python中urllib和urllib2的区别联系.html" class="article-date">
+  <time datetime="2015-01-27T09:49:40.000Z" itemprop="datePublished">Jan 27 2015</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015-01-27-python中urllib和urllib2的区别联系.html">python中urllib和urllib2的区别联系</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>在python中，urllib和urllib2不可相互替代的。 </p>
+<p>整体来说，urllib2是urllib的增强，但是urllib中有urllib2中所没有的函数。</p>
+<ul>
+<li>urllib2可以用urllib2.openurl中设置Request参数，来修改Header头。如果你访问一个网站，想更改User Agent（可以伪装你的浏览器），你就要用urllib2.</li>
+<li>urllib支持设置编码的函数，urllib.urlencode,在模拟登陆的时候，经常要post编码之后的参数，所以要想不使用第三方库完成模拟登录，你就需要使用urllib。</li>
+</ul>
+<p>urllib一般和urllib2一起搭配使用</p>
+<p>相关阅读：</p>
+<p><a href="http://www.hacksparrow.com/python-difference-between-urllib-and-urllib2.html" target="_blank" rel="noopener">Different urllib and urllib2</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhuxinyong.com/2015-01-27-python中urllib和urllib2的区别联系.html" data-id="cjhpnux9m001opog93c9uhjtu" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-Git常用命令" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014-12-31-Git常用命令.html" class="article-date">
+  <time datetime="2014-12-31T06:37:04.000Z" itemprop="datePublished">Dec 31 2014</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014-12-31-Git常用命令.html">Git常用命令</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>整理个人经常用到的命令：<a href="http://naotu.baidu.com/viewshare.html?shareId=asdyp2vmrgg0" target="_blank" rel="noopener">百度脑图</a></p>
+<p>持续更新。。。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhuxinyong.com/2014-12-31-Git常用命令.html" data-id="cjhpnux9n001qpog91ot5iufb" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/">Git</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-CSS3动画-加载" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014-12-26-CSS3动画-加载.html" class="article-date">
+  <time datetime="2014-12-26T08:54:33.000Z" itemprop="datePublished">Dec 26 2014</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014-12-26-CSS3动画-加载.html">CSS3动画-加载</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>css3的动画还是值得看看的，争取多看多写多分享一些动画效果。这次就以网站中常见的加载动画开始：</p>
+<p><a class="jsbin-embed" href="http://jsbin.com/rediko/1/embed?output" target="_blank" rel="noopener">JS Bin</a><script src="http://static.jsbin.com/js/embed.js"></script></p>
+<p>这里用到的css3的属性：</p>
+<blockquote>
+<p>animation</p>
+</blockquote>
+<p>语法:</p>
+<pre><code>animation: name duration timing-function delay iteration-count direction
+</code></pre><p>详情：<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/animation" target="_blank" rel="noopener">animation</a></p>
+        
+          <p class="article-more-link">
+            <a href="/2014-12-26-CSS3动画-加载.html#more">继续阅读全文 »</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhuxinyong.com/2014-12-26-CSS3动画-加载.html" data-id="cjhpnux9t001ypog9es5czdk0" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css3/">css3</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-20行JavaScript代码实现Router" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014-12-05-20行JavaScript代码实现Router.html" class="article-date">
+  <time datetime="2014-12-05T09:31:11.000Z" itemprop="datePublished">Dec 5 2014</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014-12-05-20行JavaScript代码实现Router.html">20行JavaScript代码实现Router</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>上周我看到一篇 <a href="http://krasimirtsonev.com/blog/article/Javascript-template-engine-in-just-20-line" target="_blank" rel="noopener">20行代码实现模板引擎</a>，这是受<a href="http://ejohn.org/blog/javascript-micro-templating/" target="_blank" rel="noopener">John Resig’s post on the same topic</a>启发的。我发现他们是如此简单，有趣同时也激发我产生一个<strong>20行代码实现客户端Router</strong>的想法。</p>
+<p><strong>开始创建一个router</strong></p>
+<p>首先我们需要一个html模板：</p>
+<pre><code>&lt;!DOCTYPE html&gt;  
+&lt;html&gt;  
+&lt;head&gt;  
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;title&gt;Building a router&lt;/title&gt;
+  &lt;script&gt;
+    // Put John&apos;s template engine code here...
+  &lt;/script&gt;
+&lt;/head&gt;  
+&lt;body&gt;
+
+&lt;/body&gt;  
+&lt;/html&gt;  
+</code></pre>
+        
+          <p class="article-more-link">
+            <a href="/2014-12-05-20行JavaScript代码实现Router.html#more">继续阅读全文 »</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhuxinyong.com/2014-12-05-20行JavaScript代码实现Router.html" data-id="cjhpnux9l001mpog9oddh084v" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+
+
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/page/6/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/8/">下一页&raquo;</a>
+  </nav>
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title recent-posts">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018-05-28-一个数字截取引发的精度问题（四）.html">一个数字截取引发的精度问题（四）</a>
+          </li>
+        
+          <li>
+            <a href="/2017-07-08-sass-vs-less.html">sass vs less</a>
+          </li>
+        
+          <li>
+            <a href="/2017-06-11-全栈工程师指南.html">全栈工程师指南</a>
+          </li>
+        
+          <li>
+            <a href="/2017-06-03-使同事羡慕不已的8个npm命令.html">使同事羡慕不已的8个npm命令</a>
+          </li>
+        
+          <li>
+            <a href="/2017-05-18-微信更新了这些内容，你还不知道？.html">微信更新了这些内容，你还不知道？</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+
+  
+    
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2018 Zhuxy&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;aotuwangren@163.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+  
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "e2fb4051c49842688ce669e634bc983f",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+    
+
+  
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

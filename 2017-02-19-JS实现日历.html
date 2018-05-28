@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>JS实现日历 | 生活😁技术</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="最近在捣鼓一个chrome插件，包括两个功能：1.倒计时，2.日历。 大致是下面这个样子：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS实现日历">
+<meta property="og:url" content="http://zhuxinyong.com/2017-02-19-JS实现日历.html">
+<meta property="og:site_name" content="生活😁技术">
+<meta property="og:description" content="最近在捣鼓一个chrome插件，包括两个功能：1.倒计时，2.日历。 大致是下面这个样子：">
+<meta property="og:locale" content="Chinese">
+<meta property="og:image" content="http://zhuxinyong.com/assets/images/countdown.png">
+<meta property="og:image" content="http://zhuxinyong.com/assets/images/calendar.png">
+<meta property="og:updated_time" content="2018-05-28T02:47:23.895Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS实现日历">
+<meta name="twitter:description" content="最近在捣鼓一个chrome插件，包括两个功能：1.倒计时，2.日历。 大致是下面这个样子：">
+<meta name="twitter:image" content="http://zhuxinyong.com/assets/images/countdown.png">
+  
+    <link rel="alternate" href="/atom.xml" title="生活😁技术" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://zhuxinyong.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">生活😁技术</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-JS实现日历" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017-02-19-JS实现日历.html" class="article-date">
+  <time datetime="2017-02-19T10:35:25.000Z" itemprop="datePublished">Feb 19 2017</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>►<a class="article-category-link" href="/categories/JavaScript/JavaScript/">JavaScript</a>►<a class="article-category-link" href="/categories/JavaScript/JavaScript/JavaScript/">JavaScript</a>►<a class="article-category-link" href="/categories/JavaScript/JavaScript/JavaScript/JavaScript/">JavaScript</a>►<a class="article-category-link" href="/categories/JavaScript/JavaScript/JavaScript/JavaScript/JavaScript/">JavaScript</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JS实现日历
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>最近在捣鼓一个chrome插件，包括两个功能：1.倒计时，2.日历。</p>
+<p>大致是下面这个样子：</p>
+<p><img src="/assets/images/countdown.png" alt="倒计时模式"></p>
+<p><img src="/assets/images/calendar.png" alt="日历模式"></p>
+<a id="more"></a>
+<p>倒计时模式倒还简单，日历刚开始以为困难点，仔细分析后也还挺顺利。</p>
+<p>写过日历的一般都知道有三点很重要：</p>
+<blockquote>
+<p>1.一个月中有几天<br>2.一个月中第一天星期几<br>2.一个月中第后一天星期几<br>3.正确的处理换行</p>
+</blockquote>
+<p>从我写这个日历的思路开始：</p>
+<p>1.刚开始思路有点乱，想着既要输出月份，又要输出月中的天数，还要处理各种换行，好多事。后来我就想倒退吧，先输出一个月的，如果指定月份的日历输出了，下面就是循环遍历月份就行了。</p>
+<p>下面是三月份的日历输出代码：</p>
+<figure class="highlight qml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> today = <span class="keyword">new</span> <span class="built_in">Date</span>(),</span><br><span class="line">    year = today.getFullYear(),</span><br><span class="line">    month = today.getMonth();</span><br><span class="line"></span><br><span class="line"><span class="comment">// ❌</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> dayStr = <span class="string">''</span>;</span><br><span class="line"><span class="comment">// 3月有31天</span></span><br><span class="line"><span class="keyword">let</span> dayInMonth = <span class="number">31</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 每个月的第一天</span></span><br><span class="line"><span class="keyword">let</span> firstDay = <span class="keyword">new</span> <span class="built_in">Date</span>(year,month,<span class="number">1</span>);</span><br><span class="line"><span class="comment">// 每个月的最后一天</span></span><br><span class="line"><span class="keyword">let</span> lastDay = <span class="keyword">new</span> <span class="built_in">Date</span>(year,month,<span class="number">31</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//第一天星期几(0-6)</span></span><br><span class="line"><span class="keyword">let</span> weekday = firstDay.getDay();</span><br><span class="line"><span class="comment">// 当月的最后一天星期几</span></span><br><span class="line"><span class="keyword">let</span> lastDayWeekDay = lastDay.getDay(); </span><br><span class="line"></span><br><span class="line"><span class="comment">// 每一个都是从1号开始</span></span><br><span class="line"><span class="keyword">let</span> <span class="built_in">date</span> = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ❌</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 补齐前面的空格</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; weekday; i++)&#123;</span><br><span class="line">    dayStr += <span class="string">'+ '</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(;<span class="built_in">date</span> &lt;= dayInMonth;<span class="built_in">date</span>++)&#123;</span><br><span class="line"></span><br><span class="line">    dayStr += <span class="built_in">date</span> + <span class="string">' '</span>;</span><br><span class="line">    weekday++</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 换行处理</span></span><br><span class="line">    <span class="keyword">if</span>(weekday%<span class="number">7</span> == <span class="number">0</span>)&#123;</span><br><span class="line">        weekday = <span class="number">0</span>;</span><br><span class="line">        dayStr += <span class="string">'\n'</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 补齐后面的空格</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> j = <span class="number">0</span>; j &lt; (<span class="number">7</span> - lastDayWeekDay - <span class="number">1</span>); j++)&#123;</span><br><span class="line">    dayStr += <span class="string">'+  '</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以把上面代码拷贝到控制台执行，看下效果。</p>
+<p>可能看上去还不像日历，日历是有头的，周几，周几，把下面代码分别加入上面代码❌处。</p>
+<pre><code>let weeks = [&apos;日&apos;,&apos;一&apos;,&apos;二&apos;,&apos;三&apos;,&apos;四&apos;,&apos;五&apos;,&apos;六&apos;];
+
+dayStr += weeks.join(&apos; &apos;) + &apos;\n&apos;;
+</code></pre><p>这样就比较像了。其实讲到这里基本日历就差不多了，还有一个重要的方法，就是算出指定月份的天数，其实JS的 Date 里没有给出api，所以需要自己算。<br>好忧伤，我查了一下python里的日历相关的给了方法。但是JS里有一个 getDate() 方法获取月份中的第几天。经过网上的搜索，得到如下方法：</p>
+<pre><code>function daysInMonth(month, year) {
+  return new Date(year, month + 1, 0).getDate();
+}
+</code></pre><p>我来解释一下：当我们尝试传入0（月份是 0-11 ）一月份，2017，得到 new Date(2017,1,0)。这代表是2月份的第0天，好奇怪，哪有第0天的？其实某月的第0天就是前一个月的最后一天，所以就得到了某月的天数。</p>
+<p>完整代码如下：</p>
+<figure class="highlight qml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">daysInMonth</span>(<span class="params">month, year</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Date</span>(year, month + <span class="number">1</span>, <span class="number">0</span>).getDate();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> weeks = [<span class="string">'日'</span>,<span class="string">'一'</span>,<span class="string">'二'</span>,<span class="string">'三'</span>,<span class="string">'四'</span>,<span class="string">'五'</span>,<span class="string">'六'</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> year = <span class="keyword">new</span> <span class="built_in">Date</span>().getFullYear();</span><br><span class="line"><span class="keyword">let</span> dayStr = <span class="string">''</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> month = <span class="number">0</span>; month &lt;=<span class="number">11</span>; month++)&#123;</span><br><span class="line">    <span class="comment">// 每个月的第一天</span></span><br><span class="line">    <span class="keyword">let</span> firstDay = <span class="keyword">new</span> <span class="built_in">Date</span>(year,month,<span class="number">1</span>); </span><br><span class="line">    <span class="keyword">let</span> dayInMonth = daysInMonth(month,year);</span><br><span class="line">    <span class="comment">// 每个月的最后一天</span></span><br><span class="line">    <span class="keyword">let</span> lastDay = <span class="keyword">new</span> <span class="built_in">Date</span>(year,month,dayInMonth);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 第一天星期几(0-6)</span></span><br><span class="line">    <span class="keyword">let</span> weekday = firstDay.getDay(); </span><br><span class="line">    <span class="comment">// 最后一天星期几</span></span><br><span class="line">    <span class="keyword">let</span> lastDayWeekDay = lastDay.getDay();</span><br><span class="line">    <span class="comment">// 每一个都是从1号开始</span></span><br><span class="line">    <span class="keyword">let</span> <span class="built_in">date</span> = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    dayStr += weeks.join(<span class="string">' '</span>) + <span class="string">'\n'</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 补齐前面的空格</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; weekday; i++)&#123;</span><br><span class="line">        dayStr += <span class="string">'+ '</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(;<span class="built_in">date</span> &lt;= dayInMonth;<span class="built_in">date</span>++)&#123;</span><br><span class="line">        dayStr += <span class="built_in">date</span> + <span class="string">' '</span>;</span><br><span class="line">        weekday++</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(weekday%<span class="number">7</span> == <span class="number">0</span>)&#123;</span><br><span class="line">            weekday = <span class="number">0</span>;</span><br><span class="line">            dayStr += <span class="string">'\n'</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 补齐后面的空格</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> j = <span class="number">0</span>; j &lt; (<span class="number">7</span> - lastDayWeekDay - <span class="number">1</span>); j++)&#123;</span><br><span class="line">        dayStr += <span class="string">'+ '</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    dayStr += <span class="string">'\n\n'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>参考：</p>
+<p>1.<a href="http://stackoverflow.com/questions/315760/what-is-the-best-way-to-determine-the-number-of-days-in-a-month-with-javascript" target="_blank" rel="noopener">http://stackoverflow.com/questions/315760/what-is-the-best-way-to-determine-the-number-of-days-in-a-month-with-javascript</a><br>2.<a href="https://github.com/lishengzxc/bblog/issues/5" target="_blank" rel="noopener">https://github.com/lishengzxc/bblog/issues/5</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhuxinyong.com/2017-02-19-JS实现日历.html" data-id="cjhpnuxat003tpog9nbjp851g" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2017-03-04-新主题新想法.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          新主题新想法
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017-01-22-Vue组件通信.html" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">Vue组件通信</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+       
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title recent-posts">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018-05-28-一个数字截取引发的精度问题（四）.html">一个数字截取引发的精度问题（四）</a>
+          </li>
+        
+          <li>
+            <a href="/2017-07-08-sass-vs-less.html">sass vs less</a>
+          </li>
+        
+          <li>
+            <a href="/2017-06-11-全栈工程师指南.html">全栈工程师指南</a>
+          </li>
+        
+          <li>
+            <a href="/2017-06-03-使同事羡慕不已的8个npm命令.html">使同事羡慕不已的8个npm命令</a>
+          </li>
+        
+          <li>
+            <a href="/2017-05-18-微信更新了这些内容，你还不知道？.html">微信更新了这些内容，你还不知道？</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+
+  
+    
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2018 Zhuxy&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;aotuwangren@163.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+  
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "e2fb4051c49842688ce669e634bc983f",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+    
+
+  
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>
