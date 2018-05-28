@@ -95,4 +95,6 @@ exclude_generator:
 ## Docs: http://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: git@github.com:ghostcode/blog.git
+  # repo: git@github.com:ghostcode/blog.git
+  repo: git@github.com:ghostcode/Blogbackup.git
+  branch: gh-pages
