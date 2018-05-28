@@ -88,7 +88,7 @@ disqus_shortname:
 ## Plugins: https://github.com/tommy351/hexo/wiki/Plugins
 ## Themes: https://github.com/tommy351/hexo/wiki/Themes
 # theme: hexo-theme-daisy
-theme: hexo-theme-xups
+theme: cafe
 exclude_generator:
 
 # Deployment
