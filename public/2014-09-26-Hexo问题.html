@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="baidu_union_verify" content="beee9203190d273a561657ff6f6278a8">
+  
+  <title>Hexo问题 | 生活😁技术</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1.Yaml Parser做出了一定的修改 在mac上好不容易装了node(这几天node一直没有安装成功，原来是安装包错误！！！)，等到安装hexo之后，运行： hexo server 然后就报错： 12345678910111213141516&amp;#123; name: &apos;HexoError&apos;,  reason: &apos;incomplete explicit mapping pair; a key">
+<meta name="keywords" content="hexo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo问题">
+<meta property="og:url" content="http://zhuxinyong.com/2014-09-26-Hexo问题.html">
+<meta property="og:site_name" content="生活😁技术">
+<meta property="og:description" content="1.Yaml Parser做出了一定的修改 在mac上好不容易装了node(这几天node一直没有安装成功，原来是安装包错误！！！)，等到安装hexo之后，运行： hexo server 然后就报错： 12345678910111213141516&amp;#123; name: &apos;HexoError&apos;,  reason: &apos;incomplete explicit mapping pair; a key">
+<meta property="og:locale" content="Chinese">
+<meta property="og:updated_time" content="2018-05-28T02:47:23.870Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo问题">
+<meta name="twitter:description" content="1.Yaml Parser做出了一定的修改 在mac上好不容易装了node(这几天node一直没有安装成功，原来是安装包错误！！！)，等到安装hexo之后，运行： hexo server 然后就报错： 12345678910111213141516&amp;#123; name: &apos;HexoError&apos;,  reason: &apos;incomplete explicit mapping pair; a key">
+  
+    <link rel="alternate" href="/atom.xml" title="生活😁技术" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "ca-pub-4882891850616832",
+      enable_page_level_ads: true
+    });
+  </script>
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://zhuxinyong.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">生活😁技术</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Hexo问题" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014-09-26-Hexo问题.html" class="article-date">
+  <time datetime="2014-09-25T16:12:30.000Z" itemprop="datePublished">Sep 26 2014</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Hexo问题
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>1.<strong>Yaml Parser做出了一定的修改</strong></p>
+<p>在mac上好不容易装了node(这几天node一直没有安装成功，原来是安装包错误！！！)，等到安装hexo之后，运行：</p>
+<pre><code>hexo server
+</code></pre><p>然后就报错：</p>
+<figure class="highlight taggerscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#123; name: 'HexoError',</span><br><span class="line">  reason: 'incomplete explicit mapping pair; a key node is missed',</span><br><span class="line">  mark:</span><br><span class="line">   &#123; name: null,</span><br><span class="line">     buffer: 'categories: Kategorien<span class="symbol">\r</span><span class="symbol">\n</span>search: Suche<span class="symbol">\r</span><span class="symbol">\n</span>tags: Tags<span class="symbol">\r</span><span class="symbol">\n</span>tagcloud: Tag-Cloud<span class="symbol">\r</span><span class="symbol">\n</span>tweets: Tweets<span class="symbol">\r</span><span class="symbol">\n</span>prev: Vorherige Seite<span class="symbol">\r</span><span class="symbol">\n</span>next: Nächste Seite<span class="symbol">\r</span><span class="symbol">\n</span>comment: Kommentare<span class="symbol">\r</span><span class="symbol">\n</span>archive_a: Archiv<span class="symbol">\r</span><span class="symbol">\n</span>archive_b: Archiv: <span class="variable">%s\r\npage: Seite %</span>d<span class="symbol">\r</span><span class="symbol">\n</span>recent_posts: Neueste Artikel<span class="symbol">\n</span><span class="symbol">\u</span>0000',</span><br><span class="line">     position: 189,</span><br><span class="line">     line: 9,</span><br><span class="line">     column: 17 &#125;,</span><br><span class="line">  message: 'Process failed: languages/de.yml',</span><br><span class="line">  domain:</span><br><span class="line">   &#123; domain: null,</span><br><span class="line">     _events: &#123; error: [Function] &#125;,</span><br><span class="line">     _maxListeners: 10,</span><br><span class="line">     members: [ [Object] ] &#125;,</span><br><span class="line">  domainThrown: true,</span><br><span class="line">  stack: undefined &#125;</span><br></pre></td></tr></table></figure>
+<p>看到第二句我就搜了一下，结果原因是hexo升级，<strong>Yaml Parser做出了一定的修改</strong>。</p>
+<p>解决办法：</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>. 将主题language下的有空格的项都需要加上双引号。<span class="keyword">tag</span> <span class="title">cloud</span> --&gt; <span class="string">"tag cloud"</span></span><br><span class="line"><span class="number">2</span>. 如果用的默认主题light，可以直接拉取最新主题，覆盖language文件夹即可。$ git <span class="keyword">clone</span> <span class="title">https</span>://github.com/tommy351/hexo-theme-light themes/</span><br></pre></td></tr></table></figure>
+<p>参考：</p>
+<p><a href="https://github.com/wileam/code/blob/master/source/_posts/update-hexo.md" target="_blank" rel="noopener">https://github.com/wileam/code/blob/master/source/_posts/update-hexo.md</a></p>
+<p><a href="http://www.huangyunkun.com/2014/07/31/hexo-update-error-with-yaml-parser/" target="_blank" rel="noopener">http://www.huangyunkun.com/2014/07/31/hexo-update-error-with-yaml-parser/</a></p>
+<p>2.<strong>hexo 3.1.1更新后代码高亮失效</strong></p>
+<p>原因：</p>
+<blockquote>
+<p>Add option to disable highlight auto-detect</p>
+</blockquote>
+<p>解决方法：</p>
+<p>增加 auto_detect: true 到站点 _config.yml 的 hilight 部分，否则默认自动检测语言高亮是关闭的</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">highlight:</span></span><br><span class="line"><span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">auto_detect:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">line_number:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">tab_replace:</span> <span class="string">''</span></span><br></pre></td></tr></table></figure>
+<p>参考：<br><a href="https://github.com/hexojs/hexo/releases/tag/3.1.1" target="_blank" rel="noopener">https://github.com/hexojs/hexo/releases/tag/3.1.1</a></p>
+<p><a href="https://github.com/iissnan/hexo-theme-next/issues/186" target="_blank" rel="noopener">https://github.com/iissnan/hexo-theme-next/issues/186</a></p>
+<p>3.<strong>添加Travis CI</strong></p>
+<p>以前发布Hexo博文的步骤：</p>
+<pre><code>1.本地写好博文 hexo new &quot;xxx&quot;
+2.生成、发布 hexo -d -g
+3.同步博客原文到github
+</code></pre><p>流程太机械，而且有时候忘记同步博客原文到仓库。机械的流程就应该自动化，就像现在前端代码的合并、压缩、打包、拼接雪碧图、CSS代码添加前缀等等机械的动作就应该流程化、自动化，省下更多的时间去做别的事情。然后就搜了一些 hexo 自动化的东西，找到了 Travis CI 这个东西，然后就愉快的集成了，现在本地写完博客只要同步就行了，生成发布的任务 Travis CI 帮你搞定了。</p>
+<pre><code>1.本地写博文 hexo new &quot;xxx&quot;
+2.同步博文到github
+</code></pre><p>参考：<a href="http://www.jianshu.com/p/e22c13d85659" target="_blank" rel="noopener">http://www.jianshu.com/p/e22c13d85659</a></p>
+<p>4.hexo 添加实例</p>
+<p>我的初衷需求是在 hexo 博客上添加一些代码实例，就是一些demo。然后就搜了一些方法，找到官网提供了一个博客配置项:</p>
+<pre><code>skip_render: Paths not to be rendered. You can use glob expressions for path matching
+</code></pre><p>大体意思就是 hexo 在生成博客时，就是忽略此目录（博客的配置文件_config.yml里的 source_dir 下的指定目录）不编译：</p>
+<pre><code>skip_render: demo/*.html //忽略 source/demo/下的 html 文件
+skip_render: demo/** // 忽略source/demo/ 下文件以及子目录下的文件
+</code></pre><p>若有多个目录需要忽略：</p>
+<pre><code>skip_render: [demo/**,sideproject/**]
+</code></pre><p>或</p>
+<pre><code>skip_render:
+    - demo/**
+    - sideproject/**
+</code></pre><p>参考：<a href="https://hexo.io/docs/configuration.html" target="_blank" rel="noopener">https://hexo.io/docs/configuration.html</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhuxinyong.com/2014-09-26-Hexo问题.html" data-id="cjhq2nxds000tssg9wkkvsat5" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2014-09-27-JavaScript技巧揭秘.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          JavaScript技巧揭秘
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2014-09-16-HTML历史管理-彩票生成器.html" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">HTML历史管理-彩票生成器</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+       
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title recent-posts">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018-05-28-一个数字截取引发的精度问题（四）.html">一个数字截取引发的精度问题（四）</a>
+          </li>
+        
+          <li>
+            <a href="/2017-07-08-sass-vs-less.html">sass vs less</a>
+          </li>
+        
+          <li>
+            <a href="/2017-06-11-全栈工程师指南.html">全栈工程师指南</a>
+          </li>
+        
+          <li>
+            <a href="/2017-06-03-使同事羡慕不已的8个npm命令.html">使同事羡慕不已的8个npm命令</a>
+          </li>
+        
+          <li>
+            <a href="/2017-05-18-微信更新了这些内容，你还不知道？.html">微信更新了这些内容，你还不知道？</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+
+  
+    
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2018 Zhuxy&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;aotuwangren@163.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+ 
+ <script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?2417a647046aae16ca9c71de9041dd92";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+  
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+  
+
+  
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

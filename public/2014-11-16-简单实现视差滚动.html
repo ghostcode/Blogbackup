@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="baidu_union_verify" content="beee9203190d273a561657ff6f6278a8">
+  
+  <title>简单实现视差滚动 | 生活😁技术</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="视差滚动是一个有趣的技术，当你滚动页面时背景移动的速度慢于内容（前景内容），造成一种3D效果。 接下来我将使用最简单的代码实现视差效果。 页面结构 这个技术的要点在于控制背景的移动速度，所以开始我们先创建HTML结构： &amp;lt;section id=&amp;quot;home&amp;quot; data-type=&amp;quot;background&amp;quot; data-speed=&amp;quot;10&amp;quot;">
+<meta name="keywords" content="特效">
+<meta property="og:type" content="article">
+<meta property="og:title" content="简单实现视差滚动">
+<meta property="og:url" content="http://zhuxinyong.com/2014-11-16-简单实现视差滚动.html">
+<meta property="og:site_name" content="生活😁技术">
+<meta property="og:description" content="视差滚动是一个有趣的技术，当你滚动页面时背景移动的速度慢于内容（前景内容），造成一种3D效果。 接下来我将使用最简单的代码实现视差效果。 页面结构 这个技术的要点在于控制背景的移动速度，所以开始我们先创建HTML结构： &amp;lt;section id=&amp;quot;home&amp;quot; data-type=&amp;quot;background&amp;quot; data-speed=&amp;quot;10&amp;quot;">
+<meta property="og:locale" content="Chinese">
+<meta property="og:image" content="http://zhuxinyong.com/assets/images/parllax.jpg">
+<meta property="og:updated_time" content="2018-05-28T02:47:23.875Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="简单实现视差滚动">
+<meta name="twitter:description" content="视差滚动是一个有趣的技术，当你滚动页面时背景移动的速度慢于内容（前景内容），造成一种3D效果。 接下来我将使用最简单的代码实现视差效果。 页面结构 这个技术的要点在于控制背景的移动速度，所以开始我们先创建HTML结构： &amp;lt;section id=&amp;quot;home&amp;quot; data-type=&amp;quot;background&amp;quot; data-speed=&amp;quot;10&amp;quot;">
+<meta name="twitter:image" content="http://zhuxinyong.com/assets/images/parllax.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="生活😁技术" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "ca-pub-4882891850616832",
+      enable_page_level_ads: true
+    });
+  </script>
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://zhuxinyong.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">生活😁技术</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-简单实现视差滚动" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014-11-16-简单实现视差滚动.html" class="article-date">
+  <time datetime="2014-11-16T09:03:34.000Z" itemprop="datePublished">Nov 16 2014</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      简单实现视差滚动
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>视差滚动是一个有趣的技术，当你滚动页面时背景移动的速度慢于内容（前景内容），造成一种3D效果。</p>
+<p>接下来我将使用最简单的代码实现视差效果。</p>
+<p><strong>页面结构</strong></p>
+<p>这个技术的要点在于控制背景的移动速度，所以开始我们先创建HTML结构：</p>
+<pre><code>&lt;section id=&quot;home&quot; data-type=&quot;background&quot; data-speed=&quot;10&quot;&gt;                            
+&lt;/section&gt;   
+
+&lt;section id=&quot;about&quot; data-type=&quot;background&quot; data-speed=&quot;10&quot;&gt;
+&lt;/section&gt;
+</code></pre><p>我们使用 <strong>data-type=”background”</strong> 和 <strong>data-speed=”10”</strong>作为关键值来实现效果。</p>
+<a id="more"></a>
+<p>接下来添加内容到结构：</p>
+<pre><code>&lt;section id=&quot;home&quot; data-type=&quot;background&quot; data-speed=&quot;10&quot; class=&quot;pages&quot;&gt;     
+         &lt;article&gt;I am absolute positioned&lt;/article&gt;
+    &lt;/section&gt;   
+
+&lt;section id=&quot;about&quot; data-type=&quot;background&quot; data-speed=&quot;10&quot; class=&quot;pages&quot;&gt;
+         &lt;article&gt;Simple Parallax Scroll&lt;/article&gt;
+&lt;/section&gt;
+</code></pre><p>我们所要实现的就是使背景的移动速度慢于内容，这就会产生一种视觉上的差别。紧接着我们要添加背景图片：</p>
+<pre><code>#home { 
+    background: url(home-bg.jpg) 50% 0 repeat fixed; min-height: 1000px;
+}
+
+#about { 
+    background: url(about-bg.jpg) 50% 0 no-repeat min-height: 1000px;  
+}
+</code></pre><p>我们再美化一下页面：</p>
+<pre><code>#home { 
+  background: url(home-bg.jpg) 50% 0 repeat fixed; min-height: 1000px; 
+  height: 1000px; 
+  margin: 0 auto; 
+  width: 100%; 
+  max-width: 1920px; 
+  position: relative; 
+}
+
+#home article { 
+  height: 458px; 
+  position: absolute; 
+  text-align: center; 
+  top: 150px; 
+  width: 100%; 
+}
+
+#about { 
+  background: url(about-bg.jpg) 50% 0 repeat fixed; min-height: 1000px; 
+  height: 1000px; 
+  margin: 0 auto; 
+  width: 100%; 
+  max-width: 1920px; 
+  position: relative; 
+  -webkit-box-shadow: 0 0 50px rgba(0,0,0,0.8);
+  box-shadow: 0 0 50px rgba(0,0,0,0.8);
+}
+
+#about article { 
+  height: 458px; 
+  position: absolute; 
+  text-align: center; 
+  top: 150px; 
+  width: 100%; 
+}
+</code></pre><p><strong>神奇的代码</strong></p>
+<p>我们引入来jQuery来简化DOM的操作，所以要按照它的标准用法：</p>
+<pre><code>$(document).ready(function(){
+
+});
+</code></pre><p>接下来请注意：我们遍历页面上带有<strong>data-type=”background”</strong>的<strong><section></section></strong>标签。</p>
+<pre><code>$(document).ready(function(){
+
+    $(&apos;section[data-type=&quot;background&quot;]&apos;).each(function(){
+      var $bgobj = $(this); // assigning the object
+    }); 
+
+});
+</code></pre><p>在<strong>each()</strong>方法中添加<strong>scroll()</strong>方法，当用户滚动页面时做出反应。</p>
+<pre><code>$(window).scroll(function() {
+
+});
+</code></pre><p>我们需要知道用户滚动来多少距离，然后把它以<strong>data-speed</strong>平分：</p>
+<pre><code>var yPos = -($(window).scrollTop() / $bgobj.data(&apos;speed&apos;);
+</code></pre><p><strong>$(window).scrollTop()</strong>表示滚动条距离页面顶部的距离，因为背景要朝着页面滚动方法的相反方向移动，所以需要使用负值。</p>
+<p>让我们来使用图片演示一下：</p>
+<p><img src="http://zhuxinyong.com/assets/images/parllax.jpg" alt="parallax"></p>
+<p>接着我们算出位移然后赋值给背景图片：</p>
+<pre><code>// Put together our final background position
+var coords = &apos;50% &apos;+ yPos + &apos;px&apos;;
+
+// Move the background
+$bgobj.css({ backgroundPosition: coords });
+</code></pre><p>最后你的代码应该像这样：</p>
+<pre><code>$(document).ready(function(){
+    $(&apos;section[data-type=&quot;background&quot;]&apos;).each(function(){
+        var $bgobj = $(this); // assigning the object
+
+        $(window).scroll(function() {
+            var yPos = -($(window).scrollTop() / $bgobj.data(&apos;speed&apos;));
+
+            // Put together our final background position
+            var coords = &apos;50% &apos;+ yPos + &apos;px&apos;;
+
+            // Move the background
+            $bgobj.css({ backgroundPosition: coords });
+        }); 
+    });    
+});
+</code></pre><p>原文：<a href="http://code.tutsplus.com/tutorials/simple-parallax-scrolling-technique--net-27641" target="_blank" rel="noopener">simple parallax</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhuxinyong.com/2014-11-16-简单实现视差滚动.html" data-id="cjhq2nxe6001jssg9m0m6508z" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/特效/">特效</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2014-11-16-HTML.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          HTML meta标签可以做的事
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2014-11-13-SublimeText之FileHeader.html" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">SublimeText之FileHeader</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+       
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title recent-posts">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018-05-28-一个数字截取引发的精度问题（四）.html">一个数字截取引发的精度问题（四）</a>
+          </li>
+        
+          <li>
+            <a href="/2017-07-08-sass-vs-less.html">sass vs less</a>
+          </li>
+        
+          <li>
+            <a href="/2017-06-11-全栈工程师指南.html">全栈工程师指南</a>
+          </li>
+        
+          <li>
+            <a href="/2017-06-03-使同事羡慕不已的8个npm命令.html">使同事羡慕不已的8个npm命令</a>
+          </li>
+        
+          <li>
+            <a href="/2017-05-18-微信更新了这些内容，你还不知道？.html">微信更新了这些内容，你还不知道？</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+
+  
+    
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2018 Zhuxy&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;aotuwangren@163.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+ 
+ <script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?2417a647046aae16ca9c71de9041dd92";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+  
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+  
+
+  
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="baidu_union_verify" content="beee9203190d273a561657ff6f6278a8">
+  
+  <title>JavaScript最佳实践二 | 生活😁技术</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="避免多层嵌套  多层嵌套会降低易读性  在循环中嵌套循环是一个不好的做法，同时还要维护多个迭代变量（i,j,k,l,m…）。 function renderProfiles(o){    var out = document.getElementById(&amp;apos;profiles&amp;apos;);    for(var i=0;i&amp;lt;o.members.length;i++){">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript最佳实践二">
+<meta property="og:url" content="http://zhuxinyong.com/2014-11-21-JavaScript最佳实践二.html">
+<meta property="og:site_name" content="生活😁技术">
+<meta property="og:description" content="避免多层嵌套  多层嵌套会降低易读性  在循环中嵌套循环是一个不好的做法，同时还要维护多个迭代变量（i,j,k,l,m…）。 function renderProfiles(o){    var out = document.getElementById(&amp;apos;profiles&amp;apos;);    for(var i=0;i&amp;lt;o.members.length;i++){">
+<meta property="og:locale" content="Chinese">
+<meta property="og:updated_time" content="2018-05-28T02:47:23.876Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript最佳实践二">
+<meta name="twitter:description" content="避免多层嵌套  多层嵌套会降低易读性  在循环中嵌套循环是一个不好的做法，同时还要维护多个迭代变量（i,j,k,l,m…）。 function renderProfiles(o){    var out = document.getElementById(&amp;apos;profiles&amp;apos;);    for(var i=0;i&amp;lt;o.members.length;i++){">
+  
+    <link rel="alternate" href="/atom.xml" title="生活😁技术" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "ca-pub-4882891850616832",
+      enable_page_level_ads: true
+    });
+  </script>
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://zhuxinyong.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">生活😁技术</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-JavaScript最佳实践二" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014-11-21-JavaScript最佳实践二.html" class="article-date">
+  <time datetime="2014-11-21T14:09:20.000Z" itemprop="datePublished">Nov 21 2014</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JavaScript最佳实践二
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p><strong>避免多层嵌套</strong></p>
+<blockquote>
+<p>多层嵌套会降低易读性</p>
+</blockquote>
+<p>在循环中嵌套循环是一个不好的做法，同时还要维护多个迭代变量（i,j,k,l,m…）。</p>
+<pre><code>function renderProfiles(o){
+   var out = document.getElementById(&apos;profiles&apos;);
+   for(var i=0;i&lt;o.members.length;i++){
+      var ul = document.createElement(&apos;ul&apos;);
+      var li = document.createElement(&apos;li&apos;);
+      li.appendChild(document.createTextNode(o.members[i].name));
+      var nestedul = document.createElement(&apos;ul&apos;);
+      for(var j=0;j&lt;o.members[i].data.length;j++){
+         var datali = document.createElement(&apos;li&apos;);
+         datali.appendChild(
+            document.createTextNode(
+               o.members[i].data[j].label + &apos; &apos; + 
+               o.members[i].data[j].value
+            )
+         );
+         nestedul.appendChild(detali);
+      }
+      li.appendChild(nestedul);
+   }
+   out.appendChild(ul);
+}
+</code></pre><a id="more"></a>
+<p>你可以避免多层嵌套，使用特定的方法在循环中完成循环：</p>
+<pre><code>function renderProfiles(o){
+   var out = document.getElementById(&apos;profiles&apos;);
+   for(var i=0;i&lt;o.members.length;i++){
+      var ul = document.createElement(&apos;ul&apos;);
+      var li = document.createElement(&apos;li&apos;);
+      li.appendChild(document.createTextNode(data.members[i].name));
+      li.appendChild(addMemberData(o.members[i]));
+   }
+   out.appendChild(ul);
+}
+function addMemberData(member){
+   var ul = document.createElement(&apos;ul&apos;);
+   for(var i=0;i&lt;member.data.length;i++){
+      var li = document.createElement(&apos;li&apos;);
+      li.appendChild(
+         document.createTextNode(
+            member.data[i].label + &apos; &apos; +
+            member.data[i].value
+         )
+      );
+   }
+   ul.appendChild(li);
+   return ul;
+}
+</code></pre><p> 想像一下不好的编辑器和小屏幕。</p>
+<p> <strong>优化循环</strong></p>
+<blockquote>
+<p>循环在JavaScript中很消耗性能</p>
+</blockquote>
+<p>好多时间浪费在做无用功。</p>
+<p>不要在每次循环时去读取数组长度，应该将其存储在另一个变量中。</p>
+<pre><code>var names = [&apos;George&apos;, 
+&apos;Ringo&apos;, 
+&apos;Paul&apos;, 
+&apos;John&apos;];
+for(var i=0;i&lt;names.length;i++){
+   doSomethingWith(names[i]);
+}
+</code></pre><p>优化：</p>
+<pre><code>var names = [&apos;George&apos;, 
+&apos;Ringo&apos;, 
+&apos;Paul&apos;, 
+&apos;John&apos;];
+for(var i=0,j=names.length;i&lt;j;i++){
+   doSomethingWith(names[i]);
+}
+</code></pre><p>避免在循环中进行过多的计算，包括正则表达式和先前的DOM操作。</p>
+<p>你可以在循环中创建DOM节点，但是请不要在其中进行插入文档操作。</p>
+<p><strong>尽可能少操作DOM</strong></p>
+<blockquote>
+<p>如果你可以避免，那就不要进行DOM操作</p>
+</blockquote>
+<p>原因：首先DOM操作很耗费资源同时在不同浏览器中总有一些问题。</p>
+<p>方法：自己写或者使用别的工具来进行数据到HTML的转化。</p>
+<p>找到尽可能多的数据然后一次渲染完。</p>
+<p><strong>不要屈服于浏览器的特性</strong></p>
+<blockquote>
+<p>不要依赖浏览器的古怪行为并且希望都兼容。</p>
+</blockquote>
+<p>避免Hack而是要分析问题细节。</p>
+<p>当你需要额外功能时，多数时候是因为你糟糕的接口设计。</p>
+<p>__不要迷信任何数据###</p>
+<blockquote>
+<p>好的代码都不信任任何输入的数据</p>
+</blockquote>
+<ul>
+<li>不要相信HTML文档</li>
+</ul>
+<p>任何人都可以对文档瞎搞比如使用Firebug</p>
+<ul>
+<li>不要相信数据总是以正确的格式传入函数</li>
+</ul>
+<p>使用Typeof进行判断然后继续执行程序</p>
+<ul>
+<li>不要相信DOM中的元素总是可获取的</li>
+</ul>
+<p>在改变DOM之前要测试确保相应元素正确存在</p>
+<ul>
+<li>不要使用JavaScript去保护任何东西</li>
+</ul>
+<p>因为它非常脆弱</p>
+<p><strong>使用JavaScript完成功能而不是生产内容</strong></p>
+<blockquote>
+<p>如果在JavaScript中写了许多HTML代码，这表明你做错了</p>
+</blockquote>
+<p>使用DOM接口生成HTML不是很方便并且难以保证生成HTML的质量。</p>
+<p>如果你有大量的接口只有当JavaScript开启时才会有效，这时应该使用Ajax来接收静态页面文件。</p>
+<p>这种方法使你更易维护HTML片段同时可以进行定制它。</p>
+<p><strong>站在巨人的肩膀上</strong></p>
+<blockquote>
+<p>JavaScript很有趣，但是对多个浏览器写代码时体验就不是很好……所以使用一个好的框架</p>
+</blockquote>
+<p>JavaScript框架就是用来修复浏览器的差异性以使浏览器行为和你的代码按预期运行。</p>
+<p>好的框架让你专注于业务代码而不是浪费时间去解决各种浏览器的内部差异。</p>
+<p><strong>开发代码不是活得的代码</strong></p>
+<blockquote>
+<p>活得代码是面向机器的，开发代码是面向人类的</p>
+</blockquote>
+<ul>
+<li><p>在构建阶段校验，压缩和优化你的代码</p>
+</li>
+<li><p>不要过早优化和批评你的同事，这些会使他们从中吸收经验</p>
+</li>
+<li><p>如果减少编写代码的时间，我们可以有更多的时间来完善向机器码的转换</p>
+</li>
+</ul>
+<p>原文：<a href="http://www.thinkful.com/learn/javascript-best-practices-2/Avoid-Heavy-Nesting" target="_blank" rel="noopener">javascript-best-practices-2</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhuxinyong.com/2014-11-21-JavaScript最佳实践二.html" data-id="cjhq2nxe5001gssg99bgehnly" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2014-12-01-Node常用包.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          Node常用包
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2014-11-16-HTML.html" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">HTML meta标签可以做的事</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+       
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title recent-posts">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018-05-28-一个数字截取引发的精度问题（四）.html">一个数字截取引发的精度问题（四）</a>
+          </li>
+        
+          <li>
+            <a href="/2017-07-08-sass-vs-less.html">sass vs less</a>
+          </li>
+        
+          <li>
+            <a href="/2017-06-11-全栈工程师指南.html">全栈工程师指南</a>
+          </li>
+        
+          <li>
+            <a href="/2017-06-03-使同事羡慕不已的8个npm命令.html">使同事羡慕不已的8个npm命令</a>
+          </li>
+        
+          <li>
+            <a href="/2017-05-18-微信更新了这些内容，你还不知道？.html">微信更新了这些内容，你还不知道？</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+
+  
+    
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2018 Zhuxy&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;aotuwangren@163.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+ 
+ <script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?2417a647046aae16ca9c71de9041dd92";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+  
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+  
+
+  
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

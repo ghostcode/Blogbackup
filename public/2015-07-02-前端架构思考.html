@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="baidu_union_verify" content="beee9203190d273a561657ff6f6278a8">
+  
+  <title>前端架构思考 | 生活😁技术</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="其实这个问题我从来没有想过，因为自己是一个菜鸟（虽然现在也是）不是前端领头人，所以只能熟悉公司的框架，然后在里面做业务。 现在虽不是前端Leader，但是需要参与到公司的一些前端架构的东西，所以近期也思考了一些，也经历了一些，则总结一下。 我个人觉得前端架构包括：   技术的选型 (Less，Sass，CoffeeScript…)     代码的调试 (本地直接debug线上代码，SourceMa">
+<meta name="keywords" content="架构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端架构思考">
+<meta property="og:url" content="http://zhuxinyong.com/2015-07-02-前端架构思考.html">
+<meta property="og:site_name" content="生活😁技术">
+<meta property="og:description" content="其实这个问题我从来没有想过，因为自己是一个菜鸟（虽然现在也是）不是前端领头人，所以只能熟悉公司的框架，然后在里面做业务。 现在虽不是前端Leader，但是需要参与到公司的一些前端架构的东西，所以近期也思考了一些，也经历了一些，则总结一下。 我个人觉得前端架构包括：   技术的选型 (Less，Sass，CoffeeScript…)     代码的调试 (本地直接debug线上代码，SourceMa">
+<meta property="og:locale" content="Chinese">
+<meta property="og:updated_time" content="2018-05-28T02:47:23.882Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端架构思考">
+<meta name="twitter:description" content="其实这个问题我从来没有想过，因为自己是一个菜鸟（虽然现在也是）不是前端领头人，所以只能熟悉公司的框架，然后在里面做业务。 现在虽不是前端Leader，但是需要参与到公司的一些前端架构的东西，所以近期也思考了一些，也经历了一些，则总结一下。 我个人觉得前端架构包括：   技术的选型 (Less，Sass，CoffeeScript…)     代码的调试 (本地直接debug线上代码，SourceMa">
+  
+    <link rel="alternate" href="/atom.xml" title="生活😁技术" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "ca-pub-4882891850616832",
+      enable_page_level_ads: true
+    });
+  </script>
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://zhuxinyong.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">生活😁技术</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-前端架构思考" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015-07-02-前端架构思考.html" class="article-date">
+  <time datetime="2015-07-02T15:20:30.000Z" itemprop="datePublished">Jul 2 2015</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      前端架构思考
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>其实这个问题我从来没有想过，因为自己是一个菜鸟（虽然现在也是）不是前端领头人，所以只能熟悉公司的框架，然后在里面做业务。</p>
+<p>现在虽不是前端Leader，但是需要参与到公司的一些前端架构的东西，所以近期也思考了一些，也经历了一些，则总结一下。</p>
+<p>我个人觉得前端架构包括：</p>
+<blockquote>
+<ol>
+<li>技术的选型 (Less，Sass，CoffeeScript…)</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="2">
+<li>代码的调试 (本地直接debug线上代码，SourceMap…)</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="3">
+<li>项目的构建 (合并，压缩，上线…)</li>
+</ol>
+</blockquote>
+<p>这个顺序也是大多数开发关心的等级，从高到底。但是对于参与到架构的人来说，每一项都很重要。</p>
+<a id="more"></a>
+<p><strong>技术选型</strong></p>
+<p>技术的选型始终要围绕三个点：项目，开发人员以及社区。</p>
+<p>项目类型的不同导致技术选择上会有差异，有时候一个项目也会有多种技术或手段实现，这时候就要看对应开发人员的技术能力。</p>
+<p>项目类型这个因素中有两个点需要特别注意：<strong>上线时间和功能点</strong>，这两个会在技术选型上起到决定性作用。你肯定会问 Why？，比如一个功能点只能使用那个唯一的技术，怎么办？别无选择，只能使用它。当然在web开发上，据我个人所知（有限的所知）还没有功能只能通过一个技术手段实现的，因为Hack技术在web开发中无处不在。</p>
+<p>上线时间会在何时起作用？在有多种技术选择，比如一个是新技术，你还不是很熟悉，另一个是你的拿手本领，它们都可以满足需求。此时你会怎么抉择？这时候你应该会看项目周期的安排，在时间允许的情况下，你当然可以使用新技术来实践一下，但是时间紧迫的时候你就会乖乖的选择后者。</p>
+<p>社区这个对于技术的选择也是蛮重要的，一个持续发展的社区肯定比突然爆红的好的多，那在自己经验有限的情况下，如何选择一个有好社区背景的技术呢？我给几个建议：1.GitHub star的数量以及issue的提问以及反馈是否及时，2.公司背景，是否出自大公司，但是也不排除大公司喜欢玩票，3.问你所认识的牛人，这是最快速，最直接的。</p>
+<p><strong>代码调试</strong></p>
+<p>谁也不会保证自己写的代码不会出问题，谁也不敢保证上线的代码会一直运行良好。此时调试的便利程度，会对定位问题起到帮助作用。线上代码的直接debug会显得很重要，因为线上的前端代码都是经过合并，压缩，混淆的，正常人一般是看不懂的。所以这时候就应该要借助工具实现。</p>
+<p><strong>项目构建</strong></p>
+<p>这个部分对大多数开发来说，不需要过分关注（除了架构组），以至于感觉不到它的存在。它就默默的帮你把所有的事情都做好了，现在的工具很多：gulp，grunt，webpack等，选择一个适合公司业务以及社区发展良好的工具。</p>
+<p>这只是简单的一篇记录，肯定还有好多遗漏，待我长发及腰（待我牛B）肯定还会删改！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhuxinyong.com/2015-07-02-前端架构思考.html" data-id="cjhq2nxeo002issg9zct82ntv" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/架构/">架构</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2015-08-14-正则表达式.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          正则表达式
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015-05-27-百变浏览器标签.html" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">百变浏览器标签</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+       
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title recent-posts">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018-05-28-一个数字截取引发的精度问题（四）.html">一个数字截取引发的精度问题（四）</a>
+          </li>
+        
+          <li>
+            <a href="/2017-07-08-sass-vs-less.html">sass vs less</a>
+          </li>
+        
+          <li>
+            <a href="/2017-06-11-全栈工程师指南.html">全栈工程师指南</a>
+          </li>
+        
+          <li>
+            <a href="/2017-06-03-使同事羡慕不已的8个npm命令.html">使同事羡慕不已的8个npm命令</a>
+          </li>
+        
+          <li>
+            <a href="/2017-05-18-微信更新了这些内容，你还不知道？.html">微信更新了这些内容，你还不知道？</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+
+  
+    
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2018 Zhuxy&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;aotuwangren@163.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+ 
+ <script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?2417a647046aae16ca9c71de9041dd92";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+  
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+  
+
+  
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

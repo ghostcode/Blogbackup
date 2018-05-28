@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="baidu_union_verify" content="beee9203190d273a561657ff6f6278a8">
+  
+  <title>低版本Webkit的popstate事件问题 | 生活😁技术</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="对于popstate事件大家应该有个印象：活动历史项改变时触发。 以下几种情况会触发：  点击浏览器的前进，后退按钮 Javascript代码中调用history.back(),forward(),go()  来个简单的例子： 123456789window.onpopstate = function(event) &amp;#123;  alert(&quot;location: &quot; + document.loc">
+<meta property="og:type" content="article">
+<meta property="og:title" content="低版本Webkit的popstate事件问题">
+<meta property="og:url" content="http://zhuxinyong.com/2015-12-22-低版本Webkit的popstate事件问题.html">
+<meta property="og:site_name" content="生活😁技术">
+<meta property="og:description" content="对于popstate事件大家应该有个印象：活动历史项改变时触发。 以下几种情况会触发：  点击浏览器的前进，后退按钮 Javascript代码中调用history.back(),forward(),go()  来个简单的例子： 123456789window.onpopstate = function(event) &amp;#123;  alert(&quot;location: &quot; + document.loc">
+<meta property="og:locale" content="Chinese">
+<meta property="og:updated_time" content="2018-05-28T02:47:23.884Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="低版本Webkit的popstate事件问题">
+<meta name="twitter:description" content="对于popstate事件大家应该有个印象：活动历史项改变时触发。 以下几种情况会触发：  点击浏览器的前进，后退按钮 Javascript代码中调用history.back(),forward(),go()  来个简单的例子： 123456789window.onpopstate = function(event) &amp;#123;  alert(&quot;location: &quot; + document.loc">
+  
+    <link rel="alternate" href="/atom.xml" title="生活😁技术" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "ca-pub-4882891850616832",
+      enable_page_level_ads: true
+    });
+  </script>
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://zhuxinyong.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">生活😁技术</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-低版本Webkit的popstate事件问题" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015-12-22-低版本Webkit的popstate事件问题.html" class="article-date">
+  <time datetime="2015-12-22T07:43:14.000Z" itemprop="datePublished">Dec 22 2015</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      低版本Webkit的popstate事件问题
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>对于popstate事件大家应该有个印象：活动历史项改变时触发。</p>
+<p>以下几种情况会触发：</p>
+<ul>
+<li>点击浏览器的前进，后退按钮</li>
+<li>Javascript代码中调用history.back(),forward(),go()</li>
+</ul>
+<p>来个简单的例子：</p>
+<figure class="highlight roboconf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">window.onpopstate = function(event) &#123;</span><br><span class="line">  <span class="attribute">alert("location</span>: " + document<span class="variable">.location</span> + ", state: " + JSON<span class="variable">.stringify</span>(event<span class="variable">.state</span>));</span><br><span class="line">&#125;;</span><br><span class="line">history.pushState(&#123;<span class="attribute">page</span>: 1&#125;, "title 1", "?page=1");</span><br><span class="line"><span class="attribute">history.pushState(&#123;page</span>: 2&#125;, "title 2", "?page=2");</span><br><span class="line"><span class="attribute">history.replaceState(&#123;page</span>: 3&#125;, "title 3", "?page=3");</span><br><span class="line"><span class="attribute">history.back(); // alerts "location</span>: http://example<span class="variable">.com</span>/example<span class="variable">.html</span>?page=1, state: &#123;"page":1&#125;"</span><br><span class="line">history<span class="variable">.back</span>(); // <span class="attribute">alerts "location</span>: http://example<span class="variable">.com</span>/example<span class="variable">.html</span>, state: null</span><br><span class="line">history<span class="variable">.go</span>(2);  // <span class="attribute">alerts "location</span>: http://example<span class="variable">.com</span>/example<span class="variable">.html</span>?page=3, state: &#123;"page":3&#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<blockquote>
+<p>Browsers tend to handle the popstate event differently on page load.<br>Chrome (prior to v34) and Safari always emit a popstate event on page load, but Firefox doesn’t.</p>
+</blockquote>
+<blockquote>
+<p>浏览器对于页面加载时处理popstate事件的方式有些不同，Chrome(34版本之前)和Safari当浏览器加载时触发popstate事件，但是火狐<br>并不会。</p>
+</blockquote>
+<p>到目前我测试的Safari（9.0）浏览器加载页面时依旧会触发popstate。</p>
+<p>测试代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">'popstate'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'popstate'</span>);</span><br><span class="line">&#125;,<span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
+<p>Safari（9.0-）下测试，会打印出:<strong>popstate</strong>。</p>
+<p>如何避免？</p>
+<p>在时间队列中添加事件，等到进程空闲时则会尽快执行：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">window</span>.addEventListener(<span class="string">'popstate'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'popstate'</span>)</span><br><span class="line">    &#125;,<span class="literal">false</span>);</span><br><span class="line">&#125;,<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<p>初次加载时，event.state值为null:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">'popstate'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(event.state == <span class="literal">null</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'popstate'</span>)</span><br><span class="line">&#125;,<span class="literal">false</span>)</span><br></pre></td></tr></table></figure>
+<p>参考：</p>
+<ol>
+<li><a href="https://github.com/visionmedia/page.js/pull/243" target="_blank" rel="noopener">https://github.com/visionmedia/page.js/pull/243</a></li>
+<li><a href="https://github.com/rackt/react-router/blob/7f60ea666a5791f7d22b645f0a513f5dd89f580e/build/global/ReactRouter.js#L725" target="_blank" rel="noopener">https://github.com/rackt/react-router/blob/7f60ea666a5791f7d22b645f0a513f5dd89f580e/build/global/ReactRouter.js#L725</a></li>
+<li><a href="http://html5doctor.com/history-api/" target="_blank" rel="noopener">http://html5doctor.com/history-api/</a></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhuxinyong.com/2015-12-22-低版本Webkit的popstate事件问题.html" data-id="cjhq2nxer002qssg9kjdktize" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2015-12-22-前端初学者问题.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          前端初学者问题
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015-12-17-IE11无法打开网页.html" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">IE11无法打开网页</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+       
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title recent-posts">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018-05-28-一个数字截取引发的精度问题（四）.html">一个数字截取引发的精度问题（四）</a>
+          </li>
+        
+          <li>
+            <a href="/2017-07-08-sass-vs-less.html">sass vs less</a>
+          </li>
+        
+          <li>
+            <a href="/2017-06-11-全栈工程师指南.html">全栈工程师指南</a>
+          </li>
+        
+          <li>
+            <a href="/2017-06-03-使同事羡慕不已的8个npm命令.html">使同事羡慕不已的8个npm命令</a>
+          </li>
+        
+          <li>
+            <a href="/2017-05-18-微信更新了这些内容，你还不知道？.html">微信更新了这些内容，你还不知道？</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+
+  
+    
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2018 Zhuxy&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;aotuwangren@163.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+ 
+ <script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?2417a647046aae16ca9c71de9041dd92";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+  
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+  
+
+  
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

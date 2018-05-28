@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="baidu_union_verify" content="beee9203190d273a561657ff6f6278a8">
+  
+  <title>生活😁技术</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="生活😁技术">
+<meta property="og:url" content="http://zhuxinyong.com/index.html">
+<meta property="og:site_name" content="生活😁技术">
+<meta property="og:locale" content="Chinese">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="生活😁技术">
+  
+    <link rel="alternate" href="/atom.xml" title="生活😁技术" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "ca-pub-4882891850616832",
+      enable_page_level_ads: true
+    });
+  </script>
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://zhuxinyong.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">生活😁技术</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-一个数字截取引发的精度问题（四）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018-05-28-一个数字截取引发的精度问题（四）.html" class="article-date">
+  <time datetime="2018-05-28T02:47:23.897Z" itemprop="datePublished">May 28 2018</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018-05-28-一个数字截取引发的精度问题（四）.html">一个数字截取引发的精度问题（四）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>做前端的都感觉JS这语言巨坑无比，兼容性让你摸不到头脑。一些初学者遇到：</p>
+<pre><code>0.1 + 0.2 = 0.30000000000000004
+</code></pre><p>都会觉得这JS太TM坑了，一个小数计算都不会。可是我想说，这”锅”JS不背！其实和JS采用的数值存储 <a href="http://grouper.ieee.org/groups/754/" target="_blank" rel="noopener">IEEE754</a> 规范有关，<br>所有采用此规范的语言都会有此问题并不是JS的”锅”。</p>
+<p>IEEE754</p>
+<blockquote>
+<p>IEEE浮点数算术标准（IEEE 754）是最广泛使用的浮点数运算标准，为许多CPU与浮点运算器所采用，单精确度（32位）、双精确度（64位）、延伸单精确度（43位以上，很少使用）与延伸双精确度（79位元以上，通常以80位元实做）</p>
+</blockquote>
+<p>计算机中是用有限的连续字节保存浮点数的。 JS采用64位（双精度）存储数据，在 IEEE 标准中，浮点数是将所有二进制位分割为特定宽度的符号域（S），指数域(E)和尾数域(F)三个域， 其中保存的值分别用于表示给定二进制浮点数中的符号，指数和尾数。</p>
+<p>根据国际标准IEEE 754，任意一个二进制浮点数V可以表示成下面的形式：</p>
+<pre><code>V = (-1)^s×M×2^E
+</code></pre><ol>
+<li>(-1)^s表示符号位，当s=0，V为正数；当s=1，V为负数。</li>
+<li>M表示有效数字，大于等于1，小于2，但整数部分的1可以省略。</li>
+<li><p>2^E表示指数位。</p>
+<p>对于十进制的5.25对应的二进制为：101.01，相当于：<code>1.0101*2^2</code>。所以，S为0，M为1.0101，E为2。<br>而<code>-5.25=-101.01=-1.0101*2^2</code>。所以S为1，M为1.0101，E为2。</p>
+</li>
+</ol>
+<p>复习一下<a href="https://zh.wikipedia.org/zh-hans/%E4%BA%8C%E8%BF%9B%E5%88%B6" target="_blank" rel="noopener">十进制转2进制</a>：</p>
+<p>口诀</p>
+<blockquote>
+<p>整数部分除2取余，由下到上；小数部分乘2取整，由上到下。</p>
+</blockquote>
+<p>0.1 在计算机中如何存储？</p>
+<p>首先 0.1 转化为二进制：0.000110011（0011循环）套用公式可得：</p>
+<pre><code>(-1)^0*1.1001*2^-4
+</code></pre><p>所以 s:0，M:1.1001(循环1001)，E:-4。</p>
+<p>由于小数位仅储存 52bit, 储存时会将超出精度部分进行”零舍一入”，</p>
+<p>无限精确值：</p>
+<pre><code>1001 1001 1001 1001 1001 1001 1001 1001 1001 1001 1001 1001 1001
+</code></pre><p>实际储存值：</p>
+<pre><code>1001 1001 1001 1001 1001 1001 1001 1001 1001 1001 1001 1001 1010
+</code></pre><p>此处精度已经丢失一次。最后0.1实际存储为：</p>
+<pre><code>0.0001 1001 1001 1001 1001 1001 1001 1001 1001 1001 1001 1001 1001 1010
+</code></pre><p>同理计算出0.2的实际存储值（同样也存在精度丢失）：</p>
+<pre><code>0.001 1001 1001 1001 1001 1001 1001 1001 1001 1001 1001 1001 1001 1010
+</code></pre><p>两数相加得：</p>
+<pre><code>0.01001100110011001100110011001100110011001100110011001110
+</code></pre><p>再转为十进制：0.30000000000000004。</p>
+<p>在线转换工具：<a href="http://tool.oschina.net/hexconvert。" target="_blank" rel="noopener">http://tool.oschina.net/hexconvert。</a></p>
+<p>参考：</p>
+<p><a href="https://www.web-tinker.com/article/20035.html" target="_blank" rel="noopener">https://www.web-tinker.com/article/20035.html</a></p>
+<p><a href="http://www.mallocfree.com/interview/c-5-float.htm" target="_blank" rel="noopener">http://www.mallocfree.com/interview/c-5-float.htm</a></p>
+<p><a href="https://zh.wikipedia.org/zh-hans/%E4%BA%8C%E8%BF%9B%E5%88%B6" target="_blank" rel="noopener">https://zh.wikipedia.org/zh-hans/%E4%BA%8C%E8%BF%9B%E5%88%B6</a></p>
+<p><a href="http://2ality.com/2012/04/number-encoding.html" target="_blank" rel="noopener">http://2ality.com/2012/04/number-encoding.html</a></p>
+<p><a href="http://zencode.in/1.%E6%B5%AE%E7%82%B9%E6%95%B0%E5%8A%A0%E5%87%8F%E9%97%AE%E9%A2%98.html" target="_blank" rel="noopener">http://zencode.in/1.%E6%B5%AE%E7%82%B9%E6%95%B0%E5%8A%A0%E5%87%8F%E9%97%AE%E9%A2%98.html</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhuxinyong.com/2018-05-28-一个数字截取引发的精度问题（四）.html" data-id="cjhq2nxft004bssg9ktvb8sd2" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/float-double-精度/">float double 精度</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-sass-vs-less" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017-07-08-sass-vs-less.html" class="article-date">
+  <time datetime="2017-07-07T23:42:06.000Z" itemprop="datePublished">Jul 8 2017</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017-07-08-sass-vs-less.html">sass vs less</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <h2 id="sass"><a href="#sass" class="headerlink" title="sass"></a>sass</h2><p>2007年发布，最早的一款CSS预处理器，带来了变量、常量、嵌套、混入、函数、循环等功能，<br>解决了CSS不可编程的短板。由于浏览器不能直接识别Sass，所以需要预先编译。</p>
+<p>Sass有两套语法规则：</p>
+<ol>
+<li>缩进式</li>
+</ol>
+<pre><code>body
+    color: red
+    header
+        background: red
+</code></pre><ol start="2">
+<li>大括号</li>
+</ol>
+<pre><code>body{
+    color: red
+    header{
+        background: red
+    }
+}
+</code></pre><h2 id="less"><a href="#less" class="headerlink" title="less"></a>less</h2><p>2009年，受Sass影响，但使用的CSS语法，可以快速上手。它也有上面说的一些功能。</p>
+<p>下面对比一些常用功能：</p>
+<h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><p>变量是代码最小的复用单元，可以减少硬编码。</p>
+<p>sass</p>
+<pre><code>$color: blue;
+
+body{
+    $color: black;
+    color: $color;
+}
+</code></pre><p>less </p>
+<pre><code>@color: blue;
+
+body{
+    @color: black;
+    color: @color;
+}
+</code></pre><p>提到变量，就不得不提作用域。</p>
+<pre><code>$color: black;
+.scoped {
+    $bg: blue;
+    $color: white;
+    color: $color;
+    background-color:$bg;
+}
+.unscoped {
+    color:$color;
+}
+</code></pre><p>sass在这里还是有点小问题的:</p>
+<p>3.4.0之前：</p>
+<pre><code>.unscoped{
+    color: white
+}
+</code></pre><p>之后：</p>
+<pre><code>.unscoped{
+    color: black;
+}
+</code></pre><p>后声明的变量总是会覆盖之前声明的变量，不管之前变量在何处声明。也就是变量都是全局的，谁在后面谁是老大。</p>
+<p>3.4.0（包括）之后，修正了这个问题：</p>
+<blockquote>
+<p>All variable assignments not at the top level of the document are now local by default. If there’s a global variable with the same name, it won’t be overwritten unless the !global flag is used. For example, $var: value !global will assign to $var globally. This behavior can be detected using feature-exists(global-variable-shadowing).</p>
+</blockquote>
+<p>大概：变量不再是全局，而默认是局部，除非给变量声明时，加上 !global。</p>
+<p>less就没有这个问题，作用域很其像他编程语言。</p>
+<h2 id="嵌套"><a href="#嵌套" class="headerlink" title="嵌套"></a>嵌套</h2><p>sass/less 官都提到了写出的样式和 HMTL 的结构更加相像，层级很明了。</p>
+<p>html</p>
+<pre><code>&lt;nav&gt;
+    &lt;ul&gt;
+        &lt;li&gt;
+            &lt;a&gt;&lt;/a&gt;
+        &lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/nav&gt;
+</code></pre><p>sass / less</p>
+<pre><code>nav{
+    ul{
+        li{
+           a{
+
+           } 
+        }
+    }
+}
+</code></pre><p>其实这样嵌套深了也不一样好，毕竟最后也会转换为CSS，会导致选择器很长，从性能、代码体积上都会有损失。个人认为 3 到 4 层嵌套<br>就可以了，或者上面的也可以写成：</p>
+<pre><code>nav{
+    ul{
+
+    }
+
+    li{
+
+    }
+
+    a{
+
+    }
+}
+</code></pre><h2 id="混入"><a href="#混入" class="headerlink" title="混入"></a>混入</h2><p>一个规则集合可以导入到另一个规则集合，或者可以说大块的代码复用。适用场景：我们在写 CSS3 时，要加很多前缀（当然现在有好多工具可以自动添加）。</p>
+<p>sass</p>
+<pre><code>@mixin border-radius($radius:10px) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+.box { 
+    @include border-radius(10px); 
+}
+</code></pre><p>less</p>
+<pre><code>.border-radius(@radius:10px){
+  -webkit-border-radius: @radius;
+     -moz-border-radius: @radius;
+      -ms-border-radius: @radius;
+          border-radius: @radius;
+}
+
+.box{
+    .border-radius(5px);
+}
+</code></pre><p>sass 有严格的声明和引用语法：@mixin，@include，而less 就松散很多，同时less还有个问题：</p>
+<pre><code>.mixin{
+    color:red;
+}
+
+.other-mixin(){
+    background:blue;
+}
+
+.class{
+    .mixin;
+    .other-mixin;
+}
+</code></pre><p>output</p>
+<pre><code>.mixin{
+    color:red;
+}
+
+.class{
+    color:red;
+    background:blue;
+}
+</code></pre><p>就是你在使用 mixin 时，不加小括号会把 mixin 也输出。因为 less 的编译器不知道你是在声明<br>mixin 还是在声明普通的选择器。</p>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><p>sass/less 都各自内置了一些函数：Color、String、List、Math、Type等</p>
+<p>sass/less</p>
+<pre><code>@base: #f04615;
+@width: 0.5;
+
+.class {
+   width: percentage(@width); // returns `50%`
+   color: saturate(@base, 5%);
+}
+</code></pre><p>output</p>
+<pre><code>.class {
+   width: 50%;
+   color: #f6430f;
+}
+</code></pre><p>最好的例子应该是 REM 布局中的 px2rem 函数了：</p>
+<pre><code>$baseFontSize:100px !default;
+
+@function px2rem( $px , $base-font-size: $baseFontSize ){
+    @if (unitless($px)) {
+        @return px2rem($px + 0px);
+
+    } @else if (unit($px) == rem) {
+        @return $px;
+    }
+
+    @return $px/($base-font-size) * 1rem;
+}
+
+
+.body{
+    font-size:px2rem(100)
+}
+</code></pre><h2 id="导入"><a href="#导入" class="headerlink" title="导入"></a>导入</h2><p>sass/less</p>
+<pre><code>@import &quot;reset.css&quot;
+
+@import &quot;reset&quot; // reset.less / reset.scss
+</code></pre><h2 id="运算"><a href="#运算" class="headerlink" title="运算"></a>运算</h2><p>四则运算</p>
+<pre><code>+ - * /
+</code></pre><p>sass</p>
+<pre><code>$conversion-1: 5cm + 10mm; // result is 6cm
+$conversion-2: 2 - 3cm - 5mm; // result is -1.5cm
+</code></pre><p>less</p>
+<pre><code>@conversion-1: 5cm + 10mm; // result is 6cm
+@conversion-2: 2 - 3cm - 5mm; // result is -1.5cm
+</code></pre><p>单位也是参与计算的</p>
+<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><p>sass</p>
+<pre><code>.message{
+    border:1px solid #ccc;
+}
+
+.success{
+    @extend .message;
+    border-color:green;
+}
+
+.error{
+    @extend .message;
+    border-color:red;
+}
+</code></pre><p>output</p>
+<pre><code>.message, .success, .error {
+    border: 1px solid #ccc;
+}
+
+.success {
+    border-color: green;
+}
+
+.error {
+    border-color: red;
+}
+</code></pre><p>less （1.4.0加入）</p>
+<pre><code>.message{
+    border:1px solid #ccc;
+}
+
+.success{
+    &amp;:extend(.message);
+    border-color:green;
+}
+
+.error{
+    &amp;:extend(.message);
+    border-color:red;
+}
+</code></pre><p>output</p>
+<pre><code>.message, .success, .error {
+    border: 1px solid #ccc;
+}
+
+.success {
+    border-color: green;
+}
+
+.error {
+    border-color: red;
+}
+</code></pre><p>注：extend 和 mixin 有时可以达到同样的功能，但是从语法和输出后的代码上还是有些区别的。</p>
+<p>extend生成的代码更紧凑、更符合预期。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhuxinyong.com/2017-07-08-sass-vs-less.html" data-id="cjhq2nxg30052ssg9ieuyagxo" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-全栈工程师指南" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017-06-11-全栈工程师指南.html" class="article-date">
+  <time datetime="2017-06-11T01:00:09.000Z" itemprop="datePublished">Jun 11 2017</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017-06-11-全栈工程师指南.html">全栈工程师指南</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p><img src="http://ww1.sinaimg.cn/large/6df9411agy1fghkk9pruuj21jk0x04e7.jpg" alt=""></p>
+<p>根据 Stack Overflow 2016年开发者调查显示，全栈工程师是最欢迎的开发者职业。毫无疑问现在有许多在线或个人课程来帮助程序员成为全栈开发者，甚至帮助这些开发者找到高薪的开发工作。</p>
+<p>一些流行的在线课程，例如：Lynda,Udacity,Coursera,Thinkful,General Assembly 。除了这些在线课程，还有好多个人的新手训练营来提供给web开发者必须的技能。</p>
+<p>在这篇文章中我不会讨论哪个在线或个人课程好，相反我会提供一个我认为成为全栈web开发者所需技能的权威指南。我将以下面三条为基准开始这篇博文：</p>
+<ol>
+<li>2017年教给学生最多的课程是什么</li>
+<li>我为公司面试开发者和有潜力的全栈开发者的经验</li>
+<li>在 Coderbyte 接受新手训练，然后找到开发工作的开发者们的故事和反馈</li>
+</ol>
+<h2 id="权威指南"><a href="#权威指南" class="headerlink" title="权威指南"></a>权威指南</h2><p>全栈工程师指既能开发前端又能开发后端的开发者。前端一般指一个应用中用户能看到和交互的部分，后端一般指一个应用中处理逻辑、数据库、用户授权、服务端配置等的部分。全栈工程师并不意味着你有必要完全掌握前后端的开发技术，而是你可以在构建应用时明白前后端开发到底发生了什么。</p>
+<p><strong>如果你想成为一名全栈开发者同时想得到一份工作，下面就是你应该学习的参考指南。</strong></p>
+<h2 id="1-HTML-CSS"><a href="#1-HTML-CSS" class="headerlink" title="1.HTML/CSS"></a>1.HTML/CSS</h2><p><img src="http://ww1.sinaimg.cn/large/6df9411agy1fghkk8khcnj20m80etwg1.jpg" alt=""></p>
+<p>许多在线和个人课程都以HTML/CSS作为成为一名 web 开发者的开端，因为它俩是web开发的基石。HTML是网站内容的骨架，CSS是为网站内容美化的。下面是一些真实工作中和面试时经常需要的HTML/CSS内容：</p>
+<ol>
+<li>语义化HTML</li>
+<li>解释 CSS Box Model</li>
+<li>CSS 预处理器的优点（你并不需要深入了解，但是你应该知道它解决了什么问题和如何帮助开发者的）</li>
+<li>CSS Media Queries 解决不同屏幕和书写响应式CSS代码</li>
+<li>Bootstrap（一个CSS框架，事实上相对于Bootstrap的特点和方法，更重要的是对CSS基础知识的掌握）</li>
+</ol>
+<h2 id="2-JavaScript"><a href="#2-JavaScript" class="headerlink" title="2.JavaScript"></a>2.JavaScript</h2><p><img src="http://ww1.sinaimg.cn/large/6df9411agy1fghm7tjgxcj20m80got9t.jpg" alt=""></p>
+<p>每年 JavaScript 都变得越来越流行同时新的库、框架和工具都在持续不断的涌现。依据 2016 Stack Overflow 的调查，JavaScript 成为全栈、前端、后端开发的最流行语言。它是唯一一个既可以在浏览器运行又可在后端运行的语言。下面是你成为一个全栈开发所需要了解的内容：</p>
+<ol>
+<li>知道如何处理DOM，同时也知道JSON是什么以及如何维护它。</li>
+<li>functional composition、prototypal、inheritance、closures、event delegation、scope、higher-order functions的一些语言特点</li>
+<li>异步流程控制、promises和callbacks</li>
+<li>学习如何架构你的代码同时抽取模块，了解webpack、browserify或者类似的gulp等构建工具如何帮助开发</li>
+<li>最少了解一个流行框架（许多课程关注在一些库、框架上例如React、AngularJS，但事实上深入了解JavaScript更重要，一旦你对JavaScript有个很好的理解，然后再挑选一个框架从全局来看，你就不会感觉到有什么困难）</li>
+<li>即使有些人在争论jQuery现在使用的很少或者它在渐渐的消亡，可是现在依旧有许多使用它构建的应用，实实在在的掌握jQuery依旧是很有帮助的</li>
+<li>了解一些测试框架同时也应意识到测试为何如此重要</li>
+<li>学习一些ES6的新特性</li>
+</ol>
+<h2 id="3-Back-End-Language"><a href="#3-Back-End-Language" class="headerlink" title="3.Back-End Language"></a>3.Back-End Language</h2><p>一旦你感觉对HTML/CSS和JavaScript掌握的很好，你将需要学习一些处理数据库操作、用户鉴权、应用逻辑的后端语言。一些课程和新手训练营通常会专注一门特定的语言，但是随着你对后端开发的套路越来越清晰的时候，其实选择哪门语言已经不重要。如果你问不同的人，哪个后端语言适合学习会得到不同的答案，所谓仁者见仁智者见智。无论你选择哪个都要坚持学下去，不要三天打鱼两天晒网。下面是不同语言工作的需求量：</p>
+<p><img src="http://ww1.sinaimg.cn/large/6df9411agy1fghkk8cocvj20go0ftjs0.jpg" alt=""></p>
+<p>. Nodejs:这是一个不错的选择因为它本来就是JavaScript，所以你不需要学习一个新的语言。这也是一些在线培训和新手训练营选择Nodejs的一些原因。Express是Nodejs中一个很重要的框架可以帮助你开发web应用。</p>
+<p>. Ruby:一些流行的开发框架，例如：Rails和Sinatra。相当多的课程已将Ruby作为第一后端开发语言。</p>
+<p>. Python:其中的流行开发框架，例如：Django和Flask。</p>
+<p>. Java:当谈及全栈开发的时候，Java并不会被经常提到，但是一些公司依旧在使用Java作为他们的后端语言同时也是一个需求量很大的语言。</p>
+<p>. PHP:现在很少有教PHP的，但是它和JAVA一样需求量依旧存在。</p>
+<h2 id="4-Databases-amp-Web-Storage"><a href="#4-Databases-amp-Web-Storage" class="headerlink" title="4.Databases &amp; Web Storage"></a>4.Databases &amp; Web Storage</h2><p><img src="http://ww1.sinaimg.cn/large/6df9411agy1fghkk8k0i5j20m80et76s.jpg" alt=""></p>
+<p>当你在构建一个web应用，需要存储一些将来要使用的数据时，你应当掌握下面有关databases和storage的一些知识：</p>
+<p>. 掌握关系型数据库，例如：SQL.</p>
+<p>. 学习非关系型数据库，例如：MongoDB.</p>
+<p>. 明白不同场景应该使用哪种。</p>
+<p>. 掌握后端语言如何和数据库连接（Nodejs+MongoDB）</p>
+<p>. 掌握像Redis和memcached的缓存好处</p>
+<p>. 掌握像session，cookies和cached data浏览器端的数据存储</p>
+<p>. 扩展数据库：ACID和ORM</p>
+<h2 id="5-HTTP-amp-REST"><a href="#5-HTTP-amp-REST" class="headerlink" title="5.HTTP &amp; REST"></a>5.HTTP &amp; REST</h2><p><img src="http://ww1.sinaimg.cn/large/6df9411agy1fghkk8k4enj20m806p750.jpg" alt=""></p>
+<p>HTTP是一个允许客户端连接服务器的无状态协议（例如JavaScript可使用AJAX发起一个HTTP请求）。下面就是你需要掌握的清单：</p>
+<p>. 什么是REST以及为何它对HTTP和web应用如此重要？</p>
+<p>. 设计REST API的最佳实践</p>
+<p>. 学习使用Chrome DevTools</p>
+<p>. 什么是SSL Certificates</p>
+<p>. HTTP/2 &amp; SPDY</p>
+<p>. WebSockets，Web Workers和 Service Worders</p>
+<h2 id="6-Web-Application-Architecture"><a href="#6-Web-Application-Architecture" class="headerlink" title="6.Web Application Architecture"></a>6.Web Application Architecture</h2><p><img src="http://ww1.sinaimg.cn/large/6df9411agy1fghkk92bekj20m80c943p.jpg" alt=""></p>
+<p>一旦你既掌握了前端技术又掌握了后端语言，同时数据库玩的也很溜，接下来最困难的东西在等着你。这时你若创建一个有点复杂的应用，就需要知道如何架构你的代码，如何分隔你的文件，在哪存储大体量的音频文件，如何设计你的数据库，在哪端执行有点计算量的任务（客户端vs服务端），当然还有更多需要考虑的。</p>
+<p>你可以在网上读到许多最佳实践，但是最好的方法是自己创建一个大点的应用，或更好一点的是参与到一个团队中开发一个大型的应用。</p>
+<p>这就是为何，一名具有7+年开发经验的人并不一定比只有2年经验的人对CSS和JavaScript有更好的理解。但是这些年他们参与开发了许多不同种类的应用和网站，同时也学习了如何构建和设计应用，以便在需要开发的时候更有效率和掌控全局。下面就是一些架构应用需要用到的知识：</p>
+<p>. 学习<a href="https://en.wikipedia.org/wiki/Platform_as_a_service" target="_blank" rel="noopener">公共平台服务</a>（Heroku，AWS）。Heroku使你发布代码和构建应用非常方便，AWS提供了许多产品和服务需要的存储、视频处理、负载等等</p>
+<p>. 应用和现代浏览器的<a href="https://www.igvita.com/posa/high-performance-networking-in-google-chrome/" target="_blank" rel="noopener">性能优化</a></p>
+<p>. 一个web应用应该包括哪些部分的<a href="https://www.quora.com/What-does-a-web-application-architecture-include" target="_blank" rel="noopener">意见</a></p>
+<p>. 微软的 <a href="https://msdn.microsoft.com/en-us/library/ee658099.aspx" target="_blank" rel="noopener">设计web应用指南</a> </p>
+<p>. <a href="https://softwareengineering.stackexchange.com/questions/127624/what-is-mvc-really" target="_blank" rel="noopener">MVC</a></p>
+<p>. 最重要的是要在项目中和其他开发人员一起工作，在GitHub上学习别人的代码，同时从高级开发者那里尽可能的多学习。</p>
+<h2 id="7-Git"><a href="#7-Git" class="headerlink" title="7.Git"></a>7.Git</h2><p><img src="http://ww1.sinaimg.cn/large/6df9411agy1fghkk8cau1j20m806sglx.jpg" alt=""></p>
+<p>Git是一个版本管理系统，允许开发者追踪代码的所有更改记录。为了能提交、拉取以及解决代码冲突等，你显然需要学习一些Git背后的概念同时也要自己把玩。</p>
+<p>. 这里是一些git命令的<a href="https://git-scm.com/docs" target="_blank" rel="noopener">参考指南</a></p>
+<p>. 这有一个为初学者准备的Git和GitHub<a href="http://product.hubspot.com/blog/git-and-github-tutorial-for-beginners" target="_blank" rel="noopener">教程</a></p>
+<h2 id="8-Basic-Algorithms-amp-Data-Structure"><a href="#8-Basic-Algorithms-amp-Data-Structure" class="headerlink" title="8.Basic Algorithms &amp; Data Structure"></a>8.Basic Algorithms &amp; Data Structure</h2><p><img src="http://ww1.sinaimg.cn/large/6df9411agy1fghkk8i54hj20m80emjup.jpg" alt=""></p>
+<p>这个主题在开发者世界中有点存在两极化，因为有些开发者认为像计算机科学例如：tree traversal,sorting,algorithm analysis,matrix manipulation，在web开发中并不应该过分的关注。但是一些大公司例如Googley依旧会在他们的面试中提问算法相关的问题，就像一些人关于Google前端工程师的说法：</p>
+<blockquote>
+<p>我们的前端工程师希望有一些扎实的CS背景，就像其他工程师一样。</p>
+</blockquote>
+<p>同时一些公司需要候选人拥有计算机科学学位或同等学位，当然也有一些公司不需要候选人有相关证书，只要能证明可以开发应用和对相应领域有所了解就可以。但是为了成为一名有实力的开发者，为了不写出低效的代码，或为了避免只因了解一点基础的算法和数据结构而使用错误的工具，同时为了能视情况作出权衡，所以下面列出了一些你应该学习的东西：</p>
+<p>. 学习并深入了解hash tables，这种数据结构在JavaScript中使用对象表示（Python中为字典，Ruby中是哈希）</p>
+<p>. 明白树和图作为数据结构是如何提供好处的</p>
+<p>. 知道何时使用对象或数组同时能作出很好的权衡</p>
+<p>. 学习在有大量数据时缓存为何如此重要，同时学习内存缓存和硬盘存储的优劣</p>
+<p>. 学习队列和栈的区别</p>
+<p>学习这些当然是一件很难的历程，但是为了成为一名全栈开发者，这些付出都是值得的。</p>
+<p>路漫漫其修远兮，吾将上下而求索！</p>
+<p>原文：<a href="https://medium.com/coderbyte/a-guide-to-becoming-a-full-stack-developer-in-2017-5c3c08a1600c" target="_blank" rel="noopener">https://medium.com/coderbyte/a-guide-to-becoming-a-full-stack-developer-in-2017-5c3c08a1600c</a></p>
+<p>有删改！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhuxinyong.com/2017-06-11-全栈工程师指南.html" data-id="cjhq2nxg50057ssg9xcb01cq2" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-使同事羡慕不已的8个npm命令" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017-06-03-使同事羡慕不已的8个npm命令.html" class="article-date">
+  <time datetime="2017-06-03T04:15:01.000Z" itemprop="datePublished">Jun 3 2017</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017-06-03-使同事羡慕不已的8个npm命令.html">使同事羡慕不已的8个npm命令</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p><img src="http://ww1.sinaimg.cn/large/6df9411agy1fg81eoovltj20xc0duabv.jpg" alt=""></p>
+<p>这篇文章会为你揭示一些有用的 npm 技巧，由于篇幅原因不可能涵盖所有，所以我选择了工程师日常相关且有用的作为本篇文章的关注点。</p>
+<h2 id="基本简写"><a href="#基本简写" class="headerlink" title="基本简写"></a>基本简写</h2><p>为了大家保持一致，特别是新人，首先我们来快速浏览一些基础的简写。</p>
+<h2 id="Installing-a-package"><a href="#Installing-a-package" class="headerlink" title="Installing a package:"></a>Installing a package:</h2><p>通常：</p>
+<pre><code>npm install pkg
+</code></pre><p>简写：</p>
+<pre><code>npm i pkg
+</code></pre><p>Installing a package globally:</p>
+<p>通常：</p>
+<pre><code>npm i --global pkg
+</code></pre><p>简写：</p>
+<pre><code>npm i -g pkg
+</code></pre><p>Installing a package and save it as a dependency:</p>
+<p>通常：</p>
+<pre><code>npm i --save pkg
+</code></pre><p>简写：</p>
+<pre><code>npm i -S pkg
+</code></pre><p>Installing a package and save it as a devDependency:</p>
+<p>通常：</p>
+<pre><code>npm i --save-dev pkg
+</code></pre><p>简写：</p>
+<pre><code>npm i -D pkg
+</code></pre><p>更多的简写请看官网：<a href="https://docs.npmjs.com/misc/config#shorthands-and-other-cli-niceties" target="_blank" rel="noopener">https://docs.npmjs.com/misc/config#shorthands-and-other-cli-niceties</a></p>
+<p>接下来让我们开启有趣之旅：</p>
+<h2 id="1-Initializing-a-new-package"><a href="#1-Initializing-a-new-package" class="headerlink" title="1.Initializing a new package"></a>1.Initializing a new package</h2><p>我们都知道 npm init ,是当我们初始化一个package的第一件事。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/76372-e7cc2e5b253929c9.gif?imageMogr2/auto-orient/strip" alt="npm init"></p>
+<p>但是，这些问题很烦人，所以为什么不避免它呢？</p>
+<p>使用 </p>
+<pre><code>npm init -y
+
+npm init -f
+</code></pre><p>来解救！</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/76372-8739a772bb77d5c4.gif?imageMogr2/auto-orient/strip" alt="3.gif"></p>
+<h2 id="2-Running-tests"><a href="#2-Running-tests" class="headerlink" title="2.Running tests"></a>2.Running tests</h2><p>另一个我们都会用的命令是 <figure class="highlight plain"><figcaption><span>test```，我们中的大多数人会每天使用，甚至一天几次。</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">![4.gif](http://upload-images.jianshu.io/upload_images/76372-0192f44f0c683478.gif?imageMogr2/auto-orient/strip)</span><br><span class="line"></span><br><span class="line">幸运的是，使用 ```npm t```，可以做相同的事！</span><br><span class="line"></span><br><span class="line">![5.gif](http://upload-images.jianshu.io/upload_images/76372-f1ab73c98f70840d.gif?imageMogr2/auto-orient/strip)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">3.List available scripts</span><br><span class="line">--</span><br><span class="line">当我们接手一个新项目时，会考虑如何开始手头的工作。我们经常会自问：我们如何运行项目？有哪些脚本命令可以使用？</span><br><span class="line"></span><br><span class="line">一种方法是找到package.json文件然后查看里面的 ```scripts``` 部分。</span><br><span class="line"></span><br><span class="line">![6.gif](http://upload-images.jianshu.io/upload_images/76372-7501b8f4fdb3074e.gif?imageMogr2/auto-orient/strip)</span><br><span class="line"></span><br><span class="line">当然我们可以做的更优雅一些，可以简单的运行 ```npm run``` 来列出所有可使用的脚本命令。</span><br><span class="line"></span><br><span class="line">![7.gif](http://upload-images.jianshu.io/upload_images/76372-4f4b37708b6dfbbd.gif?imageMogr2/auto-orient/strip)</span><br><span class="line"></span><br><span class="line">另外还可以安装 ```ntl```（```npm i -g ntl```）,然后在项目文件夹下运行 ```ntl```，同时还支持运行脚本。</span><br><span class="line"></span><br><span class="line">![8.gif](http://upload-images.jianshu.io/upload_images/76372-c6a12e2e0318c72a.gif?imageMogr2/auto-orient/strip)</span><br><span class="line"></span><br><span class="line">4.List installed packages</span><br><span class="line">--</span><br><span class="line"></span><br><span class="line">就像上面一样，有时候我们还会自问项目中都有哪些依赖。</span><br><span class="line"></span><br><span class="line">我们同样可以打开package.json文件然后查看，但是我们已经知道我们可以做的更好。</span><br><span class="line"></span><br><span class="line">使用 ```npm ls --depth 0</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/76372-82c42ed632189edd.gif?imageMogr2/auto-orient/strip" alt="9.gif"></p>
+<p>列出全局安装的包，我们可以使用同样的 <figure class="highlight plain"><figcaption><span>的标识， ```npm ls -g --depth 0```。</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">![11.gif](http://upload-images.jianshu.io/upload_images/76372-41bd72b97a934e2b.gif?imageMogr2/auto-orient/strip)</span><br><span class="line"></span><br><span class="line">5.Running locally-installed executables</span><br><span class="line">--</span><br><span class="line"></span><br><span class="line">在项目中我们安装了一个附带可执行文件的包，但是只有当我们通过 npm script 运行是才可用，你或许会惊奇为何？或知道如何避免它？</span><br><span class="line"></span><br><span class="line">首先，我们来理解一下为何--当我们在控制台运行命令时，实际上是在系统环境变量的 ```PATH``` 下列出的所有paths中，寻找同名的可执行文件。这就是为何在任何地方都可执行的原因。本地安装的包是把它们的可执行命令注册在本地的，所以它们没有被列在 ```PATH``` 中，同时也不会被找到。</span><br><span class="line"> </span><br><span class="line">你或许会问：为何在通过 npm script 就可执行？好问题！当以这种方式运行时，npm 做了一些小技巧就是在我们的 ```PATH``` 中增加了额外的目录</span><br></pre></td></tr></table></figure></p>
+<p><project-directory>/node_modules/.bin。<br><figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">你可通过运行 ```npm run env | grep <span class="string">"$PATH"</span> ```来查看，你同样可运行 ```npm run env```来查看所有环境变量，npm 增加了一些有趣的东西在里面。</span><br><span class="line"></span><br><span class="line">我们在项目目录下运行 ```./node_modules/.bin/mocha``` 来实际看看效果</span><br><span class="line"></span><br><span class="line">![<span class="number">10.</span>gif](http:<span class="comment">//upload-images.jianshu.io/upload_images/76372-0dc46e037edcfd18.gif?imageMogr2/auto-orient/strip)</span></span><br><span class="line"></span><br><span class="line">是不是很简单？无论何时你想运行本地安装的可执行文件，只要简单的敲入 ```./node_modules/.bin/&lt;command&gt;```。</span><br><span class="line"></span><br><span class="line"><span class="number">6.</span>Find your package on the internet</span><br><span class="line">--</span><br><span class="line">你或许会在package.json中发现仓库的地址，同时想问此安装包有什么功能？</span><br><span class="line">简单的运行 ```npm repo``` 就会在浏览器中打开该仓库地址。</span><br><span class="line">同样运行 ```npm home``` 命令就会打开 ```homepage```的入口。</span><br><span class="line">如果你想在 npmjs.com 中打开包的页面，有一个贴心的命令： ```npm docs</span><br></pre></td></tr></table></figure></project-directory></p>
+<h2 id="7-Run-scripts-before-and-after-other-scripts"><a href="#7-Run-scripts-before-and-after-other-scripts" class="headerlink" title="7.Run scripts before and after other scripts"></a>7.Run scripts before and after other scripts</h2><p>你可能对类似 pretest 的脚本属性，它可以帮你在运行 test 脚本之前定义一些代码。<br>真正会使你惊奇的是，你同样可以在自定义脚本中使用！</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/76372-6a7d1845fd62f342.gif?imageMogr2/auto-orient/strip" alt="12.gif"></p>
+<p>当你把 npm 作为你的构建工具或者有许多脚本要执行时，这种功能就会很有用。</p>
+<h2 id="8-Bumping-package’s-version"><a href="#8-Bumping-package’s-version" class="headerlink" title="8.Bumping package’s version"></a>8.Bumping package’s version</h2><p>你有一个包，同时使用 semver 做为你的版本记录标准，在你发布新包之前需要填写新的版本号。<br>其中一种方法就是你打开 package.json 文件然后改变里面的值，但是我们可以不需要这样做。<br>另一个简单的方法是运行 <code>npm version</code> 并附带上 <code>major</code>，<code>minor</code> 或者 <code>path</code>。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/76372-7fc7cfba6b732c24.gif?imageMogr2/auto-orient/strip" alt="13.gif"></p>
+<p>我希望你从本博文中学到一些东西，并能运用到你的日常工作中。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhuxinyong.com/2017-06-03-使同事羡慕不已的8个npm命令.html" data-id="cjhq2nxg1004yssg9r4oaz1d7" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-微信更新了这些内容，你还不知道？" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017-05-18-微信更新了这些内容，你还不知道？.html" class="article-date">
+  <time datetime="2017-05-18T02:16:41.000Z" itemprop="datePublished">May 18 2017</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017-05-18-微信更新了这些内容，你还不知道？.html">微信更新了这些内容，你还不知道？</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>微信昨天更新了一个版本，功能如下：</p>
+<ol>
+<li>可在微信实验室体验正在探索的功能</li>
+<li>聊天中查找聊天内容时，可以查找文件、图片、链接</li>
+<li>群主可在群成员信息页中，了解对方是如何加入群聊的</li>
+<li>选择图片时，可便捷地调整并预览已选择的内容</li>
+</ol>
+<p>从上面列出的点，对普通用户 1 和 4 还是值得关注的。</p>
+<p><strong>开启实验室功能</strong></p>
+<p>按照如下顺序开启：</p>
+<p><img src="./assets/images/weixin1.png" alt="css-hover"><br><img src="./assets/images/weixin2.png" alt="css-hover"><br><img src="./assets/images/weixin3.png" alt="css-hover"></p>
+<p><strong>搜一搜</strong></p>
+<p>其中的搜索功能本来就有，这次把它换到了一个更明显的地方。表面看着是换了一个地方，在我体验之后搜索结果还是不同的，从发现页面进入搜索可以搜出小程序：</p>
+<p><img src="./assets/images/kantushizi.png" alt="css-hover"></p>
+<p>不过从下面图也可以进入，聊天页面的搜索可以看成是一个简化版的搜索：</p>
+<p><img src="./assets/images/kantushizi2.png" alt="css-hover"></p>
+<p>搜索功能不仅仅搜索微信下产生的内容，还可以搜索别的平台下的，甚至说可以是全网（微信搞事情，百度吓尿了么？）。</p>
+<p><strong>看一看</strong></p>
+<p>大概看了下里面的内容，应该都是公众号（关注或未关注）里产生的东西。现在不知道里面的推送逻辑，应该是依据好友和自己关注的公众号来推送的。</p>
+<p><strong>发朋友圈可调整图片</strong></p>
+<p>新增了发朋友圈可以长按图片来调整顺序，这个功能还是挺实用的。对那些发有顺序规律的图片还是挺好的。同时还可以同步到QQ空间、facebook、twitter，基本可以做到IFTTT（if this then that）的功能。</p>
+<p>版本更新为提到的和微调的功能：</p>
+<p><strong>文章置顶</strong></p>
+<p>以前未看完的文章可以置顶，同时退到聊天界面，这次我体验下来发现做了微调，置顶之后没有退到聊天界面。感觉不大方便了！</p>
+<p><strong>共同群聊</strong></p>
+<p>在好友界面下有个 更多，点击可以进入可以看到和好友的共同群聊，这又什么用呢？除了给你一声惊叹，哇，他居然也在那个群里，同时还有一个有用的就是可以找回没有保存到通讯录的群聊。</p>
+<p><img src="./assets/images/gongtong.png" alt="css-hover"><br><img src="./assets/images/gongtong2.png" alt="css-hover"></p>
+<p><strong>收付款</strong></p>
+<p>收付款的界面也变了，收款、付款、群收款以及面对面红包被整合到同一个页面中。</p>
+<p><img src="./assets/images/shoufukuan.png" alt="css-hover"></p>
+<p>借图一张</p>
+<p><img src="./assets/images/hulianwang.png" alt="css-hover"></p>
+<p>颤抖吧!</p>
+<p>以上就是我的使用体验和总结。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhuxinyong.com/2017-05-18-微信更新了这些内容，你还不知道？.html" data-id="cjhq2nxg40054ssg9v592hw85" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-微信小程序开发小结" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017-05-13-微信小程序开发小结.html" class="article-date">
+  <time datetime="2017-05-13T06:26:03.000Z" itemprop="datePublished">May 13 2017</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017-05-13-微信小程序开发小结.html">微信小程序开发小结</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>我做的一个小程序《看图识字》在4月27日上线。在线上运行也十来天了，这里做个小结。总结一下为何要做这个、做这个遇到的一些问题以及做一个产品（姑且算一个产品吧）的感悟。</p>
+<h2 id="为何要做这个小程序？"><a href="#为何要做这个小程序？" class="headerlink" title="为何要做这个小程序？"></a>为何要做这个小程序？</h2><ol>
+<li><p>主要是因为小孩即将出生，给他做个小东西做个纪念，同时亲戚朋友也有需要的，所以为了解决用户的需求，就产生了做个小程序的想法。可是这个产品的定位还是很尴尬，因为这个是手机上的程序，不太建议幼儿玩。等到快上小学的时候，认认字还是挺好的，可还是得注意时长。</p>
+</li>
+<li><p>同时也是为了练练手。</p>
+</li>
+</ol>
+<p>这个小程序的雏形也是参考了一些别的产品，这个东西没什么复杂的东西，基本都是我YY的。主要是我看着开心就行，毕竟我是产品（哈哈），但在新的版本里也加了意见反馈功能希望得到用户的反馈。</p>
+<h2 id="遇到的一些问题"><a href="#遇到的一些问题" class="headerlink" title="遇到的一些问题"></a>遇到的一些问题</h2><p>####内容：</p>
+<p>任何一个产品（网站、APP,小程序，桌面应用等）一定是有内容填充的，而内容的来源是第一个要解决的问题。</p>
+<p>根据内容来源的不同，产品的形态又分为如下三种UGC、OGC、PGC:</p>
+<p><img src="./assets/images/yunying-ugc-pgc-ogc.png" alt="css-hover"></p>
+<ul>
+<li>UGC：User-generated Content，用户生产内容</li>
+<li>PGC：Professionally-generated Content，专业生产内容</li>
+<li>OGC：Occupationally-generated Content，职业生产内容</li>
+</ul>
+<p>从定义来看《看图识字》这个小程序属于PGC，出于个人”爱好”，义务的贡献。</p>
+<p>我解决内容问题用了一个想法两种途径：</p>
+<ul>
+<li>想法：自己找人画或者自己学sketch画 ❌</li>
+</ul>
+<p>如果要是按照这个想法做不管是找设计老司机还是我自己搞，估计这个小程序还没上线。如果一个东西拖的太久，慢慢的就失去了做下去的动力，所以我就放弃这个路子。</p>
+<ul>
+<li>另辟蹊径，既然不能重头开始画，那肯定得找现成的，所以我就找网上的图片，图片得是一个系列的也就是画风得一致，别一张一个样，然后就找到一个提供免费文档的地方。里面确实有许多图片，找到一个水果系列的一共25张，我就开始一张一张的右键查看地址下载，等我下载几张后，发现很机械。最后临时找了一个python爬虫教程写了一个简易的<a href="https://github.com/ghostcode/python-spider" target="_blank" rel="noopener">爬虫</a>下载完了图片。</li>
+</ul>
+<p>估计手动下载最多5分钟，可是写爬虫用了半小时😭😭😭。</p>
+<ul>
+<li>爬了两个系列之后，就匆匆上线了。用了一两天，发现图片是在是太渣，然后我就到万能的淘宝去寻觅，最后在和卖家的讨论（撕逼）下，把电子版的图片发我了（有可能侵权）。然后就更新了一版加入了新的系列，图片的质量好点了。不在是土八路（GCD万岁），而是国军穿戴整体。</li>
+</ul>
+<p>###语音</p>
+<p>第二版本加的语音功能，当时我的想法是搜一下网上有没有现成的API直接调用一下，可是没搜到。最后想到的是百度翻译</p>
+<p><img src="./assets/images/yuyin.png" alt="css-hover"></p>
+<p>可是等我把：</p>
+<pre><code>https://sp0.baidu.com/-rM1hT4a2gU2pMbgoY3K/gettts?lan=uk&amp;text=hello&amp;spd=2&amp;source=alading
+</code></pre><p>复制到浏览器里时，居然把mp3下载下来了：</p>
+<p><img src="./assets/images/mp3.png" alt="css-hover"></p>
+<p>可这并不是我想要的，我想的是直接发音。最后搜到一篇文章：<a href="http://dwz.cn/5Xia0K" target="_blank" rel="noopener">http://dwz.cn/5Xia0K</a> 里面有价值的就是一个地址：</p>
+<pre><code>http://tts.baidu.com/text2audio?lan=en&amp;pid=101&amp;ie=UTF-8&amp;text=hello&amp;spd=2
+</code></pre><p>把上面地址复制到浏览器后出现了我想要的：</p>
+<p><img src="./assets/images/tts.png" alt="css-hover"></p>
+<p>就在我写的时候又发现有道翻译也有一个不错的发音API，自己去找吧！</p>
+<h2 id="感悟"><a href="#感悟" class="headerlink" title="感悟"></a>感悟</h2><p>从开始有想法到写好第一版本共用2天，因为功能简单同时也是为了先有个大概的东西就匆匆的上线了。如果当时没有那么快上线，若一开始就考虑很多东西，估计已经废掉了。如果快、糙、猛的先上一版，不巧还有用户在用就会不断督促自己修改、优化。</p>
+<p>现在也每天看看数据，虽然也有些数据看不懂：</p>
+<p>在被”知晓程序”公众号一周最新《晓榜》16期推送后访问达到顶峰，然后就一直下滑 😭 幸福来得突然也不是一件好事。</p>
+<p><img src="./assets/images/liuliang.png" alt="css-hover"></p>
+<p>欣慰的是累计用户目前一直是增加的目前总人数是：1150</p>
+<p><img src="./assets/images/leiji.png" alt="css-hover"></p>
+<p>还有一个数据挺好，有29.6%的访问来自于搜索，说明起的名字还是可以的同时需求也是存在的：</p>
+<p><img src="./assets/images/sousuo.png" alt="css-hover"></p>
+<p>小程序：</p>
+<p><img src="./assets/images/kantushizi.jpeg" alt="css-hover"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhuxinyong.com/2017-05-13-微信小程序开发小结.html" data-id="cjhq2nxg0004wssg9nhzt4r31" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-Mac读取NTFS移动硬盘" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017-05-04-Mac读取NTFS移动硬盘.html" class="article-date">
+  <time datetime="2017-05-04T15:37:11.000Z" itemprop="datePublished">May 4 2017</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017-05-04-Mac读取NTFS移动硬盘.html">Mac读取NTFS移动硬盘</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p><a href="http://enjoygineering.com/mounty/" target="_blank" rel="noopener">http://enjoygineering.com/mounty/</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhuxinyong.com/2017-05-04-Mac读取NTFS移动硬盘.html" data-id="cjhq2nxfz004tssg9fuvlcx7c" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-你的人生需要一场马拉松" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017-05-04-你的人生需要一场马拉松.html" class="article-date">
+  <time datetime="2017-05-04T05:44:51.000Z" itemprop="datePublished">May 4 2017</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017-05-04-你的人生需要一场马拉松.html">你的人生需要一场马拉松</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <h2 id="定目标"><a href="#定目标" class="headerlink" title="定目标"></a>定目标</h2><p>过年的时候，在家就定了几个小目标，其中一个就是：跑一个半程马拉松。当时老婆听了就说了一句话：“<strong>千万别跑挂了！</strong>”。</p>
+<p>个人认为目标的特点：</p>
+<blockquote>
+<p>短期、具体、具有挑战而又可完成。</p>
+</blockquote>
+<p>短期很好理解不要把战线拉得太长，国家还五年一个大计划呢，所以在时间上拖的太长，容易失去控制。同时自己的付出不能得到及时的反馈，容易疲惫。</p>
+<p>具体就是你要干什么</p>
+<p>有挑战而又可完成可理解为目标不要太高，也不要太低。比如高中毕业的不要再研究1+1等于几，同样也不要说高中毕业我开始研究狭义相对论。倒是可以研究一下到大学怎么泡妹子（😆😆）</p>
+<p>综上所述：</p>
+<pre><code>跑2017年4月23日的半程马拉松
+</code></pre><p>是一个符合上述特征的目标。</p>
+<p>跑步的动力：</p>
+<pre><code>1. 给即将出生（现在已经出生）的小孩一个奖牌，并告诉他：人生即将开始，人生有开心，有痛苦，而你需要的是坚持。
+2. 挑战自己，同时锻炼一个健康的身体
+</code></pre><h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><p>经过9次稍微长点的锻炼:</p>
+<p><img src="http://ww1.sinaimg.cn/large/6df9411agy1ff9k3vq2rfj20j40l0gqw.jpg" alt=""></p>
+<p><img src="http://ww1.sinaimg.cn/large/6df9411agy1ff9k3vqxsvj20j00nwq93.jpg" alt=""></p>
+<p>在开跑前我都没有完成一次20公里的距离，所以去跑半马心里是没有底的。在报名后，等待抽签时，结果如下：</p>
+<p><img src="http://ww1.sinaimg.cn/large/6df9411agy1ff9ejaj25dj213s0tqx2c.jpg" alt=""></p>
+<p>没有抽中！！！但是经老司机带路说可以蹭跑，而且还可以弄个假的号码：</p>
+<p><img src="http://ww1.sinaimg.cn/large/6df9411agy1ff9g91qrkyj219i0oub00.jpg" alt=""></p>
+<p>城市套路太深，乡间小路太滑！</p>
+<h2 id="开跑"><a href="#开跑" class="headerlink" title="开跑"></a>开跑</h2><p>4月23日早7点东方明珠附件开跑，本以为5点起来过去很早，谁知：</p>
+<p><img src="http://ww1.sinaimg.cn/large/6df9411agy1ff9gg2ero3j20zk0qo784.jpg" alt=""></p>
+<p>到的时候已经人山人海，红旗飘展，锣鼓喧天！开跑前最后奏国歌，貌似大家都不由自主的开始唱了，在那种氛围下还是挺激动的，激动的差点少先队礼！😂</p>
+<p>随着一声枪响，撒丫子跑！！！</p>
+<p>在到第一个补给站时，我已经渴的不行了。真的意识到水的可贵！！！</p>
+<p>知乎上有个问题：<strong>马拉松运动员比赛时都在想什么？</strong> 截取几个：</p>
+<blockquote>
+<p>发枪前——能不能快些呀….挤死了…哥们儿你气球打着我了….站着好累啊！…哎哟有灰机！…“嘿～兄弟状态不错呀”….巴拉巴拉….</p>
+</blockquote>
+<blockquote>
+<p>嗯～边上那个妹子不错，看起来是第一次跑…要不要搭讪…要不要搭讪…要不要搭讪…卧槽！起跑了！</p>
+</blockquote>
+<blockquote>
+<p>前5km——啊，好high啊！…啊，人好多啊！…啊！give me five！…草草草！配速高了！憋冲动！</p>
+</blockquote>
+<p>而我：</p>
+<blockquote>
+<p>下一个补给站怎么还不到，渴啊！</p>
+</blockquote>
+<blockquote>
+<p>10km了，累的不行了，开溜吧！啊，要是这样开溜，丢人啊！开始在坚持一下吧。</p>
+</blockquote>
+<p>这种想法就持续到最后，所以能坚持下来除了毅力，还有不能那么丢人的开溜想法。</p>
+<p>还有150m左右时，看计时器2小时28分钟，啊，加速加速，跑进2小时30分钟！耶，过终点！赶紧拍照！</p>
+<h2 id="感悟"><a href="#感悟" class="headerlink" title="感悟"></a>感悟</h2><blockquote>
+<p>半马在认真做过锻炼后，还是能完成的。</p>
+</blockquote>
+<blockquote>
+<p>慢慢的让身体适应节奏，3km、5km、10km、15km、20km，每一级别都跑2-3次,然后进入下个级别。不要图急于求成，急不得，身体会受不了！</p>
+</blockquote>
+<blockquote>
+<p>跑步时，配速要稳。切记急跑急停，毕竟马拉松不是一个需要爆发力的项目，需要的是耐力！</p>
+</blockquote>
+<blockquote>
+<p>马拉松是一次与自己的较量与自己的对话，无关他人，战胜自己，就是胜利！</p>
+</blockquote>
+<p>现在在家陪老婆和孩子，感觉自己还没长大，孩子已经出世！从此多了一个称谓，多了一份责任！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhuxinyong.com/2017-05-04-你的人生需要一场马拉松.html" data-id="cjhq2nxfy004qssg9slxrnmnp" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-Canvas-矩形" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017-04-05-Canvas-矩形.html" class="article-date">
+  <time datetime="2017-04-05T12:28:32.000Z" itemprop="datePublished">Apr 5 2017</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017-04-05-Canvas-矩形.html">Canvas-矩形</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhuxinyong.com/2017-04-05-Canvas-矩形.html" data-id="cjhq2nxfx004nssg936j9uqmc" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-Canvas-方法简介" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017-04-05-Canvas-方法简介.html" class="article-date">
+  <time datetime="2017-04-05T03:36:37.000Z" itemprop="datePublished">Apr 5 2017</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017-04-05-Canvas-方法简介.html">Canvas-绘制线</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <h2 id="坐标系统简析"><a href="#坐标系统简析" class="headerlink" title="坐标系统简析"></a>坐标系统简析</h2><p><img src="http://upload-images.jianshu.io/upload_images/76372-31fb7cb9ef6bf603.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>左边是笛卡尔坐标系，右边是canvas坐标系。</p>
+<p>笛卡尔坐标系（Cartesian coordinate system）：</p>
+<blockquote>
+<p>也称直角坐标系，是一种正交坐标系。二维的直角坐标系是由两条相互垂直、0点重合的数轴组成。</p>
+</blockquote>
+<p>canvas坐标系和web坐标系一致，左上角为原点。</p>
+<h2 id="绘制线"><a href="#绘制线" class="headerlink" title="绘制线"></a>绘制线</h2><p>代码基础：</p>
+<pre><code>var canvas = document.getElementById(&apos;j-canvas&apos;);
+
+if (canvas.getContext) {
+    var ctx = canvas.getContext(&apos;2d&apos;);
+
+    // 在此添加代码
+}
+</code></pre><p>主要方法：</p>
+<pre><code>lineTo()
+</code></pre><p>单纯只用上面一个方法是不能画出线的，需要别的方法配合：</p>
+<pre><code>ctx.moveTo(0,10); // 画笔的起点或重新定位画笔
+
+ctx.lineTo(200,10);
+
+ctx.stroke(); // 描边 
+</code></pre><p>绘制结果，如下：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/76372-70f667eb5dbe1f6d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>修饰方法：</p>
+<p>lineWidth：默认值 1.0</p>
+<pre><code>ctx.lineWidth = number;
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/76372-78d574b6c1b8b8e0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>lineCap: 线的尾部何种样子</p>
+<pre><code>ctx.lineCap = &quot;butt&quot;; // 默认值
+ctx.lineCap = &quot;round&quot;;
+ctx.lineCap = &quot;square&quot;;
+</code></pre><p>如下：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/76372-65e0c520d43fda84.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>square的尺寸为： lineWidth/2 * lineWidth</p>
+<p>lineJoin: 线与线之间如何衔接</p>
+<pre><code>ctx.lineJoin = &quot;bevel&quot;;
+ctx.lineJoin = &quot;round&quot;;
+ctx.lineJoin = &quot;miter&quot;; // 默认值
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/76372-bef754fe562a1779.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>注：round的半径是lineWidth，miter为两条线延伸然后组成一个菱形。</p>
+<p>miterLimit: </p>
+<pre><code>ctx.miterLimit = value; // 默认值 10.0，（设置为：0, 负值, Infinity and NaN 则忽略）
+</code></pre><p>设置或返回最大斜接长度，斜接长度指的是在两条线交汇处内角和外角之间的距离：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/76372-3a0ddaac7f723f1a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>注：只有当 lineJoin 属性为 “miter” 时，miterLimit 才有效。</p>
+<p>如果斜接长度超过 miterLimit 的值，边角会以 lineJoin 的 “bevel” 类型来显示（图解 3）：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/76372-5e27edb38e26f020.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>setLineDash():</p>
+<pre><code>ctx.setLineDash(segments); // segments 为数组
+</code></pre><p>若数组为：[5,10]，设置偶数个数值，[线，空白]交替绘制</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/76372-fc1bd98bf2058985.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>线就是5，空白就是10。</p>
+<p>如果数组为：[5,10,15]，设置奇数个数值，内部会变成 [5,10,15,5,10,15],[线，空白,线，空白，线，空白]</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/76372-65c9247f75074d00.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>getLineDash():</p>
+<pre><code>ctx.getLineDash(); 
+</code></pre><p>返回一个偶数个数字的数组，若设置的为[5,10]，返回则为[5,10]；若设置的为[5,10,15]，返回则为[5,10,15,5,10,15]。</p>
+<p>lineDashOffset:</p>
+<pre><code>ctx.lineDashOffset = value;
+</code></pre><p>默认值：0.0，设置线的偏移量，可正（整体逆时针移动），可负（整体顺时针移动）</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/76372-c595087c1c798a4e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>绘制（Marching ants）</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/76372-0d39d3ad750d2683.gif?imageMogr2/auto-orient/strip" alt=""></p>
+<pre><code>var offset = 0;
+
+(function march(){
+    ctx.clearRect(0,0,canvas.width,canvas.height); 
+    ctx.setLineDash([5, 10]);
+
+    ctx.beginPath();
+
+    ctx.lineDashOffset = -offset;
+
+    ctx.moveTo(10, 40);
+    ctx.lineTo(200, 40);
+    ctx.lineTo(200,100);
+    ctx.lineTo(10,100);
+    ctx.lineTo(10,40)
+
+    ctx.stroke();
+
+    // 增加
+    offset++;
+
+    setTimeout(xxx,100)
+})();
+</code></pre><p>原理：offset每100毫秒增加一个单位，每增加一个单位整体就向右移动一个单位，再配合 clearRect 清除画布，视觉上感觉就是在顺时针移动。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhuxinyong.com/2017-04-05-Canvas-方法简介.html" data-id="cjhq2nxfw004lssg99zeig42e" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+
+
+  <nav id="page-nav">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/2/">下一页&raquo;</a>
+  </nav>
+</section>
+           
+    <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+     
+        <h3 class="follow-title ">Follow me</h3>
+     
+    <div class="widget follow">
+      
+              <a class="github" aria-hidden="true" href="https://github.com/ghostcode" target="_blank" title="Github"></a>
+      
+      
+            <a class="weibo" aria-hidden="true"  href="https://weibo.com/ghostcode/" target="_blank" title="微博"></a>
+      
+      
+              <a class="zhihu" aria-hidden="true"  href="https://www.zhihu.com/people/zhuxy/activities" target="_blank" title="知乎"></a>
+      
+      
+            <a class="email" aria-hidden="true"  href="mailto:670847184@qq.com" target="_blank" title="邮箱"></a>
+      
+    </div>
+  </div>
+
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title categories">分类</h3>
+    <div class="widget" id="categories">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/JavaScript/">JavaScript</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/javascript/">javascript</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/javascript/">javascript</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活/">生活</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title tagcloud">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Ajax/" style="font-size: 14px;">Ajax</a> <a href="/tags/ES6/" style="font-size: 14px;">ES6</a> <a href="/tags/Express/" style="font-size: 14px;">Express</a> <a href="/tags/Git/" style="font-size: 14px;">Git</a> <a href="/tags/Grunt/" style="font-size: 14px;">Grunt</a> <a href="/tags/HTML/" style="font-size: 14px;">HTML</a> <a href="/tags/JavaScript/" style="font-size: 19.5px;">JavaScript</a> <a href="/tags/Javascript/" style="font-size: 19.5px;">Javascript</a> <a href="/tags/Mac/" style="font-size: 14px;">Mac</a> <a href="/tags/Node/" style="font-size: 14px;">Node</a> <a href="/tags/Node-Express/" style="font-size: 14px;">Node Express</a> <a href="/tags/Sublime/" style="font-size: 19.5px;">Sublime</a> <a href="/tags/canvas/" style="font-size: 14px;">canvas</a> <a href="/tags/chrome/" style="font-size: 14px;">chrome</a> <a href="/tags/css3/" style="font-size: 14px;">css3</a> <a href="/tags/float-double-精度/" style="font-size: 25px;">float double 精度</a> <a href="/tags/hexo/" style="font-size: 19.5px;">hexo</a> <a href="/tags/javascript/" style="font-size: 14px;">javascript</a> <a href="/tags/promise/" style="font-size: 14px;">promise</a> <a href="/tags/regexp/" style="font-size: 14px;">regexp</a> <a href="/tags/throttle/" style="font-size: 14px;">throttle</a> <a href="/tags/webcomponents/" style="font-size: 14px;">webcomponents</a> <a href="/tags/主题/" style="font-size: 14px;">主题</a> <a href="/tags/想法/" style="font-size: 14px;">想法</a> <a href="/tags/效果/" style="font-size: 14px;">效果</a> <a href="/tags/架构/" style="font-size: 14px;">架构</a> <a href="/tags/浏览器/" style="font-size: 14px;">浏览器</a> <a href="/tags/特效/" style="font-size: 14px;">特效</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title recent-posts">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018-05-28-一个数字截取引发的精度问题（四）.html">一个数字截取引发的精度问题（四）</a>
+          </li>
+        
+          <li>
+            <a href="/2017-07-08-sass-vs-less.html">sass vs less</a>
+          </li>
+        
+          <li>
+            <a href="/2017-06-11-全栈工程师指南.html">全栈工程师指南</a>
+          </li>
+        
+          <li>
+            <a href="/2017-06-03-使同事羡慕不已的8个npm命令.html">使同事羡慕不已的8个npm命令</a>
+          </li>
+        
+          <li>
+            <a href="/2017-05-18-微信更新了这些内容，你还不知道？.html">微信更新了这些内容，你还不知道？</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title archive">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/02/">February 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  
+    <!--微信公众号二维码-->
+
+  <div class="widget-wrap">
+    <h3 class="follow-title ">WeChat</h3>
+    <div class="widget wechat-widget">
+        <img src="https://user-images.githubusercontent.com/745181/40598611-56c8751c-627b-11e8-87b4-9987232737ff.jpg" alt="扫码关注" width="250"/>
+    </div>
+  </div>
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2018 Zhuxy&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;aotuwangren@163.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+ 
+ <script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?2417a647046aae16ca9c71de9041dd92";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+  
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+  
+
+  
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

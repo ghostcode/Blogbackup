@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="baidu_union_verify" content="beee9203190d273a561657ff6f6278a8">
+  
+  <title>生活😁技术</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="生活😁技术">
+<meta property="og:url" content="http://zhuxinyong.com/page/8/index.html">
+<meta property="og:site_name" content="生活😁技术">
+<meta property="og:locale" content="Chinese">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="生活😁技术">
+  
+    <link rel="alternate" href="/atom.xml" title="生活😁技术" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "ca-pub-4882891850616832",
+      enable_page_level_ads: true
+    });
+  </script>
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://zhuxinyong.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">生活😁技术</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-Node常用包" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014-12-01-Node常用包.html" class="article-date">
+  <time datetime="2014-12-01T14:36:35.000Z" itemprop="datePublished">Dec 1 2014</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014-12-01-Node常用包.html">Node常用包</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>这里是个人经常用到得Node包，排名不分先后：</p>
+<ol>
+<li><a href="https://www.npmjs.org/package/anywhere" target="_blank" rel="noopener">anywhere</a> （Run static file server anywhere） </li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhuxinyong.com/2014-12-01-Node常用包.html" data-id="cjhq2nxe5001issg9cnwmpdc2" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Node/">Node</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-JavaScript最佳实践二" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014-11-21-JavaScript最佳实践二.html" class="article-date">
+  <time datetime="2014-11-21T14:09:20.000Z" itemprop="datePublished">Nov 21 2014</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014-11-21-JavaScript最佳实践二.html">JavaScript最佳实践二</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>避免多层嵌套</strong></p>
+<blockquote>
+<p>多层嵌套会降低易读性</p>
+</blockquote>
+<p>在循环中嵌套循环是一个不好的做法，同时还要维护多个迭代变量（i,j,k,l,m…）。</p>
+<pre><code>function renderProfiles(o){
+   var out = document.getElementById(&apos;profiles&apos;);
+   for(var i=0;i&lt;o.members.length;i++){
+      var ul = document.createElement(&apos;ul&apos;);
+      var li = document.createElement(&apos;li&apos;);
+      li.appendChild(document.createTextNode(o.members[i].name));
+      var nestedul = document.createElement(&apos;ul&apos;);
+      for(var j=0;j&lt;o.members[i].data.length;j++){
+         var datali = document.createElement(&apos;li&apos;);
+         datali.appendChild(
+            document.createTextNode(
+               o.members[i].data[j].label + &apos; &apos; + 
+               o.members[i].data[j].value
+            )
+         );
+         nestedul.appendChild(detali);
+      }
+      li.appendChild(nestedul);
+   }
+   out.appendChild(ul);
+}
+</code></pre>
+        
+          <p class="article-more-link">
+            <a href="/2014-11-21-JavaScript最佳实践二.html#more">继续阅读全文 »</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhuxinyong.com/2014-11-21-JavaScript最佳实践二.html" data-id="cjhq2nxe5001gssg99bgehnly" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-HTML" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014-11-16-HTML.html" class="article-date">
+  <time datetime="2014-11-16T13:21:36.000Z" itemprop="datePublished">Nov 16 2014</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014-11-16-HTML.html">HTML meta标签可以做的事</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="http://zhuxinyong.com/assets/images/meta-tag.jpg" alt="meta"></p>
+<p>Meta标签是用来存储一些页面信息，目的是使浏览器和搜索引擎更好的理解页面。</p>
+<p>作为网站开发者你可以通过meta存储页面描述，作者和关键词。或许有些标签我们不是很熟悉，这里我搜集了5个：</p>
+<p>＊ 控制浏览器缓存</p>
+<p>当你浏览器某个网站时，浏览器会帮你缓存一些东西以使后来的访问更快速。你或许经历过网站已经更新但你浏览的依旧是以前的，这是因为浏览器显示缓存的页面，你可以禁止浏览器缓存：</p>
+<pre><code>&lt;meta http-equiv=&quot;Cache-Control&quot; content=&quot;no-store&quot; /&gt;  
+</code></pre><p>这在火狐，谷歌和IE中都可以使用，在IE中你还可以声明更多：</p>
+<pre><code>&lt;meta http-equiv=&quot;Cache-Control&quot; content=&quot;no-cache&quot; /&gt;  
+&lt;meta http-equiv=&quot;Pragma&quot; content=&quot;no-cache&quot; /&gt;  
+</code></pre>
+        
+          <p class="article-more-link">
+            <a href="/2014-11-16-HTML.html#more">继续阅读全文 »</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhuxinyong.com/2014-11-16-HTML.html" data-id="cjhq2nxe4001dssg9wkurvfjg" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTML/">HTML</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-简单实现视差滚动" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014-11-16-简单实现视差滚动.html" class="article-date">
+  <time datetime="2014-11-16T09:03:34.000Z" itemprop="datePublished">Nov 16 2014</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014-11-16-简单实现视差滚动.html">简单实现视差滚动</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>视差滚动是一个有趣的技术，当你滚动页面时背景移动的速度慢于内容（前景内容），造成一种3D效果。</p>
+<p>接下来我将使用最简单的代码实现视差效果。</p>
+<p><strong>页面结构</strong></p>
+<p>这个技术的要点在于控制背景的移动速度，所以开始我们先创建HTML结构：</p>
+<pre><code>&lt;section id=&quot;home&quot; data-type=&quot;background&quot; data-speed=&quot;10&quot;&gt;                            
+&lt;/section&gt;   
+
+&lt;section id=&quot;about&quot; data-type=&quot;background&quot; data-speed=&quot;10&quot;&gt;
+&lt;/section&gt;
+</code></pre><p>我们使用 <strong>data-type=”background”</strong> 和 <strong>data-speed=”10”</strong>作为关键值来实现效果。</p>
+        
+          <p class="article-more-link">
+            <a href="/2014-11-16-简单实现视差滚动.html#more">继续阅读全文 »</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhuxinyong.com/2014-11-16-简单实现视差滚动.html" data-id="cjhq2nxe6001jssg9m0m6508z" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/特效/">特效</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-SublimeText之FileHeader" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014-11-13-SublimeText之FileHeader.html" class="article-date">
+  <time datetime="2014-11-13T06:11:39.000Z" itemprop="datePublished">Nov 13 2014</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014-11-13-SublimeText之FileHeader.html">SublimeText之FileHeader</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>创建一个新文件</strong></p>
+<ul>
+<li>侧栏菜单</li>
+</ul>
+<p><img src="http://zhuxinyong.com/assets/images/newfile.gif" alt="new file"></p>
+<ul>
+<li>快捷键</li>
+</ul>
+<blockquote>
+<p>OSX默认<strong>super+alt+n</strong>，Windows和Linux默认<strong>ctrl+alt+n</strong></p>
+</blockquote>
+<p><strong>为已经存在的文件添加头部</strong></p>
+        
+          <p class="article-more-link">
+            <a href="/2014-11-13-SublimeText之FileHeader.html#more">继续阅读全文 »</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhuxinyong.com/2014-11-13-SublimeText之FileHeader.html" data-id="cjhq2nxe3001bssg93ghj28ja" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sublime/">Sublime</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-JavaScript最佳实践一" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014-11-13-JavaScript最佳实践一.html" class="article-date">
+  <time datetime="2014-11-13T01:37:38.000Z" itemprop="datePublished">Nov 13 2014</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014-11-13-JavaScript最佳实践一.html">JavaScript最佳实践一</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>变量和函数名有意义</strong></p>
+<p>选择易理解和简短的名字作为变量和方法。</p>
+<p><strong>糟糕的命名</strong></p>
+<pre><code>x1 fe2 xbqne
+</code></pre><p><strong>同样糟糕的命名</strong></p>
+<pre><code>incrementerForMainLoopWhichSpansFromTenToTwenty
+}
+createNewMemberIfAgeOverTwentyOneAndMoonIsFull
+</code></pre><p>尽量避免使用变量和方法的名字去解释值。</p>
+        
+          <p class="article-more-link">
+            <a href="/2014-11-13-JavaScript最佳实践一.html#more">继续阅读全文 »</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhuxinyong.com/2014-11-13-JavaScript最佳实践一.html" data-id="cjhq2nxdz0015ssg9g5wl9coi" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-Git" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014-11-12-Git.html" class="article-date">
+  <time datetime="2014-11-11T23:29:56.000Z" itemprop="datePublished">Nov 12 2014</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014-11-12-Git.html">Git flow备忘清单</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p><a href="http://danielkummer.github.io/git-flow-cheatsheet/index.zh_CN.html" target="_blank" rel="noopener">Git flow备忘清单</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhuxinyong.com/2014-11-12-Git.html" data-id="cjhq2nxe10019ssg9hpyklw74" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-Mac终端变主题" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014-11-08-Mac终端变主题.html" class="article-date">
+  <time datetime="2014-11-08T12:20:54.000Z" itemprop="datePublished">Nov 8 2014</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014-11-08-Mac终端变主题.html">Mac终端变主题</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>最近看终端眼睛有点累，想改变一下主题。</p>
+<p>如果不想下新主题,终端默认有很多主题：</p>
+<ol>
+<li><blockquote>
+<p>先打开终端：终端—偏好设置—设置</p>
+</blockquote>
+</li>
+<li><blockquote>
+<p>选好之后记得点击<strong>默认</strong>，接着重启终端。</p>
+</blockquote>
+</li>
+</ol>
+<p>我现在的主题是：solarized</p>
+<p>下载：</p>
+<pre><code>$ git clone git://github.com/altercation/solarized.git
+</code></pre><p>其实有两个主题：Dark和light。</p>
+<p>下好之后双击你需要的就会自动安装，重复上面的步骤。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhuxinyong.com/2014-11-08-Mac终端变主题.html" data-id="cjhq2nxe00017ssg9y0dtswc2" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mac/">Mac</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-Git删除远程文件" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014-11-08-Git删除远程文件.html" class="article-date">
+  <time datetime="2014-11-08T12:10:37.000Z" itemprop="datePublished">Nov 8 2014</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014-11-08-Git删除远程文件.html">Git删除远程文件</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>若你不小心把文件A传到GitHub上，但你在本地又将其添加到<strong>.gitignore</strong>中。应该如何操作才能删掉远程的文件？</p>
+<p>只需要如下的命令：</p>
+<p>＊ Remove all items from index.</p>
+<pre><code>git rm -r -f --cached .
+</code></pre><p>＊ Rebuild index.</p>
+<pre><code>git add .
+</code></pre><p>＊ Make new commit</p>
+<pre><code>git commit -m &quot;Removed mylogfile.log&quot;
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhuxinyong.com/2014-11-08-Git删除远程文件.html" data-id="cjhq2nxdy0013ssg9wuxilmwu" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-浏览器的工作原理：新式网络浏览器幕后揭秘" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014-11-07-浏览器的工作原理：新式网络浏览器幕后揭秘.html" class="article-date">
+  <time datetime="2014-11-06T23:25:16.000Z" itemprop="datePublished">Nov 7 2014</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014-11-07-浏览器的工作原理：新式网络浏览器幕后揭秘.html">浏览器的工作原理：新式网络浏览器幕后揭秘</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>转载：<a href="http://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/" target="_blank" rel="noopener">浏览器的工作原理：新式网络浏览器幕后揭秘</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhuxinyong.com/2014-11-07-浏览器的工作原理：新式网络浏览器幕后揭秘.html" data-id="cjhq2nxdv0010ssg9ujmt0kzd" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/浏览器/">浏览器</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+
+
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/page/7/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/9/">下一页&raquo;</a>
+  </nav>
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title recent-posts">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018-05-28-一个数字截取引发的精度问题（四）.html">一个数字截取引发的精度问题（四）</a>
+          </li>
+        
+          <li>
+            <a href="/2017-07-08-sass-vs-less.html">sass vs less</a>
+          </li>
+        
+          <li>
+            <a href="/2017-06-11-全栈工程师指南.html">全栈工程师指南</a>
+          </li>
+        
+          <li>
+            <a href="/2017-06-03-使同事羡慕不已的8个npm命令.html">使同事羡慕不已的8个npm命令</a>
+          </li>
+        
+          <li>
+            <a href="/2017-05-18-微信更新了这些内容，你还不知道？.html">微信更新了这些内容，你还不知道？</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+
+  
+    
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2018 Zhuxy&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;aotuwangren@163.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+ 
+ <script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?2417a647046aae16ca9c71de9041dd92";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+  
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+  
+
+  
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="baidu_union_verify" content="beee9203190d273a561657ff6f6278a8">
+  
+  <title>Karma和Jasmine | 生活😁技术</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="什么是Karma? Karma是Google出品，前身叫“Testacular”，主要目的： The main goal for Karma is to bring a productive testing environment to developers. 背景： We found that we were struggling with existing tools, so we decid">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Karma和Jasmine">
+<meta property="og:url" content="http://zhuxinyong.com/2014-08-20-Karma和Jasmine.html">
+<meta property="og:site_name" content="生活😁技术">
+<meta property="og:description" content="什么是Karma? Karma是Google出品，前身叫“Testacular”，主要目的： The main goal for Karma is to bring a productive testing environment to developers. 背景： We found that we were struggling with existing tools, so we decid">
+<meta property="og:locale" content="Chinese">
+<meta property="og:updated_time" content="2018-05-28T02:47:23.868Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Karma和Jasmine">
+<meta name="twitter:description" content="什么是Karma? Karma是Google出品，前身叫“Testacular”，主要目的： The main goal for Karma is to bring a productive testing environment to developers. 背景： We found that we were struggling with existing tools, so we decid">
+  
+    <link rel="alternate" href="/atom.xml" title="生活😁技术" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "ca-pub-4882891850616832",
+      enable_page_level_ads: true
+    });
+  </script>
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://zhuxinyong.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">生活😁技术</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Karma和Jasmine" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014-08-20-Karma和Jasmine.html" class="article-date">
+  <time datetime="2014-08-20T02:28:44.000Z" itemprop="datePublished">Aug 20 2014</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Karma和Jasmine
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p><strong>什么是Karma?</strong></p>
+<p>Karma是Google出品，前身叫“Testacular”，主要目的：</p>
+<pre><code>The main goal for Karma is to bring a productive testing environment to developers.
+</code></pre><p>背景：</p>
+<pre><code>We found that we were struggling with existing tools, so we decided to write
+our own test runner. We wanted a test runner that would meet all of our needs 
+for both quick development and continuous integration -- a truly spectacular test runner. We&apos;ve called it Testacular.
+</code></pre><p>大意：</p>
+<pre><code>为了满足我们（google）自己的测试运行器，满足快速开发和持续集成的需求。
+</code></pre><p><strong>什么是Jasmine?</strong></p>
+<pre><code>Jasmine is a behavior-driven development framework for testing JavaScript code.
+It does not depend on any other JavaScript frameworks. It does not require a DOM. 
+And it has a clean, obvious syntax so that you can easily write tests.
+</code></pre><p>类似的框架：Mocha、QUnit。</p>
+<a id="more"></a>
+<p>实例：（该实例基于node,请先安装。）</p>
+<p>1). 新建项目文件夹：</p>
+<pre><code>mkdir karma &amp;&amp;　cd karma
+</code></pre><p>2). 安装Karma</p>
+<pre><code>npm install -g karma
+</code></pre><p>3). 运行karma</p>
+<pre><code>karma start
+</code></pre><p>得到下面类似信息：</p>
+<pre><code>INFO [karma]: Karma v0.10.2 server started at http://localhost:9876/INFO 
+[Chrome 28.0.1500 (Windows 7)]: Connected on socket nIlM1yUy6ELMp5ZTN9Ek
+</code></pre><p>4). karma+Jasmine配置</p>
+<pre><code>karma init
+</code></pre><p>接着会看到许多选择信息</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">Which testing framework <span class="keyword">do</span> you want <span class="keyword">to</span> use ?</span><br><span class="line">Press <span class="keyword">tab</span> <span class="keyword">to</span> <span class="keyword">list</span> possible <span class="keyword">options</span>. Enter <span class="keyword">to</span> <span class="keyword">move</span> <span class="keyword">to</span> the <span class="keyword">next</span> question.</span><br><span class="line">&gt; jasmine</span><br><span class="line"></span><br><span class="line">Do you want <span class="keyword">to</span> use Require.js ?</span><br><span class="line">This will <span class="built_in">add</span> Require.js plugin.</span><br><span class="line">Press <span class="keyword">tab</span> <span class="keyword">to</span> <span class="keyword">list</span> possible <span class="keyword">options</span>. Enter <span class="keyword">to</span> <span class="keyword">move</span> <span class="keyword">to</span> the <span class="keyword">next</span> question.</span><br><span class="line">&gt; <span class="keyword">no</span></span><br><span class="line"></span><br><span class="line">Do you want <span class="keyword">to</span> capture <span class="keyword">a</span> browser automatically ?</span><br><span class="line">Press <span class="keyword">tab</span> <span class="keyword">to</span> <span class="keyword">list</span> possible <span class="keyword">options</span>. Enter <span class="built_in">empty</span> <span class="built_in">string</span> <span class="keyword">to</span> <span class="keyword">move</span> <span class="keyword">to</span> the <span class="keyword">next</span> question.</span><br><span class="line">&gt; Chrome</span><br><span class="line">&gt;</span><br><span class="line"></span><br><span class="line">What <span class="keyword">is</span> the location of your <span class="keyword">source</span> <span class="built_in">and</span> test <span class="keyword">files</span> ?</span><br><span class="line">You can use <span class="built_in">glob</span> patterns, eg. <span class="string">"js/*.js"</span> <span class="built_in">or</span> <span class="string">"test/**/*Spec.js"</span>.</span><br><span class="line">Enter <span class="built_in">empty</span> <span class="built_in">string</span> <span class="keyword">to</span> <span class="keyword">move</span> <span class="keyword">to</span> the <span class="keyword">next</span> question.</span><br><span class="line">&gt;</span><br><span class="line"></span><br><span class="line">Should any of the <span class="keyword">files</span> included by the <span class="keyword">previous</span> patterns <span class="keyword">be</span> excluded ?</span><br><span class="line">You can use <span class="built_in">glob</span> patterns, eg. <span class="string">"**/*.swp"</span>.</span><br><span class="line">Enter <span class="built_in">empty</span> <span class="built_in">string</span> <span class="keyword">to</span> <span class="keyword">move</span> <span class="keyword">to</span> the <span class="keyword">next</span> question.</span><br><span class="line">&gt;</span><br><span class="line"></span><br><span class="line">Do you want Karma <span class="keyword">to</span> watch <span class="keyword">all</span> the <span class="keyword">files</span> <span class="built_in">and</span> run the tests <span class="keyword">on</span> <span class="keyword">change</span> ?</span><br><span class="line">Press <span class="keyword">tab</span> <span class="keyword">to</span> <span class="keyword">list</span> possible <span class="keyword">options</span>.</span><br><span class="line">&gt; yes</span><br><span class="line"></span><br><span class="line">Config <span class="keyword">file</span> generated at <span class="string">"F:\workspace\karma\karma.conf.js"</span>.</span><br></pre></td></tr></table></figure>
+<p>5). 安装karma-jasmine集成包：</p>
+<pre><code>npm install karma-jasmine
+</code></pre><p>6). 安装karma-chrome-launcher（注意如果上面要测试的浏览器还有别的，其余的也要安装）</p>
+<pre><code>npm install karma-chrome-launcher --save-dev
+</code></pre><p><strong>开始测试，需求：实现单词倒写功能：“ABCD”=&gt;“CDBA”</strong></p>
+<p>1). 新建文件 src.js：</p>
+<pre><code>function reverse(name){
+    return name.split(&quot;&quot;).reverse().join(&quot;&quot;);
+}
+</code></pre><p>2). 测试文件 test.js</p>
+<pre><code>describe(&quot;A suite of basic functions&quot;, function() {
+    it(&quot;reverse word&quot;,function(){
+        expect(&quot;DCBA&quot;).toEqual(reverse(&quot;ABCD&quot;));
+    });
+});
+</code></pre><p>3). 修改配置karma.conf.js</p>
+<pre><code>module.exports = function (config) {
+    config.set({
+        basePath: &apos;&apos;,
+        frameworks: [&apos;jasmine&apos;],
+        files: [&apos;*.js&apos;],
+        exclude: [&apos;karma.conf.js&apos;],
+        reporters: [&apos;progress&apos;],
+        port: 9876,
+        colors: true,
+        logLevel: config.LOG_INFO,
+        autoWatch: true,
+        browsers: [&apos;Chrome&apos;],
+        captureTimeout: 60000,
+        singleRun: false
+    });
+};
+</code></pre><p>4). 运行karma</p>
+<pre><code>karma start karma.conf.js
+</code></pre><p>得到如下类似信息：</p>
+<pre><code>INFO [karma]: Karma v0.12.22 server started at http://localhost:9876/
+INFO [launcher]: Starting browser Chrome
+INFO [Chrome 36.0.1985 (Windows 7)]: Connected on socket lJRdB1wQiahW6-7IpqoI wi
+th id 82373062
+Chrome 36.0.1985 (Windows 7): Executed 1 of 1 SUCCESS (0.01 secs / 0.002 secs)
+</code></pre><ol start="5">
+<li>修改test.js</li>
+</ol>
+<pre><code>describe(&quot;A suite of basic functions&quot;, function() {
+    it(&quot;reverse word&quot;,function(){
+        expect(&quot;DCBA&quot;).toEqual(reverse(&quot;ABCD&quot;));
+        expect(&quot;Conan&quot;).toEqual(reverse(&quot;nano&quot;));
+    });
+});
+</code></pre><p>此时会得到错误：</p>
+<pre><code>INFO [karma]: Karma v0.12.22 server started at http://localhost:9876/
+INFO [launcher]: Starting browser Chrome
+INFO [Chrome 36.0.1985 (Windows 7)]: Connected on socket Kta8N3MgRiMy4FLyp82H wi
+th id 72338317
+Chrome 36.0.1985 (Windows 7) A suite of basic function reverse word FAILED
+        Expected &apos;Conan&apos; to equal &apos;onan&apos;.
+        Error: Expected &apos;Conan&apos; to equal &apos;onan&apos;.
+            at Object.&lt;anonymous&gt; (F:/wordspace/karma/test.js:8:19)
+Chrome 36.0.1985 (Windows 7): Executed 1 of 1 (1 FAILED) ERROR (0.015 secs / 0.0
+04 secs)
+</code></pre><p>这错误是正常的。</p>
+<p>参考：</p>
+<ol>
+<li><a href="http://googletesting.blogspot.jp/2012/11/testacular-spectacular-test-runner-for.html" target="_blank" rel="noopener">http://googletesting.blogspot.jp/2012/11/testacular-spectacular-test-runner-for.html</a></li>
+<li><a href="http://blog.fens.me/nodejs-karma-jasmine/" target="_blank" rel="noopener">http://blog.fens.me/nodejs-karma-jasmine/</a></li>
+<li><a href="https://egghead.io/lessons/unit-testing-introduction-to-karma" target="_blank" rel="noopener">https://egghead.io/lessons/unit-testing-introduction-to-karma</a></li>
+<li><a href="http://www.slideshare.net/IgorNapierala/jasmine-presentation-23905530?next_slideshow=1（翻墙）" target="_blank" rel="noopener">http://www.slideshare.net/IgorNapierala/jasmine-presentation-23905530?next_slideshow=1（翻墙）</a></li>
+<li><a href="http://blog.segmentfault.com/bornkiller/1190000000623274" target="_blank" rel="noopener">http://blog.segmentfault.com/bornkiller/1190000000623274</a></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhuxinyong.com/2014-08-20-Karma和Jasmine.html" data-id="cjhq2nxdo000mssg97v9v5bzr" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2014-08-20-复制DOS里面的内容.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          复制DOS里面的内容
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2014-08-10-defer.html" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">defer 和 async 的区别</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+       
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title recent-posts">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018-05-28-一个数字截取引发的精度问题（四）.html">一个数字截取引发的精度问题（四）</a>
+          </li>
+        
+          <li>
+            <a href="/2017-07-08-sass-vs-less.html">sass vs less</a>
+          </li>
+        
+          <li>
+            <a href="/2017-06-11-全栈工程师指南.html">全栈工程师指南</a>
+          </li>
+        
+          <li>
+            <a href="/2017-06-03-使同事羡慕不已的8个npm命令.html">使同事羡慕不已的8个npm命令</a>
+          </li>
+        
+          <li>
+            <a href="/2017-05-18-微信更新了这些内容，你还不知道？.html">微信更新了这些内容，你还不知道？</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+
+  
+    
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2018 Zhuxy&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;aotuwangren@163.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+ 
+ <script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?2417a647046aae16ca9c71de9041dd92";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+  
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+  
+
+  
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

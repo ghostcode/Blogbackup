@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="baidu_union_verify" content="beee9203190d273a561657ff6f6278a8">
+  
+  <title>JavaScript最佳实践一 | 生活😁技术</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="变量和函数名有意义 选择易理解和简短的名字作为变量和方法。 糟糕的命名 x1 fe2 xbqne 同样糟糕的命名 incrementerForMainLoopWhichSpansFromTenToTwenty } createNewMemberIfAgeOverTwentyOneAndMoonIsFull 尽量避免使用变量和方法的名字去解释值。">
+<meta name="keywords" content="JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript最佳实践一">
+<meta property="og:url" content="http://zhuxinyong.com/2014-11-13-JavaScript最佳实践一.html">
+<meta property="og:site_name" content="生活😁技术">
+<meta property="og:description" content="变量和函数名有意义 选择易理解和简短的名字作为变量和方法。 糟糕的命名 x1 fe2 xbqne 同样糟糕的命名 incrementerForMainLoopWhichSpansFromTenToTwenty } createNewMemberIfAgeOverTwentyOneAndMoonIsFull 尽量避免使用变量和方法的名字去解释值。">
+<meta property="og:locale" content="Chinese">
+<meta property="og:updated_time" content="2018-05-28T02:47:23.874Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript最佳实践一">
+<meta name="twitter:description" content="变量和函数名有意义 选择易理解和简短的名字作为变量和方法。 糟糕的命名 x1 fe2 xbqne 同样糟糕的命名 incrementerForMainLoopWhichSpansFromTenToTwenty } createNewMemberIfAgeOverTwentyOneAndMoonIsFull 尽量避免使用变量和方法的名字去解释值。">
+  
+    <link rel="alternate" href="/atom.xml" title="生活😁技术" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "ca-pub-4882891850616832",
+      enable_page_level_ads: true
+    });
+  </script>
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://zhuxinyong.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">生活😁技术</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-JavaScript最佳实践一" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014-11-13-JavaScript最佳实践一.html" class="article-date">
+  <time datetime="2014-11-13T01:37:38.000Z" itemprop="datePublished">Nov 13 2014</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JavaScript最佳实践一
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p><strong>变量和函数名有意义</strong></p>
+<p>选择易理解和简短的名字作为变量和方法。</p>
+<p><strong>糟糕的命名</strong></p>
+<pre><code>x1 fe2 xbqne
+</code></pre><p><strong>同样糟糕的命名</strong></p>
+<pre><code>incrementerForMainLoopWhichSpansFromTenToTwenty
+}
+createNewMemberIfAgeOverTwentyOneAndMoonIsFull
+</code></pre><p>尽量避免使用变量和方法的名字去解释值。</p>
+<a id="more"></a>
+<p><strong>或许在其他一些国家是没有意义</strong></p>
+<pre><code>isOverEighteen()
+</code></pre><p><strong>通用</strong></p>
+<pre><code>isLegalAge()
+</code></pre><p>你的代码就是一个故事，请保持故事情节深入人心（容易阅读）。</p>
+<p><strong>避免全局</strong></p>
+<p>全局变量是一个相当可怕的。</p>
+<p><strong>原因：</strong>你代码中的全局变量即有可能被覆盖。</p>
+<p><strong>变通：</strong>使用闭包和模块模式。</p>
+<p>问题：所有的全局变量在其他地方都可以访问，这是不可避免的。</p>
+<pre><code>var current = null;
+var labels = {
+   &apos;home&apos;:&apos;home&apos;,
+   &apos;articles&apos;:&apos;articles&apos;,
+   &apos;contact&apos;:&apos;contact&apos;    
+};
+function init(){
+};
+function show(){
+   current = 1;
+};
+function hide(){
+   show();
+};
+</code></pre><p><strong>对象字面量</strong>：其中的任何东西都需要通过对象的名字获得。</p>
+<p>问题：重复的模块名字会产生大量的代码而且令人厌烦。</p>
+<pre><code>demo = {
+   current:null,
+   labels:{
+      &apos;home&apos;:&apos;home&apos;,
+      &apos;articles&apos;:&apos;articles&apos;,
+      &apos;contact&apos;:&apos;contact&apos;
+   },
+   init:function(){
+   },
+   show:function(){
+      demo.current = 1;
+   },
+   hide:function(){
+      demo.show();
+   }
+}
+</code></pre><p>模块模式：你需要指出哪些可以全局使用哪些不可以－－在这两之间取舍。</p>
+<p>问题：重复的模块名字，内部函数使用不同的语法。</p>
+<pre><code>module = function(){
+   var labels = {
+      &apos;home&apos;:&apos;home&apos;,
+      &apos;articles&apos;:&apos;articles&apos;,
+      &apos;contact&apos;:&apos;contact&apos;
+   };
+   return {
+      current:null,
+      init:function(){
+      },
+      show:function(){
+         module.current = 1;
+      },
+      hide:function(){
+         module.show();
+      }
+   }
+}();
+</code></pre><p>揭露模块模式：保持相同的代码风格同时暴露全局方法和变量。</p>
+<pre><code>module = function(){
+   var current = null;
+   var labels = {
+      &apos;home&apos;:&apos;home&apos;,
+      &apos;articles&apos;:&apos;articles&apos;,
+      &apos;contact&apos;:&apos;contact&apos;
+   };
+   var init = function(){
+   };
+   var show = function(){
+      current = 1;
+   };
+   var hide = function(){
+      show();
+   }
+   return{init:init, show:show, current:current}
+}();
+module.init();
+</code></pre><p><strong>使用严格模式</strong></p>
+<p>浏览器的JavaScript解析引擎有很强大的容错能力，当你需要移植代码或者交接代码给同事时，松散的代码就会给你带来麻烦。所以代码检查才能保证代码的安全。</p>
+<p>检查你的代码：<a href="http://www.jslint.com/" target="_blank" rel="noopener">http://www.jslint.com/</a></p>
+<p><strong>代码注释适中为好</strong></p>
+<blockquote>
+<p>好的代码不需解释</p>
+</blockquote>
+<p>这是一个夸张的迷信。</p>
+<p>注释那些你认为需要解释的地方，但是记住不要讲解你的人生故事（不要太长）。</p>
+<p>避免使用单行注释<strong>//</strong>，使用<strong>/<em> </em>/</strong>更安全，当换行时不会产生错误。</p>
+<p>如果你使用注释来调试代码，这是一个很好的技巧：</p>
+<pre><code>module = function(){
+   var current = null;
+/*
+   var init = function(){
+   };
+   var show = function(){
+      current = 1;
+   };
+   var hide = function(){
+      show();
+   }
+// */
+   return{init:init, show:show, current:current}
+}();
+</code></pre><p>注释不能出现在用户面前。<strong>开发代码不是活的代码(开发代码不是面向用户的代码)</strong></p>
+<p><strong>避免技术混用</strong></p>
+<p>JavaScript很擅长计算，获取外部数据（Ajax）以及根据事件做出相应的回应。</p>
+<p>例如：</p>
+<p>在类名为mandatory且其值为空时在外围加上红色边框。</p>
+<pre><code>var f = document.getElementById(&apos;mainform&apos;);
+var inputs = f.getElementsByTagName(&apos;input&apos;);
+for(var i=0,j=inputs.length;i&lt;j;i++){
+   if(inputs[i].className === &apos;mandatory&apos; &amp;&amp; inputs.value === &apos;&apos;){
+      inputs[i].style.borderColor = &apos;#f00&apos;;
+      inputs[i].style.borderStyle = &apos;solid&apos;;
+      inputs[i].style.borderWidth = &apos;1px&apos;;
+   }
+}
+</code></pre><p>两个月后，产品改版不要加红色边框，要在在字段后面增加一个提示图标。</p>
+<p>其他开发会改变你的JavaScript代码为如下：</p>
+<pre><code>var f = document.getElementById(&apos;mainform&apos;);
+var inputs = f.getElementsByTagName(&apos;input&apos;);
+for(var i=0,j=inputs.length;i&lt;j;i++){
+   if(inputs[i].className === &apos;mandatory&apos; &amp;&amp; inputs.value === &apos;&apos;){
+      inputs[i].className+=&apos; error&apos;;
+   }
+}
+</code></pre><p><strong>使用短路符号</strong></p>
+<p>你一旦习惯使用短路符号，就会发现你的代码简洁并且容易阅读。</p>
+<p>原代码：</p>
+<pre><code>var lunch = new Array();
+lunch[0]=&apos;Dosa&apos;;
+lunch[1]=&apos;Roti&apos;;
+lunch[2]=&apos;Rice&apos;;
+lunch[3]=&apos;what the heck is this?&apos;;
+</code></pre><p>改后代码：</p>
+<pre><code>var lunch = [
+   &apos;Dosa&apos;,
+   &apos;Roti&apos;,
+   &apos;Rice&apos;,
+   &apos;what the heck is this?&apos;
+];
+</code></pre><p>原代码：</p>
+<pre><code>if(v){
+   var x = v;
+} else {
+   var x =10;
+}
+</code></pre><p>改后代码：</p>
+<pre><code>var x = v || 10;
+</code></pre><p><strong>模块化</strong></p>
+<p>保持代码模块化和职责单一性。</p>
+<p>很容易写出一个方法来处理好多事情，可是当你要扩展功能时，你应该拆分多个方法去实现相应的功能。</p>
+<p>为了防止出现类似的情况，你应该保证代码的简单和通用去完成功能，而不是大而全的方法去实现。</p>
+<p>在另一个功能时，你可以使用揭示模式暴露方法以此来扩展方法。</p>
+<p>好的代码应该容易扩展而不需要重写核心代码。</p>
+<p><strong>渐进增强</strong></p>
+<p>避免JavaScript代码的高度耦合。</p>
+<p>DOM的生成耗费时间并且代价昂贵。</p>
+<p>有些元素的生成依赖JavaScript，但当JavaScript代码被禁用时，用户看到的页面就不会那么友好。</p>
+<p><strong>允许配置和转移</strong></p>
+<p>你的代码会随时被改变。</p>
+<p>包括标签，类名和IDs以及外观。</p>
+<p>把这些放到可配置项中，使你的代码易维护并可定制。</p>
+<p>例如：</p>
+<pre><code>carousel = function(){
+   var config = {
+      CSS:{
+         classes:{
+            current:&apos;current&apos;,
+            scrollContainer:&apos;scroll&apos;
+         },
+         IDs:{
+            maincontainer:&apos;carousel&apos;
+         }
+      },
+      labels:{
+         previous:&apos;back&apos;,
+         next:&apos;next&apos;,
+         auto:&apos;play&apos;
+      },
+      settings:{
+         amount:5,
+         skin:&apos;blue&apos;,
+         autoplay:false
+      },
+   };
+   function init(){
+   };
+   function scroll(){
+   };
+   function highlight(){
+   };
+   return {config:config,init:init}
+}();
+</code></pre><p><strong>总结</strong></p>
+<p>在这一节，我们讲到来命名规范，注释以及一些代码组织的建议。</p>
+<p>原文：<a href="http://www.thinkful.com/learn/javascript-best-practices-1/Modularize" target="_blank" rel="noopener">javascript-best-practices-1</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhuxinyong.com/2014-11-13-JavaScript最佳实践一.html" data-id="cjhq2nxdz0015ssg9g5wl9coi" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2014-11-13-SublimeText之FileHeader.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          SublimeText之FileHeader
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2014-11-12-Git.html" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">Git flow备忘清单</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+       
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title recent-posts">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018-05-28-一个数字截取引发的精度问题（四）.html">一个数字截取引发的精度问题（四）</a>
+          </li>
+        
+          <li>
+            <a href="/2017-07-08-sass-vs-less.html">sass vs less</a>
+          </li>
+        
+          <li>
+            <a href="/2017-06-11-全栈工程师指南.html">全栈工程师指南</a>
+          </li>
+        
+          <li>
+            <a href="/2017-06-03-使同事羡慕不已的8个npm命令.html">使同事羡慕不已的8个npm命令</a>
+          </li>
+        
+          <li>
+            <a href="/2017-05-18-微信更新了这些内容，你还不知道？.html">微信更新了这些内容，你还不知道？</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+
+  
+    
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2018 Zhuxy&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;aotuwangren@163.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+ 
+ <script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?2417a647046aae16ca9c71de9041dd92";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+  
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+  
+
+  
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

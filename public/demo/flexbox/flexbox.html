@@ -1,0 +1,371 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>display: flex</title>
+    <link rel="stylesheet" href="styles.css?20151210">
+</head>
+
+<body>
+    <h1 style="text-align:center">原地址：<a href="http://flexbox.help/">flexbox.help</a></h1>
+    <div class="page-heading">Test CSS Flexbox Rules Live</div>
+    <div class="page-description">
+        Using flexbox helps achieve layouts that used to be more difficult to create. Flexbox rules define the placement of elements contained inside a parent that has the display: flex property. See <a href="http://caniuse.com/#search=flexbox">Can I Use</a>        for browser support (it's pretty high). See <a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/">CSS-Tricks</a> for more thorough descriptions of flexbox rules.</a>
+    </div>
+    <p>Flexbox layout is most appropriate to the components of an application, and small-scale layouts, while the Grid layout is intended for larger scale layouts.</p>
+    <div class="controls-container">
+        <div class="flex-attribute-control flex-direction">
+            <div class="control-heading">flex-direction</div>
+            <div class="control-group">
+                <label>
+                    <input type="radio" name="flex-direction" value="row" checked>
+                    row (default)
+                </label>
+                <label>
+                    <input type="radio" name="flex-direction" value="row-reverse">
+                    row-reverse
+                </label>
+                <label>
+                    <input type="radio" name="flex-direction" value="column">
+                    column
+                </label>
+                <label>
+                    <input type="radio" name="flex-direction" value="column-reverse">
+                    column-reverse
+                </label>
+            </div>
+        </div>
+        <div class="flex-attribute-control flex-wrap">
+            <div class="control-heading">flex-wrap</div>
+            <div class="control-explanation">whether items wrap to the next <span class="if-row">row</span><span class="if-column">column</span> (only applies if combined <span class="if-row">width</span><span class="if-column">height</span> of items is greater than container's)</div>
+            <div class="control-group">
+                <label>
+                    <input type="radio" name="flex-wrap" value="nowrap" checked>
+                    nowrap (default)
+                </label>
+                <label>
+                    <input type="radio" name="flex-wrap" value="wrap">
+                    wrap
+                </label>
+                <label>
+                    <input type="radio" name="flex-wrap" value="wrap-reverse">
+                    wrap-reverse
+                </label>
+            </div>
+        </div>
+        <div class="flex-attribute-control justify-content">
+            <div class="control-heading">justify-content</div>
+            <div class="control-explanation">alignment along the <span class="if-row">x</span><span class="if-column">y</span> axis</div>
+            <div class="control-group">
+                <label>
+                    <input type="radio" name="justify-content" value="flex-start" checked>
+                    flex-start (default)
+                </label>
+                <label>
+                    <input type="radio" name="justify-content" value="flex-end">
+                    flex-end
+                </label>
+                <label>
+                    <input type="radio" name="justify-content" value="center">
+                    center
+                </label>
+                <label>
+                    <input type="radio" name="justify-content" value="space-around">
+                    space-around
+                </label>
+                <label>
+                    <input type="radio" name="justify-content" value="space-between">
+                    space-between
+                </label>
+            </div>
+        </div>
+        <div class="flex-attribute-control align-items">
+            <div class="control-heading">align-items</div>
+            <div class="control-explanation">alignment along the <span class="if-row">y</span><span class="if-column">x</span> axis</div>
+            <div class="control-group">
+                <label>
+                    <input type="radio" name="align-items" value="stretch" checked>
+                    stretch (default)
+                </label>
+                <label>
+                    <input type="radio" name="align-items" value="baseline">
+                    baseline
+                </label>
+                <label>
+                    <input type="radio" name="align-items" value="center">
+                    center
+                </label>
+                <label>
+                    <input type="radio" name="align-items" value="flex-start">
+                    flex-start
+                </label>
+                <label>
+                    <input type="radio" name="align-items" value="flex-end">
+                    flex-end
+                </label>
+            </div>
+        </div>
+        <div class="flex-attribute-control align-content">
+            <div class="control-heading">align-content</div>
+            <div class="control-explanation">only applies if there is more than one <span class="if-row">row</span><span class="if-column">column</span> of items</div>
+            <div class="control-group">
+                <label>
+                    <input type="radio" name="align-content" value="stretch" checked>
+                    stretch (default)
+                </label>
+                <label>
+                    <input type="radio" name="align-content" value="center">
+                    center
+                </label>
+                <label>
+                    <input type="radio" name="align-content" value="flex-start">
+                    flex-start
+                </label>
+                <label>
+                    <input type="radio" name="align-content" value="flex-end">
+                    flex-end
+                </label>
+                <label>
+                    <input type="radio" name="align-content" value="space-around">
+                    space-around
+                </label>
+                <label>
+                    <input type="radio" name="align-content" value="space-between">
+                    space-between
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="child-count-container">
+
+        <div class="control-heading child-count-info">Change child count</div>
+        <input id="ChildCount" class="child-count-slider" type="range" min="1" max="8" value="8">
+        <div>Showing <span class="child-count-value">8</span> <span class="children-text">children</span></div>
+    </div>
+    <div class="flex-parent">
+        <div class="flex-child">1</div>
+        <div class="flex-child">2</div>
+        <div class="flex-child">3</div>
+        <div class="flex-child">4</div>
+        <div class="flex-child">5</div>
+        <div class="flex-child">6</div>
+        <div class="flex-child">7</div>
+        <div class="flex-child">8</div>
+    </div>
+    <style media="screen">
+        @font-face {
+            font-family: 'opensansregular';
+            src: url('./fonts/opensans/opensans-regular-webfont.eot');
+            src: url('./fonts/opensans/opensans-regular-webfont.eot?#iefix') format('embedded-opentype'), url('./fonts/opensans/opensans-regular-webfont.woff2') format('woff2'), url('./fonts/opensans/opensans-regular-webfont.woff') format('woff'), url('./fonts/opensans/opensans-regular-webfont.ttf') format('truetype'), url('./fonts/opensans/opensans-regular-webfont.svg#opensansregular') format('svg');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            padding: 20px;
+            font-family: 'opensansregular', arial;
+            color: #333333;
+        }
+
+        a,
+        a:visited {
+            color: #0077CC;
+        }
+
+        .row-is-selected .if-column {
+            display: none;
+        }
+
+        .column-is-selected .if-row {
+            display: none;
+        }
+
+        .page-heading {
+            font-size: 32px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .page-description {
+            max-width: 436px;
+            margin: 0 auto 20px;
+        }
+
+        .controls-container {
+            margin-bottom: 20px;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: center;
+            -webkit-justify-content: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            -webkit-flex-wrap: wrap;
+            -moz-flex-wrap: wrap;
+            -ms-flex-wrap: wrap;
+            -o-flex-wrap: wrap;
+            flex-wrap: wrap;
+        }
+
+        .flex-attribute-control {
+            margin-right: 20px;
+            margin: 0 20px 20px 0;
+            max-width: 158px;
+        }
+
+        .control-explanation {
+            font-style: italic;
+            border-bottom: 1px solid #EEEEEE;
+            padding: 5px;
+            color: #888888;
+        }
+
+        .control-heading {
+            margin-bottom: 0px;
+            font-size: 20px;
+            border-bottom: 1px solid #EEEEEE;
+            font-weight: 600;
+        }
+
+        .control-group {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -webkit-flex-direction: column;
+            -ms-flex-direction: column;
+            flex-direction: column;
+        }
+
+        .flex-parent {
+            height: 400px;
+            width: 600px;
+            margin: auto;
+            border: 4px solid #333333;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-flex-wrap: wrap;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+        }
+
+        .flex-child {
+            padding: 0px 46px;
+            background-color: #EEEEEE;
+            border: 4px solid #999999;
+            font-size: 40px;
+            text-align: center;
+            line-height: 132px;
+        }
+
+        .contact {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .hide {
+            display: none;
+        }
+
+        .child-count-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .child-count-info {
+            border-bottom: none;
+        }
+
+        .child-count-slider {
+            width: 200px;
+        }
+    </style>
+    <script type="text/javascript">
+        var flexParent = document.querySelector('.flex-parent');
+        var controlsContainer = document.querySelector('.controls-container');
+        var propertyInputs = Array.prototype.slice.call(document.querySelectorAll('input[type="radio"]'));
+
+        var flexChildren = Array.prototype.slice.call(document.querySelectorAll('.flex-child'));
+        var childCount = document.getElementById('ChildCount');
+        var childCountValueContainer = document.querySelector('.child-count-value');
+        var childrenText = document.querySelector('.children-text');
+
+        var updateFlexParent = function(input) {
+            flexParent.style[input.name] = input.value;
+        }
+
+        var updateExplanations = function() {
+            var flexDirectionValue = document.querySelector('input[name="flex-direction"]:checked').value;
+
+            // some parts of the explanation text depend on the flex-direction selection
+            if (flexDirectionValue.match('row')) {
+                // when `flex-direction: row`
+                controlsContainer.classList.add('row-is-selected');
+                controlsContainer.classList.remove('column-is-selected');
+            } else if (flexDirectionValue.match('column')) {
+                // when `flex-direction: column`
+                controlsContainer.classList.add('column-is-selected');
+                controlsContainer.classList.remove('row-is-selected');
+            }
+        }
+
+        var inputListener = function(evt) {
+            updateFlexParent(evt.target);
+            updateExplanations();
+        };
+
+        // initial setup
+        propertyInputs.forEach(function(input) {
+            // event listener for each input
+            input.addEventListener('change', inputListener);
+            // inputs might not be on the default when page loads
+            if (input.checked) {
+                updateFlexParent(input);
+            }
+        });
+        childCount.value = 8;
+        // set up change of child counts
+        childCount.addEventListener('change', function(evt) {
+            var count = evt.target.value;
+            childCountValueContainer.innerHTML = count;
+
+            flexChildren.forEach(function(child, i) {
+                if (i >= count) {
+                    child.classList.add('hide');
+                } else {
+                    child.classList.remove('hide');
+                }
+            });
+
+            if (count > 1) {
+                childrenText.innerHTML = 'children';
+            } else {
+                childrenText.innerHTML = 'child';
+            }
+
+        });
+        updateExplanations();
+    </script>
+    <!-- Piwik -->
+    <script type="text/javascript">
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?8c6506f2771c14e5184e4b40cb38aac2";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+    <!-- End Piwik Code -->
+</body>
+
+</html>
